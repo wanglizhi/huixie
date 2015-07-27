@@ -68,9 +68,10 @@ class Order_model extends CI_Model{
 		$this->db->update('order',$data);
 		return $this->db->affected_rows();
 	}
-	function takeOrder($orderNum){
+	function takeOrder($orderNum, $taId){
 		$this->db->where('orderNum',$orderNum);
 		$this->db->update('hasTaken',1);
+		$this->db->update('taId', $taId);
 		return $this->db->affected_rows();
 	}
 	function selectTa($data){

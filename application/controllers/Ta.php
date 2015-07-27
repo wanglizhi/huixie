@@ -45,21 +45,30 @@ class Ta extends CI_Controller {
 //==
 	function takeOrderPage(){
 		$this->checkLogin();
+		$user = $_SESSION['user'];
 		$this->load->model('Order_model');
-		$select = $this->Order_model->searchSelectTa();
+		$select = $this->Order_model->searchSelectTa($user['openid']);
 		$order = $this->Order_model->selectBy1('orderNum', $select['orderNum']);
 
-			$data['pageTitle'] = '接单';
-			$data['order'] = $order;
-			$this->load->view('userHeader',$data);
-			$this->load->view('ta_take_order');
-			$this->load->view('userFooter');
+		//判断是否被接单
+
+		$data['pageTitle'] = '接单';
+		$data['order'] = $order;
+		$this->load->view('userHeader',$data);
+		$this->load->view('ta_take_order');
+		$this->load->view('userFooter');
 
 	}
 	function takeOrder(){
+		$this->checkLogin();
+		$user = $_SESSION['user'];
 		$orderNum = $_POST['orderNum'];
-		$this->Order_model->takeOrder($orderNum);
-		echo '接单成功';
+		if($this->Order_model->takeOrder($orderNum, $user['openid'])){
+			echo "接单成功";
+		}else{
+			echo "接单失败"
+		}
+
 	}
 	function checkLogin(){
 		if (!session_id()) session_start();
