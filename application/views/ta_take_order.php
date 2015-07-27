@@ -4,7 +4,7 @@
 
 	<h3>订单编号：<?php echo $order['orderNum'];?></h3>
 	<div>
-		<label>专业：<?php echo $order['orderNum'];?></label>
+		<label>专业：<?php echo $order['major'];?></label>
 		<label>课程名：<?php echo $order['courseName'];?></label>
 		<label>页数：<?php echo $order['pageNum'];?></label>
 		<label>阅读材料页数：<?php echo $order['refDoc'];?></label>

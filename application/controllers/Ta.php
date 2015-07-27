@@ -48,32 +48,35 @@ class Ta extends CI_Controller {
 		$user = $_SESSION['user'];
 		$this->load->model('Order_model');
 		$select = $this->Order_model->searchSelectTa($user['openid']);
-		$order = $this->Order_model->selectBy1('orderNum', $select['orderNum']);
+		$order = $this->Order_model->searchBy1('orderNum', $select['orderNum']);
 
 		//判断是否被接单
+		if($order){
+			$order = $order[0];
+		}
 
 		$data['pageTitle'] = '接单';
 		$data['order'] = $order;
 		$this->load->view('userHeader',$data);
 		$this->load->view('ta_take_order');
 		$this->load->view('userFooter');
-
 	}
 	function takeOrder(){
 		$this->checkLogin();
+		$this->load->model('Order_model');
 		$user = $_SESSION['user'];
 		$orderNum = $_POST['orderNum'];
 		if($this->Order_model->takeOrder($orderNum, $user['openid'])){
 			echo "接单成功";
 		}else{
-			echo "接单失败"
+			echo "接单失败";
 		}
 
 	}
 	function checkLogin(){
 		if (!session_id()) session_start();
 		if(isset($_SESSION['user'])){
-			var_dump($_SESSION['user']);
+			// var_dump($_SESSION['user']);
 			return true;
 		}
 
@@ -106,7 +109,7 @@ class Ta extends CI_Controller {
 		  	}
 	  		if (!session_id()) session_start();
 			$_SESSION['user'] = $user;
-			var_dump($user);
+			// var_dump($user);
 		}else{
 			echo '登陆失败, 请关闭网页重连';
 			exit(0);

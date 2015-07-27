@@ -69,9 +69,13 @@ class Order_model extends CI_Model{
 		return $this->db->affected_rows();
 	}
 	function takeOrder($orderNum, $taId){
+		date_default_timezone_set('PRC');
+		$data['createTime'] = date('Y-m-d h:i:s');
 		$this->db->where('orderNum',$orderNum);
 		$this->db->update('hasTaken',1);
 		$this->db->update('taId', $taId);
+		$this->db->update('takenTime', date('Y-m-d h:i:s'));
+		//接单时间
 		return $this->db->affected_rows();
 	}
 	function selectTa($data){
