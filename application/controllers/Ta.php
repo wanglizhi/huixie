@@ -4,6 +4,7 @@ class Ta extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->helper('url');
+		$this->load->model('Http_model');
 	}
 	function taList()
 	{
@@ -85,7 +86,7 @@ class Ta extends CI_Controller {
 			$appsecret = '16a24c163a44ee41fa3ef630c1c455ec';
 			$code = $_GET['code'];
 			$para = array('appid'=>$appid, 'secret'=>$appsecret, 'code'=>$code, 'grant_type'=>'authorization_code');
-			$this->load->model('Http_model');
+			
 			$ret = $this->Http_model->doCurlGetRequest('https://api.weixin.qq.com/sns/oauth2/access_token',$para);
 		  	$retData = json_decode($ret, true);
 
