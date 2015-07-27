@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
 
-class MyPagination {
+class Mypagination {
 
 	private function echo_head($total_pages,$current_page,$method_name){
 		$result = "<div class=\"row-fluid\">
