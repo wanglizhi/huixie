@@ -55,6 +55,13 @@ class Ta extends CI_Controller {
 		if($order){
 			$order = $order[0];
 		}
+		if($order['taId'] and $order['taId'] == $user['openid']){
+			echo '您已经接单！';
+			exit(0);
+		}else if($order['hasTaken']){
+			echo '该订单已经被人接单';
+			exit(0);
+		}
 
 		$data['pageTitle'] = '接单';
 		$data['order'] = $order;
@@ -74,6 +81,40 @@ class Ta extends CI_Controller {
 		}
 
 	}
+	//待选择订单
+	function untakenOrderList(){
+		
+	}
+	//已经接单
+	function unfinishedOrderList(){
+		$this->checkLogin();
+		$user = $_SESSION['user'];
+		if(!$user){
+			echo 'please login';
+		}else{
+			$data['pageTitle'] = 'Unfinished Orders';
+			$this->load->model('Order_model');
+			$data['orderList'] = $this->Order_model->searchBy3('taId', $user['openid'], 'hasTaken', 1, 'hasFinished', 0);
+			$this->load->view('userHeader', $data);
+			$this->load->view('orderList');
+			$this->load->view('userFooter');
+		}
+	}
+	//完成的订单
+	function finishedOrderList(){
+		$this->checkLogin();
+		$user = $_SESSION['user'];
+		if(!$user){
+			echo 'please login';
+		}else{
+			$data['pageTitle'] = 'Finished Orders';
+			$this->load->model('Order_model');
+			$data['orderList'] = $this->Order_model->searchBy3('taId', $user['openid'], 'hasPaid', 1, 'hasFinished', 1);
+			$this->load->view('userHeader', $data);
+			$this->load->view('orderList');
+			$this->load->view('userFooter');
+		}
+	}
 	function checkLogin(){
 		if (!session_id()) session_start();
 		if(isset($_SESSION['user'])){
@@ -86,7 +127,7 @@ class Ta extends CI_Controller {
 			$appsecret = '16a24c163a44ee41fa3ef630c1c455ec';
 			$code = $_GET['code'];
 			$para = array('appid'=>$appid, 'secret'=>$appsecret, 'code'=>$code, 'grant_type'=>'authorization_code');
-			
+
 			$ret = $this->Http_model->doCurlGetRequest('https://api.weixin.qq.com/sns/oauth2/access_token',$para);
 		  	$retData = json_decode($ret, true);
 
