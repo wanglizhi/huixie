@@ -85,6 +85,7 @@ class Ta extends CI_Controller {
 			$appsecret = '16a24c163a44ee41fa3ef630c1c455ec';
 			$code = $_GET['code'];
 			$para = array('appid'=>$appid, 'secret'=>$appsecret, 'code'=>$code, 'grant_type'=>'authorization_code');
+			$this->load->model('Http_model');
 			$ret = $this->Http_model->doCurlGetRequest('https://api.weixin.qq.com/sns/oauth2/access_token',$para);
 		  	$retData = json_decode($ret, true);
 
@@ -94,8 +95,8 @@ class Ta extends CI_Controller {
 		  	$this->load->model('User_model');
 		  	$this->load->model('Weixin_model');
 		  	$result = $this->User_model->searchById($openid);
-		  	if(isset($result[0])){
-		  		$user = $result[0];
+		  	if($result){
+		  		$user = $result;
 		  	}else{
 		  		$followerInfo = $this->Weixin_model->getFollowerInfo($openid);
 		  		if(isset($followerInfo['errorcode'])){
