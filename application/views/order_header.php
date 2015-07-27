@@ -24,7 +24,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<!-- END GLOBAL MANDATORY STYLES -->
 
 	<!-- BEGIN PAGE LEVEL STYLES -->
-	<link rel="stylesheet" href="media/css/DT_bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
 	<link rel="stylesheet" type="text/css" href="media/css/chosen.css" />
 	<link href="media/css/bootstrap-fileupload.css" rel="stylesheet" type="text/css">
@@ -169,7 +168,7 @@ font-weight: 300;
 			            <li><a href="<?php echo site_url("order/untakenOrderList");?>">所有未接单订单</a></li>
 			            <li><a href="<?php echo site_url("order/unfinishedOrderList");?>">所有未完成订单</a></li>
 			            <li><a href="<?php echo site_url("order/finishedOrderList");?>">所有已完成订单</a></li>
-			            <li><a href="<?php echo site_url("order/orderList");?>">所有订单（未分类）</a></li>
+			            <li><a href="<?php echo site_url("order/orderList/1/10");?>">所有订单（未分类）</a></li>
 					</ul>
 				</li>
 

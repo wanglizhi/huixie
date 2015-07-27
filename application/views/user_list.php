@@ -50,7 +50,7 @@
 							</div>
 
 							<div class="portlet-body">
-
+<div>
 <table class="table" id="userList">
 			<thead>
 				<tr>
@@ -64,8 +64,8 @@
 			<tbody>
 			<?php if(!empty($userList))foreach ($userList as $user):?>
 				<tr>
-					<td> <?php echo $user['id'];?> </td>
-					<td> <?php echo $user['name'];?> </td>
+					<td> <?php echo $user['openid'];?> </td>
+					<td> <?php echo $user['nickname'];?> </td>
 					<td> <?php echo $user['university'];?> </td>
 					<td> <?php echo $user['email'];?> </td>
 					<td> <?php echo $user['createTime'];?> </td>
@@ -73,7 +73,35 @@
 			<?php endforeach;?>
 			</tbody>
 		</table>
-
+</div><div class="row-fluid">
+						<div class="span12">
+							<div class="dataTables_paginate paging_bootstrap pagination">
+								<ul>
+									<li class="prev disabled">
+										<a style="margin: 0px;" href="#">← <span class="hidden-480">Prev</span></a>
+									</li>
+									<li class="active">
+										<a style="margin: 0px;" href="#">1</a>
+									</li>
+									<li>
+										<a style="margin: 0px;" href="#">2</a>
+									</li>
+									<li>
+										<a style="margin: 0px;" href="#">3</a>
+									</li>
+									<li>
+										<a style="margin: 0px;" href="#">4</a>
+									</li>
+									<li>
+										<a style="margin: 0px;" href="#">5</a>
+									</li>
+									<li class="next">
+										<a style="margin: 0px;" href="#"><span class="hidden-480">Next</span> → </a>
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
 
 							</div>
 
