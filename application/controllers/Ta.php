@@ -5,12 +5,16 @@ class Ta extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->model('Http_model');
+		$this->load->library('mypagination');
 	}
-	function taList()
+	function taList($page = 1,$num = ITEMS_PER_PAGE)
 	{
 		$data['pageTitle'] = '所有 TA';
 		$this->load->model('Ta_model');
-		$data['taList'] = $this->Ta_model->getAll();
+		$result = $this->Ta_model->getAll($page,$num);
+		$data['taList'] = $result['result_rows'];
+		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
+				,"ta/taList");
 		$this->load->view('admin_header', $data);
 		$this->load->view('ta_list');
 		$this->load->view('admin_footer');

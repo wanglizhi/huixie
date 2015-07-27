@@ -7,14 +7,14 @@ class Order extends CI_Controller {
 		$this->load->library('mypagination');
 	}
 	// Admin page
-	function orderList($page = 1,$num = 10)
+	function orderList($page = 1,$num = ITEMS_PER_PAGE)
 	{
 		if($page>0 && $num>0){
 			$data['pageTitle'] = '所有订单';
 			$this->load->model('Order_model');
 			$result = $this->Order_model->getAll($page,$num);
 			$data['orderList'] = $result['result_rows'];
-			$data['page_info'] = $this->mypagination->create_links(($result['result_num_rows']+$num-1)/$num,$page
+			$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
 				,"order/orderList");
 		}else{
 			$data['orderList'] = array();
@@ -23,34 +23,46 @@ class Order extends CI_Controller {
 		$this->load->view('order_list');
 		$this->load->view('admin_footer');
 	}
-	function unpaidOrderList(){
+	function unpaidOrderList($page = 1,$num = ITEMS_PER_PAGE){
 		$data['pageTitle'] = '未付款订单';
 		$this->load->model('Order_model');
-		$data['orderList'] = $this->Order_model->searchBy1('hasPaid', 0);
+		$result = $this->Order_model->searchBy1('hasPaid', 0,$page,$num);
+		$data['orderList'] = $result['result_rows'];
+		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
+				,"order/unpaidOrderList");
 		$this->load->view('admin_header', $data);
 		$this->load->view('order_list');
 		$this->load->view('admin_footer');
 	}
-	function untakenOrderList(){
+	function untakenOrderList($page = 1,$num = ITEMS_PER_PAGE){
 		$data['pageTitle'] = '未接单订单';
 		$this->load->model('Order_model');
-		$data['orderList'] = $this->Order_model->searchBy2('hasPaid', 1, 'hasTaken', 0);
+		$result = $this->Order_model->searchBy2('hasPaid', 1, 'hasTaken', 0,$page,$num);
+		$data['orderList'] = $result['result_rows'];
+		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
+				,"order/untakenOrderList");
 		$this->load->view('admin_header', $data);
 		$this->load->view('order_list');
 		$this->load->view('admin_footer');
 	}
-	function unfinishedOrderList(){
+	function unfinishedOrderList($page = 1,$num = ITEMS_PER_PAGE){
 		$data['pageTitle'] = '未完成订单';
 		$this->load->model('Order_model');
-		$data['orderList'] = $this->Order_model->searchBy2('hasTaken', 1, 'hasFinished', 0);
+		$result = $this->Order_model->searchBy2('hasTaken', 1, 'hasFinished', 0,$page,$num);
+		$data['orderList'] = $result['result_rows'];
+		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
+				,"order/unfinishedOrderList");
 		$this->load->view('admin_header', $data);
 		$this->load->view('order_list');
 		$this->load->view('admin_footer');
 	}
-	function finishedOrderList(){
+	function finishedOrderList($page = 1,$num = ITEMS_PER_PAGE){
 		$data['pageTitle'] = '已完成订单';
 		$this->load->model('Order_model');
-		$data['orderList'] = $this->Order_model->searchBy2('hasPaid', 1, 'hasFinished', 1);
+		$result = $this->Order_model->searchBy2('hasPaid', 1, 'hasFinished', 1,$page,$num);
+		$data['orderList'] = $result['result_rows'];
+		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
+				,"order/finishedOrderList");
 		$this->load->view('admin_header', $data);
 		$this->load->view('order_list');
 		$this->load->view('admin_footer');

@@ -31,6 +31,7 @@ class Mypagination {
 
     public function create_links($total_pages,$current_page,$method_name)
     {
+    	if($total_pages<=1) return "";
     	$result = $this->echo_head($total_pages,$current_page,$method_name);
     	return $result;
     }

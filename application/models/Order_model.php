@@ -4,37 +4,50 @@ class Order_model extends CI_Model{
 		parent::__construct();
 		$this->load->database();
 	}
-	function searchBy1($key, $value){
+	function searchBy1($key, $value,$page,$num){
 		$this->db->where($key, $value);
 		$this->db->select('*');
-		$query=$this->db->get('order');
+		$query=$this->db->get('order',$num,($page-1)*$num);
 		if($this->db->affected_rows()){
-			$result = $query->result();
+			$result['result_rows'] = $query->result();
+			$query=$this->db->get('order');
+			$result['result_num_rows'] = $query->num_rows();
 			return json_decode(json_encode($result),true);
 		}else{
 			return array();
 		}
 	}
-	function searchBy2($key1, $value1, $key2, $value2){
+	function searchBy2($key1, $value1, $key2, $value2,$page,$num){
 		$this->db->where($key1, $value1);
 		$this->db->where($key2, $value2);
 		$this->db->select('*');
-		$query=$this->db->get('order');
+		$query=$this->db->get('order',$num,($page-1)*$num);
 		if($this->db->affected_rows()){
-			$result = $query->result();
+			$result['result_rows'] = $query->result();
+			$this->db->where($key1, $value1);
+			$this->db->where($key2, $value2);
+			$query=$this->db->get('order');
+			$result['result_num_rows'] = $query->num_rows();
 			return json_decode(json_encode($result),true);
 		}else{
-			return array();
+			$result['result_rows']="";
+			$result['result_num_rows'] = 0;
+			return $result;
 		}
 	}
-	function searchBy3($key1, $value1, $key2, $value2, $key3, $value3){
+	function searchBy3($key1, $value1, $key2, $value2, $key3, $value3,$page,$num){
 		$this->db->where($key1, $value1);
 		$this->db->where($key2, $value2);
 		$this->db->where($key3, $value3);
 		$this->db->select('*');
 		$query=$this->db->get('order');
 		if($this->db->affected_rows()){
-			$result = $query->result();
+			$result['result_rows'] = $query->result();
+			$this->db->where($key1, $value1);
+			$this->db->where($key2, $value2);
+			$this->db->where($key3, $value3);
+			$query=$this->db->get('order');
+			$result['result_num_rows'] = $query->num_rows();
 			return json_decode(json_encode($result),true);
 		}else{
 			return array();

@@ -5,13 +5,17 @@ class User extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->model('Http_model');
+		$this->load->library('mypagination');
 	}
-	function userList()
+	function userList($page = 1,$num = ITEMS_PER_PAGE)
 	{
 		$data['pageTitle'] = '所有用户';
 		$this->load->model('User_model');
-		$data['userList'] = $this->User_model->getAll();
-		$this->load->view('admin_header',$data);		
+		$result = $this->User_model->getAll($page,$num);
+		$data['userList'] = $result['result_rows'];
+		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
+				,"user/userList");
+		$this->load->view('admin_header',$data);
 		$this->load->view('user_list');
 		$this->load->view('admin_footer');
 	}

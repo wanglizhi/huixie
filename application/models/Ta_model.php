@@ -19,7 +19,8 @@ class Ta_model extends CI_Model{
 		$this->db->select('*');
 		$query=$this->db->get('ta');
 		if($this->db->affected_rows()){
-			$result = $query->result();
+			$result['result_num_rows'] = $query->num_rows();
+			$result['result_rows'] = $query->result();
 			return json_decode(json_encode($result),true);
 		}else{
 			return array();

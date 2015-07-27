@@ -80,7 +80,7 @@
 									<?php elseif($order['hasTaken']==0): ?>
 									<td> <span class="label label-warning">已付款</span></td>
 								<?php elseif($order['hasFinished']==0): ?>
-								<td> <span class="label label-primary">已接单</span></td>
+								<td> <span class="label label-info">已接单</span></td>
 							<?php else: ?>
 							<td> <span class="label label-success">已完成</span></td>
 						<?php endif; ?>

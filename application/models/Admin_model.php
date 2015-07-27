@@ -4,11 +4,12 @@ class Admin_model extends CI_Model{
 		parent::__construct();
 		$this->load->database();
 	}
-	function getAll(){
+	function getAll($page,$num){
 		$this->db->select('*');
 		$query=$this->db->get('admin');
 		if($this->db->affected_rows()){
-			$result = $query->result();
+			$result['result_num_rows'] = $query->num_rows();
+			$result['result_rows'] = $query->result();
 			return json_decode(json_encode($result),true);
 		}else{
 			return array();

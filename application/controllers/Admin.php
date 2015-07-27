@@ -4,6 +4,7 @@ class Admin extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->helper('url');
+		$this->load->library('mypagination');
 	}
 	function index(){
 		$this->load->view('admin_header');
@@ -11,13 +12,16 @@ class Admin extends CI_Controller {
 		$this->load->view('admin_footer');
 	}
 
-	function adminList(){
+	function adminList($page = 1,$num = ITEMS_PER_PAGE){
 		$this->checkLogin();
 
 		$data['pageTitle'] = '管理员列表';
 		$data['admin'] = $_SESSION['admin'];
 		$this->load->model('Admin_model');
-		$data['adminList'] = $this->Admin_model->getAll();
+		$result = $this->Admin_model->getAll($page,$num);
+		$data['adminList'] = $result['result_rows'];
+		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
+				,"order/orderList");
 		$this->load->view('admin_header',$data);		
 		$this->load->view('admin_list');
 		$this->load->view('admin_footer');

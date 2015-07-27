@@ -15,11 +15,13 @@ class User_model extends CI_Model{
 			return array();
 		}
 	}
-	function getAll(){
+	function getAll($page,$num){
 		$this->db->select('*');
-		$query=$this->db->get('user');
+		$query=$this->db->get('user',$num,($page-1)*$num);
 		if($this->db->affected_rows()){
-			$result = $query->result();
+			$result['result_rows'] = $query->result();
+			$query=$this->db->get('user');
+			$result['result_num_rows'] = $query->num_rows();
 			return json_decode(json_encode($result),true);
 		}else{
 			return array();
