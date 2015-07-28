@@ -78,15 +78,7 @@ class Ta extends CI_Controller {
 		$this->load->model('Order_model');
 		$user = $_SESSION['user'];
 		$orderNum = $_POST['orderNum'];
-		$order = $this->Order_model->searchBy1('orderNum', $orderNum);
 		if($this->Order_model->takeOrder($orderNum, $user['openid'])){
-			$this->load->model('Message_model');
-			$this->Message_model->sendMessageToTa(
-				$order,
-				$user['openid'],
-				'订单接单成功！',
-				'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri=http%3A%2F%2Fhuixie.me%2Fhuixie%2Findex.php%2Fta%2FtakeOrderPage&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect',
-				'恭喜你接单成功，请联系客服获得相关材料，完成后将文件发送到admin@huixie.me');
 			echo "接单成功";
 		}else{
 			echo "接单失败";
