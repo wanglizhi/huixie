@@ -22,6 +22,7 @@ create table `user`(
 
 `university` varchar(64) DEFAULT NULL,
 `email` varchar(128) DEFAULT NULL,
+`balance` int(11),
 
 `createTime` datetime NOT NULL
 )
@@ -29,7 +30,7 @@ create table `user`(
 #TA表
 create table `ta`(
 `openid` varchar(255) NOT NULL PRIMARY KEY,
-`name` varchar(64),
+`introduction` text,
 `skills` varchar(128),
 `star` float,
 `unitPrice` int(11),
