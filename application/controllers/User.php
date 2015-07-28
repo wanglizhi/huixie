@@ -263,36 +263,33 @@ class User extends CI_Controller {
 	}
 	function payOrder(){
 		if (!session_id()) session_start();
-		$user = $_SESSION['user'];
 		$order = $_SESSION['order'];
 		$order['price'] = $_SESSION['price'];
-		$this->load->model('Weixin_model');
-		$this->load->model('Message_model');
 		$order['hasPaid'] = 1;
 		date_default_timezone_set('PRC');
 		$order['paidTime'] = date('Y-m-d h:i:s');
 		$this->load->model('Order_model');
 		$this->Order_model->update($order);
-		//推送给用户
-		$this->Message_model->sendMessageToUser(
-				$order,
-				$user['openid'],
-				'付款成功，订单详情如下：！',
-				'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri=http%3A%2F%2Fhuixie.me%2Fhuixie%2Findex.php%2Fta%2FtakeOrderPage&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect',
-				'恭喜你下单成功，请联系客服获得帮助，将参考资料发送到admin@huixie.me');
-
 		//推送给TA
+		$this->load->model('Weixin_model');
+
 		$selectedTa = $_SESSION['taList'];
+		// if(is_array($selectedTa)){
+			foreach ($selectedTa as $ta) {
+				echo '推送的人的名字：'.$ta['name']."\n";
+			$this->Weixin_model->sendMessageToTa($order, $ta['openid'], '有新的订单提醒');
 
-		foreach ($selectedTa as $ta) {
-			echo '推送的人的名字：'.$ta['name']."\n";
-		$this->Weixin_model->sendMessageToTa($order, $ta['openid'], '有新的订单提醒');
-
-		$data['taId'] = $ta['openid'];
-		$data['orderNum'] = $order['orderNum'];
-		$data['createTime'] = date('Y-m-d h:i:s');
-		$this->Order_model->selectTa($data);
-		}
+			$data['taId'] = $ta['openid'];
+			$data['orderNum'] = $order['orderNum'];
+			$data['createTime'] = date('Y-m-d h:i:s');
+			$this->Order_model->selectTa($data);
+			}
+		// }else{
+		// 	$data['taId'] = $selectedTa['id'];
+		// 	$data['orderNum'] = $order['orderNum'];
+		// 	$data['createTime'] = date('Y-m-d h:i:s');
+		// 	$this->Order_model->selectTa($data);
+		// }
 		
 		//跳转到未接单界面
 		redirect('user/untakenOrderList');
