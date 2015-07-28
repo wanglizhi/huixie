@@ -35,7 +35,8 @@ create table `ta`(
 `star` float,
 `unitPrice` int(11),
 `createTime` datetime,
-`email` varchar(128)
+`email` varchar(128),
+`hasCheck` tinyint(4)
 )
 
 #订单表
