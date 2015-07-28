@@ -24,8 +24,8 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 
-		$this->load->view('admin_header');
+		$this->load->view(ADMIN_PREFIX.'admin_header');
 		$this->load->view('index');
-		$this->load->view('admin_footer');
+		$this->load->view(ADMIN_PREFIX.'admin_footer');
 	}
 }
