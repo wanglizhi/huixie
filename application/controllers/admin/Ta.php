@@ -1,0 +1,46 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); //防止用户直接访问
+
+class Ta extends MY_AdminController {
+	function __construct(){
+		parent::__construct();
+		$this->load->helper('url');
+		$this->load->model('Http_model');
+		$this->load->library('mypagination');
+	}
+	function taList($page = 1,$num = ITEMS_PER_PAGE)
+	{
+		$data['pageTitle'] = '所有 TA';
+		$this->load->model('Ta_model');
+		$result = $this->Ta_model->getAll($page,$num);
+		$data['taList'] = $result['result_rows'];
+		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
+				,ADMIN_PREFIX."ta/taList");
+		$this->loadView(ADMIN_PREFIX.'ta_list',$data);
+	}
+	function addTaPage(){
+		$data['pageTitle'] = '添加 TA';
+		$this->loadView(ADMIN_PREFIX.'add_tA',$data);
+	}
+	function addTa(){
+		$this->load->model('Ta_model');
+		$data['name']=$_POST['name'];
+		$data['email']=$_POST['email'];
+		$data['skills']=$_POST['skills'];
+		$data['star'] = $_POST['star'];
+		$data['unitPrice'] = $_POST['unitPrice'];
+		date_default_timezone_set('PRC');
+		$data['createTime'] = date('Y-m-d h:i:s');
+		if(isset($data['name'])){
+			$time = 3;
+			header("refresh:$time;url=addTaPage");
+			print('添加失败...<br>'.$time.'秒后自动跳转。');
+		}
+		if (!$this->Ta_model->add($data)) {
+			$time = 3;
+			header("refresh:$time;url=addTaPage");
+			print('添加失败...<br>'.$time.'秒后自动跳转。');
+		}else{
+			redirect('ta/taList');
+		}
+	}
+}

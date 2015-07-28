@@ -70,7 +70,7 @@
 					<td> <?php echo $user['university'];?> </td>
 					<td> <?php echo $user['email'];?> </td>
 					<td> <?php echo $user['createTime'];?> </td>
-					<td> <a href="<?php echo site_url("order/userOrderList/")."/".$user['openid']?>">查看订单</a> </td>
+					<td> <a href="<?php echo site_url(ADMIN_PREFIX."order/userOrderList/")."/".$user['openid']?>">查看订单</a> </td>
 				</tr>
 			<?php endforeach;?>
 			</tbody>

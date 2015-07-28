@@ -23,7 +23,7 @@
 
 					<div class="span12">
 						<h3 class="page-title">
-							用户管理
+							登陆
 						</h3>
 						<ul class="breadcrumb">
 							<li>
@@ -40,7 +40,7 @@
 						<div class="portlet box blue" id="form_wizard_1">
 							<div class="portlet-title">
 								<div class="caption">
-									<i class="icon-reorder"></i> 用户列表
+									<i class="icon-reorder"></i> 填写表单
 								</div>
 								<div class="tools hidden-phone">
 									<a href="javascript:;" class="collapse"></a>
@@ -50,33 +50,21 @@
 							</div>
 
 							<div class="portlet-body">
-<div>
-<table class="table" id="userList">
-			<thead>
-				<tr>
-					<th>ID</th>
-					<th>用户名</th>
-					<th>大学</th>
-					<th>邮箱</th>
-					<th>创建时间</th>
-					<th>查看订单</th>
-				</tr>
-			</thead>
-			<tbody>
-			<?php if(!empty($userList))foreach ($userList as $user):?>
-				<tr>
-					<td> <?php echo $user['openid'];?> </td>
-					<td> <?php echo $user['nickname'];?> </td>
-					<td> <?php echo $user['university'];?> </td>
-					<td> <?php echo $user['email'];?> </td>
-					<td> <?php echo $user['createTime'];?> </td>
-					<td> <a href="<?php echo site_url("order/userOrderList/")."/".$user['openid']?>">查看订单</a> </td>
-				</tr>
-			<?php endforeach;?>
-			</tbody>
-		</table>
+
+<div class="tab-pane">
+<form action="<?php echo site_url(ADMIN_PREFIX.'login/adminLogin');?>" method="post">
+  			<div class="form-group">
+    			<label for="name">用户名</label>
+    			<input type="text" class="form-control m-wrap large" id="name" name="name" placeholder="" required="required">
+  			</div>
+  			<div class="form-group">
+    			<label for="password">密码</label>
+    			<input type="password" class="form-control m-wrap large" id="password" name="password" placeholder="" required="required">
+  			</div>
+  			<button type="submit" class="btn green">Sign in</button>
+		</form>
 </div>
-<?=$page_info?>
+
 
 							</div>
 

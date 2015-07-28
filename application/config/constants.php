@@ -24,6 +24,7 @@ define('DIR_WRITE_MODE', 0755);
 */
 define ('ITEMS_PER_PAGE', 10);
 define ('MAX_PAGES', 10);
+define ('ADMIN_PREFIX', 'admin/');
 
 
 /*
