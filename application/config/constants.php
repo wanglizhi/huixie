@@ -23,6 +23,7 @@ define('DIR_WRITE_MODE', 0755);
 	应用中自定义的常量
 */
 define ('ITEMS_PER_PAGE', 10);
+define ('MAX_PAGES', 10);
 
 
 /*

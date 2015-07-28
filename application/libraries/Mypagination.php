@@ -2,7 +2,7 @@
 
 class Mypagination {
 
-	private function echo_head($total_pages,$current_page,$method_name){
+	private function create($total_pages,$current_page,$method_name){
 		$result = "<div class=\"row-fluid\">
 		<div class=\"span12\">
 			<div class=\"dataTables_paginate paging_bootstrap pagination\">
@@ -11,10 +11,12 @@ class Mypagination {
 			$result.="<li class=\"prev\">
 				<a style=\"margin: 0px;\" href=\"".site_url($method_name)."/".($current_page-1)."\">← <span class=\"hidden-480\">Prev</span></a>
 				</li>";
-		for($i = 1;$i<=$total_pages;$i++){
+		$max_page = min($total_pages,$current_page+MAX_PAGES/2);
+		$min_page = max(1,$max_page-MAX_PAGES);
+		for($i = $min_page;$i<=$max_page;$i++){
 			if($i==$current_page){
 				$result.="<li class=\"active\">
-							<a style=\"margin: 0px;\" href=\"".site_url($method_name)."/".$i."\">".$i."</a>
+							<a style=\"margin: 0px;\" disabled=\"disabled\";>".$i."</a>
 						</li>";
 			}
 			else{
@@ -32,7 +34,7 @@ class Mypagination {
     public function create_links($total_pages,$current_page,$method_name)
     {
     	if($total_pages<=1) return "";
-    	$result = $this->echo_head($total_pages,$current_page,$method_name);
+    	$result = $this->create($total_pages,$current_page,$method_name);
     	return $result;
     }
 }
