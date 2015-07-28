@@ -24,12 +24,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<!-- END GLOBAL MANDATORY STYLES -->
 
 	<!-- BEGIN PAGE LEVEL STYLES -->
-	<link rel="stylesheet" href="media/css/DT_bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
 	<link rel="stylesheet" type="text/css" href="media/css/chosen.css" />
 	<link href="media/css/bootstrap-fileupload.css" rel="stylesheet" type="text/css">
 	<link href="media/css/chosen.css" rel="stylesheet" type="text/css">
 	<link href="media/css/profile.css" rel="stylesheet" type="text/css">
+	<link href="media/css/search.css" rel="stylesheet" type="text/css"/>
+
 	<!-- END PAGE LEVEL STYLES -->
 
 	<link rel="shortcut icon" href="media/image/favicon.ico" />

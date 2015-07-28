@@ -4,6 +4,29 @@ class User_model extends CI_Model{
 		parent::__construct();
 		$this->load->database();
 	}
+
+	function searchUserCondition($key){
+		$this->db->like('openid',$key);
+		$this->db->or_like('email',$key);
+		$this->db->or_like('nickname',$key);
+	}
+
+	function searchUser($key,$page,$num){
+		$this->searchUserCondition($key);
+		$query=$this->db->get('user',$num,($page-1)*$num);
+		if($this->db->affected_rows()){
+			$result['result_rows'] = $query->result();
+			$this->searchUserCondition($key);
+			$query=$this->db->get('user');
+			$result['result_num_rows'] = $query->num_rows();
+			return json_decode(json_encode($result),true);
+		}else{
+			$result['result_rows'] = array();
+			$result['result_num_rows'] = 0;
+			return $result;
+		}
+	}
+
 	function searchById($id){
 		$this->db->where('openid',$id);
 		$this->db->select('*');
