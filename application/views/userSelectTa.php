@@ -2,7 +2,7 @@
 <div id="container" >
 	<h1> <?php echo $pageTitle;?> </h1>
 
-	<form action="<?php echo site_url('user/selectTa');?>" method="post">
+	<form action="<?php echo site_url('customer/order/selectTa');?>" method="post">
 
 <?php if(!empty($taList))foreach ($taList as $ta):?>
 	<div class="checkbox">

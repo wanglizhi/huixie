@@ -94,7 +94,7 @@
     			<a link="">保密政策</a>
   			</div>
   			<div class="form-actions">
-  			<button type="submit" class="btn blue">提交</button>
+  			<button type="submit" class="btn blue"><i class="icon-ok"></i> 提交</button>
   			</div>
 		</form>
 

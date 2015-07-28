@@ -5,16 +5,15 @@ class Order extends CustomerController {
 		parent::__construct();
 	}
 	function index(){
+		$this->addOrderPage();
 	}
 	//添加订单
 	function addOrderPage(){
-
 		$this->load->view('customer/header');
 		$this->load->view('customer/add_order');
 		$this->load->view('customer/footer');
 	}
 	function addOrder(){
-		$this->checkLogin();
 		$this->load->model('Order_model');
 		$user = $_SESSION['user'];
 
@@ -33,99 +32,122 @@ class Order extends CustomerController {
 		$data['orderNum'] = time();
 		if(!(isset($data['major']) and isset($data['courseName']) and isset($data['userId']) and isset($data['email'])) ){
 			$time = 3;
-			header("refresh:$time;url=orderPage");
+			header("refresh:$time;url=addOrderPage");
 			print('信息错误，订单添加失败...<br>'.$time.'秒后自动跳转。');
 			return ;
 		}
 		$order = $this->Order_model->add($data);
 		if (!isset($order)) {
 			$time = 3;
-			header("refresh:$time;url=orderPage");
+			header("refresh:$time;url=addOrderPage");
 			print('信息错误，订单添加失败...<br>'.$time.'秒后自动跳转。');
 		}else{
 			$data['id'] = $order['id'];
 			$_SESSION['order'] = $data;
-			redirect('user/taSelectPage');
+			redirect('customer/order/taSelectPage'.$order['orderNum']);
 		}
 	}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	// Admin page
-	function orderList($page = 1,$num = ITEMS_PER_PAGE)
-	{
-		if($page>0 && $num>0){
-			$data['pageTitle'] = '所有订单';
-			$this->load->model('Order_model');
-			$result = $this->Order_model->getAll($page,$num);
-			$data['orderList'] = $result['result_rows'];
-			$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
-				,"order/orderList");
-		}else{
-			$data['orderList'] = array();
+	function taSelectPage($orderNum=0){
+		$this->load->model('Ta_model');
+		$this->load->model('User_model');
+		$order = $_SESSION['order'];
+		$taList = $this->Ta_model->searchBySkills($order['major']);
+		$length = count($taList);
+		for ($i=0; $i < $length; $i++) { 
+			$taList[$i]['userInfo'] = $this->User_model->searchById($taList[$i]['openid']);
 		}
-		$this->load->view('admin_header', $data);
-		$this->load->view('order_list');
-		$this->load->view('admin_footer');
+
+		// $ta1 = array('openid'=> '123456677', 'unitPrice' => 100, 'star'=> 4.0, 'introduction'=>'我来自哈佛，学习成绩非常好！',
+		// 	'userInfo'=>array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
+		// 		'nickname'=>'nickname'));
+		// $ta2 = array('openid'=> '123456677', 'unitPrice' => 100, 'star'=> 4.0, 'introduction'=>'我来自哈佛，学习成绩非常好！',
+		// 	'userInfo'=>array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
+		// 		'nickname'=>'nickname'));
+		// $taList = array('1'=>$ta1, '2'=>$ta2);
+
+		$data['taList'] = $taList;
+		$this->load->view('customer/header', $data);
+		$this->load->view('customer/select_ta');
+		$this->load->view('customer/footer');
 	}
-	function unpaidOrderList($page = 1,$num = ITEMS_PER_PAGE){
-		$data['pageTitle'] = '未付款订单';
+
+	function payOrderPage(){
+		$taIdList = $_POST['taIdList'];
+		$taList = array();
+		$this->load->model('Ta_model');
+		$max = 0;
+		$min = 100000;
+		foreach ($taIdList as $taId) {
+			$ta = $this->Ta_model->searchById($taId);
+			$taList[$taId] = $ta;
+			if($ta['unitPrice'] > $max){
+				$max = $ta['unitPrice'];
+			}
+			if($ta['unitPrice'] < $min){
+				$min = $ta['unitPrice'];
+			}
+		}
+		$data['order'] = $_SESSION['order'];
+		$data['taList'] = $taList;
+		$data['max'] = $max * $_SESSION['order']['pageNum'];
+		$data['min'] = $min * $_SESSION['order']['pageNum'];
+		//添加到session
+		$_SESSION['price'] = $data['max'];
+		$_SESSION['taList'] = $taList;
+		
+		//数据测试
+		// $data['max'] = 100;
+		// $data['min'] = 10;
+		// $data['order'] = array('orderNum'=>1234567,'courseName'=>'设计与实现','major'=>'软件工程', 'pageNum'=>10, 'refDoc'=>6, 'endTime'=>'2015-6-10', 'requirement'=>'没有什么要求，好好写就行');
+		// $ta1 = array('openid'=> '123456677', 'unitPrice' => 100, 'star'=> 4.0, 'introduction'=>'我来自哈佛，学习成绩非常好！',
+		// 	'userInfo'=>array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
+		// 		'nickname'=>'nickname'));
+		// $ta2 = array('openid'=> '123456677', 'unitPrice' => 100, 'star'=> 4.0, 'introduction'=>'我来自哈佛，学习成绩非常好！',
+		// 	'userInfo'=>array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
+		// 		'nickname'=>'nickname'));
+		// $taList = array('1'=>$ta1, '2'=>$ta2);
+		// $data['taList'] = $taList;
+
+		$this->load->view('customer/header', $data);
+		$this->load->view('customer/pay_order_detail');
+		$this->load->view('customer/footer');
+	}
+	function payOrder(){
+		$user = $_SESSION['user'];
+		$order = $_SESSION['order'];
+		$order['price'] = $_SESSION['price'];
+		$this->load->model('Weixin_model');
+		$this->load->model('Message_model');
+		$order['hasPaid'] = 1;
+		date_default_timezone_set('PRC');
+		$order['paidTime'] = date('Y-m-d h:i:s');
 		$this->load->model('Order_model');
-		$result = $this->Order_model->searchBy1('hasPaid', 0,$page,$num);
-		$data['orderList'] = $result['result_rows'];
-		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
-				,"order/unpaidOrderList");
-		$this->load->view('admin_header', $data);
-		$this->load->view('order_list');
-		$this->load->view('admin_footer');
+		$this->Order_model->update($order);
+		//推送给用户
+		$this->Message_model->sendMessageToUser(
+				$order,
+				$user['openid'],
+				'付款成功，订单详情如下：！',
+				'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri=http%3A%2F%2Fhuixie.me%2Fhuixie%2Findex.php%2Fta%2FtakeOrderPage&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect',
+				'恭喜你下单成功，请联系客服获得帮助，将参考资料发送到admin@huixie.me');
+
+		//推送给TA
+		$selectedTa = $_SESSION['taList'];
+
+		foreach ($selectedTa as $ta) {
+			echo '推送的人的名字：'.$ta['name']."\n";
+		$this->Weixin_model->sendMessageToTa($order, $ta['openid'], '有新的订单提醒');
+
+		$data['taId'] = $ta['openid'];
+		$data['orderNum'] = $order['orderNum'];
+		$data['createTime'] = date('Y-m-d h:i:s');
+		$this->Order_model->selectTa($data);
+		}
+		
+		//跳转到未接单界面
+		redirect('user/untakenOrderList');
 	}
-	function untakenOrderList($page = 1,$num = ITEMS_PER_PAGE){
-		$data['pageTitle'] = '未接单订单';
-		$this->load->model('Order_model');
-		$result = $this->Order_model->searchBy2('hasPaid', 1, 'hasTaken', 0,$page,$num);
-		$data['orderList'] = $result['result_rows'];
-		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
-				,"order/untakenOrderList");
-		$this->load->view('admin_header', $data);
-		$this->load->view('order_list');
-		$this->load->view('admin_footer');
-	}
-	function unfinishedOrderList($page = 1,$num = ITEMS_PER_PAGE){
-		$data['pageTitle'] = '未完成订单';
-		$this->load->model('Order_model');
-		$result = $this->Order_model->searchBy2('hasTaken', 1, 'hasFinished', 0,$page,$num);
-		$data['orderList'] = $result['result_rows'];
-		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
-				,"order/unfinishedOrderList");
-		$this->load->view('admin_header', $data);
-		$this->load->view('order_list');
-		$this->load->view('admin_footer');
-	}
-	function finishedOrderList($page = 1,$num = ITEMS_PER_PAGE){
-		$data['pageTitle'] = '已完成订单';
-		$this->load->model('Order_model');
-		$result = $this->Order_model->searchBy2('hasPaid', 1, 'hasFinished', 1,$page,$num);
-		$data['orderList'] = $result['result_rows'];
-		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
-				,"order/finishedOrderList");
-		$this->load->view('admin_header', $data);
-		$this->load->view('order_list');
-		$this->load->view('admin_footer');
-	}
+
 
 }

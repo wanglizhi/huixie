@@ -9,7 +9,7 @@ class Oauth extends CI_Controller {
 	}
 	function loginPage(){
 		$this->load->view('customer/header');
-		$this->load->view('customer/loginPage');
+		$this->load->view('customer/login_page');
 		$this->load->view('customer/footer');
 	}
 }
