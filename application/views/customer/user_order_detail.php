@@ -23,12 +23,8 @@
 
 					<div class="span12">
 						<h3 class="page-title">
-							首页
+							订单信息
 						</h3>
-						<ul class="breadcrumb">
-							<li>
-							</li>
-						</ul>
 					</div>
 
 				</div>
@@ -40,7 +36,7 @@
 						<div class="portlet box blue" id="form_wizard_1">
 							<div class="portlet-title">
 								<div class="caption">
-									<i class="icon-reorder"></i> 简介
+									<i class="icon-reorder"></i> 订单编号：<?php echo $order['orderNum'];?>
 								</div>
 								<div class="tools hidden-phone">
 									<a href="javascript:;" class="collapse"></a>
@@ -49,13 +45,18 @@
 
 							</div>
 
-							<div class="portlet-body">
+							<div class="portlet-body center">
 							
-			<div class="jumbotron" style="padding:10%;">
-			  <h1>府学教育!</h1>
-			  <p>欢迎访问府学教育，我们是一家服务于教育的网站</p>
-			  <p><a class="btn green btn-lg" role="button">Learn more</a></p>
-			</div>
+	<div class="alert alert-success">
+		<h4>详情</h4>
+		<label>专业：<?php echo $order['major'];?></label>
+		<label>课程名：<?php echo $order['courseName'];?></label>
+		<label>页数：<?php echo $order['pageNum'];?></label>
+		<label>阅读材料页数：<?php echo $order['refDoc'];?></label>
+		<label>截止日期：<?php echo $order['endTime'];?></label>
+		<label>补充要求：<?php echo $order['requirement'];?></label>
+		<label>价格：<?php echo $order['price'];?></label>
+	</div>
 
 
 							</div>

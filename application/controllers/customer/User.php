@@ -11,6 +11,48 @@ class User extends CustomerController {
 		unset($_SESSION['user']);
 		redirect('customer/oauth/loginPage');
 	}
+	function infoPage(){
+		$user = $_SESSION['user'];
+
+		//数据测试
+		// $user = array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
+		// 		'nickname'=>'nickname', 'country'=>'中国', 'city'=>'南京', 'sex'=>1, 'university'=>'南京大学', 'email'=>'user@qq.com');
+
+		$data['user'] = $user;
+		$this->load->view('customer/header', $data);
+		$this->load->view('customer/user_info');
+		$this->load->view('customer/footer');
+	}
+	function modify(){
+		$user = $_SESSION['user'];
+		$university = $_POST['university'];
+		$email = $_POST['email'];
+		$user['university'] = $university;
+		$usre['email'] = $email;
+		$this->load->model('User_model');
+		$this->User_model->modify($user['openid'], $user);
+		//更新Session
+		$_SESSION['user'] = $user;
+
+		redirect('customer/user/infoPage');
+	}
+	function orderDetail($pageNum){
+		$user = $_SESSION['user'];
+		$this->load->model('Order_model');
+		$order = $this->Order_model->searchBy1('orderNum', $orderNum);
+
+		//测试数据
+		// $user = array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
+		// 		'nickname'=>'nickname', 'country'=>'中国', 'city'=>'南京', 'sex'=>1, 'university'=>'南京大学', 'email'=>'user@qq.com', 'openid'=>12);
+		// $order = array('taId'=>2, 'hasTaken'=>0, 'orderNum'=>1234567,'courseName'=>'设计与实现','major'=>'软件工程', 'pageNum'=>10, 'refDoc'=>6, 'endTime'=>'2015-6-10', 'requirement'=>'没有什么要求，好好写就行');
+
+		$data['order'] = $order;
+		$data['user'] = $user;
+
+		$this->load->view('customer/header',$data);
+		$this->load->view('customer/user_order_detail');
+		$this->load->view('customer/footer');
+	}
 
 	function unpaidOrderList($page = 1,$num = ITEMS_PER_PAGE){
 		$user = $_SESSION['user'];

@@ -106,26 +106,26 @@ font-weight: 300;
 
         <li class="start ">
           <a href="<?php echo site_url("customer/user/logout");?>">
-          <i class="icon-home"></i> 
+          <i class="icon-signout"></i> 
           <span class="title">注销</span>
           </a>
         </li>
 
         <li class="start ">
           <a href="<?php echo site_url("customer/order/addOrderPage");?>">
-          <i class="icon-home"></i> 
+          <i class="icon-edit"></i> 
           <span class="title">下订单</span>
           </a>
         </li>
 
         <li class="">
           <a href="javascript:;">
-          <i class="icon-cogs"></i> 
+          <i class="icon-shopping-cart"></i> 
           <span class="title">我的订单</span>
           <span class="arrow "></span>
           </a>
           <ul class="sub-menu">
-            <li><a href="<?php echo site_url("customer/user/orderList");?>">个人信息</a></li>
+            <li><a href="<?php echo site_url("customer/user/infoPage");?>">个人信息</a></li>
             <li><a href="<?php echo site_url("customer/user/orderList");?>">订单列表</a></li>
             <li><a href="<?php echo site_url("customer/user/unpaidOrderList");?>">未付款订单</a></li>
           </ul>
@@ -133,7 +133,7 @@ font-weight: 300;
 
         <li class="">
           <a href="javascript:;">
-          <i class="icon-cogs"></i> 
+          <i class="icon-inbox"></i> 
           <span class="title">我的接单</span>
           <span class="arrow "></span>
           </a>

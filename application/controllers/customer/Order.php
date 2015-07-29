@@ -31,16 +31,11 @@ class Order extends CustomerController {
 		$data['createTime'] = date('Y-m-d h:i:s');
 		$data['orderNum'] = time();
 		if(!(isset($data['major']) and isset($data['courseName']) and isset($data['userId']) and isset($data['email'])) ){
-			$time = 3;
-			header("refresh:$time;url=addOrderPage");
-			print('信息错误，订单添加失败...<br>'.$time.'秒后自动跳转。');
-			return ;
+			redirect('customer/order/addOrderPage');
 		}
 		$order = $this->Order_model->add($data);
 		if (!isset($order)) {
-			$time = 3;
-			header("refresh:$time;url=addOrderPage");
-			print('信息错误，订单添加失败...<br>'.$time.'秒后自动跳转。');
+			redirect('customer/order/addOrderPage');
 		}else{
 			$data['id'] = $order['id'];
 			$_SESSION['order'] = $data;
@@ -49,6 +44,7 @@ class Order extends CustomerController {
 	}
 
 	function taSelectPage($orderNum=0){
+
 		$this->load->model('Ta_model');
 		$this->load->model('User_model');
 		$order = $_SESSION['order'];
@@ -113,6 +109,7 @@ class Order extends CustomerController {
 		$this->load->view('customer/pay_order_detail');
 		$this->load->view('customer/footer');
 	}
+	// 付款
 	function payOrder(){
 		$user = $_SESSION['user'];
 		$order = $_SESSION['order'];
@@ -129,24 +126,31 @@ class Order extends CustomerController {
 				$order,
 				$user['openid'],
 				'付款成功，订单详情如下：！',
-				'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri=http%3A%2F%2Fhuixie.me%2Fhuixie%2Findex.php%2Fta%2FtakeOrderPage&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect',
+				'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri=http%3A%2F%2Fhuixie.me%2Fhuixie%2Findex.php%2Fcustomer%2Fuser%2ForderDetail%2F'.$order['orderNum'].'&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect',
 				'恭喜你下单成功，请联系客服获得帮助，将参考资料发送到admin@huixie.me');
 
 		//推送给TA
 		$selectedTa = $_SESSION['taList'];
 
 		foreach ($selectedTa as $ta) {
-			echo '推送的人的名字：'.$ta['name']."\n";
-		$this->Weixin_model->sendMessageToTa($order, $ta['openid'], '有新的订单提醒');
+			$this->Weixin_model->sendMessageToTa($order, $ta['openid'], '有新的订单提醒');
+			$this->Message_model->sendMessageToTa(
+				$order,
+				$ta['openid'],
+				'有新的订单提醒',
+				'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri=http%3A%2F%2Fhuixie.me%2Fhuixie%2Findex.php%2Fcustomer%2Fta%2FtakeOrderPage%2F'.$orderNum.'&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect',
+				'请您及时接单，并且联系客服获得相关材料');
 
-		$data['taId'] = $ta['openid'];
-		$data['orderNum'] = $order['orderNum'];
-		$data['createTime'] = date('Y-m-d h:i:s');
-		$this->Order_model->selectTa($data);
+
+			$data['taId'] = $ta['openid'];
+			$data['orderNum'] = $order['orderNum'];
+			$data['createTime'] = date('Y-m-d h:i:s');
+			$this->load->model('Selected_ta_model');
+			$this->Selected_ta_model->add($data);
 		}
 		
-		//跳转到未接单界面
-		redirect('user/untakenOrderList');
+		//跳转到接单界面
+		redirect('customer/user/orderList');
 	}
 
 

@@ -74,7 +74,7 @@ class User_model extends CI_Model{
 	}
 	
 	function modify($id,$data){
-		$this->db->where('id',$id);
+		$this->db->where('openid',$id);
 		$this->db->update('user',$data);
 		return $this->db->affected_rows();
 	}

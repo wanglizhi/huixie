@@ -43,61 +43,74 @@ class Ta extends CustomerController {
 
 
 	// 接单界面
-	function takeOrderPage(){
+	function takeOrderPage($orderNum){
 		$user = $_SESSION['user'];
 		$this->load->model('Order_model');
-		$select = $this->Order_model->searchSelectTa($user['openid']);
-		$order = $this->Order_model->searchBy1('orderNum', $select['orderNum']);
+		$this->load->model('Selected_ta_model');
+		// $select = $this->Selected_ta_model->searchBy2($user['openid'], $orderNum);
+		$order = $this->Order_model->searchBy1('orderNum', $orderNum);
 
-		//判断是否被接单
-		if($order){
-			$order = $order[0];
-		}
-		if($order['taId'] and $order['taId'] == $user['openid']){
-			echo '您已经接单！';
-			exit(0);
-		}else if($order['hasTaken']){
-			echo '该订单已经被人接单';
-			exit(0);
-		}
+		//测试数据
+		// $user = array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
+		// 		'nickname'=>'nickname', 'country'=>'中国', 'city'=>'南京', 'sex'=>1, 'university'=>'南京大学', 'email'=>'user@qq.com', 'openid'=>12);
+		// $order = array('taId'=>2, 'hasTaken'=>0, 'orderNum'=>1234567,'courseName'=>'设计与实现','major'=>'软件工程', 'pageNum'=>10, 'refDoc'=>6, 'endTime'=>'2015-6-10', 'requirement'=>'没有什么要求，好好写就行');
 
-		$data['pageTitle'] = '接单';
 		$data['order'] = $order;
-		$this->load->view('userHeader',$data);
-		$this->load->view('ta_take_order');
-		$this->load->view('userFooter');
+		$data['user'] = $user;
+
+		$this->load->view('customer/header',$data);
+		$this->load->view('customer/ta_take_order');
+		$this->load->view('customer/footer');
 	}
 	function takeOrder(){
-		$this->checkLogin();
 		$this->load->model('Order_model');
 		$user = $_SESSION['user'];
 		$orderNum = $_POST['orderNum'];
 		$order = $this->Order_model->searchBy1('orderNum', $orderNum);
 		if($this->Order_model->takeOrder($orderNum, $user['openid'])){
+			// 更新SelectedTa
+			$this->load->model('Selected_ta_model');
+			$this->Selected_ta_model->takeOrder($orderNum);
+
 			$this->load->model('Message_model');
 			$this->Message_model->sendMessageToTa(
 				$order,
 				$user['openid'],
 				'订单接单成功！',
-				'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri=http%3A%2F%2Fhuixie.me%2Fhuixie%2Findex.php%2Fta%2FtakeOrderPage&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect',
+				'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri=http%3A%2F%2Fhuixie.me%2Fhuixie%2Findex.php%2Fcustomer%2Fta%2FtakeOrderPage%2F'.$orderNum.'&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect',
 				'恭喜你接单成功，请联系客服获得相关材料，完成后将文件发送到admin@huixie.me');
-			echo "接单成功";
-		}else{
-			echo "接单失败";
 		}
+		redirect('customer/ta/takeOrderPage');
 
 	}
 	//待选择订单
-	function untakenOrderList(){
-		echo '待选择订单';
+	function untakenOrderList($page = 1,$num = ITEMS_PER_PAGE){
+		$user = $_SESSION['user'];
+		$this->load->model('Selected_ta_model');
+		$selectList = $this->Selected_ta_model->searchByTa($user['openid']);
+		$orderList = array();
+		foreach ($selectList as $select) {
+			$this->load->model('Order_model');
+			$order = $this->Order_model->searchBy1('orderNum', $select['orderNum'])[0];
+			array_push($orderList, $order);
+		}
+
+		$data['orderList'] = $orderList;
+		$result['result_num_rows'] = count($orderList);
+		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
+				,"customer/user/orderList");
+
+		$this->load->view('customer/header', $data);
+		$this->load->view('customer/ta_order_list');
+		$this->load->view('customer/footer');
 	}
 
 	// 订单列表
 	function orderList($page = 1,$num = ITEMS_PER_PAGE){
-		// $user = $_SESSION['user'];
+		$user = $_SESSION['user'];
 
 		//数据测试
-		$user = array('openid'=>'4');
+		// $user = array('openid'=>'4');
 
 
 		$data['pageTitle'] = '接单列表';
@@ -109,7 +122,7 @@ class Ta extends CustomerController {
 				,"customer/user/orderList");
 
 		$this->load->view('customer/header', $data);
-		$this->load->view('customer/user_order_list');
+		$this->load->view('customer/ta_order_list');
 		$this->load->view('customer/footer');
 	}
 	

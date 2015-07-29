@@ -23,7 +23,7 @@
 
 					<div class="span12">
 						<h3 class="page-title">
-							付款信息
+							订单信息
 						</h3>
 					</div>
 
@@ -56,27 +56,26 @@
 		<label>截止日期：<?php echo $order['endTime'];?></label>
 		<label>补充要求：<?php echo $order['requirement'];?></label>
 	</div>
-	<div class="alert alert-success">
-		<h4>选择的TA信息</h4>
-		<?php if(!empty($taList))foreach ($taList as $ta):?>
-  		<label>姓名：<?php echo $ta['userInfo']['nickname'];?></label>
-  		<img src="<?php echo $ta['userInfo']['headimgurl'];?>" alt="..." class="img-circle" style="width:120px;height:120px">
-  		<?php endforeach;?>
-	</div>
 
-	<div class="alert">
-		价格区间（我们收取TA价格区间的最大值，交易成功后返回实际差额）
-		<label>【 <?php echo $min;?> 元 --- <?php echo $max;?> 元 】</label>
-		<br>
-		实际收取金额：【<?php echo $max;?> 元】
-	</div>
-
-	<div class="alert alert-info">
-		请选择付款方式：<br>
-		<a href="<?php echo site_url("customer/order/payOrder");?>">Paypal</a><br>
-		<a link="">微信支付</a><br>
-		<a link="">支付宝支付</a>
-	</div>
+		<?php if($order['taId'] and $order['taId'] == $user['openid']): ?>
+			<div class="alert alert-success">
+			<h4>您已经接受此订单</h4>
+			</div>
+			<div class="alert">如果需要阅读材料，请联系客服，论文完成后发送到邮箱admin@huixie.me</div>
+		<?php elseif($order['hasTaken']): ?>
+				<div class="alert alert-error">
+				<h4>订单已经被接单，您不能再接。</h4>
+				</div>
+		<?php else: ?>
+		<div class="">
+		<form action="<?php echo site_url('customer/ta/takeOrder');?>" method="post">
+  			<div class="form-group">
+    			<input type="hidden" value="<?php echo $order['orderNum'];?>" id="orderNum" name="orderNum" placeholder="">
+  			</div>
+  			<button type="submit" class="btn green">确认接单</button>
+		</form>
+		</div>
+		<?php endif ?>
 
 
 							</div>
