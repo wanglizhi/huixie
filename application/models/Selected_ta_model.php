@@ -6,8 +6,7 @@ class Selected_ta_model extends CI_Model{
 	}
 
 	function takeOrder($orderNum){
-		$this->db->where('orderNum',$orderNum);
-		$this->db->update('hasTake',1);
+		$this->db->query('update selectedTa set hasTaken = 1 where orderNum = '.$orderNum);
 		return $this->db->affected_rows();
 	}
 

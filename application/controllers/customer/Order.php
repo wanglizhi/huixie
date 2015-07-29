@@ -49,6 +49,7 @@ class Order extends CustomerController {
 		$this->load->model('User_model');
 		$this->load->model('Order_model');
 		$order = $this->Order_model->searchById($orderNum);
+		$_SESSION['order'] = $order;
 		$taList = $this->Ta_model->searchBySkills($order['major']);
 		$length = count($taList);
 		for ($i=0; $i < $length; $i++) {

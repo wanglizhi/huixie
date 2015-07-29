@@ -95,6 +95,7 @@ class Ta extends CustomerController {
 			array_push($orderList, $order);
 		}
 
+		$data['pageTitle'] = '未接单列表';
 		$data['orderList'] = $orderList;
 		$result['result_num_rows'] = count($orderList);
 		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
