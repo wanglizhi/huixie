@@ -24,6 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<!-- END GLOBAL MANDATORY STYLES -->
 
 	<!-- BEGIN PAGE LEVEL STYLES -->
+	<link rel="stylesheet" href="media/css/DT_bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
 	<link rel="stylesheet" type="text/css" href="media/css/chosen.css" />
 	<link href="media/css/bootstrap-fileupload.css" rel="stylesheet" type="text/css">
@@ -80,7 +81,8 @@ font-weight: 300;
 				<ul class="nav pull-right">
 
 					<!-- BEGIN USER LOGIN DROPDOWN -->
-					<?php if(isset($admin)): ?>
+					<?php if(isset($admin) or isset($_SESSION['admin'])): ?>
+						<?php if(! isset($admin)) $admin = $_SESSION['admin'];?>
      				   <li class="dropdown user">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<img alt="" src="media/image/avatar1_small.jpg" />

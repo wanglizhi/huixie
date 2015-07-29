@@ -17,6 +17,16 @@ class Ta extends MY_AdminController {
 				,ADMIN_PREFIX."ta/taList");
 		$this->loadView(ADMIN_PREFIX.'ta_list',$data);
 	}
+	function searchTa($key = "",$page = 1,$num = ITEMS_PER_PAGE){
+		$data['pageTitle'] = '查找TA';
+		$this->load->model('Ta_model');
+		if($key==NULL)	$key = $_GET['key'];
+		$result = $this->Ta_model->searchTa($key,$page,$num);
+		$data['taList'] = $result['result_rows'];
+		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
+				,ADMIN_PREFIX."ta/searchTa/".$key);
+		$this->loadView(ADMIN_PREFIX.'ta_list',$data);
+	}
 	function addTaPage(){
 		$data['pageTitle'] = '添加 TA';
 		$this->loadView(ADMIN_PREFIX.'add_tA',$data);

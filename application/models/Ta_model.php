@@ -15,6 +15,30 @@ class Ta_model extends CI_Model{
 			return array();
 		}
 	}
+
+
+	function searchTaCondition($key){
+		$this->db->like('openid',$key);
+		$this->db->or_like('email',$key);
+		$this->db->or_like('name',$key);
+	}
+
+	function searchTa($key,$page,$num){
+		$this->searchTaCondition($key);
+		$query=$this->db->get('ta',$num,($page-1)*$num);
+		if($this->db->affected_rows()){
+			$result['result_rows'] = $query->result();
+			$this->searchTaCondition($key);
+			$query=$this->db->get('ta');
+			$result['result_num_rows'] = $query->num_rows();
+			return json_decode(json_encode($result),true);
+		}else{
+			$result['result_rows'] = array();
+			$result['result_num_rows'] = 0;
+			return $result;
+		}
+	}
+
 	function getAll(){
 		$this->db->select('*');
 		$query=$this->db->get('ta');

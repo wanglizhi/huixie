@@ -6,10 +6,6 @@
 				<h3 class="page-title">
 					TA管理
 				</h3>
-				<ul class="breadcrumb">
-					<li>
-					</li>
-				</ul>
 			</div>
 		</div>
 		<!-- END PAGE HEADER-->
@@ -17,21 +13,30 @@
 		<!-- BEGIN PAGE CONTENT-->
 		<div class="row-fluid">
 			<div class="span12">
-				<div class="portlet box blue" id="form_wizard_1">
+				<div class="portlet box" id="form_wizard_1">
 					<div class="portlet-title">
-						<div class="caption">
-							<i class="icon-reorder"></i> TA列表
-						</div>
-						<div class="tools hidden-phone">
-							<a href="javascript:;" class="collapse"></a>
+						<div class="row-fluid search-forms search-default" style="width:50%;" >
+
+							<form class="form-search" action="<?php echo site_url(ADMIN_PREFIX."ta/searchTa");?>" method="get" style="padding: 0px;">
+								<div class="chat-form">
+									<div class="input-cont" >   
+
+										<input type="text" name="key" placeholder="请输入关键词。。。" class="m-wrap">
+
+									</div>
+
+									<button type="submit" class="btn green">搜索TA &nbsp; <i class="m-icon-swapright m-icon-white"></i></button>
+
+								</div>
+
+							</form>
 
 						</div>
-
 					</div>
 
 					<div class="portlet-body">
 						<div>
-							<table class="table" id="taList">
+							<table class="table table-striped table-hover" id="taList">
 								<thead>
 									<tr>
 										<th>Open ID</th>
@@ -44,7 +49,8 @@
 									</tr>
 								</thead>
 								<tbody>
-									<?php if(!empty($taList))foreach ($taList as $ta):?>
+									<?php if(!empty($taList)): ?>
+									<?php foreach ($taList as $ta):?>
 									<tr>
 										<td> <?php echo $ta['openid'];?> </td>
 										<td> <?php echo $ta['name'];?> </td>
@@ -54,7 +60,12 @@
 										<td> <?php echo $ta['unitPrice'];?> </td>
 										<td> <?php echo $ta['createTime'];?> </td>
 									</tr>
-								<?php endforeach;?>
+									<?php endforeach;?>
+									<?php else: ?>
+									<tr class="odd">
+										<td valign="top" colspan="6" class="dataTables_empty">没有找到符合条件的结果</td>
+									</tr>
+									<?php endif;?>
 							</tbody>
 						</table>
 					</div>

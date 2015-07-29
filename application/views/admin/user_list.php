@@ -56,7 +56,7 @@
 										<th>大学</th>
 										<th>邮箱</th>
 										<th>创建时间</th>
-										<th>查看订单</th>
+										<th>详情</th>
 									</tr>
 								</thead>
 								<tbody>
@@ -68,7 +68,7 @@
 										<td> <?php echo $user['university'];?> </td>
 										<td> <?php echo $user['email'];?> </td>
 										<td> <?php echo $user['createTime'];?> </td>
-										<td> <a href="<?php echo site_url(ADMIN_PREFIX."order/userOrderList/")."/".$user['openid']?>">查看订单</a> </td>
+										<td> <a href="<?php echo site_url(ADMIN_PREFIX."user/userProfile")."?user_id=".$user['openid']?>">查看详情</a> </td>
 									</tr>
 									<?php endforeach;?>
 									<?php else:?>

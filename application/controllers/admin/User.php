@@ -17,6 +17,19 @@ class User extends MY_AdminController {
 				,ADMIN_PREFIX."user/searchUser/".$key);
 		$this->loadView(ADMIN_PREFIX.'user_list',$data);
 	}
+	function userProfile($user_id = NULL,$page = 1,$num = ITEMS_PER_PAGE){
+		if(!isset($user_id) && !isset($_GET['user_id'])) return;
+		if(!isset($user_id)) $user_id = $_GET['user_id'];
+		$this->load->model('User_model');
+		$result = $this->User_model->searchById($user_id);
+		if(isset($result)) $data['user'] = $result;
+		$this->load->model('Order_model');
+		$result = $this->Order_model->searchBy1('userId', $user_id,$page,$num);
+		$data['orderList'] = $result['result_rows'];
+		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
+				,ADMIN_PREFIX."user/userProfile/".$user_id);
+		$this->loadView(ADMIN_PREFIX.'user_profile',$data);
+	}
 	function userList($page = 1,$num = ITEMS_PER_PAGE)
 	{
 		$data['pageTitle'] = '所有用户';

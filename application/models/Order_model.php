@@ -15,7 +15,9 @@ class Order_model extends CI_Model{
 			$result['result_num_rows'] = $query->num_rows();
 			return json_decode(json_encode($result),true);
 		}else{
-			return array();
+			$result['result_rows']="";
+			$result['result_num_rows'] = 0;
+			return $result;
 		}
 	}
 	function searchBy2($key1, $value1, $key2, $value2,$page,$num){
