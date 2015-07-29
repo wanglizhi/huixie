@@ -29,7 +29,7 @@ class Ta extends MY_AdminController {
 	}
 	function addTaPage(){
 		$data['pageTitle'] = '添加 TA';
-		$this->loadView(ADMIN_PREFIX.'add_tA',$data);
+		$this->loadView(ADMIN_PREFIX.'add_ta1',$data);
 	}
 	function addTa(){
 		$this->load->model('Ta_model');

@@ -13,6 +13,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<meta content="" name="description" />
 	<meta content="" name="author" />
 	<!-- BEGIN GLOBAL MANDATORY STYLES -->
+	
 	<link href="media/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 	<link href="media/css/bootstrap-responsive.min.css" rel="stylesheet" type="text/css"/>
 	<link href="media/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
@@ -35,19 +36,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<!-- END PAGE LEVEL STYLES -->
 
 	<link rel="shortcut icon" href="media/image/favicon.ico" />
+	
+	<!--star -->
+	<link rel="stylesheet" href="media/css/jquery.raty.css" media="screen" type="text/css"/>
+	
+	<script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
+	<script src="media/js/jquery.js"></script>
+	<script src="media/js/jquery.raty.js"></script>
+	<script src="media/js/labs.js" type="text/javascript"></script>
+
 </head>
 <!-- END HEAD -->
 
 <style>
 .navbar-brand{
-font-weight: 300;
-  font-size: 22px;
-  font-family: "Roboto Condensed", sans-serif;
-  color: white;
-  padding: 0;
-  padding-left: 5px;
-  height: 45px;
-  line-height: 45px;
+	font-weight: 300;
+	font-size: 22px;
+	font-family: "Roboto Condensed", sans-serif;
+	color: white;
+	padding: 0;
+	padding-left: 5px;
+	height: 45px;
+	line-height: 45px;
 }
 </style>
 
@@ -64,135 +74,135 @@ font-weight: 300;
 				<!-- BEGIN LOGO -->
 				<!--  <a class="brand" href="#">
 				<img src="../resources/media/image/logo.png" alt="logo"/>
-				</a>-->
-				<span class="navbar-brand" href="#">
-              	<strong>会</strong> <font color="red"><strong>写么</strong></font>
-            	</span>
-				<!-- END LOGO -->
+			</a>-->
+			<span class="navbar-brand" href="#">
+				<strong>会</strong> <font color="red"><strong>写么</strong></font>
+			</span>
+			<!-- END LOGO -->
 
-				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
-				<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
+			<!-- BEGIN RESPONSIVE MENU TOGGLER -->
+			<a href="javascript:;" class="btn-navbar collapsed" data-toggle="collapse" data-target=".nav-collapse">
 				<img src="media/image/menu-toggler.png" alt="" />
-				</a>          
-				<!-- END RESPONSIVE MENU TOGGLER -->            
+			</a>          
+			<!-- END RESPONSIVE MENU TOGGLER -->            
 
-				<!-- BEGIN TOP NAVIGATION MENU -->              
+			<!-- BEGIN TOP NAVIGATION MENU -->              
 
-				<ul class="nav pull-right">
+			<ul class="nav pull-right">
 
-					<!-- BEGIN USER LOGIN DROPDOWN -->
-					<?php if(isset($admin) or isset($_SESSION['admin'])): ?>
-						<?php if(! isset($admin)) $admin = $_SESSION['admin'];?>
-     				   <li class="dropdown user">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+				<!-- BEGIN USER LOGIN DROPDOWN -->
+				<?php if(isset($admin) or isset($_SESSION['admin'])): ?>
+				<?php if(! isset($admin)) $admin = $_SESSION['admin'];?>
+				<li class="dropdown user">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<img alt="" src="media/image/avatar1_small.jpg" />
 						<span class="username"><?php echo $admin['name'];?></span>
 						<i class="icon-angle-down"></i>
-						</a>
-						<ul class="dropdown-menu">
-							<li><a href="<?php echo site_url("admin_/modifyPage");?>"><i class="icon-lock"></i>修改密码</a></li>
-							<li><a href="<?php echo site_url(ADMIN_PREFIX."login/adminLogout");?>"><i class="icon-key"></i>注销</a></li>
-						</ul>
-					</li>
-      				<?php else: ?>
-        				<li class="active"><a href="<?php echo site_url(ADMIN_PREFIX."login/loginPage");?>">请登陆</a></li>
-     				<?php endif ?>
-					
-					<!-- END USER LOGIN DROPDOWN -->
-
-				</ul>
-				<!-- END TOP NAVIGATION MENU --> 
-
-			</div>
-		</div>
-		<!-- END TOP NAVIGATION BAR -->
-	</div>
-	<!-- END HEADER -->
-
-	<!-- BEGIN CONTAINER -->
-	<div class="page-container row-fluid">
-
-		<!-- BEGIN SIDEBAR -->
-		<div class="page-sidebar nav-collapse collapse">
-
-			<!-- BEGIN SIDEBAR MENU -->        
-			<ul class="page-sidebar-menu">
-				<li>
-					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
-					<div class="sidebar-toggler hidden-phone"></div>
-					<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+					</a>
+					<ul class="dropdown-menu">
+						<li><a href="<?php echo site_url("admin_/modifyPage");?>"><i class="icon-lock"></i>修改密码</a></li>
+						<li><a href="<?php echo site_url(ADMIN_PREFIX."login/adminLogout");?>"><i class="icon-key"></i>注销</a></li>
+					</ul>
 				</li>
+			<?php else: ?>
+			<li class="active"><a href="<?php echo site_url(ADMIN_PREFIX."login/loginPage");?>">请登陆</a></li>
+		<?php endif ?>
 
-				<li class="start ">
-					<a href="#">
+		<!-- END USER LOGIN DROPDOWN -->
+
+	</ul>
+	<!-- END TOP NAVIGATION MENU --> 
+
+</div>
+</div>
+<!-- END TOP NAVIGATION BAR -->
+</div>
+<!-- END HEADER -->
+
+<!-- BEGIN CONTAINER -->
+<div class="page-container row-fluid">
+
+	<!-- BEGIN SIDEBAR -->
+	<div class="page-sidebar nav-collapse collapse">
+
+		<!-- BEGIN SIDEBAR MENU -->        
+		<ul class="page-sidebar-menu">
+			<li>
+				<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+				<div class="sidebar-toggler hidden-phone"></div>
+				<!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+			</li>
+
+			<li class="start ">
+				<a href="#">
 					<i class="icon-home"></i> 
 					<span class="title">统计面板</span>
-					</a>
-				</li>
+				</a>
+			</li>
 
-				<li class="">
-					<a href="javascript:;">
+			<li class="">
+				<a href="javascript:;">
 					<i class="icon-cogs"></i> 
 					<span class="title">用户管理</span>
 					<span class="arrow "></span>
-					</a>
-					<ul class="sub-menu">
-						<li><a href="<?php echo site_url(ADMIN_PREFIX."user/registerPage");?>">添加用户</a></li>
-            			<li><a href="<?php echo site_url(ADMIN_PREFIX."user/userList");?>">查看用户列表</a></li>
-					</ul>
-				</li>
+				</a>
+				<ul class="sub-menu">
+					<li><a href="<?php echo site_url(ADMIN_PREFIX."user/registerPage");?>">添加用户</a></li>
+					<li><a href="<?php echo site_url(ADMIN_PREFIX."user/userList");?>">查看用户列表</a></li>
+				</ul>
+			</li>
 
-				<li class="">
-					<a href="javascript:;">
+			<li class="">
+				<a href="javascript:;">
 					<i class="icon-cogs"></i> 
 					<span class="title">TA管理</span>
 					<span class="arrow "></span>
-					</a>
-					<ul class="sub-menu">
-						<li >
-							<a href="<?php echo site_url(ADMIN_PREFIX."ta/addTaPage");?>">
+				</a>
+				<ul class="sub-menu">
+					<li >
+						<a href="<?php echo site_url(ADMIN_PREFIX."ta/addTaPage");?>">
 							添加TA</a>
 						</li>
 						<li >
 							<a href="<?php echo site_url(ADMIN_PREFIX."ta/taList");?>">
-							查看TA列表</a>
+								查看TA列表</a>
+							</li>
+						</ul>
+					</li>
+
+					<li class="">
+						<a href="javascript:;">
+							<i class="icon-cogs"></i> 
+							<span class="title">订单管理</span>
+							<span class="arrow "></span>
+						</a>
+						<ul class="sub-menu">
+
+							<li><a href="<?php echo site_url(ADMIN_PREFIX."order/unpaidOrderList");?>">所有未付款订单</a></li>
+							<li><a href="<?php echo site_url(ADMIN_PREFIX."order/untakenOrderList");?>">所有未接单订单</a></li>
+							<li><a href="<?php echo site_url(ADMIN_PREFIX."order/unfinishedOrderList");?>">所有未完成订单</a></li>
+							<li><a href="<?php echo site_url(ADMIN_PREFIX."order/finishedOrderList");?>">所有已完成订单</a></li>
+							<li><a href="<?php echo site_url(ADMIN_PREFIX."order/orderList");?>">所有订单（未分类）</a></li>
+						</ul>
+					</li>
+
+					<li class="">
+						<a href="javascript:;">
+							<i class="icon-cogs"></i> 
+							<span class="title">Admin管理</span>
+							<span class="arrow "></span>
+						</a>
+						<ul class="sub-menu">
+							<li >
+								<a href="<?php echo site_url("admin_/adminList");?>">
+									查看Admin列表</a>
+								</li>
+							</ul>
 						</li>
+
 					</ul>
-				</li>
+					<!-- END SIDEBAR MENU -->
 
-				<li class="">
-					<a href="javascript:;">
-					<i class="icon-cogs"></i> 
-					<span class="title">订单管理</span>
-					<span class="arrow "></span>
-					</a>
-					<ul class="sub-menu">
-
-						<li><a href="<?php echo site_url(ADMIN_PREFIX."order/unpaidOrderList");?>">所有未付款订单</a></li>
-			            <li><a href="<?php echo site_url(ADMIN_PREFIX."order/untakenOrderList");?>">所有未接单订单</a></li>
-			            <li><a href="<?php echo site_url(ADMIN_PREFIX."order/unfinishedOrderList");?>">所有未完成订单</a></li>
-			            <li><a href="<?php echo site_url(ADMIN_PREFIX."order/finishedOrderList");?>">所有已完成订单</a></li>
-			            <li><a href="<?php echo site_url(ADMIN_PREFIX."order/orderList");?>">所有订单（未分类）</a></li>
-					</ul>
-				</li>
-
-				<li class="">
-					<a href="javascript:;">
-					<i class="icon-cogs"></i> 
-					<span class="title">Admin管理</span>
-					<span class="arrow "></span>
-					</a>
-					<ul class="sub-menu">
-						<li >
-							<a href="<?php echo site_url("admin_/adminList");?>">
-							查看Admin列表</a>
-						</li>
-					</ul>
-				</li>
-
-			</ul>
-			<!-- END SIDEBAR MENU -->
-
-		</div>
-	</div>
+				</div>
+			</div>
 		<!-- END SIDEBAR -->

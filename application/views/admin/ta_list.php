@@ -40,7 +40,6 @@
 								<thead>
 									<tr>
 										<th>Open ID</th>
-										<th>姓名</th>
 										<th>邮箱</th>
 										<th>技能</th>
 										<th>评级</th>
@@ -53,7 +52,6 @@
 									<?php foreach ($taList as $ta):?>
 									<tr>
 										<td> <?php echo $ta['openid'];?> </td>
-										<td> <?php echo $ta['name'];?> </td>
 										<td> <?php echo $ta['email'];?> </td>
 										<td> <?php echo $ta['skills'];?> </td>
 										<td> <?php echo $ta['star'];?> </td>
