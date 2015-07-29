@@ -66,7 +66,7 @@ class Ta extends CustomerController {
 		$this->load->model('Order_model');
 		$user = $_SESSION['user'];
 		$orderNum = $_POST['orderNum'];
-		$order = $this->Order_model->searchBy1('orderNum', $orderNum);
+		$order = $this->Order_model->searchById($orderNum);
 		if($this->Order_model->takeOrder($orderNum, $user['openid'])){
 			// 更新SelectedTa
 			$this->load->model('Selected_ta_model');
