@@ -28,7 +28,7 @@ class User extends CustomerController {
 		$university = $_POST['university'];
 		$email = $_POST['email'];
 		$user['university'] = $university;
-		$usre['email'] = $email;
+		$user['email'] = $email;
 		$this->load->model('User_model');
 		$this->User_model->modify($user['openid'], $user);
 		//更新Session
@@ -36,10 +36,10 @@ class User extends CustomerController {
 
 		redirect('customer/user/infoPage');
 	}
-	function orderDetail($pageNum){
+	function orderDetail($orderNum){
 		$user = $_SESSION['user'];
 		$this->load->model('Order_model');
-		$order = $this->Order_model->searchBy1('orderNum', $orderNum);
+		$order = $this->Order_model->searchById($orderNum);
 
 		//测试数据
 		// $user = array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',

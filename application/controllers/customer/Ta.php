@@ -48,7 +48,7 @@ class Ta extends CustomerController {
 		$this->load->model('Order_model');
 		$this->load->model('Selected_ta_model');
 		// $select = $this->Selected_ta_model->searchBy2($user['openid'], $orderNum);
-		$order = $this->Order_model->searchBy1('orderNum', $orderNum);
+		$order = $this->Order_model->searchById($orderNum);
 
 		//测试数据
 		// $user = array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',

@@ -39,15 +39,16 @@ class Order extends CustomerController {
 		}else{
 			$data['id'] = $order['id'];
 			$_SESSION['order'] = $data;
-			redirect('customer/order/taSelectPage'.$order['orderNum']);
+			redirect('customer/order/taSelectPage/'.$data['orderNum']);
 		}
 	}
 
-	function taSelectPage($orderNum=0){
+	function taSelectPage($orderNum){
 
 		$this->load->model('Ta_model');
 		$this->load->model('User_model');
-		$order = $_SESSION['order'];
+		$this->load->model('Order_model');
+		$order = $this->Order_model->searchById($orderNum);
 		$taList = $this->Ta_model->searchBySkills($order['major']);
 		$length = count($taList);
 		for ($i=0; $i < $length; $i++) { 
@@ -75,6 +76,7 @@ class Order extends CustomerController {
 		$max = 0;
 		$min = 100000;
 		foreach ($taIdList as $taId) {
+			//ta 对象里要加userInfo项目
 			$ta = $this->Ta_model->searchById($taId);
 			$taList[$taId] = $ta;
 			if($ta['unitPrice'] > $max){
@@ -84,10 +86,13 @@ class Order extends CustomerController {
 				$min = $ta['unitPrice'];
 			}
 		}
-		$data['order'] = $_SESSION['order'];
+
+		$order = $this->Order_model->searchById($_SESSION['order']['orderNum']);
+
+		$data['order'] = $order;
 		$data['taList'] = $taList;
-		$data['max'] = $max * $_SESSION['order']['pageNum'];
-		$data['min'] = $min * $_SESSION['order']['pageNum'];
+		$data['max'] = $max * $order['pageNum'];
+		$data['min'] = $min * $order['pageNum'];
 		//添加到session
 		$_SESSION['price'] = $data['max'];
 		$_SESSION['taList'] = $taList;
@@ -138,7 +143,7 @@ class Order extends CustomerController {
 				$order,
 				$ta['openid'],
 				'有新的订单提醒',
-				'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri=http%3A%2F%2Fhuixie.me%2Fhuixie%2Findex.php%2Fcustomer%2Fta%2FtakeOrderPage%2F'.$orderNum.'&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect',
+				'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri=http%3A%2F%2Fhuixie.me%2Fhuixie%2Findex.php%2Fcustomer%2Fta%2FtakeOrderPage%2F'.$order['orderNum'].'&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect',
 				'请您及时接单，并且联系客服获得相关材料');
 
 

@@ -4,6 +4,19 @@ class Order_model extends CI_Model{
 		parent::__construct();
 		$this->load->database();
 	}
+	function searchById($orderNum){
+		$this->db->where('orderNum', $orderNum);
+		$this->db->select('*');
+		$query=$this->db->get('order');
+
+		if($this->db->affected_rows()){
+			$result = $query->result();
+			return json_decode(json_encode($result[0]),true);
+		}else{
+			return array();
+		}
+	}
+
 	function searchBy1($key, $value,$page,$num){
 		$this->db->where($key, $value);
 		$this->db->select('*');
@@ -82,7 +95,7 @@ class Order_model extends CI_Model{
 		
 	}
 	function update($data){
-		$this->db->where('id',$data['id']);
+		$this->db->where('orderNum',$data['orderNum']);
 		$this->db->update('order',$data);
 		return $this->db->affected_rows();
 	}
