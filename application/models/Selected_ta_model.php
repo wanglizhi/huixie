@@ -17,7 +17,7 @@ class Selected_ta_model extends CI_Model{
 	}
 	function searchByTa($taId){
 		$this->db->where('taId', $taId);
-		$this->db->where('hasTake', 0);
+		$this->db->where('hasTaken', 0);
 		$this->db->select('*');
 		$query=$this->db->get('selectedTa');
 		if($this->db->affected_rows()){

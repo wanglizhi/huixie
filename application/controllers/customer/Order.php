@@ -86,7 +86,7 @@ class Order extends CustomerController {
 				$min = $ta['unitPrice'];
 			}
 		}
-
+		$this->load->model('Order_model');
 		$order = $this->Order_model->searchById($_SESSION['order']['orderNum']);
 
 		$data['order'] = $order;
