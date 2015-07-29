@@ -10,11 +10,12 @@ class Ta_model extends CI_Model{
 		$query=$this->db->get('ta');
 		if($this->db->affected_rows()){
 			$result = $query->result();
-			$ta = $result[0];
+			$ta = json_decode(json_encode($result[0]),true);
+
 			$this->load->model('User_model');
 			$userInfo = $this->User_model->searchById($ta['openid']);
 			$ta['userInfo'] = $userInfo;
-			return json_decode(json_encode($ta),true);
+			return $ta;
 		}else{
 			return array();
 		}

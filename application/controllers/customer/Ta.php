@@ -91,7 +91,7 @@ class Ta extends CustomerController {
 		$orderList = array();
 		foreach ($selectList as $select) {
 			$this->load->model('Order_model');
-			$order = $this->Order_model->searchBy1('orderNum', $select['orderNum'])[0];
+			$order = $this->Order_model->searchById($select['orderNum']);
 			array_push($orderList, $order);
 		}
 
