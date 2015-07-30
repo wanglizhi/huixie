@@ -100,8 +100,7 @@ class Order_model extends CI_Model{
 		return $this->db->affected_rows();
 	}
 	function takeOrder($orderNum, $taId){
-		$result = $this->searchBy1('orderNum', $orderNum);
-		$data = $result[0];
+		$data = $this->searchById($orderNum);
 		$data['taId'] = $taId;
 		date_default_timezone_set('PRC');
 		$data['takenTime'] = date('Y-m-d h:i:s');
