@@ -31,7 +31,6 @@ class Ta extends CustomerController {
 		}else{
 			$data['openid']= $user['openid'];
 			$data['email'] = $_POST['email'];
-			$data['name'] = $user['nickname'];
 			date_default_timezone_set('PRC');
 			$data['createTime'] = date('Y-m-d h:i:s');
 			$this->Ta_model->add($data);
@@ -80,7 +79,7 @@ class Ta extends CustomerController {
 				'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri=http%3A%2F%2Fhuixie.me%2Fhuixie%2Findex.php%2Fcustomer%2Fta%2FtakeOrderPage%2F'.$orderNum.'&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect',
 				'恭喜你接单成功，请联系客服获得相关材料，完成后将文件发送到admin@huixie.me');
 		}
-		redirect('customer/ta/takeOrderPage');
+		redirect('customer/ta/takeOrderPage/'.$orderNum);
 
 	}
 	//待选择订单
