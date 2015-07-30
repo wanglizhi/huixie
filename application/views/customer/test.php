@@ -58,11 +58,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			
 			<div class="demo">
 				<h3>自定义下拉选项</h3>
+				<form action="<?php echo site_url('customer/oauth/check');?>" method="post">
 				<div id="city_5">
-					<select class="prov"></select>
-					<select class="city" disabled="disabled"></select>
-					<select class="dist" disabled="disabled"></select>
+					<select class="prov" name="prov"></select>
+					<select class="city" name="city" disabled="disabled"></select>
+					<select class="dist" name="dist" disabled="disabled"></select>
 				</div>
+				<div class="form-actions">
+  				<button type="submit" class="btn blue"><i class="icon-ok"></i> 提交</button>
+  				</div>
+				</form>
 				<pre>
 					$("#city_5").citySelect({
 					url:{"citylist":[

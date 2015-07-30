@@ -8,6 +8,9 @@ class Oauth extends CI_Controller {
 	function index(){
 		$this->load->view('customer/test');
 	}
+	function check(){
+		echo $_POST['prov'].'--'.$_POST['city'];
+	}
 	function loginPage(){
 		$this->load->view('customer/header');
 		$this->load->view('customer/login_page');

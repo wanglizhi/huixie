@@ -1,9 +1,7 @@
 var major_array=[];
 var sub_array=[];
-major_array[0]='请选择';
-sub_array[0] = new Array('请选择');
-major_array[1]='人文社科';
-sub_array[1]=new Array('请选择',
+major_array[0]='人文社科';
+sub_array[0]=new Array('请选择',
 						'犯罪学',
 						'经济学',
 						'英语',
@@ -14,8 +12,8 @@ sub_array[1]=new Array('请选择',
 						'哲学',
 						'考古学');
 
-major_array[2]='自然科学';
-sub_array[2]=new Array('请选择',
+major_array[1]='自然科学';
+sub_array[1]=new Array('请选择',
 						'生物学',
 						'化学',
 						'计算机',
@@ -24,8 +22,8 @@ sub_array[2]=new Array('请选择',
 						'物理学',
 						'统计学');
 
-major_array[3]='商科';
-sub_array[3]=new Array('请选择',
+major_array[2]='商科';
+sub_array[2]=new Array('请选择',
 						'会计',
 						'金融',
 						'信息系统',
@@ -40,8 +38,8 @@ sub_array[3]=new Array('请选择',
 						'酒店管理',
 						'体育管理');
 
-major_array[4]='医学';
-sub_array[4]=new Array('请选择',
+major_array[3]='医学';
+sub_array[3]=new Array('请选择',
 						'性学',
 						'毒品酒精滥用',
 						'家庭医学',
@@ -52,8 +50,8 @@ sub_array[4]=new Array('请选择',
 						'妇科',
 						'基础护理');
 
-major_array[5]='法律';
-sub_array[5]=new Array('请选择',
+major_array[4]='法律';
+sub_array[4]=new Array('请选择',
 						'实务训练',
 						'争端解决',
 						'环境法',
@@ -65,8 +63,8 @@ sub_array[5]=new Array('请选择',
 						'辩护',
 						'LLM');
 
-major_array[6]='教育学';
-sub_array[6]=new Array('请选择',
+major_array[5]='教育学';
+sub_array[5]=new Array('请选择',
 						'课程与教学',
 						'教育管理学',
 						'教育政策',
@@ -79,8 +77,8 @@ sub_array[6]=new Array('请选择',
 						'职业技术教育',
 						'TESOL');
 
-major_array[7]='工程';
-sub_array[7]=new Array('请选择',
+major_array[6]='工程';
+sub_array[6]=new Array('请选择',
 						'工程',
 						'航空航天工程',
 						'生物/农业工程',
@@ -95,8 +93,8 @@ sub_array[7]=new Array('请选择',
 						'机械工程',
 						'核工程');
 
-major_array[8]='健康';
-sub_array[8]=new Array('请选择',
+major_array[7]='健康';
+sub_array[7]=new Array('请选择',
 						'听力学',
 						'临床心理学',
 						'卫生保健管理',
@@ -113,8 +111,8 @@ sub_array[8]=new Array('请选择',
 						'语言病理学',
 						'兽医学');
 
-major_array[9]='公共事务';
-sub_array[9]=new Array('请选择',
+major_array[8]='公共事务';
+sub_array[8]=new Array('请选择',
 						'城市管理与政策',
 						'环境政策与管理',
 						'健康政策与管理',
@@ -125,8 +123,8 @@ sub_array[9]=new Array('请选择',
 						'公共政策分析',
 						'社会政策');
 
-major_array[10]='艺术';
-sub_array[10]=new Array('请选择',
+major_array[9]='艺术';
+sub_array[9]=new Array('请选择',
 						'制陶术',
 						'平面设计',
 						'工业设计',
@@ -137,8 +135,8 @@ sub_array[10]=new Array('请选择',
 						'版画',
 						'雕刻');
 
-major_array[11]='传媒';
-sub_array[11]=new Array('请选择',
+major_array[10]='传媒';
+sub_array[10]=new Array('请选择',
 						'多媒体',
 						'公共关系',
 						'广告学',
