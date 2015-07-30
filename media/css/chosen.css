@@ -137,6 +137,7 @@
 .chzn-container-single-nosearch .chzn-search input {
   position: absolute;
   left: -9000px;
+  border-color: red;
 }
 .chzn-container-multi .chzn-choices {
   -webkit-border-radius: 3px;
@@ -176,6 +177,19 @@
   margin: 0;
   padding: 0;
 }
+
+.error .chzn-choices{
+	border-color: #b94a48 !important;
+}
+
+.chzn-label label{
+	margin-top: -25px;
+}
+
+.chzn-label input{
+	margin-top: -25px;
+}
+
 .chzn-container-multi .chzn-choices .search-field input {
   -webkit-box-shadow: none;
   -moz-box-shadow: none;

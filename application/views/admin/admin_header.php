@@ -25,6 +25,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<!-- END GLOBAL MANDATORY STYLES -->
 
 	<!-- BEGIN PAGE LEVEL STYLES -->
+
+
+	
+	<link rel="stylesheet" type="text/css" href="media/css/multi-select-metro.css" />
 	<link rel="stylesheet" href="media/css/DT_bootstrap.css" />
 	<link rel="stylesheet" type="text/css" href="media/css/select2_metro.css" />
 	<link rel="stylesheet" type="text/css" href="media/css/chosen.css" />
@@ -34,9 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<link href="media/css/search.css" rel="stylesheet" type="text/css"/>
 
 	<!-- END PAGE LEVEL STYLES -->
-
-	<link rel="shortcut icon" href="media/image/favicon.ico" />
-	
+	<link rel="stylesheet" type="text/css" href="media/css/multi-select-metro.css" />
 	<!--star -->
 	<link rel="stylesheet" href="media/css/jquery.raty.css" media="screen" type="text/css"/>
 	

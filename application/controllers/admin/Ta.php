@@ -29,21 +29,28 @@ class Ta extends MY_AdminController {
 	}
 	function addTaPage(){
 		$data['pageTitle'] = '添加 TA';
-		$this->loadView(ADMIN_PREFIX.'add_ta1',$data);
+		$this->loadView(ADMIN_PREFIX.'add_ta',$data);
 	}
 	function addTa(){
 		$this->load->model('Ta_model');
-		$data['name']=$_POST['name'];
-		$data['email']=$_POST['email'];
-		$data['skills']=$_POST['skills'];
-		$data['star'] = $_POST['star'];
-		$data['unitPrice'] = $_POST['unitPrice'];
-		date_default_timezone_set('PRC');
-		$data['createTime'] = date('Y-m-d h:i:s');
-		if(isset($data['name'])){
+		try{
+			$data['openid']=$_POST['openId'];
+			$data['email']=$_POST['email'];
+			$data['skills']=$_POST['skill'];
+			$data['star'] = $_POST['star'];
+			$data['unitPrice'] = $_POST['unitPrice'];
+			date_default_timezone_set('PRC');
+			$data['createTime'] = date('Y-m-d h:i:s');
+		}catch(Exception $e){
 			$time = 3;
 			header("refresh:$time;url=addTaPage");
-			print('添加失败...<br>'.$time.'秒后自动跳转。');
+			print('出错了...<br>'.$time.'秒后自动跳转。');
+		}
+		if(!empty($this->Ta_model->searchById($data['openid']))){
+			$time = 3;
+			header("refresh:$time;url=addTaPage");
+			print('该openId已存在！...<br>'.$time.'秒后自动跳转。');
+			exit();
 		}
 		if (!$this->Ta_model->add($data)) {
 			$time = 3;
