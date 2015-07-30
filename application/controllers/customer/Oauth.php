@@ -5,6 +5,11 @@ class Oauth extends CI_Controller {
 		parent::__construct();
 		$this->load->helper('url');
 	}
+	function testModel(){
+		$this->load->model('Ta_model');
+		$result = $this->Ta_model->searchBySkills('历史');
+		var_dump($result);
+	}
 	function index(){
 		$this->load->view('customer/test');
 	}
