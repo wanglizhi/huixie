@@ -46,16 +46,15 @@
 							</div>
 
 							<div class="portlet-body center">
-							
+
 			<form action="<?php echo site_url('customer/order/addOrder');?>" method="post">
   			<div class="form-group">
     			<label for="major">专业<font color='red'>*</font></label>
-    			<select class="form-control m-wrap span6" name="major" id="major">
-  					<option>天文</option>
-  					<option>地理</option>
-  					<option>历史</option>
-  					<option>物理</option>
-				</select>
+    			<div id="city_5">
+					<select class="prov medium m-wrap" name="prov"></select>
+					<select class="city medium m-wrap" name="city" disabled="disabled" required="required"></select>
+					<select class="dist medium m-wrap" name="dist" disabled="disabled"></select>
+				</div>
   			</div>
   			<div class="form-group">
     			<label for="courseName">课程名<font color='red'>*</font></label>
@@ -83,8 +82,9 @@
   			</div>
   			<div class="form-group">
     			<label for="endTime">截止日期<font color='red'>*</font></label>
-          <input type="date" class="form-control m-wrap span6" id="endTime" name="endTime" required="required">
-    			<!-- <input type="time" class="form-control" id="endTime" name="endTime" required="required"> -->
+          <input type="date" class="form-control m-wrap medium" id="endTime" name="endTime" required="required">
+    			<input type="time" class="form-control m-wrap medium" id="endTime" name="endTime" required="required">
+    			<input type="datetime" class="form-control m-wrap span6" id="endTime" name="endTime" required="required">
   			</div>
   			<div class="form-group">
     			<label for="requirement">补充要求</label>
@@ -113,3 +113,37 @@
 
 		</div>
 		<!-- END PAGE -->  
+
+
+		<script>
+		jQuery(document).ready(function() {
+		   	
+			var json = new Object();
+	   		var citylist = new Array();
+			for (var i = 0; i < major_array.length; i++) {
+				// majorArray[i]
+				var p = new Object();
+				var c = new Array();
+
+				for (var j = 0; j < sub_array[i].length; j++) {
+					var n = new Object();
+					n.n = sub_array[i][j];
+					c.push(n);
+				};
+
+				p.p = major_array[i];
+				p.c = c;
+				citylist.push(p);
+				// alert(JSON.stringify(p));
+			};
+			json.citylist = citylist;
+
+			$("#city_5").citySelect({
+				url: json,
+				prov:"",
+				city:"",
+				dist:"",
+				nodata:"none"
+			});
+		});
+	</script>

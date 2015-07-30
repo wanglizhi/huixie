@@ -60,8 +60,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<h3>自定义下拉选项</h3>
 				<form action="<?php echo site_url('customer/oauth/check');?>" method="post">
 				<div id="city_5">
-					<select class="prov" name="prov"></select>
-					<select class="city" name="city" disabled="disabled"></select>
+					<select class="prov" name="prov" required="required"></select>
+					<select class="city" name="city" disabled="disabled" required="required"></select>
 					<select class="dist" name="dist" disabled="disabled"></select>
 				</div>
 				<div class="form-actions">

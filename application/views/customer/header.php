@@ -34,6 +34,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
   <link rel="shortcut icon" href="images/icon.ico" /> 
   <!-- <link rel="shortcut icon" href="media/image/favicon.ico" /> -->
+
+  <script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
+  <script type="text/javascript" src="js/jquery.cityselect.js"></script>
+  <script type="text/javascript" src="js/majorData.js"></script> 
 </head>
 <!-- END HEAD -->
 
