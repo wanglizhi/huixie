@@ -14,18 +14,22 @@ class Order extends CustomerController {
 		$this->load->view('customer/footer');
 	}
 	function addOrder(){
+
+		// echo $_POST['endDate'].'--'.$_POST['endTime'].'--'.$_POST['prov'].'--'.$_POST['city'];
+		// exit(0);
+
 		$this->load->model('Order_model');
 		$user = $_SESSION['user'];
 
 		// 2015-07-14T08:55Z
 		// echo $_POST['endTime'];
-		$data['major'] = $_POST['major'];
+		$data['major'] = $_POST['prov'].'-'.$_POST['city'];
 		$data['courseName'] = $_POST['courseName'];
 		$data['email'] = $_POST['email'];
 		$data['pageNum'] = $_POST['pageNum'];
 		$data['refDoc'] = $_POST['refDoc'];
 		$data['requirement'] = $_POST['requirement'];
-		$data['endTime'] = $_POST['endTime'];
+		$data['endTime'] = $_POST['endDate'].' '.$_POST['endTime'];
 		$data['userId'] = $user['openid'];
 		date_default_timezone_set('PRC');
 		$data['createTime'] = date('Y-m-d h:i:s');

@@ -51,9 +51,8 @@
   			<div class="form-group">
     			<label for="major">专业<font color='red'>*</font></label>
     			<div id="city_5">
-					<select class="prov medium m-wrap" name="prov"></select>
-					<select class="city medium m-wrap" name="city" disabled="disabled" required="required"></select>
-					<select class="dist medium m-wrap" name="dist" disabled="disabled"></select>
+					<select class="prov small m-wrap" name="prov"></select>
+					<select class="city small m-wrap" name="city" disabled="disabled" required="required"></select>
 				</div>
   			</div>
   			<div class="form-group">
@@ -82,9 +81,8 @@
   			</div>
   			<div class="form-group">
     			<label for="endTime">截止日期<font color='red'>*</font></label>
-          <input type="date" class="form-control m-wrap medium" id="endTime" name="endTime" required="required">
-    			<input type="time" class="form-control m-wrap medium" id="endTime" name="endTime" required="required">
-    			<input type="datetime" class="form-control m-wrap span6" id="endTime" name="endTime" required="required">
+          		<input type="date" class="form-control m-wrap small" id="endDate" name="endDate" required="required">
+    			<input type="time" class="form-control m-wrap small" id="endTime" name="endTime" required="required">
   			</div>
   			<div class="form-group">
     			<label for="requirement">补充要求</label>
