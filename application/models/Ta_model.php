@@ -71,6 +71,7 @@ class Ta_model extends CI_Model{
 		}
 	}
 	function searchBySkills($skills){
+		$skills = '%'.$skills.'%';
 		$sql="select * from ta where skills like '$skills' order by star desc limit 10";
 		$query=$this->db->query($sql);
 		if($this->db->affected_rows()){

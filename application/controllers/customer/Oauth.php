@@ -7,7 +7,7 @@ class Oauth extends CI_Controller {
 	}
 	function testModel(){
 		$this->load->model('Ta_model');
-		$result = $this->Ta_model->searchBySkills('历史');
+		$result = $this->Ta_model->searchBySkills('工程-计算机工程');
 		var_dump($result);
 	}
 	function index(){
