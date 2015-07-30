@@ -73,7 +73,9 @@
     			<label for="email">邮箱</label>
     			<input type="email" class="form-control m-wrap span6" id="email" name="email" placeholder="" required="required">
   			</div>
-  			<button type="submit" class="btn green">提交申请</button>
+  			<div class="form-actions">
+  			<button type="submit" class="btn green"><i class="icon-ok"></i> 提交申请</button>
+  			</div>
 		</form>
 
 

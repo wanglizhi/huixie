@@ -6,6 +6,7 @@ class Oauth extends CI_Controller {
 		$this->load->helper('url');
 	}
 	function index(){
+		$this->load->view('customer/test');
 	}
 	function loginPage(){
 		$this->load->view('customer/header');
