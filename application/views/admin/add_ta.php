@@ -50,102 +50,6 @@
 									<select id="skill_choose" name="skill_choose" data-placeholder="请选择技能" class="chosen span6" multiple="multiple" tabindex="6" style="display: inline-block">
 
 										<option value=""></option>
-
-										<optgroup label="NFC EAST">
-
-											<option value="11">Dallas Cowboys</option>
-
-											<option value="aaaa">New York Giants</option>
-
-											<option>Philadelphia Eagles</option>
-
-											<option>Washington Redskins</option>
-
-										</optgroup>
-
-										<optgroup label="NFC NORTH">
-
-											<option>Chicago Bears</option>
-
-											<option>Detroit Lions</option>
-
-											<option>Green Bay Packers</option>
-
-											<option>Minnesota Vikings</option>
-
-										</optgroup>
-
-										<optgroup label="NFC SOUTH">
-
-											<option>Atlanta Falcons</option>
-
-											<option>Carolina Panthers</option>
-
-											<option>New Orleans Saints</option>
-
-											<option>Tampa Bay Buccaneers</option>
-
-										</optgroup>
-
-										<optgroup label="NFC WEST">
-
-											<option>Arizona Cardinals</option>
-
-											<option>St. Louis Rams</option>
-
-											<option>San Francisco 49ers</option>
-
-											<option>Seattle Seahawks</option>
-
-										</optgroup>
-
-										<optgroup label="AFC EAST">
-
-											<option>Buffalo Bills</option>
-
-											<option>Miami Dolphins</option>
-
-											<option>New England Patriots</option>
-
-											<option>New York Jets</option>
-
-										</optgroup>
-
-										<optgroup label="AFC NORTH">
-
-											<option>Baltimore Ravens</option>
-
-											<option>Cincinnati Bengals</option>
-
-											<option>Cleveland Browns</option>
-
-											<option>Pittsburgh Steelers</option>
-
-										</optgroup>
-
-										<optgroup label="AFC SOUTH">
-
-											<option>Houston Texans</option>
-
-											<option>Indianapolis Colts</option>
-
-											<option>Jacksonville Jaguars</option>
-
-											<option>Tennessee Titans</option>
-
-										</optgroup>
-
-										<optgroup label="AFC WEST">
-
-											<option>Denver Broncos</option>
-
-											<option>Kansas City Chiefs</option>
-
-											<option>Oakland Raiders</option>
-
-											<option>San Diego Chargers</option>
-
-										</optgroup>
 									</select>
 									<div style="display: inline-block;" class="chzn-label">
 										<input id="skill" name="skill" type="text" data-required="1" style="width: 1px;visibility: hidden;"/>
@@ -205,6 +109,7 @@
 
 	<!--VALIDATION -->
 
+	<script src="js/majorData.js" type="text/javascript"></script>
 	<script>
 	$('#skill_star').raty({
 		path      : 'media/image',
@@ -213,6 +118,25 @@
 		starOff   : 'star-off.png',
 		starOn    : 'star-on.png'
 	});
+
+	function initMajorData(){
+		var length = major_array.length;
+		var select = document.getElementById("skill_choose");
+		for(var i = 0;i<length;i++){
+			var group = document.createElement("optgroup");
+			group.label = major_array[i];
+			group.style = "font-size:16px";
+			var sub_length = sub_array[i].length;
+			for(var j = 0;j<sub_length;j++){
+				var option = document.createElement("option");
+				option.value = major_array[i]+"-"+sub_array[i][j];
+				option.innerHTML = sub_array[i][j];
+				group.appendChild(option);
+			}
+			select.appendChild(group);
+		}
+	}
+	initMajorData();
 
 	jQuery(document).ready(function(){
 		jQuery.validator.addMethod("star_required",function(value,element,params){
@@ -301,6 +225,7 @@
                 },
             });
 });
+
 </script>
 
 

@@ -282,6 +282,11 @@
   margin: 0;
   list-style: none;
 }
+.chzn-results .group-result{
+	font-weight : bold !important;
+	border-bottom: solid 1px black;
+}
+
 .chzn-container .chzn-results li em {
   background: #feffde;
   font-style: normal;
