@@ -57,7 +57,7 @@ class Ta extends MY_AdminController {
 			header("refresh:$time;url=addTaPage");
 			print('添加失败...<br>'.$time.'秒后自动跳转。');
 		}else{
-			redirect('ta/taList');
+			redirect(ADMIN_PREFIX.'ta/taList');
 		}
 	}
 }
