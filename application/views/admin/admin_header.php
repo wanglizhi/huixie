@@ -170,7 +170,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 								查看待审核TA列表</a>
 							</li>
 							<li >
-								<a href="<?php echo site_url(ADMIN_PREFIX."ta/taList");?>">
+								<a href="<?php echo site_url(ADMIN_PREFIX."ta/checkedtaList");?>">
 									查看TA列表</a>
 								</li>
 							</ul>

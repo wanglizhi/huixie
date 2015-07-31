@@ -17,19 +17,55 @@ class User extends MY_AdminController {
 				,ADMIN_PREFIX."user/searchUser/".$key);
 		$this->loadView(ADMIN_PREFIX.'user_list',$data);
 	}
-	function userProfile($user_id = NULL,$page = 1,$num = ITEMS_PER_PAGE){
-		if(!isset($user_id) && !isset($_GET['user_id'])) return;
+	function userProfile($user_id = NULL){
+		if(!isset($user_id) && !isset($_GET['user_id'])){
+			echo "error!";
+			exit();
+		}
 		if(!isset($user_id)) $user_id = $_GET['user_id'];
 		$this->load->model('User_model');
 		$result = $this->User_model->searchById($user_id);
 		if(isset($result)) $data['user'] = $result;
 		$this->load->model('Order_model');
-		$result = $this->Order_model->searchBy1('userId', $user_id,$page,$num);
-		$data['orderList'] = $result['result_rows'];
-		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
-				,ADMIN_PREFIX."user/userProfile/".$user_id);
+		$result = $this->Order_model->searchBy1('userId', $user_id,1,ITEMS_PER_PAGE);
+		$data['userOrderTable'] = array(
+			'orderList' => $result['result_rows'],
+			'tableId'   => "userOrderTable",
+		);
+		$data['page_info'] = array(
+			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+			'current_page'  => 1,
+			'page_method' => ADMIN_PREFIX."user/userOrderListPage",
+		);
 		$this->loadView(ADMIN_PREFIX.'user_profile',$data);
 	}
+	function userOrderListPage($user_id = NULL){
+		if(!isset($user_id) && !isset($_GET['user_id'])){
+			echo "error!";
+			exit();
+		}
+		if(!isset($user_id)) $user_id = $_GET['user_id'];
+		$page = $_GET['page'];
+		$js_page_method = $_GET['js_page_method'];
+		if(!isset($page)){
+			echo "错误！！没有页数";
+			exit(0);
+		}
+		$this->load->model('Order_model');
+		$result = $this->Order_model->searchBy1('userId', $user_id,$page,ITEMS_PER_PAGE);
+		$data['orderTable'] = array(
+			'orderList' => $result['result_rows'],
+			'tableId'   => "userOrderTable",
+		);
+		$data['page_info'] = array(
+			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+			'current_page'  => $page,
+			'page_method' => ADMIN_PREFIX."user/userOrderListPage",
+		);
+		$data['js_page_method'] = $js_page_method;
+		$this->load->view(ADMIN_PREFIX.'order_table',$data);
+	}
+
 	function updateUser(){
 		$this->load->model('User_model');
 		if(!isset($_POST['openid'])){

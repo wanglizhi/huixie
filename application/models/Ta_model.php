@@ -63,6 +63,27 @@ class Ta_model extends CI_Model{
 		}
 	}
 
+
+	function getCheckedCondition(){
+		$this->db->where('hasCheck',TRUE);
+	}
+
+	function getChecked($page,$num){
+		$this->getCheckedCondition();
+		$query=$this->db->get('ta',$num,($page-1)*$num);
+		if($this->db->affected_rows()){
+			$result['result_rows'] = $query->result();
+			$this->getCheckedCondition();
+			$query=$this->db->get('ta');
+			$result['result_num_rows'] = $query->num_rows();
+			return json_decode(json_encode($result),true);
+		}else{
+			$result['result_rows'] = array();
+			$result['result_num_rows'] = 0;
+			return $result;
+		}
+	}
+
 	function getAll($page,$num){
 		$this->db->select('*');
 		$query=$this->db->get('ta',$num,($page-1)*$num);

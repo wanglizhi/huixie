@@ -17,6 +17,15 @@ class Ta extends MY_AdminController {
 				,ADMIN_PREFIX."ta/taList");
 		$this->loadView(ADMIN_PREFIX.'ta_list',$data);
 	}
+	function checkedtaList($page = 1,$num = ITEMS_PER_PAGE){
+		$data['pageTitle'] = '待审核 TA';
+		$this->load->model('Ta_model');
+		$result = $this->Ta_model->getChecked($page,$num);
+		$data['taList'] = $result['result_rows'];
+		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
+				,ADMIN_PREFIX."ta/unCheckedtaList");
+		$this->loadView(ADMIN_PREFIX.'ta_list',$data);
+	}
 	function unCheckedtaList($page = 1,$num = ITEMS_PER_PAGE){
 		$data['pageTitle'] = '待审核 TA';
 		$this->load->model('Ta_model');
@@ -36,7 +45,7 @@ class Ta extends MY_AdminController {
 				,ADMIN_PREFIX."ta/searchTa/".$key);
 		$this->loadView(ADMIN_PREFIX.'ta_list',$data);
 	}
-	function taInfo($openid = "",$page = 1,$num = ITEMS_PER_PAGE){
+	function taInfo($openid = ""){
 		$data['pageTitle'] = 'TA 信息';
 		$this->load->model('Ta_model');
 		if($openid==="") $openid = $_GET['openid'];
@@ -49,12 +58,43 @@ class Ta extends MY_AdminController {
 		} 
 		$data['ta'] = $ta;
 		$this->load->model('Order_model');
-		$result = $this->Order_model->searchBy1('taId', $openid,$page,$num);
-		$data['orderList'] = $result['result_rows'];
-		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
-				,ADMIN_PREFIX."ta/taInfo/".$openid);
-		
+		$result = $this->Order_model->searchBy1('taId', $openid,1,ITEMS_PER_PAGE);
+		$data['taOrderTable'] = array(
+			'orderList' => $result['result_rows'],
+			'tableId'   => "taOrderTable",
+		);
+		$data['page_info'] = array(
+			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+			'current_page'  => 1,
+			'page_method' => ADMIN_PREFIX."ta/taOrderListPage",
+		);
 		$this->loadView(ADMIN_PREFIX.'ta_info',$data);
+	}
+	function taOrderListPage($openid = ""){
+		if($openid=="" && !isset($_GET['openid'])){
+			echo "error!";
+			exit();
+		}
+		if($openid=="") $openid = $_GET['openid'];
+		$page = $_GET['page'];
+		$js_page_method = $_GET['js_page_method'];
+		if(!isset($page)){
+			echo "错误！！没有页数";
+			exit(0);
+		}
+		$this->load->model('Order_model');
+		$result = $this->Order_model->searchBy1('taId', $openid,$page,ITEMS_PER_PAGE);
+		$data['orderTable'] = array(
+			'orderList' => $result['result_rows'],
+			'tableId'   => "taOrderTable",
+		);
+		$data['page_info'] = array(
+			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+			'current_page'  => $page,
+			'page_method' => ADMIN_PREFIX."ta/taOrderListPage",
+		);
+		$data['js_page_method'] = $js_page_method;
+		$this->load->view(ADMIN_PREFIX.'order_table',$data);
 	}
 	function addTaPage(){
 		$data['pageTitle'] = '添加 TA';
