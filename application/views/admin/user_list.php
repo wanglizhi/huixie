@@ -56,20 +56,17 @@
 										<th>大学</th>
 										<th>邮箱</th>
 										<th>创建时间</th>
-										<th>详情</th>
 									</tr>
 								</thead>
 								<tbody>
 									<?php if(!empty($userList)): ?>
 									<?php foreach ($userList as $user):?>
 									<tr>
-										<td> <?php echo $user['openid'];?> </td>
+										<td> <a href="<?php echo site_url(ADMIN_PREFIX."user/userProfile")."?user_id=".$user['openid']?>"><?php echo $user['openid'];?></a></td>
 										<td> <?php echo $user['nickname'];?> </td>
 										<td> <?php echo $user['university'];?> </td>
 										<td> <?php echo $user['email'];?> </td>
-										<td> <?php echo $user['createTime'];?> </td>
-										<td> <a href="<?php echo site_url(ADMIN_PREFIX."user/userProfile")."?user_id=".$user['openid']?>">查看详情</a> </td>
-									</tr>
+										<td> <?php echo $user['createTime'];?> </td></tr>
 									<?php endforeach;?>
 									<?php else:?>
 									<tr class="odd">

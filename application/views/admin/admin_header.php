@@ -166,45 +166,49 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							添加TA</a>
 						</li>
 						<li >
-							<a href="<?php echo site_url(ADMIN_PREFIX."ta/taList");?>">
-								查看TA列表</a>
+							<a href="<?php echo site_url(ADMIN_PREFIX."ta/unCheckedtaList");?>">
+								查看待审核TA列表</a>
 							</li>
-						</ul>
-					</li>
-
-					<li class="">
-						<a href="javascript:;">
-							<i class="icon-cogs"></i> 
-							<span class="title">订单管理</span>
-							<span class="arrow "></span>
-						</a>
-						<ul class="sub-menu">
-
-							<li><a href="<?php echo site_url(ADMIN_PREFIX."order/unpaidOrderList");?>">所有未付款订单</a></li>
-							<li><a href="<?php echo site_url(ADMIN_PREFIX."order/untakenOrderList");?>">所有未接单订单</a></li>
-							<li><a href="<?php echo site_url(ADMIN_PREFIX."order/unfinishedOrderList");?>">所有未完成订单</a></li>
-							<li><a href="<?php echo site_url(ADMIN_PREFIX."order/finishedOrderList");?>">所有已完成订单</a></li>
-							<li><a href="<?php echo site_url(ADMIN_PREFIX."order/orderList");?>">所有订单（未分类）</a></li>
-						</ul>
-					</li>
-
-					<li class="">
-						<a href="javascript:;">
-							<i class="icon-cogs"></i> 
-							<span class="title">Admin管理</span>
-							<span class="arrow "></span>
-						</a>
-						<ul class="sub-menu">
 							<li >
-								<a href="<?php echo site_url("admin_/adminList");?>">
-									查看Admin列表</a>
+								<a href="<?php echo site_url(ADMIN_PREFIX."ta/taList");?>">
+									查看TA列表</a>
 								</li>
 							</ul>
 						</li>
 
-					</ul>
-					<!-- END SIDEBAR MENU -->
+						<li class="">
+							<a href="javascript:;">
+								<i class="icon-cogs"></i> 
+								<span class="title">订单管理</span>
+								<span class="arrow "></span>
+							</a>
+							<ul class="sub-menu">
 
+								<li><a href="<?php echo site_url(ADMIN_PREFIX."order/unpaidOrderList");?>">所有未付款订单</a></li>
+								<li><a href="<?php echo site_url(ADMIN_PREFIX."order/untakenOrderList");?>">所有未接单订单</a></li>
+								<li><a href="<?php echo site_url(ADMIN_PREFIX."order/unfinishedOrderList");?>">所有未完成订单</a></li>
+								<li><a href="<?php echo site_url(ADMIN_PREFIX."order/finishedOrderList");?>">所有已完成订单</a></li>
+								<li><a href="<?php echo site_url(ADMIN_PREFIX."order/orderList");?>">所有订单（未分类）</a></li>
+							</ul>
+						</li>
+
+						<li class="">
+							<a href="javascript:;">
+								<i class="icon-cogs"></i> 
+								<span class="title">Admin管理</span>
+								<span class="arrow "></span>
+							</a>
+							<ul class="sub-menu">
+								<li >
+									<a href="<?php echo site_url("admin_/adminList");?>">
+										查看Admin列表</a>
+									</li>
+								</ul>
+							</li>
+
+						</ul>
+						<!-- END SIDEBAR MENU -->
+
+					</div>
 				</div>
-			</div>
 		<!-- END SIDEBAR -->

@@ -30,6 +30,18 @@ class User extends MY_AdminController {
 				,ADMIN_PREFIX."user/userProfile/".$user_id);
 		$this->loadView(ADMIN_PREFIX.'user_profile',$data);
 	}
+	function updateUser(){
+		$this->load->model('User_model');
+		if(!isset($_POST['openid'])){
+			$time = 3;
+			header("refresh:$time;url=registerPage");
+			print('openid不存在...<br>'.$time.'秒后自动跳转。');
+			exit();
+		}
+		$result = $this->User_model->updateUser($_POST['openid'],$_POST['university'],
+			$_POST['email']);
+		$this->userProfile($_POST['openid']);
+	}
 	function userList($page = 1,$num = ITEMS_PER_PAGE)
 	{
 		$data['pageTitle'] = '所有用户';

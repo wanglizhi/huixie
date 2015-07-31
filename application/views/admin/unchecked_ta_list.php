@@ -43,25 +43,20 @@
 										<th>邮箱</th>
 										<th>技能</th>
 										<th>评级</th>
-										<th>每页收费</th>
-										<th>审核状态</th>
+										<th>每页收费（元）</th>
+										<th>创建时间</th>
 									</tr>
 								</thead>
 								<tbody>
 									<?php if(!empty($taList)): ?>
 									<?php foreach ($taList as $ta):?>
 									<tr>
-										<td> 
-											<a href="<?php echo site_url(ADMIN_PREFIX."ta/taInfo/?openid=".$ta['openid']);?>">
-												<?php echo $ta['openid'];?> 
-											</a>
-										</td>
+										<td> <?php echo $ta['openid'];?> </td>
 										<td> <?php echo $ta['email'];?> </td>
 										<td> <?php echo $ta['skills'];?> </td>
 										<td> <?php echo $ta['star'];?> </td>
-										<td> <?php if($ta['unitPrice']!=null)
-												echo $ta['unitPrice']." 元";?>  </td>
-										<td>
+										<td> <?php echo $ta['unitPrice'];?> </td>
+										<td> 
 											<?php if($ta['hasCheck']): ?>
 											<span class="label label-success">已审核</span>
 											<?php else:?>

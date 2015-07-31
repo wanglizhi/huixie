@@ -11,7 +11,6 @@ class Ta_model extends CI_Model{
 		if($this->db->affected_rows()){
 			$result = $query->result();
 			$ta = json_decode(json_encode($result[0]),true);
-
 			$this->load->model('User_model');
 			$userInfo = $this->User_model->searchById($ta['openid']);
 			$ta['userInfo'] = $userInfo;
@@ -44,21 +43,49 @@ class Ta_model extends CI_Model{
 		}
 	}
 
-	function getAll(){
+	function getUncheckedCondition(){
+		$this->db->where('hasCheck',FALSE);
+	}
+
+	function getUnchecked($page,$num){
+		$this->getUncheckedCondition();
+		$query=$this->db->get('ta',$num,($page-1)*$num);
+		if($this->db->affected_rows()){
+			$result['result_rows'] = $query->result();
+			$this->getUncheckedCondition();
+			$query=$this->db->get('ta');
+			$result['result_num_rows'] = $query->num_rows();
+			return json_decode(json_encode($result),true);
+		}else{
+			$result['result_rows'] = array();
+			$result['result_num_rows'] = 0;
+			return $result;
+		}
+	}
+
+	function getAll($page,$num){
 		$this->db->select('*');
-		$query=$this->db->get('ta');
+		$query=$this->db->get('ta',$num,($page-1)*$num);
 		if($this->db->affected_rows()){
 			$result['result_num_rows'] = $query->num_rows();
 			$result['result_rows'] = $query->result();
 			return json_decode(json_encode($result),true);
 		}else{
-			return array();
+			$result['result_num_rows'] = 0;
+			$result['result_rows'] = array();
+			return $result;
 		}
 	}
 	function add($data){
 		$this->db->query($this->db->insert_string('ta',$data));					
 		return $this->db->affected_rows();
 	}
+	function update($data){
+		$this->db->where('openid',$data['openid']);
+		$result = $this->db->update('ta',$data);					
+		return $result;
+	}
+
 	function searchByName($name){
 		$this->db->where('name',$name);
 		$this->db->select('*');
@@ -83,9 +110,6 @@ class Ta_model extends CI_Model{
 	}
 
 	function delete(){
-		
-	}
-	function update($data){
 		
 	}
 	
