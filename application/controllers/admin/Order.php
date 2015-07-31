@@ -5,7 +5,6 @@ class Order extends MY_AdminController {
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->library('mypagination');
-		$this->load->library('my_pagination');
 	}
 
 	function test(){
