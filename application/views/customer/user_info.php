@@ -52,9 +52,11 @@
 			<div class="span6">
 			<img src="<?php echo $user['headimgurl'];?>" alt="..." class="img-circle" style="width:120px;height:120px">
 			</div>
-				<div class="span6">性别：<?php if($user['sex']):?>
+				<div class="span6">性别：<?php if($user['sex'] == 0):?>
+				<?php echo '未知';?>
+				<?php elseif($user['sex'] == 1):?>
 				<?php echo '男';?>
-				<?php else:?>
+			<?php elseif($user['sex'] == 2):?>
 				<?php echo '女';?>
 				<?php endif?>
 

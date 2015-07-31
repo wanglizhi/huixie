@@ -15,7 +15,7 @@ class Weixin_model extends CI_Model{
 		);
 		$ret = $this->Http_model->doCurlGetRequest($url, $para);
 		$retData = json_decode($ret, true);
-		var_dump($retData);
+		// var_dump($retData);
 
 		return $retData;
 	}
@@ -59,7 +59,7 @@ class Weixin_model extends CI_Model{
 		$ret = $this->Http_model->doCurlPostRequest($url, json_encode($template, JSON_UNESCAPED_UNICODE));
 		$retData = json_decode($ret, true);
 
-		var_dump($retData);
+		// var_dump($retData);
 
 	}
 
@@ -91,7 +91,7 @@ class Weixin_model extends CI_Model{
 		);
 		$ret = $this->Http_model->doCurlGetRequest($url, $para);
 		$retData = json_decode($ret, true);
-		var_dump($retData);
+		// var_dump($retData);
 
 		return $retData;
 	}

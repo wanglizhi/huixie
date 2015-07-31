@@ -58,6 +58,7 @@
 										<th>页数</th>
 										<th>补充材料</th>
 										<th>截止日期</th>
+										<th>额外需求</th>
 										<th>订单状态</th>
 										<th>详情</th>
 									</tr>
@@ -71,6 +72,7 @@
 										<td data-title="页数"> <?php echo $order['pageNum'];?> </td>
 										<td data-title="补充材料"> <?php echo $order['refDoc'];?> </td>
 										<td data-title="截止日期"> <?php echo $order['endTime'];?> </td>
+										<td data-title="额外需求"> <?php echo $order['requirement'];?> </td>
 										<?php if($order['hasTaken']==0): ?>
 										<td data-title="状态"> <span class="label label-default">未接单</span></td>
 									<?php elseif($order['hasFinished']==0): ?>
