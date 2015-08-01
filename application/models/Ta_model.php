@@ -66,16 +66,17 @@ class Ta_model extends CI_Model{
 
 	function getCheckedCondition(){
 		$this->db->where('hasCheck',TRUE);
+		$this->db->from('ta');
 	}
 
 	function getChecked($page,$num){
 		$this->getCheckedCondition();
-		$query=$this->db->get('ta',$num,($page-1)*$num);
+		$result['result_num_rows'] = $this->db->count_all_results();
 		if($this->db->affected_rows()){
-			$result['result_rows'] = $query->result();
 			$this->getCheckedCondition();
-			$query=$this->db->get('ta');
-			$result['result_num_rows'] = $query->num_rows();
+			$this->db->limit($num,($page-1)*$num);
+			$query = $this->db->get();
+			$result['result_rows'] = $query->result();
 			return json_decode(json_encode($result),true);
 		}else{
 			$result['result_rows'] = array();
@@ -84,11 +85,18 @@ class Ta_model extends CI_Model{
 		}
 	}
 
-	function getAll($page,$num){
+	function getAllCondition(){
 		$this->db->select('*');
-		$query=$this->db->get('ta',$num,($page-1)*$num);
+		$this->db->from('ta');
+	}
+
+	function getAll($page,$num){
+		$this->getAllCondition();
+		$result['result_num_rows'] = $this->db->count_all_results();
+		$this->getAllCondition();
+		$this->db->limit($num,($page-1)*$num);
 		if($this->db->affected_rows()){
-			$result['result_num_rows'] = $query->num_rows();
+			$query=$this->db->get();
 			$result['result_rows'] = $query->result();
 			return json_decode(json_encode($result),true);
 		}else{

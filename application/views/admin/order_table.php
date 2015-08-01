@@ -1,4 +1,4 @@
-<div id="<?=$orderTable['tableId']?>">
+<div id="<?php if(isset($orderTable)) echo $orderTable['tableId']?>">
 	<table class="table table-striped table-hover">
 		<thead>
 			<tr>
@@ -14,7 +14,10 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php $orderList = $orderTable['orderList'];?>
+			<?php
+				if(isset($orderTable)) 
+					$orderList = $orderTable['orderList'];
+			?>
 			<?php if(!empty($orderList)):?>
 			<?php foreach ($orderList as $order):?>
 			<tr>
@@ -78,7 +81,7 @@
 
 </table>
 
-<?php 
+<?php
 $data['page_info'] = $page_info;
 $data['js_page_method'] = $js_page_method;
 $this->load->view(ADMIN_PREFIX."pagination",$data);

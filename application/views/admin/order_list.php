@@ -34,8 +34,6 @@
 
 				<div class="portlet-body">
 					<?php
-						$data['orderTable'] = $orderTable;
-						$data['page_info'] = $page_info;
 						$data['js_page_method'] = "change_order_page";
 						$this->load->view(ADMIN_PREFIX."order_table",$data);
 					?>

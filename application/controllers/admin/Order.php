@@ -7,15 +7,6 @@ class Order extends MY_AdminController {
 		$this->load->library('mypagination');
 	}
 
-	function test(){
-			$this->load->model('Order_model');
-			$result = $this->Order_model->getAll(1,ITEMS_PER_PAGE);
-			$data['orderList'] = $result['result_rows'];
-			$data['page_info'] = $this->my_pagination->create_links(
-				$result['result_num_rows'],1,ADMIN_PREFIX."order/orderList");
-			$this->load->view('admin/order_tbody',$data);
-	}
-
 	// Admin page
 
 	function orderList(){

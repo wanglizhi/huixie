@@ -101,6 +101,22 @@
 								</div>
 								<div class="control-group">
 
+									<label class="control-label">审核状态: </label>
+
+									<div class="controls">
+
+										<select id="hasCheck" name="hasCheck" class="small m-wrap" tabindex="1">
+											<option value="0" <?php if(!$ta['hasCheck']) echo "selected";?> >待审核</option>
+
+											<option value="1" <?php if($ta['hasCheck']) echo "selected";?>>已审核</option>
+
+										</select>
+
+									</div>
+
+								</div>
+								<div class="control-group">
+
 									<label class="control-label">
 										简介:
 										<span class="required">*</span>
@@ -129,7 +145,6 @@
 					<div class="portlet-body">
 						<?php
 							$data['orderTable'] = $taOrderTable;
-							$data['page_info'] = $page_info;
 							$data['js_page_method'] = "change_ta_order_page";
 							$this->load->view(ADMIN_PREFIX."order_table",$data);
 						?>

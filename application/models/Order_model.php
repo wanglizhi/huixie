@@ -66,19 +66,29 @@ class Order_model extends CI_Model{
 			$result['result_num_rows'] = $query->num_rows();
 			return json_decode(json_encode($result),true);
 		}else{
-			return array();
+			$result['result_rows']="";
+			$result['result_num_rows'] = 0;
+			return $result;
 		}
 	}
-	function getAll($page,$num){
+
+	function getAllCondition(){
 		$this->db->select('*');
-		$query=$this->db->get('order',$num,($page-1)*$num);
+		$this->db->from('order');
+	}
+
+	function getAll($page,$num){
+		$this->getAllCondition();
+		$result['result_num_rows'] = $this->db->count_all_results();
+		$this->getAllCondition();
+		$this->db->limit($num,($page-1)*$num);
+		$query = $this->db->get();
 		if($this->db->affected_rows()){
 			$result['result_rows'] = $query->result();
-			$query=$this->db->get('order');
-			$result['result_num_rows'] = $query->num_rows();
 			return json_decode(json_encode($result),true);
 		}else{
-			return array();
+			$result['result_rows'] = array();
+			return $result;
 		}
 	}
 	function add($data){

@@ -78,16 +78,46 @@ class User extends MY_AdminController {
 			$_POST['email']);
 		$this->userProfile($_POST['openid']);
 	}
-	function userList($page = 1,$num = ITEMS_PER_PAGE)
+	function userList()
 	{
 		$data['pageTitle'] = '所有用户';
 		$this->load->model('User_model');
-		$result = $this->User_model->getAll($page,$num);
-		$data['userList'] = $result['result_rows'];
-		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
-				,ADMIN_PREFIX."user/userList");
+		$result = $this->User_model->getAll(1,ITEMS_PER_PAGE);
+		$data['userTable'] = array(
+			'userList' => $result['result_rows'],
+			'tableId'   => "userTable",
+		);
+		$data['page_info'] = array(
+			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+			'current_page'  => 1,
+			'page_method' => ADMIN_PREFIX."user/userListPage",
+		);
 		$this->loadView(ADMIN_PREFIX.'user_list',$data);
 	}
+	function userListPage()
+	{
+		$page = $_GET['page'];
+		if(!isset($page)){
+			echo "错误！！没有页数";
+			exit(0);
+		}
+		$js_page_method = $_GET['js_page_method'];
+		$data['pageTitle'] = '所有用户';
+		$this->load->model('User_model');
+		$result = $this->User_model->getAll($page,ITEMS_PER_PAGE);
+		$data['userTable'] = array(
+			'userList' => $result['result_rows'],
+			'tableId'   => "userTable",
+		);
+		$data['page_info'] = array(
+			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+			'current_page'  => $page,
+			'page_method' => ADMIN_PREFIX."user/userListPage",
+		);
+		$data['js_page_method'] = $js_page_method;
+		$this->load->view(ADMIN_PREFIX.'user_table',$data);
+	}
+
 	function registerPage(){
 		$data['pageTitle']='添加用户';
 		$this->loadView(ADMIN_PREFIX.'add_user',$data);
