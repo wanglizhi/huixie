@@ -165,8 +165,10 @@ class Order extends CustomerController {
 	function notifyUrl(){
 		$this->log('notifyUrl start <-----------------------------------------------');
 		// var_dump($_POST);
-		$this->log($_POST);
-		$this->log(var_dump($_POST));
+		$this->log($_POST['business']);
+		$this->log($_POST['item_name']);
+		$this->log($_POST['item_number']);
+		$this->log($_POST['payment_status']);
 		$this->log('notifyUrl end <-----------------------------------------------');
 	}
 
