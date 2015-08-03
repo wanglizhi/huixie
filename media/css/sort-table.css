@@ -1,0 +1,18 @@
+/* tables */
+table.sort-table {
+}
+table.sort-table thead tr .sort {
+	padding: 8px !important;
+	background: url('../image/bg.gif') no-repeat center right;
+}
+table.sort-table thead tr .sort_asc {
+	padding: 8px !important;
+	background: url('../image/sort_asc.gif') no-repeat center right;
+}
+table.sort-table thead tr .sort_desc {
+	padding: 8px !important;
+	background: url('../image/sort_desc.gif') no-repeat center right;
+}
+table.sort-table thead tr .sort_asc, table.sort-table thead tr .sort_desc {
+	background-color: #EAEAEA;
+}

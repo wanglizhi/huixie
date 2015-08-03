@@ -24,7 +24,6 @@ class Ta_model extends CI_Model{
 	function searchTaCondition($key){
 		$this->db->like('openid',$key);
 		$this->db->or_like('email',$key);
-		$this->db->or_like('name',$key);
 	}
 
 	function searchTa($key,$page,$num){

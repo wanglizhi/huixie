@@ -36,6 +36,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<link href="media/css/chosen.css" rel="stylesheet" type="text/css">
 	<link href="media/css/profile.css" rel="stylesheet" type="text/css">
 	<link href="media/css/search.css" rel="stylesheet" type="text/css"/>
+	<link href="media/css/sort-table.css" rel="stylesheet" type="text/css"/>
 
 	<!-- END PAGE LEVEL STYLES -->
 	<link rel="stylesheet" type="text/css" href="media/css/multi-select-metro.css" />

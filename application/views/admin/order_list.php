@@ -31,7 +31,24 @@
 		<!-- BEGIN PAGE CONTENT-->
 		<div class="row-fluid">
 			<div class="span12">
+				<div class="portlet-title">
+						<div class="row-fluid search-forms search-default" style="width:50%;" >
 
+							<div class="form-search" method="get" style="padding: 0px;">
+								<div class="chat-form">
+									<div class="input-cont" >   
+
+										<input type="text" id="key" name="key" placeholder="请输入关键词。。。" class="m-wrap"/>
+
+									</div>
+
+									<button class="btn green" onclick="search()">搜索订单 &nbsp; <i class="m-icon-swapright m-icon-white"></i></button>
+
+								</div>
+							</div>
+
+						</div>
+					</div>
 				<div class="portlet-body">
 					<?php
 						$data['js_page_method'] = "change_order_page";
@@ -39,16 +56,30 @@
 					?>
 
 					<script type="text/javascript">
-					function change_order_page(page){
+					var sort_key = "createTime",sort_method = "desc",current_page = 1;
+					var search_key = "";
+					function search(){
+						var key = document.getElementById('key').value;
+						change_order_page(1,undefined,undefined,undefined,key);
+						return false;
+					}
+					function change_order_page(page,key,method,callBack,searchKey){
+						if(page===undefined) page = current_page;
+						if(key===undefined) key = sort_key;
+						if(method===undefined) method = sort_method;
+						if(searchKey===undefined) searchKey = search_key;
 						var tableId = "<?=$orderTable['tableId']?>";
 						$.ajax({
 							url: "<?php echo site_url($page_info['page_method'])?>",
 							type: "get",
-							data: {'page':page,'js_page_method': "change_order_page",},
+							data: {'page':page,'js_page_method': "change_order_page",'sort_key': key,'sort_method':method,'search_key': searchKey},
 							dataType: "html",
 							success: function(data){
 								$('#'+tableId).html(' ');
 								$('#'+tableId).html(data);
+								sort_key = key,sort_method = method,current_page = page;
+								search_key = searchKey;
+								if(callBack!==undefined) callBack();
 							},
 						});
 					}

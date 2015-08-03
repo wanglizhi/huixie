@@ -16,6 +16,8 @@ class Order extends MY_AdminController {
 		$data['orderTable'] = array(
 			'orderList' => $result['result_rows'],
 			'tableId'   => "orderTable",
+			'sort_key'  => "createTime",
+			'sort_method' => 'desc', 
 		);
 		$data['page_info'] = array(
 			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
@@ -28,16 +30,20 @@ class Order extends MY_AdminController {
 	//获取分页数据
 	function orderListPage(){
 		$page = $_GET['page'];
-		if(!isset($page)){
-			echo "错误！！没有页数";
-			exit(0);
-		}
+		if(!isset($page)) $page = 1;
+		$sort_key = "createTime";
+		$sort_method = "desc";
+		if(isset($_GET['sort_key'])) $sort_key = $_GET['sort_key'];
+		if(isset($_GET['sort_method'])) $sort_method = $_GET['sort_method'];
 		$js_page_method = $_GET['js_page_method'];
 		$this->load->model('Order_model');
-		$result = $this->Order_model->getAll($page,ITEMS_PER_PAGE);
+		$search_key = $_GET['search_key'];
+		$result = $this->Order_model->getAll($page,ITEMS_PER_PAGE,$sort_key,$sort_method,$search_key);
 		$data['orderTable'] = array(
 			'orderList' => $result['result_rows'],
 			'tableId'   => "orderTable",
+			'sort_key'  => $sort_key,
+			'sort_method' => $sort_method, 
 		);
 		$data['page_info'] = array(
 			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
@@ -55,6 +61,8 @@ class Order extends MY_AdminController {
 		$data['orderTable'] = array(
 			'orderList' => $result['result_rows'],
 			'tableId'   => "orderTable",
+			'sort_key'  => "createTime",
+			'sort_method' => 'desc', 
 		);
 		$data['page_info'] = array(
 			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
@@ -66,17 +74,21 @@ class Order extends MY_AdminController {
 
 	function unpaidOrderListPage(){
 		$page = $_GET['page'];
-		if(!isset($page)){
-			echo "错误！！没有页数";
-			exit(0);
-		}
+		if(!isset($page)) $page = 1;
+		$sort_key = "createTime";
+		$sort_method = "desc";
+		if(isset($_GET['sort_key'])) $sort_key = $_GET['sort_key'];
+		if(isset($_GET['sort_method'])) $sort_method = $_GET['sort_method'];
+		$search_key = $_GET['search_key'];
 		$js_page_method = $_GET['js_page_method'];
 		$data['pageTitle'] = '未付款订单';
 		$this->load->model('Order_model');
-		$result = $this->Order_model->searchBy1('hasPaid',FALSE,$page,ITEMS_PER_PAGE);
+		$result = $this->Order_model->searchBy1('hasPaid',FALSE,$page,ITEMS_PER_PAGE,$sort_key,$sort_method,$search_key);
 		$data['orderTable'] = array(
 			'orderList' => $result['result_rows'],
 			'tableId'   => "orderTable",
+			'sort_key'  => $sort_key,
+			'sort_method' => $sort_method, 
 		);
 		$data['page_info'] = array(
 			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
@@ -94,6 +106,8 @@ class Order extends MY_AdminController {
 		$data['orderTable'] = array(
 			'orderList' => $result['result_rows'],
 			'tableId'   => "orderTable",
+			'sort_key'  => "createTime",
+			'sort_method' => 'desc', 
 		);
 		$data['page_info'] = array(
 			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
@@ -105,17 +119,21 @@ class Order extends MY_AdminController {
 
 	function untakenOrderListPage(){
 		$page = $_GET['page'];
-		if(!isset($page)){
-			echo "错误！！没有页数";
-			exit(0);
-		}
+		if(!isset($page)) $page = 1;
+		$sort_key = "createTime";
+		$sort_method = "desc";
+		if(isset($_GET['sort_key'])) $sort_key = $_GET['sort_key'];
+		if(isset($_GET['sort_method'])) $sort_method = $_GET['sort_method'];
+		$search_key = $_GET['search_key'];
 		$js_page_method = $_GET['js_page_method'];
 		$data['pageTitle'] = '未接单订单';
 		$this->load->model('Order_model');
-		$result = $this->Order_model->searchBy2('hasPaid', TRUE, 'hasTaken', FALSE,$page,ITEMS_PER_PAGE);
+		$result = $this->Order_model->searchBy2('hasPaid', TRUE, 'hasTaken', FALSE,$page,ITEMS_PER_PAGE,$sort_key,$sort_method,$search_key);
 		$data['orderTable'] = array(
 			'orderList' => $result['result_rows'],
 			'tableId'   => "orderTable",
+			'sort_key'  => $sort_key,
+			'sort_method' => $sort_method, 
 		);
 		$data['page_info'] = array(
 			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
@@ -132,6 +150,8 @@ class Order extends MY_AdminController {
 		$data['orderTable'] = array(
 			'orderList' => $result['result_rows'],
 			'tableId'   => "orderTable",
+			'sort_key'  => "createTime",
+			'sort_method' => 'desc', 
 		);
 		$data['page_info'] = array(
 			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
@@ -144,17 +164,21 @@ class Order extends MY_AdminController {
 
 	function unfinishedOrderListPage(){
 		$page = $_GET['page'];
-		if(!isset($page)){
-			echo "错误！！没有页数";
-			exit(0);
-		}
+		if(!isset($page)) $page = 1;
+		$sort_key = "createTime";
+		$sort_method = "desc";
+		if(isset($_GET['sort_key'])) $sort_key = $_GET['sort_key'];
+		if(isset($_GET['sort_method'])) $sort_method = $_GET['sort_method'];
+		$search_key = $_GET['search_key'];
 		$js_page_method = $_GET['js_page_method'];
 		$data['pageTitle'] = '未完成订单';
 		$this->load->model('Order_model');
-		$result = $this->Order_model->searchBy2('hasTaken', TRUE, 'hasFinished', FALSE,$page,ITEMS_PER_PAGE);
+		$result = $this->Order_model->searchBy2('hasTaken', TRUE, 'hasFinished', FALSE,$page,ITEMS_PER_PAGE,$sort_key,$sort_method,$search_key);
 		$data['orderTable'] = array(
 			'orderList' => $result['result_rows'],
 			'tableId'   => "orderTable",
+			'sort_key'  => $sort_key,
+			'sort_method' => $sort_method, 
 		);
 		$data['page_info'] = array(
 			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
@@ -173,6 +197,8 @@ class Order extends MY_AdminController {
 		$data['orderTable'] = array(
 			'orderList' => $result['result_rows'],
 			'tableId'   => "orderTable",
+			'sort_key'  => "createTime",
+			'sort_method' => 'desc', 
 		);
 		$data['page_info'] = array(
 			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
@@ -184,17 +210,21 @@ class Order extends MY_AdminController {
 
 	function finishedOrderListPage(){
 		$page = $_GET['page'];
-		if(!isset($page)){
-			echo "错误！！没有页数";
-			exit(0);
-		}
+		if(!isset($page)) $page = 1;
+		$sort_key = "createTime";
+		$sort_method = "desc";
+		if(isset($_GET['sort_key'])) $sort_key = $_GET['sort_key'];
+		if(isset($_GET['sort_method'])) $sort_method = $_GET['sort_method'];
+		$search_key = $_GET['search_key'];
 		$js_page_method = $_GET['js_page_method'];
 		$data['pageTitle'] = '已完成订单';
 		$this->load->model('Order_model');
-		$result = $this->Order_model->searchBy2('hasPaid', TRUE, 'hasFinished', TRUE,$page,ITEMS_PER_PAGE);
+		$result = $this->Order_model->searchBy2('hasPaid', TRUE, 'hasFinished', TRUE,$page,ITEMS_PER_PAGE,$sort_key,$sort_method,$search_key);
 		$data['orderTable'] = array(
 			'orderList' => $result['result_rows'],
 			'tableId'   => "orderTable",
+			'sort_key'  => $sort_key,
+			'sort_method' => $sort_method, 
 		);
 		$data['page_info'] = array(
 			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),

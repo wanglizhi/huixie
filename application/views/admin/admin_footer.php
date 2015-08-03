@@ -41,6 +41,7 @@
 	<script src="media/js/app.js"></script>
 	<script src="media/js/form-wizard.js"></script>  
 	<script src="media/js/form-samples.js"></script>     
+	<script src="media/js/jquery.tablesorter.js"></script>     
 	<!-- END PAGE LEVEL SCRIPTS -->
 
 	<!-- BEGIN 自定义js -->

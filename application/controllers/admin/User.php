@@ -7,16 +7,45 @@ class User extends MY_AdminController {
 		$this->load->model('Http_model');
 		$this->load->library('mypagination');
 	}
-	function searchUser($key = "",$page = 1,$num = ITEMS_PER_PAGE){
+	function searchUser($key = ""){
 		$data['pageTitle'] = '查找用户';
 		$this->load->model('User_model');
 		if($key==NULL)	$key = $_GET['key'];
-		$result = $this->User_model->searchUser($key,$page,$num);
-		$data['userList'] = $result['result_rows'];
-		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
-				,ADMIN_PREFIX."user/searchUser/".$key);
+		$result = $this->User_model->searchUser($key,1,ITEMS_PER_PAGE);
+		$data['userTable'] = array(
+			'userList' => $result['result_rows'],
+			'tableId'   => "userTable",
+		);
+		$data['page_info'] = array(
+			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+			'current_page'  => 1,
+			'page_method' => ADMIN_PREFIX."user/searchUserPage",
+		);
 		$this->loadView(ADMIN_PREFIX.'user_list',$data);
 	}
+
+	function searchUserPage(){
+		$page = $_GET['page'];
+		$js_page_method = $_GET['js_page_method'];
+		if(!isset($page)){
+			echo "错误！！没有页数";
+			exit(0);
+		}
+		$this->load->model('User_model');
+		$result = $this->User_model->searchUser($key,$page,ITEMS_PER_PAGE);
+		$data['userTable'] = array(
+			'userList' => $result['result_rows'],
+			'tableId'   => "userTable",
+		);
+		$data['page_info'] = array(
+			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+			'current_page'  => $page,
+			'page_method' => ADMIN_PREFIX."user/searchUserPage",
+		);
+		$data['js_page_method'] = $js_page_method;
+		$this->load->view(ADMIN_PREFIX.'user_table',$data);
+	}
+
 	function userProfile($user_id = NULL){
 		if(!isset($user_id) && !isset($_GET['user_id'])){
 			echo "error!";
@@ -31,6 +60,8 @@ class User extends MY_AdminController {
 		$data['userOrderTable'] = array(
 			'orderList' => $result['result_rows'],
 			'tableId'   => "userOrderTable",
+			'sort_key'  => "createTime",
+			'sort_method' => 'desc', 
 		);
 		$data['page_info'] = array(
 			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
@@ -46,16 +77,22 @@ class User extends MY_AdminController {
 		}
 		if(!isset($user_id)) $user_id = $_GET['user_id'];
 		$page = $_GET['page'];
+		$sort_key = "createTime";
+		$sort_method = "desc";
+		if(isset($_GET['sort_key'])) $sort_key = $_GET['sort_key'];
+		if(isset($_GET['sort_method'])) $sort_method = $_GET['sort_method'];
 		$js_page_method = $_GET['js_page_method'];
 		if(!isset($page)){
 			echo "错误！！没有页数";
 			exit(0);
 		}
 		$this->load->model('Order_model');
-		$result = $this->Order_model->searchBy1('userId', $user_id,$page,ITEMS_PER_PAGE);
+		$result = $this->Order_model->searchBy1('userId', $user_id,$page,ITEMS_PER_PAGE,$sort_key,$sort_method);
 		$data['orderTable'] = array(
 			'orderList' => $result['result_rows'],
 			'tableId'   => "userOrderTable",
+			'sort_key'  => $sort_key,
+			'sort_method' => $sort_method, 
 		);
 		$data['page_info'] = array(
 			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),

@@ -149,16 +149,23 @@
 							$this->load->view(ADMIN_PREFIX."order_table",$data);
 						?>
 						<script type="text/javascript">
-							function change_ta_order_page(page){
+							var sort_key = "createTime",sort_method = "desc",current_page = 1;
+							function change_ta_order_page(page,key,method,callBack){
+								
+								if(page===undefined) page = current_page;
+								if(key===undefined) key = sort_key;
+								if(method===undefined) method = sort_method;
 								var tableId = "<?=$taOrderTable['tableId']?>";
 								$.ajax({
 									url: "<?php echo site_url($page_info['page_method'])?>",
 									type: "get",
-									data: {'page':page,'js_page_method': "change_ta_order_page",'openid': "<?=$ta['openid']?>"},
+									data: {'page':page,'js_page_method': "change_ta_order_page",'openid': "<?=$ta['openid']?>",'sort_key': key,'sort_method':method,},
 									dataType: "html",
 									success: function(data){
 										$('#'+tableId).html(' ');
 										$('#'+tableId).html(data);
+										sort_key = key,sort_method = method,current_page = page;
+										if(callBack!==undefined) callBack();
 									},
 								});
 							}

@@ -150,6 +150,8 @@ class Ta extends MY_AdminController {
 		$data['taOrderTable'] = array(
 			'orderList' => $result['result_rows'],
 			'tableId'   => "taOrderTable",
+			'sort_key'  => "createTime",
+			'sort_method' => 'desc', 
 		);
 		$data['page_info'] = array(
 			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
@@ -170,11 +172,18 @@ class Ta extends MY_AdminController {
 			echo "错误！！没有页数";
 			exit(0);
 		}
+		if(!isset($page)) $page = 1;
+		$sort_key = "createTime";
+		$sort_method = "desc";
+		if(isset($_GET['sort_key'])) $sort_key = $_GET['sort_key'];
+		if(isset($_GET['sort_method'])) $sort_method = $_GET['sort_method'];
 		$this->load->model('Order_model');
-		$result = $this->Order_model->searchBy1('taId', $openid,$page,ITEMS_PER_PAGE);
+		$result = $this->Order_model->searchBy1('taId', $openid,$page,ITEMS_PER_PAGE,$sort_key,$sort_method);
 		$data['orderTable'] = array(
 			'orderList' => $result['result_rows'],
 			'tableId'   => "taOrderTable",
+			'sort_key'  => $sort_key,
+			'sort_method' => $sort_method, 
 		);
 		$data['page_info'] = array(
 			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
