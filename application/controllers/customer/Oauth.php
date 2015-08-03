@@ -11,7 +11,9 @@ class Oauth extends CI_Controller {
 		var_dump($result);
 	}
 	function index(){
-		$this->load->view('customer/test');
+		// $this->load->view('customer/test');
+		$ch = curl_init('https://www.paypal.com/cgi-bin/webscr');
+
 	}
 	function check(){
 		echo $_POST['prov'].'--'.$_POST['city'];
