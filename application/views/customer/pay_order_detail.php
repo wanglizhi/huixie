@@ -78,13 +78,30 @@
 		<a class="btn purple btn-block" link="">支付宝支付</a>
 
 <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post" target="_top">
-<input type="hidden" name="cmd" value="_s-xclick">
+<input type="hidden" name="cmd" value="_express-checkout">
+<input type="hidden" name="useraction" value="commit">
+<input type="hidden" name="token" value="valueFromSetExpressCheckoutResponse">
 <input type="hidden" name="hosted_button_id" value="V3WXFF2AKNZDJ">
-<input type="hidden" name="return" value="http://www.coursebang.com/recharge-success">
+<input type="hidden" name="return" value="http://huixie.me/huixie/index.php">
 <input type="image" src="https://www.sandbox.paypal.com/en_US/i/btn/btn_paynow_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 <img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
 </form>
 
+
+<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+<input type="hidden" name="cmd" value="_xclick">
+<input type="hidden" name="business" value="acount@huixie.me"> 
+<input type="hidden" name="item_name" value="item name">
+<input type="hidden" name="item_number" value="<?php echo $order['orderNum'];?>"> 
+<input type="hidden" name="cancel_return" value="<?php echo site_url("customer/order/payOrderPage");?>"> 
+<input type="hidden" name="return" value="<?php echo site_url('customer/user/orderDetail/'.$order['orderNum']);?>"> 
+<input type="hidden" name="notify_url" value="<?php echo site_url('customer/order/notifyUrl');?>"> 
+<input type="hidden" name="amount" value="50.00">
+<input type="hidden" name="no_shipping" value="2"> 
+<input type="hidden" name="no_note" value="1"> 
+<input type="hidden" name="currency_code" value="USD"> 
+<input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but23.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!> 
+</form>
 		
 	</div>
 

@@ -47,10 +47,10 @@
 
 					</div>
 
-					<div class="portlet-body">
-						<div>
-							<table class="table table-bordered table-striped table-condensed cf" id="orderList">
-								<thead class="cf">
+					<div class="portlet-body flip-scroll">
+						<!-- <div> -->
+							<table class="table-bordered table-striped table-condensed flip-content" id="orderList">
+								<thead class="flip-content">
 									<tr>
 										<th>订单编号</th>
 										<th>专业</th>
@@ -118,7 +118,7 @@
 			</tbody>
 
 		</table>
-	</div>
+	<!-- </div> -->
 	<?=$page_info?>
 </div>
 
