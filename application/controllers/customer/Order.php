@@ -280,7 +280,6 @@ class Order extends CustomerController {
 		// STEP 3: Inspect IPN validation result and act accordingly
 
 		if (strcmp ($res, "VERIFIED") == 0) {
-			$this->log('VERIFIED');
 		    // check whether the payment_status is Completed
 		    // check that txn_id has not been previously processed
 		    // check that receiver_email is your Primary PayPal email
@@ -296,6 +295,12 @@ class Order extends CustomerController {
 		    $txn_id = $_POST['txn_id'];
 		    $receiver_email = $_POST['receiver_email'];
 		    $payer_email = $_POST['payer_email'];
+
+		    $this->log('VERIFIED');
+		    $this->log($item_name);
+		    $this->log($item_number);
+		    $this->log($payment_status);
+		    $this->log($payment_amount);
 
 		    // <---- HERE you can do your INSERT to the database
 

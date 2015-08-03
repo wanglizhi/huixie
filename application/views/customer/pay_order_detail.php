@@ -100,7 +100,7 @@
 <input type="hidden" name="no_shipping" value="2"> 
 <input type="hidden" name="no_note" value="1"> 
 <input type="hidden" name="currency_code" value="USD"> 
-<input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but23.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!> 
+<input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but23.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!"> 
 </form>
 		
 	</div>
