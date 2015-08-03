@@ -75,45 +75,45 @@ class Order extends CustomerController {
 	}
 
 	function payOrderPage(){
-		// $taIdList = $_POST['taIdList'];
-		// $taList = array();
-		// $this->load->model('Ta_model');
-		// $max = 0;
-		// $min = 100000;
-		// foreach ($taIdList as $taId) {
-		// 	//ta 对象里要加userInfo项目
-		// 	$ta = $this->Ta_model->searchById($taId);
-		// 	$taList[$taId] = $ta;
-		// 	if($ta['unitPrice'] > $max){
-		// 		$max = $ta['unitPrice'];
-		// 	}
-		// 	if($ta['unitPrice'] < $min){
-		// 		$min = $ta['unitPrice'];
-		// 	}
-		// }
-		// $this->load->model('Order_model');
-		// $order = $this->Order_model->searchById($_SESSION['order']['orderNum']);
+		$taIdList = $_POST['taIdList'];
+		$taList = array();
+		$this->load->model('Ta_model');
+		$max = 0;
+		$min = 100000;
+		foreach ($taIdList as $taId) {
+			//ta 对象里要加userInfo项目
+			$ta = $this->Ta_model->searchById($taId);
+			$taList[$taId] = $ta;
+			if($ta['unitPrice'] > $max){
+				$max = $ta['unitPrice'];
+			}
+			if($ta['unitPrice'] < $min){
+				$min = $ta['unitPrice'];
+			}
+		}
+		$this->load->model('Order_model');
+		$order = $this->Order_model->searchById($_SESSION['order']['orderNum']);
 
-		// $data['order'] = $order;
-		// $data['taList'] = $taList;
-		// $data['max'] = $max * $order['pageNum'];
-		// $data['min'] = $min * $order['pageNum'];
-		// //添加到session
-		// $_SESSION['price'] = $data['max'];
-		// $_SESSION['taList'] = $taList;
+		$data['order'] = $order;
+		$data['taList'] = $taList;
+		$data['max'] = $max * $order['pageNum'];
+		$data['min'] = $min * $order['pageNum'];
+		//添加到session
+		$_SESSION['price'] = $data['max'];
+		$_SESSION['taList'] = $taList;
 		
 		//数据测试
-		$data['max'] = 100;
-		$data['min'] = 10;
-		$data['order'] = array('orderNum'=>1234567,'courseName'=>'设计与实现','major'=>'软件工程', 'pageNum'=>10, 'refDoc'=>6, 'endTime'=>'2015-6-10', 'requirement'=>'没有什么要求，好好写就行');
-		$ta1 = array('openid'=> '123456677', 'unitPrice' => 100, 'star'=> 4.0, 'introduction'=>'我来自哈佛，学习成绩非常好！',
-			'userInfo'=>array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
-				'nickname'=>'nickname'));
-		$ta2 = array('openid'=> '123456677', 'unitPrice' => 100, 'star'=> 4.0, 'introduction'=>'我来自哈佛，学习成绩非常好！',
-			'userInfo'=>array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
-				'nickname'=>'nickname'));
-		$taList = array('1'=>$ta1, '2'=>$ta2);
-		$data['taList'] = $taList;
+		// $data['max'] = 100;
+		// $data['min'] = 10;
+		// $data['order'] = array('orderNum'=>1234567,'courseName'=>'设计与实现','major'=>'软件工程', 'pageNum'=>10, 'refDoc'=>6, 'endTime'=>'2015-6-10', 'requirement'=>'没有什么要求，好好写就行');
+		// $ta1 = array('openid'=> '123456677', 'unitPrice' => 100, 'star'=> 4.0, 'introduction'=>'我来自哈佛，学习成绩非常好！',
+		// 	'userInfo'=>array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
+		// 		'nickname'=>'nickname'));
+		// $ta2 = array('openid'=> '123456677', 'unitPrice' => 100, 'star'=> 4.0, 'introduction'=>'我来自哈佛，学习成绩非常好！',
+		// 	'userInfo'=>array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
+		// 		'nickname'=>'nickname'));
+		// $taList = array('1'=>$ta1, '2'=>$ta2);
+		// $data['taList'] = $taList;
 
 		$this->load->view('customer/header', $data);
 		$this->load->view('customer/pay_order_detail');
@@ -301,6 +301,9 @@ class Order extends CustomerController {
 		    $this->log($item_number);
 		    $this->log($payment_status);
 		    $this->log($payment_amount);
+		    $this->log($_POST['pending_reason']);
+		    //判断正确性并且进行下一步操作
+		    $this->payOrder();
 
 		    // <---- HERE you can do your INSERT to the database
 

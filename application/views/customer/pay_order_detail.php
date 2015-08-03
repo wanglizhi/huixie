@@ -73,7 +73,7 @@
 
 	<div class="alert alert-info">
 		请选择付款方式：<br>
-		<a class="btn blue btn-block" href="<?php echo site_url("customer/order/payOrder");?>">Paypal</a><br>
+		<!-- <a class="btn blue btn-block" href="<?php echo site_url("customer/order/payOrder");?>">Paypal</a><br> -->
 		<a class="btn green btn-block" link="">微信支付</a><br>
 		<a class="btn purple btn-block" link="">支付宝支付</a>
 
