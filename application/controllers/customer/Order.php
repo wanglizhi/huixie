@@ -75,6 +75,11 @@ class Order extends CustomerController {
 	}
 
 	function payOrderPage(){
+		if(isset($_POST['taIdList'])){
+			$taIdList = $_POST['taIdList'];
+		}else{
+			$taIdList = array();
+		}
 		$taIdList = $_POST['taIdList'];
 		$taList = array();
 		$this->load->model('Ta_model');
@@ -224,6 +229,7 @@ class Order extends CustomerController {
 		$this->log('notifyUrl end <-----------------------------------------------');
 	}
 	function notify(){
+		$this->log('enter notify function');
 		// STEP 1: Read POST data
 
 		// reading posted data from directly from $_POST causes serialization 
