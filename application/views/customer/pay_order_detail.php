@@ -80,16 +80,16 @@
 <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
 <input type="hidden" name="cmd" value="_xclick">
 <input type="hidden" name="business" value="acount@huixie.me"> 
-<input type="hidden" name="item_name" value="item name">
+<input type="hidden" name="item_name" value="<?php echo $sessionId;?>">
 <input type="hidden" name="item_number" value="<?php echo $order['orderNum'];?>"> 
 <input type="hidden" name="cancel_return" value="<?php echo site_url("customer/order/payOrderPage");?>"> 
 <input type="hidden" name="return" value="<?php echo site_url('customer/user/orderDetail/'.$order['orderNum']);?>"> 
-<input type="hidden" name="notify_url" value="<?php echo site_url('customer/order/notify');?>"> 
+<input type="hidden" name="notify_url" value="<?php echo site_url('customer/oauth/notify');?>"> 
 <input type="hidden" name="amount" value="50.00">
 <input type="hidden" name="no_shipping" value="2"> 
 <input type="hidden" name="no_note" value="1"> 
 <input type="hidden" name="currency_code" value="USD"> 
-<input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but23.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!"> 
+<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!"> 
 </form>
 		
 	</div>
