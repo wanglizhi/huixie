@@ -107,8 +107,8 @@ class Oauth extends CI_Controller {
 		    $this->log($_POST['pending_reason']);
 		    
 		    //判断正确性并且进行下一步操作
-		    Session_id($item_name);
-		    session_start();
+		    session_id($item_name);
+		    session_start($item_name);
 
 		    redirect('customer/order/payOrder');
 

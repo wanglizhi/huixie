@@ -130,8 +130,10 @@ class Order extends CustomerController {
 	}
 	// 付款
 	function payOrder(){
+		$this->log('enter payOrder');
 		$user = $_SESSION['user'];
 		$order = $_SESSION['order'];
+		var_dump($order);
 		$order['price'] = $_SESSION['price'];
 		$this->load->model('Weixin_model');
 		$this->load->model('Message_model');
