@@ -44,7 +44,7 @@ class User extends CustomerController {
 		//测试数据
 		// $user = array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
 		// 		'nickname'=>'nickname', 'country'=>'中国', 'city'=>'南京', 'sex'=>1, 'university'=>'南京大学', 'email'=>'user@qq.com', 'openid'=>12);
-		// $order = array('taId'=>2, 'hasTaken'=>0, 'orderNum'=>1234567,'courseName'=>'设计与实现','major'=>'软件工程', 'pageNum'=>10, 'refDoc'=>6, 'endTime'=>'2015-6-10', 'requirement'=>'没有什么要求，好好写就行');
+		// $order = array('taId'=>2, 'price'=>100, 'hasPaid'=>0, 'hasTaken'=>0, 'orderNum'=>1437727418,'courseName'=>'设计与实现','major'=>'软件工程', 'pageNum'=>10, 'refDoc'=>6, 'createTime'=>'2015-4-30 18：00','endTime'=>'2015-6-10', 'requirement'=>'没有什么要求，好好写就行');
 
 		$data['order'] = $order;
 		$data['user'] = $user;

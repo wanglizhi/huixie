@@ -5,7 +5,16 @@ class Order_model extends CI_Model{
 		$this->load->database();
 	}
 	function searchById($orderNum){
-		return $this->searchBy1('orderNum',$orderNum,1,ITEMS_PER_PAGE);
+		$this->db->where('orderNum', $orderNum);
+		$this->db->select('*');
+		$query=$this->db->get('order');
+
+		if($this->db->affected_rows()){
+			$result = $query->result();
+			return json_decode(json_encode($result[0]),true);
+		}else{
+			return array();
+		}
 	}
 
 	function searchBy1Condition($key,$value,$sort_key,$sort_method,$searchKey){

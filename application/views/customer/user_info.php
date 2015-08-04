@@ -48,10 +48,11 @@
 							<div class="portlet-body center">
 			
 			<div class="alert alert-success">
-			<h4>昵称：<?php echo $user['nickname'];?></h4>
 			<div class="span6">
 			<img src="<?php echo $user['headimgurl'];?>" alt="..." class="img-circle" style="width:120px;height:120px">
 			</div>
+			<br>
+			<div class="span6">昵称：<?php echo $user['nickname'];?></div>
 				<div class="span6">性别：<?php if($user['sex'] == 0):?>
 				<?php echo '未知';?>
 				<?php elseif($user['sex'] == 1):?>

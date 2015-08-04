@@ -47,79 +47,49 @@
 
 					</div>
 
-					<div class="portlet-body flip-scroll">
-						<!-- <div> -->
-							<table class="table-bordered table-striped table-condensed flip-content" id="orderList">
-								<thead class="flip-content">
-									<tr>
-										<th>订单编号</th>
-										<th>专业</th>
-										<th>课程名称</th>
-										<th>页数</th>
-										<th>补充材料</th>
-										<th>截止日期</th>
-										<th>额外需求</th>
-										<th>订单状态</th>
-										<th>详情</th>
-									</tr>
-								</thead>
-								<tbody>
-									<?php if(!empty($orderList))foreach ($orderList as $order):?>
-									<tr>
-										<td data-title="订单编号"> <?php echo $order['orderNum'];?> </td>
-										<td data-title="专业"> <?php echo $order['major'];?> </td>
-										<td data-title="课程名称"> <?php echo $order['courseName'];?> </td>
-										<td data-title="页数"> <?php echo $order['pageNum'];?> </td>
-										<td data-title="补充材料"> <?php echo $order['refDoc'];?> </td>
-										<td data-title="截止日期"> <?php echo $order['endTime'];?> </td>
-										<td data-title="额外需求"> <?php echo $order['requirement'];?> </td>
-										<?php if($order['hasTaken']==0): ?>
-										<td data-title="状态"> <span class="label label-default">未接单</span></td>
-									<?php elseif($order['hasFinished']==0): ?>
-									<td data-title="状态"> <span class="label label-success">已接单</span></td>
-								<?php else: ?>
-								<td data-title="状态"> <span class="label label-info">已完成</span></td>
-								<?php endif; ?>
-
-						<td data-title="详情">
+					<div class="portlet-body">
+						<?php if(!empty($orderList))foreach ($orderList as $order):?>
+						<div class="well">
+							<h4 class="alert-heading">订单编号：<?php echo $order['orderNum'];?></h4>
+							<label>专业：<?php echo $order['major'];?></label>
+							<label>课程名：<?php echo $order['courseName'];?></label>
+							<label>截止日期：<?php echo $order['endTime'];?></label>
+							<label>订单状态：
+							<?php if($order['hasPaid']==0): ?>
+								<span class="label label-default">未付款</span>
+							<?php elseif($order['hasTaken']==0): ?>
+								<span class="label label-warning">已付款</span>
+							<?php elseif($order['hasFinished']==0): ?>
+								<span class="label label-info">已接单</span>
+							<?php else: ?>
+								<span class="label label-success">已完成</span>
+							<?php endif; ?>
+							
 							<?php 
 							static $orderRow = 0; 
 							?>
-							<a href="#orderRow<?=$orderRow?>" data-toggle="modal">查看详情</a>
-							<!-- Modal -->
-							<div class="modal hide fade modal-overflow" id="orderRow<?=$orderRow?>" tabindex="-1" role="dialog">
-								<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-										<h4 class="modal-title" id="myModalLabel<?=$orderRow?>">订单详情</h4>
-								</div>
-								<div class="modal-body">
-									<div class="profile-classic row-fluid">
-										<ul style="width:100%;" class="unstyled span10">
-											<li style="width:100%;"><span>订单编号:</span> <?=$order['orderNum']?></li>
-											<li style="width:100%;"><span>专业:</span> <?=$order['major']?></li>
-											<li style="width:100%;"><span>课程名称:</span> <?=$order['courseName']?></li>
-											<li style="width:100%;"><span>邮箱:</span> <?=$order['email']?></li>
-											<li style="width:100%;"><span>页数:</span> <?=$order['pageNum']?></li>
-											<li style="width:100%;"><span>阅读材料:</span> <?=$order['refDoc']?></li>
-											<li style="width:100%;"><span>截止日期:</span> <?=$order['endTime']?></li>
-											<li style="width:100%;"><span>额外需求:</span> <?=$order['requirement']?></li>
-											<li style="width:100%;"><span>接单时间:</span> <?=$order['takenTime']?></li>
-											<li style="width:100%;"><span>结束时间:</span> <?=$order['finishedTime']?></li>
-										</ul>
-									</div>
-								</div>
+							<a class="btn btn-primary mini" role="button" data-toggle="collapse" href="#orderRow<?=$orderRow?>" aria-expanded="false" aria-controls="collapseExample">
+				  			<i class="icon-chevron-down"></i></a>
+							</label>
+							
+							<div class="collapse" id="orderRow<?=$orderRow?>">
+						 		 <div class="well">
+						 		 	<h4>详细描述</h4>
+						 		 	<label>页数：<?php echo $order['pageNum'];?></label>
+									<label>阅读材料页数：<?php echo $order['refDoc'];?></label>
+									<label>截止日期：<?php echo $order['endTime'];?></label>
+									<label>补充要求：<?php echo $order['requirement'];?></label>
+									<label>接单时间：<?php echo $order['takenTime'];?></label>
+									<label>完成时间：<?php echo $order['finishedTime'];?></label>
+						  		</div>
 							</div>
 							<?php
 							$orderRow++; 
 							?>
-						</td>
-					</tr>
-				<?php endforeach;?>
-			</tbody>
+						</div>
+					<?php endforeach;?>
 
-		</table>
-	<!-- </div> -->
-	<?=$page_info?>
+		<?=$page_info?>
 </div>
 
 </div>
