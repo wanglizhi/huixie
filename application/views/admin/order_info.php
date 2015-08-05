@@ -91,11 +91,11 @@
 					</div>
 					<div class="profile-classic span12">
 						<ul class="unstyled">
-						<li style="border-top: solid 1px #f5f5f5;">
-							<span class="info-label">额外需求:</span>
-							<?=$order['requirement']?>
-						</li>
-					</ul>
+							<li style="border-top: solid 1px #f5f5f5;">
+								<span class="info-label">额外需求:</span>
+								<?=$order['requirement']?>
+							</li>
+						</ul>
 					</div>
 					<h3 class="form-section">订单状态</h3>
 					<div class="span12">
@@ -117,54 +117,12 @@
 											<option value="<?=FALSE?>" <?php if(!$order['hasTaken']) echo "selected";?> >未接单</option>
 
 											<option value="<?=TRUE?>" <?php if($order['hasTaken']) echo "selected";?> >已接单</option>
-											<script type="text/javascript">
-											/**
-* 时间对象的格式化
-*/
-Date.prototype.format = function(format)
-{
-/*
-* format="yyyy-MM-dd hh:mm:ss";
-*/
-var o = {
-	"M+" : this.getMonth() + 1,
-	"d+" : this.getDate(),
-	"h+" : this.getHours(),
-	"m+" : this.getMinutes(),
-	"s+" : this.getSeconds(),
-	"q+" : Math.floor((this.getMonth() + 3) / 3),
-	"S" : this.getMilliseconds()
-}
-
-if (/(y+)/.test(format))
-{
-	format = format.replace(RegExp.$1, (this.getFullYear() + "").substr(4
-		- RegExp.$1.length));
-}
-
-for (var k in o)
-{
-	if (new RegExp("(" + k + ")").test(format))
-	{
-		format = format.replace(RegExp.$1, RegExp.$1.length == 1
-			? o[k]
-			: ("00" + o[k]).substr(("" + o[k]).length));
-	}
-}
-return format;
-}
-												function taken(takenState){
-													if(takenState.value==1){
-														var takenTime = document.getElementById('takenTime');
-														takenTime.value = moment().format("YYYY-MM-DD HH:mm:ss")
-													}
-												}
-											</script>
+											
 										</select>
 									</li>
 									<li>
 										<span class="pay-label">完成状态:</span>
-										<select id="hasFinished" name="hasFinished" class="small m-wrap" tabindex="1">
+										<select id="hasFinished" name="hasFinished" class="small m-wrap" tabindex="1" onchange="finish(this)">
 											<option value="<?=FALSE?>" <?php if(!$order['hasFinished']) echo "selected";?> >未完成</option>
 
 											<option value="<?=TRUE?>" <?php if($order['hasFinished']) echo "selected";?>>已完成</option>
@@ -172,6 +130,20 @@ return format;
 										</select>
 									</li>
 								</ul>
+								<script type="text/javascript">
+								function taken(takenState){
+									if(takenState.value==1){
+										var takenTime = document.getElementById('takenTime');
+										takenTime.value = moment().format("YYYY-MM-DD HH:mm:ss")
+									}
+								}
+								function finish(finishState){
+									if(finishState.value==1){
+										var finishTime = document.getElementById('finishedTime');
+										finishTime.value = moment().format("YYYY-MM-DD HH:mm:ss")
+									}
+								}
+								</script>
 							</div>
 
 							<div class="profile-classic span6">
