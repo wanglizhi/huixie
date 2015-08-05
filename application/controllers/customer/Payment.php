@@ -131,7 +131,6 @@ class Payment extends CI_Controller {
 		$selectedTa = $_SESSION['taList'];
 
 		foreach ($selectedTa as $ta) {
-			$this->Weixin_model->sendMessageToTa($order, $ta['openid'], '有新的订单提醒');
 			$this->Message_model->sendMessageToTa(
 				$order,
 				$ta['openid'],

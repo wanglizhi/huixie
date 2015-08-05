@@ -53,6 +53,10 @@ class User extends CustomerController {
 		$this->load->view('customer/user_order_detail');
 		$this->load->view('customer/footer');
 	}
+	function returnPage($orderNum){
+		header("refresh:3;url=orderDetail/".$orderNum);
+		print('等待支付结果...<br>3秒后自动跳转。');
+	}
 
 	function unpaidOrderList($page = 1,$num = ITEMS_PER_PAGE){
 		$user = $_SESSION['user'];

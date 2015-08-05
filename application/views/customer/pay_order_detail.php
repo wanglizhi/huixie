@@ -82,8 +82,8 @@
 <input type="hidden" name="business" value="acount@huixie.me"> 
 <input type="hidden" name="item_name" value="<?php echo $sessionId;?>">
 <input type="hidden" name="item_number" value="<?php echo $order['orderNum'];?>"> 
-<input type="hidden" name="cancel_return" value="<?php echo site_url("customer/order/payOrderPage");?>"> 
-<input type="hidden" name="return" value="<?php echo site_url('customer/user/orderDetail/'.$order['orderNum']);?>"> 
+<input type="hidden" name="cancel_return" value="<?php echo site_url("customer/user/orderDetail/".$order['orderNum']);?>"> 
+<input type="hidden" name="return" value="<?php echo site_url('customer/user/returnPage/'.$order['orderNum']);?>"> 
 <input type="hidden" name="notify_url" value="<?php echo site_url('customer/payment/paypalNotify');?>"> 
 <input type="hidden" name="amount" value="50.00">
 <input type="hidden" name="no_shipping" value="2"> 
