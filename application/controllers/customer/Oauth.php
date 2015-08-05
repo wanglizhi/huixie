@@ -13,23 +13,19 @@ class Oauth extends CI_Controller {
 	function index(){
 		// $this->load->view('customer/test');
 		// $ch = curl_init('https://www.paypal.com/cgi-bin/webscr');
-		session_id('123456');
-		session_start();
-		$sessionId = session_id();
-		echo $sessionId;
-		session_write_close();
+		//sleep(5);
 
-		header('location:order/payOrder?sessionId='.$sessionId);
-		exit(0);
-
+		header("refresh:3;url=oauth/check");
+		print('信息错误，添加失败...<br>3秒后自动跳转。');
+		//$this->check();
 	}
 	function check(){
-		echo $_POST['prov'].'--'.$_POST['city'];
+		echo 'check';
 	}
 	function loginPage(){
 		$this->load->view('customer/header');
 		$this->load->view('customer/login_page');
 		$this->load->view('customer/footer');
 	}
-	
+
 }

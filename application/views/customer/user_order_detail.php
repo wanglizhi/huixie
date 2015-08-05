@@ -48,7 +48,7 @@
 							<div class="portlet-body center">
 							
 	<div class="alert alert-success">
-		<h4 class="alert-heading">详情</h4>
+		<h4 class="alert-heading"><a class="btn green" href="<?php echo site_url('customer/user/orderDetail/'.$order['orderNum']);?>">详情(点击刷新)</a></h4>
 		<label>专业：<?php echo $order['major'];?></label>
 		<label>课程名：<?php echo $order['courseName'];?></label>
 		<label>页数：<?php echo $order['pageNum'];?></label>
@@ -68,6 +68,7 @@
 			<span class="label label-success">已完成&nbsp<?php echo $order['finishedTime'];?></span>
 		<?php endif; ?>
 		</label>
+		<label></label>
 </div>
 
 	</div>
