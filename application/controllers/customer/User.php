@@ -36,7 +36,7 @@ class User extends CustomerController {
 
 		redirect('customer/user/infoPage');
 	}
-	function orderDetail($orderNum){
+	function orderDetail($orderNum, $p){
 		$user = $_SESSION['user'];
 		$this->load->model('Order_model');
 		$order = $this->Order_model->searchById($orderNum);
@@ -54,8 +54,9 @@ class User extends CustomerController {
 		$this->load->view('customer/footer');
 	}
 	function returnPage($orderNum){
-		header("refresh:3;url=orderDetail/".$orderNum);
-		print('等待支付结果...<br>3秒后自动跳转。');
+		print('等待支付结果, 5秒后自动跳转');
+		sleep(30);
+		$this->orderDetail($orderNum);
 	}
 
 	function unpaidOrderList($page = 1,$num = ITEMS_PER_PAGE){
