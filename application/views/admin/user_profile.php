@@ -12,7 +12,7 @@
 		<div class="row-fluid">
 
 			<div class="span12">
-				<h3 class="page-title">用户管理</h3>
+				<h3 class="form-section">用户管理</h3>
 			</div>
 
 		</div>
@@ -123,8 +123,7 @@
 								<div class="span12">
 									<div class="profile-classic span6">
 										<ul class="unstyled">
-											<li >
-												<div class="control-group control-input">
+											<li class="control-group control-input">
 
 												<span class="control-label">
 													用户名:
@@ -134,8 +133,7 @@
 												<div class="controls" style="margin-left: 0px;">
 													<input type="text"  id="nickname" name="nickname" data-required="1" class="span6 m-wrap" value="<?=$user['nickname']?>" readonly></div>
 											</li>
-											<li >
-												<div class="control-group control-input">
+											<li class="control-group control-input">
 
 												<span class="control-label">
 													国家:
@@ -145,8 +143,7 @@
 												<div class="controls" style="margin-left: 0px;">
 													<input type="text"  id="country" name="country" data-required="1" class="span6 m-wrap" value="<?=$user['country']?>" readonly></div>
 											</li>
-											<li >
-												<div class="control-group control-input">
+											<li class="control-group control-input">
 
 												<span class="control-label">
 													城市:
@@ -156,8 +153,7 @@
 												<div class="controls" style="margin-left: 0px;">
 													<input type="text"  id="city" name="city" data-required="1" class="span6 m-wrap" value="<?=$user['city']?>" readonly></div>
 											</li>
-											<li >
-												<div class="control-group control-input">
+											<li class="control-group control-input">
 
 												<span class="control-label">
 													邮箱:
@@ -185,8 +181,7 @@
 												</div>
 
 											</li>
-											<li >
-												<div class="control-group control-input">
+											<li class="control-group control-input">
 
 												<span class="control-label">
 													省份:
@@ -196,8 +191,7 @@
 												<div class="controls" style="margin-left: 0px;">
 													<input type="text"  id="province" name="province" data-required="1" class="span6 m-wrap" value="<?=$user['province']?>" readonly></div>
 											</li>
-											<li >
-												<div class="control-group control-input">
+											<li class="control-group control-input">
 
 												<span class="control-label">
 													大学:

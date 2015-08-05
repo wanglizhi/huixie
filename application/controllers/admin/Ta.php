@@ -136,11 +136,11 @@ class Ta extends MY_AdminController {
 	function taInfo($openid = ""){
 		$data['pageTitle'] = 'TA 信息';
 		$this->load->model('Ta_model');
-		if($openid==="") $openid = $_GET['openid'];
+		if($openid===""&&isset($_GET['openid'])) $openid = $_GET['openid'];
 		$ta = $this->Ta_model->searchById($openid);
 		if(empty($ta)){
 			$time = 3;
-			header("refresh:$time;url=addTaPage");
+			header("refresh:$time;url=taList");
 			print($openid.'ta不存在...<br>'.$time.'秒后自动跳转。');
 			exit();
 		} 
@@ -211,16 +211,11 @@ class Ta extends MY_AdminController {
 			$data['createTime'] = date('Y-m-d h:i:s');
 		}catch(Exception $e){
 			$time = 3;
-			header("refresh:$time;url=addTaPage");
+			header("refresh:$time;url=taList");
 			print('出错了...<br>'.$time.'秒后自动跳转。');
 		}
-		if (!$this->Ta_model->update($data)) {
-			$time = 3;
-			header("refresh:$time;url=addTaPage");
-			print('添加失败...<br>'.$time.'秒后自动跳转。');
-		}else{
-			redirect(ADMIN_PREFIX.'ta/taList');
-		}
+		$this->Ta_model->update($data);
+		redirect(ADMIN_PREFIX.'ta/taInfo?openid='.$_POST['openId']);
 	}
 	function addTa(){
 		$this->load->model('Ta_model');

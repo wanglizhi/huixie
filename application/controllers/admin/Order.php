@@ -9,6 +9,18 @@ class Order extends MY_AdminController {
 
 	// Admin page
 
+	function orderInfo(){
+		$orderNum = $_GET['orderNum'];
+		$this->load->model('Order_model');
+		$order = $this->Order_model->searchById($orderNum);
+		if(empty($order)){
+			echo "不存在订单";
+			return;
+		}
+		$data['order'] = $order;
+		$this->loadView(ADMIN_PREFIX."order_info",$data);
+	}
+
 	function orderList(){
 		$data['pageTitle'] = '所有订单';
 		$this->load->model('Order_model');
@@ -233,5 +245,29 @@ class Order extends MY_AdminController {
 		);
 		$data['js_page_method'] = $js_page_method;
 		$this->load->view(ADMIN_PREFIX.'order_table',$data);
+	}
+
+	function updateOrder(){
+		$this->load->model('Order_model');
+		try{
+			$data['hasPaid'] = $_POST['hasPaid'];
+			if($_POST['paidTime']!="")
+				$data['paidTime'] = $_POST['paidTime'];
+			$data['hasTaken'] = $_POST['hasTaken'];
+			if($_POST['takenTime']!="")
+				$data['takenTime'] = $_POST['takenTime'];
+			$data['hasFinished'] = $_POST['hasFinished'];
+			if($_POST['finishedTime']!="")
+				$data['finishedTime'] = $_POST['finishedTime'];
+			if($_POST['taId']!="")
+				$data['taId'] = $_POST['taId'];
+			$data['orderNum'] = $_POST['orderNum'];
+ 		}catch(Exception $e){
+			$time = 3;
+			header("refresh:$time;url=orderInfo?orderNum=".$_POST['orderNum']);
+			print('出错了...<br>'.$time.'秒后自动跳转。');
+ 		}	
+		$this->Order_model->update($data);
+		redirect(ADMIN_PREFIX.'order/orderInfo?orderNum='.$_POST['orderNum']);
 	}
 }
