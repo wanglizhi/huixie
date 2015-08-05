@@ -1,31 +1,13 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed'); //防止用户直接访问
 
-class Oauth extends CI_Controller {
+class Payment extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->helper('url');
 	}
-	function testModel(){
-		$this->load->model('Ta_model');
-		$result = $this->Ta_model->searchBySkills('工程-计算机工程');
-		var_dump($result);
-	}
-	function index(){
-		// $this->load->view('customer/test');
-		$ch = curl_init('https://www.paypal.com/cgi-bin/webscr');
-
-	}
-	function check(){
-		echo $_POST['prov'].'--'.$_POST['city'];
-	}
-	function loginPage(){
-		$this->load->view('customer/header');
-		$this->load->view('customer/login_page');
-		$this->load->view('customer/footer');
-	}
 	//网站的回调没有验证方法，必须继承CI_Controller
 
-	function notify(){
+	function paypalNotify(){
 		$this->log('enter notify function');
 		// STEP 1: Read POST data
 
@@ -53,7 +35,6 @@ class Oauth extends CI_Controller {
 		   }
 		   $req .= "&$key=$value";
 		}
-
 
 		// STEP 2: Post IPN data back to paypal to validate
 
@@ -108,9 +89,13 @@ class Oauth extends CI_Controller {
 		    
 		    //判断正确性并且进行下一步操作
 		    session_id($item_name);
-		    session_start($item_name);
+		    session_start();
+		    $user = $_SESSION['user'];
+			$order = $_SESSION['order'];
+			$this->log($user['openid']);
+			$this->log($order['orderNum']);
 
-		    redirect('customer/order/payOrder');
+		    $this->payOrder();
 
 		    // <---- HERE you can do your INSERT to the database
 
@@ -119,6 +104,49 @@ class Oauth extends CI_Controller {
 		    $this->log('INVALID');
 		}
 
+	}
+	// 付款
+	function payOrder(){
+		$this->log('enter payOrder');
+		$user = $_SESSION['user'];
+		$order = $_SESSION['order'];
+		var_dump($order);
+		$order['price'] = $_SESSION['price'];
+		$this->load->model('Weixin_model');
+		$this->load->model('Message_model');
+		$order['hasPaid'] = 1;
+		date_default_timezone_set('PRC');
+		$order['paidTime'] = date('Y-m-d h:i:s');
+		$this->load->model('Order_model');
+		$this->Order_model->update($order);
+		//推送给用户
+		$this->Message_model->sendMessageToUser(
+				$order,
+				$user['openid'],
+				'付款成功，订单详情如下：！',
+				'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri=http%3A%2F%2Fhuixie.me%2Fhuixie%2Findex.php%2Fcustomer%2Fuser%2ForderDetail%2F'.$order['orderNum'].'&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect',
+				'恭喜你下单成功，请联系客服获得帮助，将参考资料发送到admin@huixie.me');
+
+		//推送给TA
+		$selectedTa = $_SESSION['taList'];
+
+		foreach ($selectedTa as $ta) {
+			$this->Weixin_model->sendMessageToTa($order, $ta['openid'], '有新的订单提醒');
+			$this->Message_model->sendMessageToTa(
+				$order,
+				$ta['openid'],
+				'有新的订单提醒',
+				'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri=http%3A%2F%2Fhuixie.me%2Fhuixie%2Findex.php%2Fcustomer%2Fta%2FtakeOrderPage%2F'.$order['orderNum'].'&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect',
+				'请您及时接单，并且联系客服获得相关材料');
+
+			//数据库添加选择的TA列表
+			$data['taId'] = $ta['openid'];
+			$data['orderNum'] = $order['orderNum'];
+			$data['createTime'] = date('Y-m-d h:i:s');
+			$this->load->model('Selected_ta_model');
+			$this->Selected_ta_model->add($data);
+		}
+		
 	}
 
 	//写内容到文件，log日志功能
