@@ -150,7 +150,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<span class="arrow "></span>
 				</a>
 				<ul class="sub-menu">
-					<li><a href="<?php echo site_url(ADMIN_PREFIX."user/registerPage");?>">添加用户</a></li>
 					<li><a href="<?php echo site_url(ADMIN_PREFIX."user/userList");?>">查看用户列表</a></li>
 				</ul>
 			</li>

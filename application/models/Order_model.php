@@ -120,8 +120,10 @@ class Order_model extends CI_Model{
 			return array();
 		}
 	}
-	function delete(){
-		
+	function delete($orderNum){
+		$this->db->where('orderNum',$orderNum);
+		$this->db->delete('order');
+		return $this->db->affected_rows();
 	}
 	function update($data){
 		$this->db->where('orderNum',$data['orderNum']);

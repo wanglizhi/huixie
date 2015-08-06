@@ -270,4 +270,10 @@ class Order extends MY_AdminController {
 		$this->Order_model->update($data);
 		redirect(ADMIN_PREFIX.'order/orderInfo?orderNum='.$_POST['orderNum']);
 	}
+
+	function deleteOrder(){
+		$this->load->model('Order_model');
+		$orderNum = $_POST['orderNum'];
+		$this->Order_model->delete($orderNum);
+	}
 }
