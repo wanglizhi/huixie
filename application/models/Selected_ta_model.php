@@ -14,13 +14,16 @@ class Selected_ta_model extends CI_Model{
 		$this->db->query($this->db->insert_string('selectedTa',$data));
 		return $this->db->affected_rows();
 	}
-	function searchByTa($taId){
+	function searchByTa($taId, $page, $num){
 		$this->db->where('taId', $taId);
 		$this->db->where('hasTaken', 0);
+		$this->db->order_by('createTime', 'desc');
 		$this->db->select('*');
-		$query=$this->db->get('selectedTa');
+		$query=$this->db->get('selectedTa',$num,($page-1)*$num);
 		if($this->db->affected_rows()){
-			$result = $query->result();
+			$result['result_rows'] = $query->result();
+			$query=$this->db->get('user');
+			$result['result_num_rows'] = $query->num_rows();
 			return json_decode(json_encode($result),true);
 		}else{
 			return array();

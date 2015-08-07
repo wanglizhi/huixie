@@ -145,6 +145,7 @@ class Order extends CustomerController {
 	}
 	// 付款
 	function payOrder(){
+		
 		$this->log('enter payOrder');
 		$user = $_SESSION['user'];
 		$order = $_SESSION['order'];
@@ -169,7 +170,6 @@ class Order extends CustomerController {
 		$selectedTa = $_SESSION['taList'];
 
 		foreach ($selectedTa as $ta) {
-			$this->Weixin_model->sendMessageToTa($order, $ta['openid'], '有新的订单提醒');
 			$this->Message_model->sendMessageToTa(
 				$order,
 				$ta['openid'],
