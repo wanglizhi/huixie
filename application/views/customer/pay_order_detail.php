@@ -92,7 +92,7 @@
 		<input type="hidden" name="cancel_return" value="<?php echo site_url("customer/user/orderDetail/".$order['orderNum']);?>"> 
 		<input type="hidden" name="return" value="<?php echo site_url('customer/user/payOrder');?>"> 
 		<input type="hidden" name="notify_url" value="<?php echo site_url('customer/payment/paypalNotify');?>">
-		<input type="hidden" name="amount" value="<?php echo $order['price'];?>">
+		<input type="hidden" name="amount" value="<?php echo $max;?>">
 		<input type="hidden" name="no_shipping" value="2"> 
 		<input type="hidden" name="no_note" value="1"> 
 		<input type="hidden" name="currency_code" value="USD"> 

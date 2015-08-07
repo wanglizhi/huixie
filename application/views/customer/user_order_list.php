@@ -114,24 +114,30 @@
 									date_default_timezone_set($order['timezone']);
 									echo date("Y-m-d H:i:s",$timestamp);
 									?></label>
-									<label>付款时间：<?php 
-									date_default_timezone_set("PRC");
-									$timestamp = strtotime($order['paidTime']);
-									date_default_timezone_set($order['timezone']);
-									echo date("Y-m-d H:i:s",$timestamp);
-									?></label>
-									<label>接单时间：<?php 
-									date_default_timezone_set("PRC");
-									$timestamp = strtotime($order['takenTime']);
-									date_default_timezone_set($order['timezone']);
-									echo date("Y-m-d H:i:s",$timestamp);
-									?></label>
-									<label>完成时间：<?php 
-									date_default_timezone_set("PRC");
-									$timestamp = strtotime($order['finishedTime']);
-									date_default_timezone_set($order['timezone']);
-									echo date("Y-m-d H:i:s",$timestamp);
-									?></label>
+
+									<?php if($order['hasPaid']==1): ?>
+										<label>付款时间：<?php 
+										date_default_timezone_set("PRC");
+										$timestamp = strtotime($order['paidTime']);
+										date_default_timezone_set($order['timezone']);
+										echo date("Y-m-d H:i:s",$timestamp);
+										?></label>
+									<?php elseif($order['hasTaken']==1): ?>
+										<label>接单时间：<?php 
+										date_default_timezone_set("PRC");
+										$timestamp = strtotime($order['takenTime']);
+										date_default_timezone_set($order['timezone']);
+										echo date("Y-m-d H:i:s",$timestamp);
+										?></label>
+									<?php elseif($order['hasFinished']==1): ?>
+										<label>完成时间：<?php 
+										date_default_timezone_set("PRC");
+										$timestamp = strtotime($order['finishedTime']);
+										date_default_timezone_set($order['timezone']);
+										echo date("Y-m-d H:i:s",$timestamp);
+										?></label>
+									<?php endif; ?>
+
 						  		</div>
 							</div>
 							<?php
