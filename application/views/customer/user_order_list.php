@@ -49,6 +49,9 @@
 
 					<div class="portlet-body">
 					<?php if(!empty($orderList))foreach ($orderList as $order):?>
+						<?php 
+							static $orderRow = 0; 
+						?>
 						<div class="well">
 							<h4 class="alert-heading">订单编号：<?php echo $order['orderNum'];?></h4>
 							<label>专业：<?php echo $order['major'];?></label>
@@ -58,6 +61,27 @@
 							<?php if($order['hasPaid']==0): ?>
 								<span class="label label-default">未付款</span>
 								<a class="btn green mini" href="<?php echo site_url('customer/order/taSelectPage/'.$order['orderNum']);?>"><i class="icon-shopping-cart"></i>&nbsp去结算</a>
+								<a class="btn red mini" data-toggle="modal" data-target="#delete<?=$orderRow?>"><i class="icon-trash"></i>&nbsp删除订单</a>
+								
+								<!-- Modal -->
+								<div class="modal fade" id="delete<?=$orderRow?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+								  <div class="modal-dialog" role="document">
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <h4 class="modal-title" id="myModalLabel">警告</h4>
+								      </div>
+								      <div class="modal-body">
+								        <label>订单编号：<?php echo $order['orderNum'];?></label>
+										<label>课程名：<?php echo $order['courseName'];?></label>
+										<label>未付款订单最多只能有十单，请及时清理~</label>
+								      </div>
+								      <div class="modal-footer">
+								        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+								        <a class="btn red" href="<?php echo site_url('customer/user/deleteOrder/'.$order['orderNum']);?>"><i class="icon-trash"></i>&nbsp删除订单</a>
+								      </div>
+								    </div>
+								  </div>
+								</div>
 							<?php elseif($order['hasTaken']==0): ?>
 								<span class="label label-warning">已付款</span>
 							<?php elseif($order['hasFinished']==0): ?>
@@ -66,9 +90,6 @@
 								<span class="label label-success">已完成</span>
 							<?php endif; ?>
 							
-							<?php 
-							static $orderRow = 0; 
-							?>
 							<a class="btn btn-primary mini" role="button" data-toggle="collapse" href="#orderRow<?=$orderRow?>" aria-expanded="false" aria-controls="collapseExample">
 				  			<i class="icon-chevron-down"></i></a>
 							</label>
@@ -78,13 +99,39 @@
 						 		 	<h4>详细描述</h4>
 						 		 	<label>页数：<?php echo $order['pageNum'];?></label>
 									<label>阅读材料页数：<?php echo $order['refDoc'];?></label>
-									<label>截止日期：<?php echo $order['endTime'];?></label>
+									<label>截止日期：<?php 
+									date_default_timezone_set("PRC");
+									$timestamp = strtotime($order['endTime']);
+									date_default_timezone_set($order['timezone']);
+									echo date("Y-m-d H:i:s",$timestamp);
+									?></label>
+									<label>时区：<?php echo $order['timezone'];?></label>
 									<label>补充要求：<?php echo $order['requirement'];?></label>
 									<label>邮箱：<?php echo $order['email'];?></label>
-									<label>创建时间：<?php echo $order['createTime'];?></label>
-									<label>付款时间：<?php echo $order['paidTime'];?></label>
-									<label>接单时间：<?php echo $order['takenTime'];?></label>
-									<label>完成时间：<?php echo $order['finishedTime'];?></label>
+									<label>创建时间：<?php 
+									date_default_timezone_set("PRC");
+									$timestamp = strtotime($order['createTime']);
+									date_default_timezone_set($order['timezone']);
+									echo date("Y-m-d H:i:s",$timestamp);
+									?></label>
+									<label>付款时间：<?php 
+									date_default_timezone_set("PRC");
+									$timestamp = strtotime($order['paidTime']);
+									date_default_timezone_set($order['timezone']);
+									echo date("Y-m-d H:i:s",$timestamp);
+									?></label>
+									<label>接单时间：<?php 
+									date_default_timezone_set("PRC");
+									$timestamp = strtotime($order['takenTime']);
+									date_default_timezone_set($order['timezone']);
+									echo date("Y-m-d H:i:s",$timestamp);
+									?></label>
+									<label>完成时间：<?php 
+									date_default_timezone_set("PRC");
+									$timestamp = strtotime($order['finishedTime']);
+									date_default_timezone_set($order['timezone']);
+									echo date("Y-m-d H:i:s",$timestamp);
+									?></label>
 						  		</div>
 							</div>
 							<?php

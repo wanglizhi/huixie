@@ -156,5 +156,12 @@ class Order_model extends CI_Model{
 			return array();
 		}
 	}
+	function unpaidCount($userId){
+		$this->db->where('userId', $userId);
+		$this->db->where('hasPaid', 0);
+		$this->db->select('*');
+		$query=$this->db->get('order');
+		return $this->db->affected_rows();
+	}
 }
 ?>

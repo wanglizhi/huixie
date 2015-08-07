@@ -49,6 +49,10 @@ class Message_model extends CI_Model{
 	function sendMessageToUser($order, $openid, $first, $url, $remark){
 		$this->load->model('Ctoken_model');
 		$token = $this->Ctoken_model->getAccessToken();
+		date_default_timezone_set("PRC");
+		$timestamp = strtotime($order['endTime']);
+		date_default_timezone_set($order['timezone']);
+		$endTime = date("Y-m-d H:i:s",$timestamp);
 		$template = array(
 			'touser' => $openid,
 			'template_id' => 'PbGUA1ZGH6hh4H1zVpyVcR0jgF3QzTfr6vLPTAoM6yc',
@@ -72,7 +76,7 @@ class Message_model extends CI_Model{
 					'color' => '#173177'
 				),
 				'keyword4' =>array(
-					'value' => $order['endTime'],
+					'value' => $endTime,
 					'color' => '#173177'
 				),
 				'keyword5' =>array(

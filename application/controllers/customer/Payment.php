@@ -95,7 +95,7 @@ class Payment extends CI_Controller {
 			$this->log($user['openid']);
 			$this->log($order['orderNum']);
 
-		    $this->payOrder();
+		    //$this->payOrder();
 
 		    // <---- HERE you can do your INSERT to the database
 

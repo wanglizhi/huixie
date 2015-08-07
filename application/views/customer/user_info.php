@@ -65,16 +65,38 @@
 				<div class="span6">地址：<?php echo $user['country'].'-'.$user['city'];?></div>
 				<div class="span6">大学：<?php echo $user['university'];?></div>
 				<div class="span6">邮箱：<?php echo $user['email'];?></div>
+				<div class="span6">账户余额￥：<?php echo $user['balance'];?></div>
+				<div class="span6"><?php 
+				$type = $user['cashType'];
+				if($type == 1){
+					echo "Paypal：";
+				}else if($type == 2){
+					echo "支付宝：";
+				}else if($type == 3){
+					echo "微信支付账户";
+				}
+				echo $user['cashAccount'];
+				?></div>
 			</div>
 			<div class="alert span6">您可以提交下面的表单修改你的学校和邮箱！</div>
 		<form action="<?php echo site_url('customer/user/modify');?>" method="post">
 			<div class="form-group">
     			<label for="university">大学</label>
-    			<input type="text" class="form-control m-wrap span6" id="university" name="university" placeholder="" required="required">
+    			<input type="text" class="form-control m-wrap span6" id="university" name="university" placeholder="" value="<?php echo $user['university'];?>" required="required">
   			</div>
   			<div class="form-group">
     			<label for="email">邮箱</label>
-    			<input type="email" class="form-control m-wrap span6" id="email" name="email" placeholder="" required="required">
+    			<input type="email" class="form-control m-wrap span6" id="email" name="email" placeholder="" value="<?php echo $user['email'];?>"required="required">
+  			</div>
+  			<div class="form-group">
+    			<label for="email">现金账户</label>
+    			<select class="form-control m-wrap span6" name="cashType" id="cashType" required="required">
+  					<option></option>
+  					<option value="1">Paypal</option>
+  					<option value="2">支付宝</option>
+  					<option value="3">微信支付</option>
+				</select>
+    			<input type="text" class="form-control m-wrap span6" id="cashAccount" name="cashAccount" placeholder="" value="<?php echo $user['cashAccount'];?>" required="required">
   			</div>
   			<div class="form-actions">
   			<button type="submit" class="btn green"><i class="icon-ok"></i> 提交申请</button>

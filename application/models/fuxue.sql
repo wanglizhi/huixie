@@ -57,7 +57,7 @@ create table `order`(
 `pageNum` int(11) NOT NULL,
 `refDoc` int(11) NOT NULL,
 `endTime` datetime NOT NULL,
-`timezone` varchar(64),
+`timezone` varchar(64) NOT NULL,
 `requirement` text,
 
 `userId` varchar(255) NOT NULL,

@@ -47,11 +47,18 @@
 
 							<div class="portlet-body center">
 
+							<?php if(isset($notice) and $notice!= ""):?>
+							<div class="alert">
+									<button class="close" data-dismiss="alert"></button>
+									<strong>Notice!</strong> <?php echo $notice; ?>
+							</div>
+						<?php  endif?>
+
 			<form action="<?php echo site_url('customer/order/addOrder');?>" method="post">
   			<div class="form-group">
     			<label for="major">专业<font color='red'>*</font></label>
     			<div id="city_5">
-					<select class="prov small m-wrap" name="prov"></select>
+					<select class="prov small m-wrap" name="prov" required="required"></select>
 					<select class="city small m-wrap" name="city" disabled="disabled" required="required"></select>
 				</div>
   			</div>
@@ -83,6 +90,20 @@
     			<label for="endTime">截止日期<font color='red'>*</font></label>
           		<input type="date" class="form-control m-wrap small" id="endDate" name="endDate" required="required">
     			<input type="time" class="form-control m-wrap small" id="endTime" name="endTime" required="required">
+  				
+
+    			<label for="endTime">请选择时区<font color='red'>*</font></label>
+  				<select class="form-control m-wrap span6" name="timezone" id="timezone" required="required">
+  					<option></option>
+  					<option value="PST8PDT">UTC-8(太平洋时间,洛杉矶)</option>
+  					<option value="MST7CDT">UTC-7(山地时间,丹佛)</option>
+  					<option value="CST6CDT">UTC-6(中央时间,芝加哥)</option>
+  					<option value="EST5EDT">UTC-5(东部时间,纽约)</option>
+  					<option value="Australia/Perth">UTC+8(澳大利亚时间,珀斯)</option>
+  					<option value="Australia/Darwin">UTC+9:30(澳大利亚东部时间,达尔文)</option>
+  					<option value="Australia/Sydney">UTC+10(澳大利亚中央东部时间,悉尼)</option>
+				</select>
+  				</select>
   			</div>
   			<div class="form-group">
     			<label for="requirement">补充要求</label>

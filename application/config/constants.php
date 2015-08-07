@@ -26,6 +26,9 @@ define ('ITEMS_PER_PAGE', 10);
 define ('MAX_PAGES', 10);
 define ('ADMIN_PREFIX', 'admin/');
 
+define('UNIT_PRICE', 34);
+define('MAX_UNPAID', 10);
+
 
 /*
 |--------------------------------------------------------------------------

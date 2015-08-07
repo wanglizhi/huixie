@@ -53,7 +53,13 @@
 		<label>课程名：<?php echo $order['courseName'];?></label>
 		<label>页数：<?php echo $order['pageNum'];?></label>
 		<label>阅读材料页数：<?php echo $order['refDoc'];?></label>
-		<label>截止日期：<?php echo $order['endTime'];?></label>
+		<label>截止日期：<?php 
+			date_default_timezone_set("PRC");
+			$timestamp = strtotime($order['endTime']);
+			date_default_timezone_set($order['timezone']);
+			echo date("Y-m-d H:i:s",$timestamp);
+		?></label>
+		<label>时区：<?php echo $order['timezone'];?></label>
 		<label>补充要求：<?php echo $order['requirement'];?></label>
 		<label>价格：<?php echo $order['price'];?></label>
 		<label>订单状态：
@@ -61,11 +67,26 @@
 			<span class="label label-default">未付款</span>
 			<a class="btn green mini" href="<?php echo site_url('customer/order/taSelectPage/'.$order['orderNum']);?>"><i class="icon-shopping-cart"></i>&nbsp去结算</a>
 		<?php elseif($order['hasTaken']==0): ?>
-			<span class="label label-warning">已付款&nbsp<?php echo $order['paidTime'];?></span>
+			<span class="label label-warning">已付款&nbsp<?php 
+			date_default_timezone_set("PRC");
+			$timestamp = strtotime($order['paidTime']);
+			date_default_timezone_set($order['timezone']);
+			echo date("Y-m-d H:i:s",$timestamp);
+		?></span>
 		<?php elseif($order['hasFinished']==0): ?>
-			<span class="label label-info">已接单&nbsp<?php echo $order['takenTime'];?></span>
+			<span class="label label-info">已接单&nbsp<?php 
+			date_default_timezone_set("PRC");
+			$timestamp = strtotime($order['takenTime']);
+			date_default_timezone_set($order['timezone']);
+			echo date("Y-m-d H:i:s",$timestamp);
+		?></span>
 		<?php else: ?>
-			<span class="label label-success">已完成&nbsp<?php echo $order['finishedTime'];?></span>
+			<span class="label label-success">已完成&nbsp<?php 
+			date_default_timezone_set("PRC");
+			$timestamp = strtotime($order['finishedTime']);
+			date_default_timezone_set($order['timezone']);
+			echo date("Y-m-d H:i:s",$timestamp);
+		?></span>
 		<?php endif; ?>
 		</label>
 		<label></label>

@@ -9,6 +9,8 @@ class User extends CustomerController {
 	function logout(){
 		if (!session_id()) session_start();
 		unset($_SESSION['user']);
+		//删除所有该用户的Session文件
+		session_destroy();
 		redirect('customer/oauth/loginPage');
 	}
 	function infoPage(){
@@ -16,7 +18,8 @@ class User extends CustomerController {
 
 		//数据测试
 		// $user = array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
-		// 		'nickname'=>'nickname', 'country'=>'中国', 'city'=>'南京', 'sex'=>1, 'university'=>'南京大学', 'email'=>'user@qq.com');
+		// 		'nickname'=>'nickname', 'country'=>'中国', 'city'=>'南京', 'sex'=>1, 'university'=>'南京大学', 'email'=>'user@qq.com',
+		// 		'cashType'=>1, 'cashAccount'=>'account@paypal.com','balance'=>100);
 
 		$data['user'] = $user;
 		$this->load->view('customer/header', $data);
@@ -27,6 +30,10 @@ class User extends CustomerController {
 		$user = $_SESSION['user'];
 		$university = $_POST['university'];
 		$email = $_POST['email'];
+		$cashType = $_POST['cashType'];
+		$cashAccount = $_POST['cashAccount'];
+		$user['cashType'] = $cashType;
+		$user['cashAccount'] = $cashAccount;
 		$user['university'] = $university;
 		$user['email'] = $email;
 		$this->load->model('User_model');
@@ -59,6 +66,7 @@ class User extends CustomerController {
 
 		//数据测试
 		// $user = array('openid'=>'4');
+		// $_SESSION['user'] = $user;
 
 
 		$data['pageTitle'] = '未付款订单列表';
@@ -72,6 +80,16 @@ class User extends CustomerController {
 		$this->load->view('customer/header', $data);
 		$this->load->view('customer/user_order_list');
 		$this->load->view('customer/footer');
+	}
+	function deleteOrder($orderNum){
+		$user = $_SESSION['user'];
+		$this->load->model('Order_model');
+		$order = $this->Order_model->searchById($orderNum);
+		if($order['userId'] == $user['openid']){
+			$this->Order_model->delete($orderNum);
+		}
+		redirect('customer/user/unpaidOrderList');
+		$this->unpaidOrderList();
 	}
 
 	function orderList($page = 1,$num = ITEMS_PER_PAGE){

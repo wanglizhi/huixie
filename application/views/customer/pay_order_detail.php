@@ -53,7 +53,13 @@
 		<label>课程名：<?php echo $order['courseName'];?></label>
 		<label>页数：<?php echo $order['pageNum'];?></label>
 		<label>阅读材料页数：<?php echo $order['refDoc'];?></label>
-		<label>截止日期：<?php echo $order['endTime'];?></label>
+		<label>截止日期：<?php 
+			date_default_timezone_set("PRC");
+			$timestamp = strtotime($order['endTime']);
+			date_default_timezone_set($order['timezone']);
+			echo date("Y-m-d H:i:s",$timestamp);
+			?></label>
+		<label>时区：<?php echo $order['timezone'];?></label>
 		<label>补充要求：<?php echo $order['requirement'];?></label>
 	</div>
 	<div class="alert alert-success">
@@ -62,6 +68,7 @@
   		<label>姓名：<?php echo $ta['userInfo']['nickname'];?></label>
   		<img src="<?php echo $ta['userInfo']['headimgurl'];?>" alt="..." class="img-circle" style="width:120px;height:120px">
   		<?php endforeach;?>
+  		<label>如果没有选择TA或者TA没有接单，系统将会自动分配TA，请您放心！</label>
 	</div>
 
 	<div class="alert">
@@ -77,20 +84,20 @@
 		<a class="btn green btn-block" link="">微信支付</a><br>
 		<a class="btn purple btn-block" link="">支付宝支付</a>
 
-<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
-<input type="hidden" name="cmd" value="_xclick">
-<input type="hidden" name="business" value="acount@huixie.me">
-<input type="hidden" name="item_name" value="<?php echo $sessionId;?>">
-<input type="hidden" name="item_number" value="<?php echo $order['orderNum'];?>"> 
-<input type="hidden" name="cancel_return" value="<?php echo site_url("customer/user/orderDetail/".$order['orderNum']);?>"> 
-<input type="hidden" name="return" value="<?php echo site_url('customer/user/orderDetail/'.$order['orderNum']);?>"> 
-<input type="hidden" name="notify_url" value="<?php echo site_url('customer/payment/paypalNotify');?>">
-<input type="hidden" name="amount" value="<?php echo $order['price'];?>">
-<input type="hidden" name="no_shipping" value="2"> 
-<input type="hidden" name="no_note" value="1"> 
-<input type="hidden" name="currency_code" value="USD"> 
-<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!"> 
-</form>
+		<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+		<input type="hidden" name="cmd" value="_xclick">
+		<input type="hidden" name="business" value="acount@huixie.me">
+		<input type="hidden" name="item_name" value="<?php echo $sessionId;?>">
+		<input type="hidden" name="item_number" value="<?php echo $order['orderNum'];?>"> 
+		<input type="hidden" name="cancel_return" value="<?php echo site_url("customer/user/orderDetail/".$order['orderNum']);?>"> 
+		<input type="hidden" name="return" value="<?php echo site_url('customer/user/payOrder');?>"> 
+		<input type="hidden" name="notify_url" value="<?php echo site_url('customer/payment/paypalNotify');?>">
+		<input type="hidden" name="amount" value="<?php echo $order['price'];?>">
+		<input type="hidden" name="no_shipping" value="2"> 
+		<input type="hidden" name="no_note" value="1"> 
+		<input type="hidden" name="currency_code" value="USD"> 
+		<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!"> 
+		</form>
 		
 	</div>
 

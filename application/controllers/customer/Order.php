@@ -8,28 +8,41 @@ class Order extends CustomerController {
 		$this->addOrderPage();
 	}
 	//添加订单
-	function addOrderPage(){
+	function addOrderPage($notice=""){
+		$data['notice'] = $notice;
 		$this->load->view('customer/header');
-		$this->load->view('customer/add_order');
+		$this->load->view('customer/add_order', $data);
 		$this->load->view('customer/footer');
 	}
 	function addOrder(){
 
 		// echo $_POST['endDate'].'--'.$_POST['endTime'].'--'.$_POST['prov'].'--'.$_POST['city'];
-		// exit(0);
 
 		$this->load->model('Order_model');
 		$user = $_SESSION['user'];
 
+		$count = $this->Order_model->unpaidCount($user['openid']);
+		if($count >= MAX_UNPAID){
+			$notice = '未付款订单数量大于'.MAX_UNPAID.'，无法继续添加，请适量删除未付款订单！';
+			redirect('customer/order/addOrderPage/'.$notice);
+		}
 		// 2015-07-14T08:55Z
 		// echo $_POST['endTime'];
+
+		$endTime = $_POST['endDate'].' '.$_POST['endTime'];
+		$timezone = $_POST['timezone'];
+		date_default_timezone_set($timezone);
+		$timestamp = strtotime($endTime);
+		date_default_timezone_set("PRC");
+		$data['endTime'] = date("Y-m-d H:i:s",$timestamp);
+		$data['timezone'] = $timezone;
+
 		$data['major'] = $_POST['prov'].'-'.$_POST['city'];
 		$data['courseName'] = $_POST['courseName'];
 		$data['email'] = $_POST['email'];
 		$data['pageNum'] = $_POST['pageNum'];
 		$data['refDoc'] = $_POST['refDoc'];
 		$data['requirement'] = $_POST['requirement'];
-		$data['endTime'] = $_POST['endDate'].' '.$_POST['endTime'];
 		$data['userId'] = $user['openid'];
 		date_default_timezone_set('PRC');
 		$data['createTime'] = date('Y-m-d h:i:s');
@@ -79,25 +92,27 @@ class Order extends CustomerController {
 
 		if(isset($_POST['taIdList'])){
 			$taIdList = $_POST['taIdList'];
+			$taList = array();
+			$this->load->model('Ta_model');
+			$max = 0;
+			$min = 100000;
+			foreach ($taIdList as $taId) {
+				//ta 对象里要加userInfo项目
+				$ta = $this->Ta_model->searchById($taId);
+				$taList[$taId] = $ta;
+				if($ta['unitPrice'] > $max){
+					$max = $ta['unitPrice'];
+				}
+				if($ta['unitPrice'] < $min){
+					$min = $ta['unitPrice'];
+				}
+			}
+
 		}else{
-			$taIdList = array();
+			$max = $min = UNIT_PRICE;
+			$taList = array();
 		}
-		$taIdList = $_POST['taIdList'];
-		$taList = array();
-		$this->load->model('Ta_model');
-		$max = 0;
-		$min = 100000;
-		foreach ($taIdList as $taId) {
-			//ta 对象里要加userInfo项目
-			$ta = $this->Ta_model->searchById($taId);
-			$taList[$taId] = $ta;
-			if($ta['unitPrice'] > $max){
-				$max = $ta['unitPrice'];
-			}
-			if($ta['unitPrice'] < $min){
-				$min = $ta['unitPrice'];
-			}
-		}
+		
 		$this->load->model('Order_model');
 		$order = $this->Order_model->searchById($_SESSION['order']['orderNum']);
 
@@ -133,7 +148,7 @@ class Order extends CustomerController {
 		$this->log('enter payOrder');
 		$user = $_SESSION['user'];
 		$order = $_SESSION['order'];
-		var_dump($order);
+		// var_dump($order);
 		$order['price'] = $_SESSION['price'];
 		$this->load->model('Weixin_model');
 		$this->load->model('Message_model');
@@ -171,68 +186,7 @@ class Order extends CustomerController {
 		}
 		
 		//跳转到接单界面
-		redirect('customer/user/orderList');
-	}
-	function notifyUrl(){
-		$this->log('notifyUrl start <-----------------------------------------------');
-
-		// read the post from PayPal system and add 'cmd'  
-		$req = 'cmd=_notify-validate';  
-		   
-		foreach ($_POST as $key => $value) {  
-		$value = urlencode(stripslashes($value));  
-		$req .= "&$key=$value";
-		}  
-		   
-		// post back to PayPal system to validate  
-		$header .= "POST /cgi-bin/webscr HTTP/1.0\r\n";  
-		$header .= "Content-Type: application/x-www-form-urlencoded\r\n";  
-		$header .= "Content-Length: " . strlen($req) . "\r\n\r\n";  
-		   
-		$fp = fsockopen ('http://www.sandbox.paypal.com', 80, $errno, $errstr, 60); // 沙盒用  
-		//$fp = fsockopen ('ssl://www.paypal.com', 443, $errno, $errstr, 30); // 正式用  
-		   
-		// assign posted variables to local variables  
-		$item_name = $_POST['item_name'];  
-		$item_number = $_POST['item_number'];  
-		$payment_status = $_POST['payment_status'];  
-		$payment_amount = $_POST['mc_gross'];  
-		$payment_currency = $_POST['mc_currency'];  
-		$txn_id = $_POST['txn_id'];  
-		$receiver_email = $_POST['receiver_email'];  
-		$payer_email = $_POST['payer_email'];  
-		$mc_gross = $_POST['mc_gross ']; // 付款金额  
-		$custom = $_POST['custom ']; // 得到订单号  
-
-		$this->log($item_number);
-		   
-		if (!$fp) {  
-		// HTTP ERROR  
-			$this->log('http error');
-		} else {  
-			fputs ($fp, $header . $req);  
-		while (!feof($fp)) {  
-			$res = fgets ($fp, 1024);  
-		if (strcmp ($res, "VERIFIED") == 0) {
-		// check the payment_status is Completed  
-		// check that txn_id has not been previously processed  
-		// check that receiver_email is your Primary PayPal email  
-		// check that payment_amount/payment_currency are correct  
-		// process payment  
-		// 验证通过。付款成功了，在这里进行逻辑处理（修改订单状态，邮件提醒，自动发货等）  
-			$this->log('VERIFIED');
-			$this->log('payment_status->'.$_POST['payment_status']);
-		}  
-		else if (strcmp ($res, "INVALID") == 0) {  
-		// log for manual investigation  
-		// 验证失败，可以不处理。  
-			$this->log('INVALID');
-		}  
-		}  
-		fclose ($fp);  
-		}
-		// var_dump($_POST);
-		$this->log('notifyUrl end <-----------------------------------------------');
+		redirect('customer/user/orderDetail/'.$order['orderNum']);
 	}
 
 		//写内容到文件，log日志功能
