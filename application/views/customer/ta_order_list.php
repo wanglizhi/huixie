@@ -58,7 +58,8 @@
 							<?php if($order['hasPaid']==0): ?>
 								<span class="label label-default">未付款</span>
 							<?php elseif($order['hasTaken']==0): ?>
-								<span class="label label-warning">已付款</span>
+								<span class="label label-warning">待接单</span>
+								<a class="btn green mini" href="<?php echo site_url('customer/ta/takeOrderPage/'.$order['orderNum']);?>"><i class="icon-shopping-cart"></i>&nbsp去接单</a>
 							<?php elseif($order['hasFinished']==0): ?>
 								<span class="label label-info">已接单</span>
 							<?php else: ?>
@@ -73,7 +74,7 @@
 							</label>
 							
 							<div class="collapse" id="orderRow<?=$orderRow?>">
-						 		 <div class="well">
+						 		 <div class="">
 						 		 	<h4>详细描述</h4>
 						 		 	<label>页数：<?php echo $order['pageNum'];?></label>
 									<label>阅读材料页数：<?php echo $order['refDoc'];?></label>

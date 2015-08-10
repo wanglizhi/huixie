@@ -95,7 +95,7 @@
 							</label>
 							
 							<div class="collapse" id="orderRow<?=$orderRow?>">
-						 		 <div class="well">
+						 		 <div class="">
 						 		 	<h4>详细描述</h4>
 						 		 	<label>页数：<?php echo $order['pageNum'];?></label>
 									<label>阅读材料页数：<?php echo $order['refDoc'];?></label>

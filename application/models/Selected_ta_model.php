@@ -22,11 +22,13 @@ class Selected_ta_model extends CI_Model{
 		$query=$this->db->get('selectedTa',$num,($page-1)*$num);
 		if($this->db->affected_rows()){
 			$result['result_rows'] = $query->result();
-			$query=$this->db->get('user');
+			$query=$this->db->get('selectedTa');
 			$result['result_num_rows'] = $query->num_rows();
 			return json_decode(json_encode($result),true);
 		}else{
-			return array();
+			$result['result_rows']=array();
+			$result['result_num_rows'] = 0;
+			return $result;
 		}
 	}
 	function searchBy2($taId, $orderNum){

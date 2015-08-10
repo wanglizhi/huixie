@@ -87,7 +87,9 @@ class Ta extends CustomerController {
 		//此处需要修改，排序问题，联合查询问题，分页问题，选择接单
 		$user = $_SESSION['user'];
 		$this->load->model('Selected_ta_model');
-		$selectList = $this->Selected_ta_model->searchByTa($user['openid'],$page,$num);
+		echo $user['openid'];
+		$result = $this->Selected_ta_model->searchByTa($user['openid'],$page,$num);
+		$selectList = $result['result_rows'];
 		$orderList = array();
 		foreach ($selectList as $select) {
 			$this->load->model('Order_model');
@@ -97,7 +99,6 @@ class Ta extends CustomerController {
 
 		$data['pageTitle'] = '未接单列表';
 		$data['orderList'] = $orderList;
-		$result['result_num_rows'] = count($orderList);
 		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
 				,"customer/ta/untakenOrderList");
 

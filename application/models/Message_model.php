@@ -10,7 +10,7 @@ class Message_model extends CI_Model{
 		$token = $this->Ctoken_model->getAccessToken();
 		$template = array(
 			'touser' => $openid,
-			'template_id' => 'VLw5SAxhP7LSN6WHF0GO5Kmejrjb6BtqcRlZEly_Ncs',
+			'template_id' => '6FqI2wjXUmfRunkD4zVxVAv_nWZPbb7qnVS80VN08OU',
 			'url' => $url,
 			'topcolor' => '#FF0000',
 			'data'=>array(
