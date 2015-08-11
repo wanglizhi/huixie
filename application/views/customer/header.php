@@ -21,6 +21,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <link href="media/css/style-responsive.css" rel="stylesheet" type="text/css"/>
   <link href="media/css/default.css" rel="stylesheet" type="text/css" id="style_color"/>
   <link href="media/css/uniform.default.css" rel="stylesheet" type="text/css"/>
+
   <!-- END GLOBAL MANDATORY STYLES -->
 
   <!-- BEGIN PAGE LEVEL STYLES -->
@@ -37,7 +38,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
   <script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
   <script type="text/javascript" src="js/jquery.cityselect.js"></script>
-  <script type="text/javascript" src="js/majorData.js"></script> 
+  <script type="text/javascript" src="js/majorData.js"></script>
 </head>
 <!-- END HEAD -->
 

@@ -52,7 +52,40 @@
 				<div>技能：<?php echo $ta['skills'];?></div>
 				<div>单价：<?php echo $ta['unitPrice'];?></div>
 				<div>评级：<?php echo $ta['star'];?></div>
+				<div>邮箱：<?php echo $ta['email'];?></div>
+				<div>当前状态：
+				<?php if($ta['state']==0): ?>
+					<span class="label label-success">空闲</span>
+				<?php elseif($ta['state']==1): ?>
+					<span class="label label-warning">有课</span>
+				<?php else: ?>
+					<span class="label label-important">忙碌</span>
+				<?php endif ?>
+				</div>
 			</div>
+
+			<form action="<?php echo site_url('customer/ta/modify');?>" method="post">
+  			<div class="form-group">
+    			<label for="state">当前状态(有课状态不能修改成空闲状态)</label>
+    			<select class="form-control span6" name="state" id="state" value="<?php echo $ta['state'];?>" required="required">
+    			<?php if($ta['state']==0): ?>
+					<option value="0" selected="selected">空闲</option>
+					<option value="2">忙碌</option>
+				<?php elseif($ta['state']==2): ?>
+					<option value="0">空闲</option>
+					<option value="2" selected="selected">忙碌</option>
+				<?php endif ?>
+				</select>
+    			<label for="email">邮箱</label>
+    			<input type="email" class="form-control m-wrap span6" id="email" name="email" placeholder="" value="<?php echo $ta['email'];?>" required="required">
+  			</div>
+
+  			<div class="form-actions">
+  			<button type="submit" class="btn green"><i class="icon-ok"></i> 修改</button>
+  			</div>
+			</form>
+
+			
 			<div class="alert alert-info">如果需要修改助教的相关信息，请联系客服，并且将相关材料发送到邮箱admin@huixie.me</div>
 		<?php else: ?>
 			<?php if($ta): ?>
@@ -67,6 +100,7 @@
     			<label for="email">邮箱</label>
     			<input type="email" class="form-control m-wrap span6" id="email" name="email" placeholder="" required="required">
   			</div>
+
   			<div class="form-actions">
   			<button type="submit" class="btn green"><i class="icon-ok"></i> 提交申请</button>
   			</div>
@@ -88,3 +122,8 @@
 
 		</div>
 		<!-- END PAGE -->  
+		<script>
+		jQuery(document).ready(function() {
+			$("[name='my-checkbox']").bootstrapSwitch();
+		});
+	</script>

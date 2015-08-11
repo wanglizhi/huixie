@@ -74,7 +74,7 @@
 </div>
 <button type="submit" class="btn blue"><i class="icon-ok"></i> 提交</button>
 
-<a href="#" class="btn btn-default" role="button">返回</a>
+<!-- <a href="#" class="btn btn-default" role="button">返回修改</a> -->
 </form>
 
 							</div>

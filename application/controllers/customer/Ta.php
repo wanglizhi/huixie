@@ -13,8 +13,7 @@ class Ta extends CustomerController {
 		$data['ta'] = $result;
 
 		//数据测试
-		// $data['ta'] = array('skills'=>'软件工程','star'=>3.5, 'unitPrice'=>100, 'hasCheck'=>1, 'email'=>'11@qq.com');
-		// $data['ta'] = array();
+		// $data['ta'] = array('skills'=>'软件工程','star'=>3.5, 'unitPrice'=>100, 'hasCheck'=>1, 'email'=>'11@qq.com', 'state'=>2);	
 
 		$this->load->view('customer/header', $data);
 		$this->load->view('customer/register_ta');
@@ -35,6 +34,24 @@ class Ta extends CustomerController {
 			$data['createTime'] = date('Y-m-d h:i:s');
 			$this->Ta_model->add($data);
 		}
+		redirect('customer/ta/registerPage');
+	}
+	function modify(){
+		$user = $_SESSION['user'];
+		$state = $_POST['state'];
+		$email = $_POST['email'];
+		$this->load->model('Ta_model');
+		$result = $this->Ta_model->searchById($user['openid']);
+		$result['email'] = $email;
+		//如果有课，则设置为有课或者忙碌
+		$result['state'] = $state;
+		if($this->Ta_model->getState($user['openid'])){
+			if($state == 0){
+				$result['state']=1;
+			}
+		}
+		$this->Ta_model->modify($result['openid'],$result);
+
 		redirect('customer/ta/registerPage');
 	}
 
@@ -66,6 +83,7 @@ class Ta extends CustomerController {
 		$user = $_SESSION['user'];
 		$orderNum = $_POST['orderNum'];
 		$order = $this->Order_model->searchById($orderNum);
+		// TA接单
 		if($this->Order_model->takeOrder($orderNum, $user['openid'])){
 			// 更新SelectedTa
 			$this->load->model('Selected_ta_model');
@@ -79,6 +97,14 @@ class Ta extends CustomerController {
 				'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri=http%3A%2F%2Fhuixie.me%2Fhuixie%2Findex.php%2Fcustomer%2Fta%2FtakeOrderPage%2F'.$orderNum.'&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect',
 				'恭喜你接单成功，请联系客服获得相关材料，完成后将文件发送到admin@huixie.me');
 		}
+		// 将用户状态修改为有课
+		$this->load->model('Ta_model');
+		$result = $this->Ta_model->searchById($user['openid']);
+		if(!$result['state']){
+			$result['state'] = 1;
+			$this->Ta_model->modify($result['openid'],$result);
+		}
+
 		redirect('customer/ta/takeOrderPage/'.$orderNum);
 
 	}
@@ -87,7 +113,6 @@ class Ta extends CustomerController {
 		//此处需要修改，排序问题，联合查询问题，分页问题，选择接单
 		$user = $_SESSION['user'];
 		$this->load->model('Selected_ta_model');
-		echo $user['openid'];
 		$result = $this->Selected_ta_model->searchByTa($user['openid'],$page,$num);
 		$selectList = $result['result_rows'];
 		$orderList = array();

@@ -127,7 +127,7 @@ class Ta_model extends CI_Model{
 	}
 	function searchBySkills($skills){
 		$skills = '%'.$skills.'%';
-		$sql="select * from ta where skills like '$skills' order by star desc limit 10";
+		$sql="select * from ta where skills like '$skills' and state!=2 order by state, star desc limit 10";
 		$query=$this->db->query($sql);
 		if($this->db->affected_rows()){
 			$result = $query->result();
@@ -145,6 +145,15 @@ class Ta_model extends CI_Model{
 		$this->db->where('openid',$id);
 		$this->db->update('ta',$data);
 		return $this->db->affected_rows();
+	}
+	function getState($id){
+		$this->load->model('Order_model');
+		$result = $this->Order_model->searchBy3('taId', $id, 'hasTaken', 1,'hasFinished', 0, 1, ITEMS_PER_PAGE);
+		if($result['result_rows']){
+			return 1;
+		}else{
+			return 0;
+		}
 	}
 }
 ?>

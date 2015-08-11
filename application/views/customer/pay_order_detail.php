@@ -100,6 +100,10 @@
 		</form>
 		
 	</div>
+	<div class="form-actions">
+  			<a href="<?php echo site_url('customer/order/taSelectPage/'.$order['orderNum']);?>" class="btn blue" role="button">返回修改</a>
+  			</div>
+
 
 
 							</div>

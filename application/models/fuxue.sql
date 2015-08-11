@@ -44,6 +44,9 @@ create table `ta`(
 `email` varchar(128),
 `hasCheck` tinyint(4),
 
+# TA当前的状态，0 空闲， 1 有未完成订单， 2 忙碌（自己设定）
+`state` tinyint(4) NOT NULL DEFAULT 0,
+
 `actualPrice` int(11)
 )
 
