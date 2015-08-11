@@ -95,7 +95,7 @@
 		<input type="hidden" name="amount" value="<?php echo $max;?>">
 		<input type="hidden" name="no_shipping" value="2"> 
 		<input type="hidden" name="no_note" value="1"> 
-		<input type="hidden" name="currency_code" value="USD"> 
+		<input type="hidden" name="currency_code" value="USD">
 		<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!"> 
 		</form>
 		

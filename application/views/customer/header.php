@@ -32,6 +32,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <link href="media/css/chosen.css" rel="stylesheet" type="text/css">
   <link href="media/css/profile.css" rel="stylesheet" type="text/css">
   <!-- END PAGE LEVEL STYLES -->
+  <!--star -->
+  <link rel="stylesheet" href="media/css/jquery.raty.css" media="screen" type="text/css"/>
 
   <link rel="shortcut icon" href="images/icon.ico" /> 
   <!-- <link rel="shortcut icon" href="media/image/favicon.ico" /> -->
@@ -39,6 +41,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
   <script type="text/javascript" src="js/jquery.cityselect.js"></script>
   <script type="text/javascript" src="js/majorData.js"></script>
+  <script src="media/js/jquery.raty.js"></script>
 </head>
 <!-- END HEAD -->
 

@@ -103,14 +103,13 @@
   					<option value="Australia/Darwin">UTC+9:30(澳大利亚东部时间,达尔文)</option>
   					<option value="Australia/Sydney">UTC+10(澳大利亚中央东部时间,悉尼)</option>
 				</select>
-  				</select>
   			</div>
   			<div class="form-group">
     			<label for="requirement">补充要求</label>
     			<textarea rows="5" class="form-control m-wrap span6" id="requirement" name="requirement" placeholder=""></textarea>
   			</div>
 			<div class="form-group">
-    			<a link="">保密政策</a>
+    			<a link="" href="<?php echo site_url("customer/order/privacy");?>">保密政策</a>
   			</div>
   			<div class="form-actions">
   			<button type="submit" class="btn blue"><i class="icon-ok"></i> 提交</button>

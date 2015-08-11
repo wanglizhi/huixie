@@ -91,10 +91,20 @@
   			<div class="form-group">
     			<label for="email">现金账户</label>
     			<select class="form-control m-wrap span6" name="cashType" id="cashType" required="required">
-  					<option></option>
-  					<option value="1">Paypal</option>
+  					
+  				<?php if($user['cashType']==1): ?>
+					<option value="1" selected="selected">Paypal</option>
   					<option value="2">支付宝</option>
   					<option value="3">微信支付</option>
+				<?php elseif($user['cashType']==2): ?>
+					<option value="1">Paypal</option>
+  					<option value="2" selected="selected">支付宝</option>
+  					<option value="3">微信支付</option>
+				<?php elseif($user['cashType']==3): ?>
+					<option value="1">Paypal</option>
+  					<option value="2">支付宝</option>
+  					<option value="3" selected="selected">微信支付</option>
+				<?php endif ?>
 				</select>
     			<input type="text" class="form-control m-wrap span6" id="cashAccount" name="cashAccount" placeholder="" value="<?php echo $user['cashAccount'];?>" required="required">
   			</div>

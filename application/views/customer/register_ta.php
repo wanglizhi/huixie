@@ -49,11 +49,23 @@
 		<?php if($ta and $ta['hasCheck']): ?>
 			<div class="alert alert-success">
 			<h4>您已经通过审核成为助教</h4>
-				<div>技能：<?php echo $ta['skills'];?></div>
-				<div>单价：<?php echo $ta['unitPrice'];?></div>
-				<div>评级：<?php echo $ta['star'];?></div>
-				<div>邮箱：<?php echo $ta['email'];?></div>
-				<div>当前状态：
+				<label>技能：<?php echo $ta['skills'];?></label>
+				<label>单价：<?php echo $ta['unitPrice'];?></label>
+				<div>
+					<label>
+						技能评价:
+						<span class="required">*</span>
+					</label>
+					<div class="controls ">
+						<div style="display: inline-block;" id="skill_star" name="skill_star" ></div>
+						<input id="star" name="star" type="text" data-required="1" style="width:1px;visibility: hidden;"/>
+					</div>
+				</div>
+
+
+
+				<label>邮箱：<?php echo $ta['email'];?></label>
+				<label>当前状态：
 				<?php if($ta['state']==0): ?>
 					<span class="label label-success">空闲</span>
 				<?php elseif($ta['state']==1): ?>
@@ -61,7 +73,7 @@
 				<?php else: ?>
 					<span class="label label-important">忙碌</span>
 				<?php endif ?>
-				</div>
+				</label>
 			</div>
 
 			<form action="<?php echo site_url('customer/ta/modify');?>" method="post">
@@ -74,6 +86,9 @@
 				<?php elseif($ta['state']==2): ?>
 					<option value="0">空闲</option>
 					<option value="2" selected="selected">忙碌</option>
+				<?php elseif($ta['state']==1): ?>
+					<option value="1" selected="selected">有课</option>
+					<option value="2">忙碌</option>
 				<?php endif ?>
 				</select>
     			<label for="email">邮箱</label>
@@ -124,6 +139,16 @@
 		<!-- END PAGE -->  
 		<script>
 		jQuery(document).ready(function() {
-			$("[name='my-checkbox']").bootstrapSwitch();
+			$('#skill_star').raty({
+		readOnly	:true,
+		path      : 'media/image',
+		half      : true,
+		starHalf  : 'star-half.png',
+		starOff   : 'star-off.png',
+		starOn    : 'star-on.png',
+		<?php if($ta['star']!=""):?>
+		score     : <?=$ta['star']?>
+		<?php endif;?>
+	});
 		});
 	</script>
