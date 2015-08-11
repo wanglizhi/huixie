@@ -142,6 +142,9 @@ class Ta_model extends CI_Model{
 	}
 	
 	function modify($id,$data){
+		if(isset($data['userInfo'])){
+			unset($data['userInfo']);
+		}
 		$this->db->where('openid',$id);
 		$this->db->update('ta',$data);
 		return $this->db->affected_rows();
