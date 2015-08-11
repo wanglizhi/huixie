@@ -73,8 +73,22 @@
 
 									<div class="input-prepend span2">
 
-										<span class="add-on">￥</span>
+										<span class="add-on">$</span>
 										<input id="unitPrice" name="unitPrice" class="m-wrap span12" type="text">
+									</div>
+
+								</div>
+
+							</div>	
+							<div class="control-group">
+
+								<label class="control-label">实际工资:<span class="required">*</span></label>
+								<div class="controls">
+
+									<div class="input-prepend span2">
+
+										<span class="add-on">$</span>
+										<input id="actualPrice" name="actualPrice" class="m-wrap span12" type="text">
 									</div>
 
 								</div>

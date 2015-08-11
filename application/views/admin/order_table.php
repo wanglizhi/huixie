@@ -3,7 +3,8 @@
 		<thead>
 			<tr>
 				<th>订单编号</th>
-				<th>用户编号</th>
+				<th>课程名称</th>
+				<th>专业</th>
 				<?php 
 				$sort_key = "createTime";
 				$sort_method = "desc";
@@ -55,7 +56,8 @@ function sort(th,key){
 			?>
 			<?php $orderRow++;?>
 		</td>
-		<td> <?php echo $order['userId'];?> </td>
+		<td> <?php echo $order['courseName'];?> </td>
+		<td> <?php echo $order['major'];?> </td>
 		<td> <?php echo $order['createTime'];?> </td>
 		<td> <?php echo $order['finishedTime'];?> </td>
 		<td> <?php echo $order['price'];?> </td>
@@ -98,7 +100,7 @@ function delete_order(orderNum){
 </script>
 
 <?php
-$data['page_info'] = $page_info;
+$data['page_info'] = $orderTable['page_info'];
 $data['js_page_method'] = $js_page_method;
 $this->load->view(ADMIN_PREFIX."pagination",$data);
 ?>

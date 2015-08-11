@@ -29,7 +29,10 @@
 				<div class="row-fluid">
 					<div class="row-fluid form-section" >
 						<h3 style="display:inline-block;">订单信息</h3>
-						<h3 style="display:inline-block;float:right;">总价：<font color="#169ef4"><?=$order['price']?></font>元</h3>
+						<div style="display:inline-block;float:right;">
+							<h3 style="display:inline-block;margin-right:50px;">接单价：<font color="#169ef4"><?=$order['takenPrice']?></font>元</h3>
+							<h3 style="display:inline-block;">总价：<font color="#169ef4"><?=$order['price']?></font>元</h3>
+						</div>
 					</div>
 					<div class="span12">
 						<div class="span12">
@@ -78,12 +81,15 @@
 									</li>
 
 									<li>
-										<span class="info-label">额外需求:</span>
-										<?=$order['requirement']?>
-									</li>
-									<li>
 										<span class="info-label">截止时间:</span>
 										<?=$order['endTime']?>
+									</li>
+									<li>
+										<span class="info-label">用户截止时间:</span>
+										<?php
+											$this->load->helper('time');
+											echo decodeTime($order['endTime'],$order['timezone'])." (".$order['timezone'].")";
+										?>
 									</li>
 								</ul>
 							</div>
@@ -128,6 +134,18 @@
 											<option value="<?=TRUE?>" <?php if($order['hasFinished']) echo "selected";?>>已完成</option>
 
 										</select>
+									</li>
+									<li>
+										<div class="control-group control-input" style="margin-bottom:0px;">
+
+											<span class="pay-label" style="color: #666;">
+												TA ID:
+											</span>
+
+											<div class="controls" style="margin-left: 0px;">
+												<input type="text"  id="taId" name="taId" data-required="1" class="span6 m-wrap" value="<?=$order['taId']?>">
+											</div>
+										</div>
 									</li>
 								</ul>
 								<script type="text/javascript">
@@ -180,19 +198,6 @@
 									</li>
 								</ul>
 
-							</div>
-						</div>
-					</div>
-					<div class="span12">
-						
-						<div class="control-group control-input" style="margin-bottom:0px;">
-
-							<span class="pay-label" style="color: #666;">
-								TA ID:
-							</span>
-
-							<div class="controls" style="margin-left: 0px;">
-								<input type="text"  id="taId" name="taId" data-required="1" class="span6 m-wrap" value="<?=$order['taId']?>">
 							</div>
 						</div>
 					</div>

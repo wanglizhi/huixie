@@ -25,6 +25,7 @@ define('DIR_WRITE_MODE', 0755);
 define ('ITEMS_PER_PAGE', 10);
 define ('MAX_PAGES', 10);
 define ('ADMIN_PREFIX', 'admin/');
+define ('CASH_TYPE',"return array(null,'paypal','alipay','weixinpay');");
 
 define('UNIT_PRICE', 34);
 define('MAX_UNPAID', 10);

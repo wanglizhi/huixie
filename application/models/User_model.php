@@ -69,13 +69,9 @@ class User_model extends CI_Model{
 	function delete(){
 		
 	}
-	function updateUser($openid,$university,$email){
-		$this->db->where('openid',$openid);
-		$data = array(
-			'university' =>$university,
-			'email' => $email,
-		);
-		$this->db->update('user',$data);
+	function updateUser($user){
+		$this->db->where('openid',$user['openid']);
+		$this->db->update('user',$user);
 		return $this->db->affected_rows();
 	}
 

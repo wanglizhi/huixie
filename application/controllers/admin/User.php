@@ -62,11 +62,33 @@ class User extends MY_AdminController {
 			'tableId'   => "userOrderTable",
 			'sort_key'  => "createTime",
 			'sort_method' => 'desc', 
+			'page_info' => array(
+				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+				'current_page'  => 1,
+				'page_method' => ADMIN_PREFIX."user/userOrderListPage",
+			),
 		);
-		$data['page_info'] = array(
-			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
-			'current_page'  => 1,
-			'page_method' => ADMIN_PREFIX."user/userOrderListPage",
+		$this->load->model('Trade_model');
+		$result = $this->Trade_model->searchTradeByUser($user_id,1,ITEMS_PER_PAGE);
+		$data['userTradeTable'] = array(
+			'tradeList' => $result['result_rows'],
+			'tableId'   => "userTradeTable",
+			'page_info' => array(
+				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+				'current_page'  => 1,
+				'page_method' => ADMIN_PREFIX."user/userTradeListPage",
+			),
+		);
+		$this->load->model('Cash_model');
+		$result = $this->Cash_model->searchCashByUser($user_id,1,ITEMS_PER_PAGE);
+		$data['userCashTable'] = array(
+			'cashList' => $result['result_rows'],
+			'tableId'   => "userCashTable",
+			'page_info' => array(
+				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+				'current_page'  => 1,
+				'page_method' => ADMIN_PREFIX."user/userCashListPage",
+			),
 		);
 		$this->loadView(ADMIN_PREFIX.'user_profile',$data);
 	}
@@ -93,14 +115,67 @@ class User extends MY_AdminController {
 			'tableId'   => "userOrderTable",
 			'sort_key'  => $sort_key,
 			'sort_method' => $sort_method, 
-		);
-		$data['page_info'] = array(
-			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
-			'current_page'  => $page,
-			'page_method' => ADMIN_PREFIX."user/userOrderListPage",
+			'page_info' => array(
+				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+				'current_page'  => $page,
+				'page_method' => ADMIN_PREFIX."user/userOrderListPage",
+			),
 		);
 		$data['js_page_method'] = $js_page_method;
 		$this->load->view(ADMIN_PREFIX.'order_table',$data);
+	}
+	function userTradeListPage($user_id = NULL){
+		if(!isset($user_id) && !isset($_GET['user_id'])){
+			echo "error!";
+			exit();
+		}
+		if(!isset($user_id)) $user_id = $_GET['user_id'];
+		$page = $_GET['page'];
+		$js_page_method = $_GET['js_page_method'];
+		if(!isset($page)){
+			echo "错误！！没有页数";
+			exit(0);
+		}
+		$this->load->model('Trade_model');
+		$result = $this->Trade_model->searchTradeByUser($user_id,$page,ITEMS_PER_PAGE);
+		$data['tradeTable'] = array(
+			'tradeList' => $result['result_rows'],
+			'tableId'   => "userTradeTable",
+			'page_info' => array(
+				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+				'current_page'  => $page,
+				'page_method' => ADMIN_PREFIX."user/userTradeListPage",
+			),
+		);
+		$data['js_page_method'] = $js_page_method;
+		$this->load->view(ADMIN_PREFIX.'trade_table',$data);
+	}
+
+	function userCashListPage($user_id = NULL){
+		if(!isset($user_id) && !isset($_GET['user_id'])){
+			echo "error!";
+			exit();
+		}
+		if(!isset($user_id)) $user_id = $_GET['user_id'];
+		$page = $_GET['page'];
+		$js_page_method = $_GET['js_page_method'];
+		if(!isset($page)){
+			echo "错误！！没有页数";
+			exit(0);
+		}
+		$this->load->model('Cash_model');
+		$result = $this->Cash_model->searchCashByUser($user_id,$page,ITEMS_PER_PAGE);
+		$data['cashTable'] = array(
+			'cashList' => $result['result_rows'],
+			'tableId'   => "userCashTable",
+			'page_info' => array(
+				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+				'current_page'  => $page,
+				'page_method' => ADMIN_PREFIX."user/userCashListPage",
+			),
+		);
+		$data['js_page_method'] = $js_page_method;
+		$this->load->view(ADMIN_PREFIX.'cash_table',$data);
 	}
 
 	function updateUser(){
@@ -111,8 +186,13 @@ class User extends MY_AdminController {
 			print('openid不存在...<br>'.$time.'秒后自动跳转。');
 			exit();
 		}
-		$result = $this->User_model->updateUser($_POST['openid'],$_POST['university'],
-			$_POST['email']);
+		$user['openid'] = $_POST['openid'];
+		$user['university'] = $_POST['university'];
+		$user['email'] = $_POST['email'];
+		$user['cashType'] = $_POST['cashType'];
+		$user['cashAccount'] = $_POST['cashAccount'];
+		$user['balance'] = $_POST['balance'];
+		$result = $this->User_model->updateUser($user);
 		$this->userProfile($_POST['openid']);
 	}
 	function userList()
