@@ -21,7 +21,7 @@
 			<?php foreach ($cashList as $cash):?>
 			<tr detail="close">
 				<td>
-					<a href="javascript:void(0);" onclick="showDetail(this)"><?=$cash['id']?></a>
+					<a href="javascript:void(0);" onclick="showCashDetail(this,'<?=$cash['describe']?>')"><?=$cash['id']?></a>
 				</td>
 				<td> <?php echo $cash['openid'];?> </td>
 				<td> <?php echo $cash['cashType'];?> </td>
@@ -43,7 +43,7 @@
 </table>
 
 <script type="text/javascript">
-function showDetail(detailButton){
+function showCashDetail(detailButton,detail){
 	var tr = $(detailButton).closest('tr');
 	if($(tr).attr("detail")=="open"){
 		var tr1 = $(tr).next();
@@ -53,7 +53,7 @@ function showDetail(detailButton){
 		var tr1 = " \
 			<tr> \
 				<td>描述:</td> \
-				<td class='details' colspan='5'><?=$cash['describe']?></td> \
+				<td class='details' colspan='7'>"+detail+"</td> \
 			</tr> \
 		";
 		$(tr).after(tr1);

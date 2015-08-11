@@ -19,9 +19,7 @@
 			<?php foreach ($tradeList as $trade):?>
 			<tr detail="close">
 				<td>
-					<?php static $tradeRow = 0; ?>
-					<a href="javascript:void(0);" onclick="showDetail(this)"><?=$trade['id']?></a>
-					<?php $tradeRow++;?>
+					<a href="javascript:void(0);" onclick="showTradeDetail(this,'<?=$trade['describe']?>')"><?=$trade['id']?></a>
 				</td>
 				<td> <?php echo $trade['openid'];?> </td>
 				<td> <?php echo $trade['money'];?> </td>
@@ -41,7 +39,7 @@
 </table>
 
 <script type="text/javascript">
-function showDetail(detailButton){
+function showTradeDetail(detailButton,detail){
 	var tr = $(detailButton).closest('tr');
 	if($(tr).attr("detail")=="open"){
 		var tr1 = $(tr).next();
@@ -51,7 +49,7 @@ function showDetail(detailButton){
 		var tr1 = " \
 			<tr> \
 				<td>描述:</td> \
-				<td class='details' colspan='5'><?=$trade['describe']?></td> \
+				<td class='details' colspan='5'>"+detail+"</td> \
 			</tr> \
 		";
 		$(tr).after(tr1);
