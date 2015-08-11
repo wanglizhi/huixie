@@ -30,7 +30,7 @@ class Webchat extends CI_Controller {
 
 		//url encode
 		// 授权接口需要转码
-		// $url = 'http://huixie.me/huixie/index.php/user/orderPage';
+		// $url = 'http://huixie.me/index.php/user/orderPage';
 		// echo urlencode($url);
 		
 		$this->log('index end ==================================================>');

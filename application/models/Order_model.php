@@ -73,7 +73,7 @@ class Order_model extends CI_Model{
 		$this->db->from('order');
 	}
 
-	function searchBy3($key1, $value1, $key2, $value2, $key3, $value3,$page,$num,$searchKey=""){
+	function searchBy3($key1, $value1, $key2, $value2, $key3, $value3,$page,$num,$sort_key="createTime",$sort_method="desc",$searchKey=""){
 		$this->searchBy3Condition($key1, $value1, $key2, $value2,$key3, $value3,$sort_key,$sort_method,$searchKey);
 		$result['result_num_rows'] = $this->db->count_all_results();
 		$this->searchBy3Condition($key1, $value1, $key2, $value2,$key3, $value3,$sort_key,$sort_method,$searchKey);

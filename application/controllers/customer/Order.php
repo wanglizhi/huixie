@@ -95,55 +95,55 @@ class Order extends CustomerController {
 	function payOrderPage(){
 		// 如果没有TA选择，如何处理。。。。
 
-		// if(isset($_POST['taIdList'])){
-		// 	$taIdList = $_POST['taIdList'];
-		// 	$taList = array();
-		// 	$this->load->model('Ta_model');
-		// 	$max = 0;
-		// 	$min = 100000;
-		// 	foreach ($taIdList as $taId) {
-		// 		//ta 对象里要加userInfo项目
-		// 		$ta = $this->Ta_model->searchById($taId);
-		// 		$taList[$taId] = $ta;
-		// 		if($ta['unitPrice'] > $max){
-		// 			$max = $ta['unitPrice'];
-		// 		}
-		// 		if($ta['unitPrice'] < $min){
-		// 			$min = $ta['unitPrice'];
-		// 		}
-		// 	}
+		if(isset($_POST['taIdList'])){
+			$taIdList = $_POST['taIdList'];
+			$taList = array();
+			$this->load->model('Ta_model');
+			$max = 0;
+			$min = 100000;
+			foreach ($taIdList as $taId) {
+				//ta 对象里要加userInfo项目
+				$ta = $this->Ta_model->searchById($taId);
+				$taList[$taId] = $ta;
+				if($ta['unitPrice'] > $max){
+					$max = $ta['unitPrice'];
+				}
+				if($ta['unitPrice'] < $min){
+					$min = $ta['unitPrice'];
+				}
+			}
 
-		// }else{
-		// 	$max = $min = UNIT_PRICE;
-		// 	$taList = array();
-		// }
+		}else{
+			$max = $min = UNIT_PRICE;
+			$taList = array();
+		}
 		
-		// $this->load->model('Order_model');
-		// $order = $this->Order_model->searchById($_SESSION['order']['orderNum']);
+		$this->load->model('Order_model');
+		$order = $this->Order_model->searchById($_SESSION['order']['orderNum']);
 
-		// $data['order'] = $order;
-		// $data['taList'] = $taList;
-		// $data['max'] = $max * $order['pageNum'];
-		// $data['min'] = $min * $order['pageNum'];
-		// $sessionId = session_id();
-		// $data['sessionId'] = $sessionId;
-		// //添加到session
-		// $_SESSION['price'] = $data['max'];
-		// $_SESSION['taList'] = $taList;
+		$data['order'] = $order;
+		$data['taList'] = $taList;
+		$data['max'] = $max * $order['pageNum'];
+		$data['min'] = $min * $order['pageNum'];
+		$sessionId = session_id();
+		$data['sessionId'] = $sessionId;
+		//添加到session
+		$_SESSION['price'] = $data['max'];
+		$_SESSION['taList'] = $taList;
 		
 		//数据测试
-		$data['max'] = 100;
-		$data['min'] = 10;
-		$data['order'] = array('orderNum'=>1234567,'courseName'=>'设计与实现','major'=>'软件工程', 'pageNum'=>10, 'refDoc'=>6, 'endTime'=>'2015-6-10', 'requirement'=>'没有什么要求，好好写就行');
-		$ta1 = array('openid'=> '123456677', 'unitPrice' => 100, 'star'=> 4.0, 'introduction'=>'我来自哈佛，学习成绩非常好！',
-			'userInfo'=>array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
-				'nickname'=>'nickname'));
-		$ta2 = array('openid'=> '123456677', 'unitPrice' => 100, 'star'=> 4.0, 'introduction'=>'我来自哈佛，学习成绩非常好！',
-			'userInfo'=>array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
-				'nickname'=>'nickname'));
-		$taList = array('1'=>$ta1, '2'=>$ta2);
-		$data['sessionId'] = 0;
-		$data['taList'] = $taList;
+		// $data['max'] = 100;
+		// $data['min'] = 10;
+		// $data['order'] = array('orderNum'=>1234567,'courseName'=>'设计与实现','major'=>'软件工程', 'pageNum'=>10, 'refDoc'=>6, 'endTime'=>'2015-6-10', 'requirement'=>'没有什么要求，好好写就行');
+		// $ta1 = array('openid'=> '123456677', 'unitPrice' => 100, 'star'=> 4.0, 'introduction'=>'我来自哈佛，学习成绩非常好！',
+		// 	'userInfo'=>array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
+		// 		'nickname'=>'nickname'));
+		// $ta2 = array('openid'=> '123456677', 'unitPrice' => 100, 'star'=> 4.0, 'introduction'=>'我来自哈佛，学习成绩非常好！',
+		// 	'userInfo'=>array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
+		// 		'nickname'=>'nickname'));
+		// $taList = array('1'=>$ta1, '2'=>$ta2);
+		// $data['sessionId'] = 0;
+		// $data['taList'] = $taList;
 
 
 		$this->load->view('customer/header', $data);
@@ -170,7 +170,7 @@ class Order extends CustomerController {
 				$order,
 				$user['openid'],
 				'付款成功，订单详情如下：！',
-				'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri=http%3A%2F%2Fhuixie.me%2Fhuixie%2Findex.php%2Fcustomer%2Fuser%2ForderDetail%2F'.$order['orderNum'].'&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect',
+				'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri=http%3A%2F%2Fhuixie.me%2Findex.php%2Fcustomer%2Fuser%2ForderDetail%2F'.$order['orderNum'].'&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect',
 				'恭喜你下单成功，请联系客服获得帮助，将参考资料发送到admin@huixie.me');
 
 		//推送给TA
@@ -181,7 +181,7 @@ class Order extends CustomerController {
 				$order,
 				$ta['openid'],
 				'有新的订单提醒',
-				'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri=http%3A%2F%2Fhuixie.me%2Fhuixie%2Findex.php%2Fcustomer%2Fta%2FtakeOrderPage%2F'.$order['orderNum'].'&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect',
+				'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri=http%3A%2F%2Fhuixie.me%2Findex.php%2Fcustomer%2Fta%2FtakeOrderPage%2F'.$order['orderNum'].'&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect',
 				'请您及时接单，并且联系客服获得相关材料');
 
 			//数据库添加选择的TA列表
