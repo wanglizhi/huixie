@@ -28,7 +28,7 @@ function sort(th,key){
 	var method = th.getAttribute('value');
 	if(method=="desc") method = "asc";
 	else method = "desc";
-	<?=$js_page_method?>(<?=$page_info['current_page']?>,key,method);
+	<?=$js_page_method?>(<?=$orderTable['page_info']['current_page']?>,key,method);
 }
 </script>
 
@@ -92,7 +92,7 @@ function delete_order(orderNum){
 			type: "post",
 			data: {'orderNum':orderNum},
 			success: function(data){
-				<?php echo $js_page_method."(".$page_info['current_page'].")"?>;
+				<?php echo $js_page_method."(".$orderTable['page_info']['current_page'].")"?>;
 			},
 		});
 	}

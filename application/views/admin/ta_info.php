@@ -173,7 +173,7 @@
 								if(method===undefined) method = sort_method;
 								var tableId = "<?=$taOrderTable['tableId']?>";
 								$.ajax({
-									url: "<?php echo site_url($page_info['page_method'])?>",
+									url: "<?php echo site_url($taOrderTable['page_info']['page_method'])?>",
 									type: "get",
 									data: {'page':page,'js_page_method': "change_ta_order_page",'openid': "<?=$ta['openid']?>",'sort_key': key,'sort_method':method,},
 									dataType: "html",

@@ -15,11 +15,11 @@ class Ta extends MY_AdminController {
 		$data['taTable'] = array(
 			'taList' => $result['result_rows'],
 			'tableId'   => "taTable",
-		);
-		$data['page_info'] = array(
-			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
-			'current_page'  => 1,
-			'page_method' => ADMIN_PREFIX."ta/taListPage",
+			'page_info' => array(
+				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+				'current_page'  => 1,
+				'page_method' => ADMIN_PREFIX."ta/taListPage",
+			),
 		);
 		$this->loadView(ADMIN_PREFIX.'ta_list',$data);
 	}
@@ -37,11 +37,11 @@ class Ta extends MY_AdminController {
 		$data['taTable'] = array(
 			'taList' => $result['result_rows'],
 			'tableId'   => "taTable",
-		);
-		$data['page_info'] = array(
-			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
-			'current_page'  => $page,
-			'page_method' => ADMIN_PREFIX."ta/taListPage",
+			'page_info' => array(
+				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+				'current_page'  => $page,
+				'page_method' => ADMIN_PREFIX."ta/taListPage",
+			),
 		);
 		$data['js_page_method'] = $js_page_method;
 		$this->load->view(ADMIN_PREFIX.'ta_table',$data);
@@ -54,11 +54,11 @@ class Ta extends MY_AdminController {
 		$data['taTable'] = array(
 			'taList' => $result['result_rows'],
 			'tableId'   => "taTable",
-		);
-		$data['page_info'] = array(
-			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
-			'current_page'  => 1,
-			'page_method' => ADMIN_PREFIX."ta/checkedtaListPage",
+			'page_info' => array(
+				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+				'current_page'  => 1,
+				'page_method' => ADMIN_PREFIX."ta/checkedtaListPage",
+			),
 		);
 		$this->loadView(ADMIN_PREFIX.'ta_list',$data);
 	}
@@ -75,11 +75,11 @@ class Ta extends MY_AdminController {
 		$data['taTable'] = array(
 			'taList' => $result['result_rows'],
 			'tableId'   => "taTable",
-		);
-		$data['page_info'] = array(
-			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
-			'current_page'  => $page,
-			'page_method' => ADMIN_PREFIX."ta/checkedtaListPage",
+			'page_info' => array(
+				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+				'current_page'  => $page,
+				'page_method' => ADMIN_PREFIX."ta/checkedtaListPage",
+			),
 		);
 		$data['js_page_method'] = $js_page_method;
 		$this->load->view(ADMIN_PREFIX.'ta_table',$data);
@@ -92,11 +92,11 @@ class Ta extends MY_AdminController {
 		$data['taTable'] = array(
 			'taList' => $result['result_rows'],
 			'tableId'   => "taTable",
-		);
-		$data['page_info'] = array(
-			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
-			'current_page'  => 1,
-			'page_method' => ADMIN_PREFIX."ta/unCheckedtaListPage",
+			'page_info' => array(
+				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+				'current_page'  => 1,
+				'page_method' => ADMIN_PREFIX."ta/unCheckedtaListPage",
+			),
 		);
 		$this->loadView(ADMIN_PREFIX.'ta_list',$data);
 	}
@@ -113,11 +113,11 @@ class Ta extends MY_AdminController {
 		$data['taTable'] = array(
 			'taList' => $result['result_rows'],
 			'tableId'   => "taTable",
-		);
-		$data['page_info'] = array(
-			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
-			'current_page'  => $page,
-			'page_method' => ADMIN_PREFIX."ta/unCheckedtaListPage",
+			'page_info' => array(
+				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+				'current_page'  => $page,
+				'page_method' => ADMIN_PREFIX."ta/unCheckedtaListPage",
+			),
 		);
 		$data['js_page_method'] = $js_page_method;
 		$this->load->view(ADMIN_PREFIX.'ta_table',$data);
@@ -152,11 +152,11 @@ class Ta extends MY_AdminController {
 			'tableId'   => "taOrderTable",
 			'sort_key'  => "createTime",
 			'sort_method' => 'desc', 
-		);
-		$data['page_info'] = array(
-			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
-			'current_page'  => 1,
-			'page_method' => ADMIN_PREFIX."ta/taOrderListPage",
+			'page_info' => array(
+				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+				'current_page'  => 1,
+				'page_method' => ADMIN_PREFIX."ta/taOrderListPage",
+			),
 		);
 		$this->loadView(ADMIN_PREFIX.'ta_info',$data);
 	}
@@ -184,11 +184,11 @@ class Ta extends MY_AdminController {
 			'tableId'   => "taOrderTable",
 			'sort_key'  => $sort_key,
 			'sort_method' => $sort_method, 
-		);
-		$data['page_info'] = array(
-			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
-			'current_page'  => $page,
-			'page_method' => ADMIN_PREFIX."ta/taOrderListPage",
+			'page_info' => array(
+				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+				'current_page'  => $page,
+				'page_method' => ADMIN_PREFIX."ta/taOrderListPage",
+			),
 		);
 		$data['js_page_method'] = $js_page_method;
 		$this->load->view(ADMIN_PREFIX.'order_table',$data);

@@ -70,7 +70,7 @@
 						if(searchKey===undefined) searchKey = search_key;
 						var tableId = "<?=$orderTable['tableId']?>";
 						$.ajax({
-							url: "<?php echo site_url($page_info['page_method'])?>",
+							url: "<?php echo site_url($orderTable['page_info']['page_method'])?>",
 							type: "get",
 							data: {'page':page,'js_page_method': "change_order_page",'sort_key': key,'sort_method':method,'search_key': searchKey},
 							dataType: "html",

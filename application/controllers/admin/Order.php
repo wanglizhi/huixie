@@ -30,11 +30,11 @@ class Order extends MY_AdminController {
 			'tableId'   => "orderTable",
 			'sort_key'  => "createTime",
 			'sort_method' => 'desc', 
-		);
-		$data['page_info'] = array(
-			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
-			'current_page'  => 1,
-			'page_method' => ADMIN_PREFIX."order/orderListPage",
+			'page_info' => array(
+				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+				'current_page'  => 1,
+				'page_method' => ADMIN_PREFIX."order/orderListPage",
+			),
 		);
 		$this->loadView(ADMIN_PREFIX.'order_list',$data);
 	}
@@ -56,11 +56,11 @@ class Order extends MY_AdminController {
 			'tableId'   => "orderTable",
 			'sort_key'  => $sort_key,
 			'sort_method' => $sort_method, 
-		);
-		$data['page_info'] = array(
-			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
-			'current_page'  => $page,
-			'page_method' => ADMIN_PREFIX."order/orderListPage",
+			'page_info' => array(
+				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+				'current_page'  => $page,
+				'page_method' => ADMIN_PREFIX."order/orderListPage",
+			),
 		);
 		$data['js_page_method'] = $js_page_method;
 		$this->load->view(ADMIN_PREFIX.'order_table',$data);
@@ -75,11 +75,11 @@ class Order extends MY_AdminController {
 			'tableId'   => "orderTable",
 			'sort_key'  => "createTime",
 			'sort_method' => 'desc', 
-		);
-		$data['page_info'] = array(
-			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
-			'current_page'  => 1,
-			'page_method' => ADMIN_PREFIX."order/unpaidOrderListPage",
+			'page_info' => array(
+				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+				'current_page'  => 1,
+				'page_method' => ADMIN_PREFIX."order/unpaidOrderListPage",
+			),
 		);
 		$this->loadView(ADMIN_PREFIX.'order_list',$data);
 	}
@@ -101,11 +101,11 @@ class Order extends MY_AdminController {
 			'tableId'   => "orderTable",
 			'sort_key'  => $sort_key,
 			'sort_method' => $sort_method, 
-		);
-		$data['page_info'] = array(
-			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
-			'current_page'  => $page,
-			'page_method' => ADMIN_PREFIX."order/unpaidOrderListPage",
+			'page_info' => array(
+				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+				'current_page'  => $page,
+				'page_method' => ADMIN_PREFIX."order/unpaidOrderListPage",
+			),
 		);
 		$data['js_page_method'] = $js_page_method;
 		$this->load->view(ADMIN_PREFIX.'order_table',$data);
@@ -120,11 +120,11 @@ class Order extends MY_AdminController {
 			'tableId'   => "orderTable",
 			'sort_key'  => "createTime",
 			'sort_method' => 'desc', 
-		);
-		$data['page_info'] = array(
-			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
-			'current_page'  => 1,
-			'page_method' => ADMIN_PREFIX."order/untakenOrderListPage",
+			'page_info' => array(
+				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+				'current_page'  => 1,
+				'page_method' => ADMIN_PREFIX."order/untakenOrderListPage",
+			),
 		);
 		$this->loadView(ADMIN_PREFIX.'order_list',$data);
 	}
@@ -146,11 +146,11 @@ class Order extends MY_AdminController {
 			'tableId'   => "orderTable",
 			'sort_key'  => $sort_key,
 			'sort_method' => $sort_method, 
-		);
-		$data['page_info'] = array(
-			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
-			'current_page'  => $page,
-			'page_method' => ADMIN_PREFIX."order/untakenOrderListPage",
+			'page_info' => array(
+				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+				'current_page'  => $page,
+				'page_method' => ADMIN_PREFIX."order/untakenOrderListPage",
+			),
 		);
 		$data['js_page_method'] = $js_page_method;
 		$this->load->view(ADMIN_PREFIX.'order_table',$data);
@@ -164,11 +164,11 @@ class Order extends MY_AdminController {
 			'tableId'   => "orderTable",
 			'sort_key'  => "createTime",
 			'sort_method' => 'desc', 
-		);
-		$data['page_info'] = array(
-			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
-			'current_page'  => 1,
-			'page_method' => ADMIN_PREFIX."order/unfinishedOrderListPage",
+			'page_info' => array(
+				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+				'current_page'  => 1,
+				'page_method' => ADMIN_PREFIX."order/unfinishedOrderListPage",
+			),
 		);
 		$this->loadView(ADMIN_PREFIX.'order_list',$data);
 	}
@@ -191,11 +191,11 @@ class Order extends MY_AdminController {
 			'tableId'   => "orderTable",
 			'sort_key'  => $sort_key,
 			'sort_method' => $sort_method, 
-		);
-		$data['page_info'] = array(
-			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
-			'current_page'  => $page,
-			'page_method' => ADMIN_PREFIX."order/unfinishedOrderListPage",
+			'page_info' => array(
+				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+				'current_page'  => $page,
+				'page_method' => ADMIN_PREFIX."order/unfinishedOrderListPage",
+			),
 		);
 		$data['js_page_method'] = $js_page_method;
 		$this->load->view(ADMIN_PREFIX.'order_table',$data);
@@ -211,11 +211,11 @@ class Order extends MY_AdminController {
 			'tableId'   => "orderTable",
 			'sort_key'  => "createTime",
 			'sort_method' => 'desc', 
-		);
-		$data['page_info'] = array(
-			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
-			'current_page'  => 1,
-			'page_method' => ADMIN_PREFIX."order/finishedOrderListPage",
+			'page_info' => array(
+				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+				'current_page'  => 1,
+				'page_method' => ADMIN_PREFIX."order/finishedOrderListPage",
+			),
 		);
 		$this->loadView(ADMIN_PREFIX.'order_list',$data);
 	}
@@ -237,11 +237,11 @@ class Order extends MY_AdminController {
 			'tableId'   => "orderTable",
 			'sort_key'  => $sort_key,
 			'sort_method' => $sort_method, 
-		);
-		$data['page_info'] = array(
-			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
-			'current_page'  => $page,
-			'page_method' => ADMIN_PREFIX."order/finishedOrderListPage",
+			'page_info' => array(
+				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+				'current_page'  => $page,
+				'page_method' => ADMIN_PREFIX."order/finishedOrderListPage",
+			),
 		);
 		$data['js_page_method'] = $js_page_method;
 		$this->load->view(ADMIN_PREFIX.'order_table',$data);
