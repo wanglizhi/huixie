@@ -61,6 +61,15 @@
   		<label>姓名：<?php echo $ta['userInfo']['nickname'];?></label>
   		<label>评级：<?php echo $ta['star'];?></label>
   		<label>单价：<?php echo $ta['unitPrice'];?></label>
+  		<label>当前状态：
+			<?php if($ta['state']==0): ?>
+				<span class="label label-success">空闲</span>
+			<?php elseif($ta['state']==1): ?>
+				<span class="label label-warning">有课</span>
+			<?php else: ?>
+				<span class="label label-important">忙碌</span>
+			<?php endif ?>
+		</label>
   		<label>简介：<?php echo $ta['introduction'];?></label>
   		
 	</div>

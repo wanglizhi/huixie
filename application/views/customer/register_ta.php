@@ -89,6 +89,10 @@
 				<?php elseif($ta['state']==1): ?>
 					<option value="1" selected="selected">有课</option>
 					<option value="2">忙碌</option>
+				<?php else: ?>
+					<option></option>
+					<option value="1">有课</option>
+					<option value="2">忙碌</option>
 				<?php endif ?>
 				</select>
     			<label for="email">邮箱</label>

@@ -58,7 +58,7 @@
 			$timestamp = strtotime($order['endTime']);
 			date_default_timezone_set($order['timezone']);
 			echo date("Y-m-d H:i:s",$timestamp);
-			?></label>
+		?></label>
 		<label>时区：<?php echo $order['timezone'];?></label>
 		<label>补充要求：<?php echo $order['requirement'];?></label>
 	</div>
@@ -76,6 +76,9 @@
 		<label>【 <?php echo $min;?> 元 --- <?php echo $max;?> 元 】</label>
 		<br>
 		实际收取金额：【<?php echo $max;?> 元】
+		<div>
+			余额
+		</div>
 	</div>
 
 	<div class="alert alert-info">

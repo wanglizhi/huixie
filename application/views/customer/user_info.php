@@ -104,6 +104,11 @@
 					<option value="1">Paypal</option>
   					<option value="2">支付宝</option>
   					<option value="3" selected="selected">微信支付</option>
+  				<?php else: ?>
+  					<option></option>
+  					<option value="1">Paypal</option>
+  					<option value="2">支付宝</option>
+  					<option value="3">微信支付</option>
 				<?php endif ?>
 				</select>
     			<input type="text" class="form-control m-wrap span6" id="cashAccount" name="cashAccount" placeholder="" value="<?php echo $user['cashAccount'];?>" required="required">

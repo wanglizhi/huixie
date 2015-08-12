@@ -121,6 +121,11 @@ class Order_model extends CI_Model{
 		}
 	}
 	function delete($orderNum){
+		//删除订单时删除其他操作
+		//删除SelectedTa列表对应的orderNum项
+		$this->load->model('Selected_ta_model');
+		$this->Selected_ta_model->delete($orderNum);
+
 		$this->db->where('orderNum',$orderNum);
 		$this->db->delete('order');
 		return $this->db->affected_rows();

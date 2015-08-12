@@ -43,5 +43,10 @@ class Selected_ta_model extends CI_Model{
 			return array();
 		}
 	}
+	function delete($orderNum){
+		$this->db->where('orderNum',$orderNum);
+		$this->db->delete('selectedTa');
+		return $this->db->affected_rows();
+	}
 }
 ?>
