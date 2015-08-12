@@ -160,8 +160,8 @@
 				<div class="tab-pane" id="ta_order">
 					<div class="portlet-body">
 						<?php
+							$taOrderTable['js_page_method'] = "change_ta_order_page";
 							$data['orderTable'] = $taOrderTable;
-							$data['js_page_method'] = "change_ta_order_page";
 							$this->load->view(ADMIN_PREFIX."order_table",$data);
 						?>
 						<script type="text/javascript">

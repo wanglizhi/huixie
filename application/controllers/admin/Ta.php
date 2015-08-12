@@ -19,8 +19,8 @@ class Ta extends MY_AdminController {
 				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
 				'current_page'  => 1,
 				'page_method' => ADMIN_PREFIX."ta/taListPage",
-			),
-		);
+				),
+			);
 		$this->loadView(ADMIN_PREFIX.'ta_list',$data);
 	}
 
@@ -41,9 +41,9 @@ class Ta extends MY_AdminController {
 				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
 				'current_page'  => $page,
 				'page_method' => ADMIN_PREFIX."ta/taListPage",
-			),
-		);
-		$data['js_page_method'] = $js_page_method;
+				),
+			'js_page_method' => $js_page_method,
+			);
 		$this->load->view(ADMIN_PREFIX.'ta_table',$data);
 	}
 
@@ -58,8 +58,8 @@ class Ta extends MY_AdminController {
 				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
 				'current_page'  => 1,
 				'page_method' => ADMIN_PREFIX."ta/checkedtaListPage",
-			),
-		);
+				),
+			);
 		$this->loadView(ADMIN_PREFIX.'ta_list',$data);
 	}
 
@@ -79,9 +79,9 @@ class Ta extends MY_AdminController {
 				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
 				'current_page'  => $page,
 				'page_method' => ADMIN_PREFIX."ta/checkedtaListPage",
-			),
-		);
-		$data['js_page_method'] = $js_page_method;
+				),
+			'js_page_method' => $js_page_method,
+			);
 		$this->load->view(ADMIN_PREFIX.'ta_table',$data);
 	}
 
@@ -96,8 +96,8 @@ class Ta extends MY_AdminController {
 				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
 				'current_page'  => 1,
 				'page_method' => ADMIN_PREFIX."ta/unCheckedtaListPage",
-			),
-		);
+				),
+			);
 		$this->loadView(ADMIN_PREFIX.'ta_list',$data);
 	}
 
@@ -117,9 +117,9 @@ class Ta extends MY_AdminController {
 				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
 				'current_page'  => $page,
 				'page_method' => ADMIN_PREFIX."ta/unCheckedtaListPage",
-			),
-		);
-		$data['js_page_method'] = $js_page_method;
+				),
+			'js_page_method' => $js_page_method,
+			);
 		$this->load->view(ADMIN_PREFIX.'ta_table',$data);
 	}
 
@@ -130,7 +130,7 @@ class Ta extends MY_AdminController {
 		$result = $this->Ta_model->searchTa($key,$page,$num);
 		$data['taList'] = $result['result_rows'];
 		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
-				,ADMIN_PREFIX."ta/searchTa/".$key);
+			,ADMIN_PREFIX."ta/searchTa/".$key);
 		$this->loadView(ADMIN_PREFIX.'ta_list',$data);
 	}
 	function taInfo($openid = ""){
@@ -144,9 +144,48 @@ class Ta extends MY_AdminController {
 			print($openid.'ta不存在...<br>'.$time.'秒后自动跳转。');
 			exit();
 		} 
+		$this->load->model('User_model');
+		$result = $this->User_model->searchById($openid);
+		if(isset($result)) $data['user'] = $result;
+		$this->load->model('Order_model');
+		$result = $this->Order_model->searchBy1('userId', $openid,1,ITEMS_PER_PAGE);
+		$data['userOrderTable'] = array(
+			'orderList' => $result['result_rows'],
+			'tableId'   => "userOrderTable",
+			'sort_key'  => "createTime",
+			'sort_method' => 'desc', 
+			'page_info' => array(
+				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+				'current_page'  => 1,
+				'page_method' => ADMIN_PREFIX."user/userOrderListPage",
+				),
+			);
+		$this->load->model('Trade_model');
+		$result = $this->Trade_model->searchTradeByUser($openid,1,ITEMS_PER_PAGE);
+		$data['userTradeTable'] = array(
+			'tradeList' => $result['result_rows'],
+			'tableId'   => "userTradeTable",
+			'page_info' => array(
+				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+				'current_page'  => 1,
+				'page_method' => ADMIN_PREFIX."user/userTradeListPage",
+				),
+			);
+		$this->load->model('Cash_model');
+		$result = $this->Cash_model->searchCashByUser($openid,1,ITEMS_PER_PAGE);
+		$data['userCashTable'] = array(
+			'cashList' => $result['result_rows'],
+			'tableId'   => "userCashTable",
+			'page_info' => array(
+				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
+				'current_page'  => 1,
+				'page_method' => ADMIN_PREFIX."user/userCashListPage",
+				),
+			);
 		$data['ta'] = $ta;
 		$this->load->model('Order_model');
 		$result = $this->Order_model->searchBy1('taId', $openid,1,ITEMS_PER_PAGE);
+		
 		$data['taOrderTable'] = array(
 			'orderList' => $result['result_rows'],
 			'tableId'   => "taOrderTable",
@@ -156,9 +195,9 @@ class Ta extends MY_AdminController {
 				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
 				'current_page'  => 1,
 				'page_method' => ADMIN_PREFIX."ta/taOrderListPage",
-			),
-		);
-		$this->loadView(ADMIN_PREFIX.'ta_info',$data);
+				),
+			);
+		$this->loadView(ADMIN_PREFIX.'user_profile',$data);
 	}
 	function taOrderListPage($openid = ""){
 		if($openid=="" && !isset($_GET['openid'])){
@@ -188,9 +227,9 @@ class Ta extends MY_AdminController {
 				'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
 				'current_page'  => $page,
 				'page_method' => ADMIN_PREFIX."ta/taOrderListPage",
-			),
-		);
-		$data['js_page_method'] = $js_page_method;
+				),
+			'js_page_method' => $js_page_method,
+			);
 		$this->load->view(ADMIN_PREFIX.'order_table',$data);
 	}
 	function addTaPage(){

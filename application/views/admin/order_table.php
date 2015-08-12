@@ -13,22 +13,22 @@
 				?>
 
 				<?php if($sort_key=="createTime"):?>
-				<th class="sort_<?=$sort_method?>" value="<?=$sort_method?>" onclick="sort(this,'createTime')">创建日期</th>
+				<th class="sort_<?=$sort_method?>" value="<?=$sort_method?>" onclick="sort(this,'<?=$orderTable["js_page_method"]?>','createTime')">创建日期</th>
 			<?php else:?>
-			<th class="sort" value="asc" onclick="sort(this,'createTime')">创建日期</th>
+			<th class="sort" value="asc" onclick="sort(this,'<?=$orderTable["js_page_method"]?>','createTime')">创建日期</th>
 		<?php endif?>
 		<?php if($sort_key=="endTime"):?>
-		<th class="sort_<?=$sort_method?>" value="<?=$sort_method?>" onclick="sort(this,'endTime')">截止日期</th>
+		<th class="sort_<?=$sort_method?>" value="<?=$sort_method?>" onclick="sort(this,'<?=$orderTable["js_page_method"]?>','endTime')">截止日期</th>
 	<?php else:?>
-	<th class="sort" value="asc" onclick="sort(this,'endTime')">截止日期</th>
+	<th class="sort" value="asc" onclick="sort(this,'<?=$orderTable["js_page_method"]?>','endTime')">截止日期</th>
 <?php endif?>
 
 <script type="text/javascript">
-function sort(th,key){
+function sort(th,js_page_method,key){
 	var method = th.getAttribute('value');
 	if(method=="desc") method = "asc";
 	else method = "desc";
-	<?=$js_page_method?>(<?=$orderTable['page_info']['current_page']?>,key,method);
+	(eval(js_page_method))(<?=$orderTable['page_info']['current_page']?>,key,method);
 }
 </script>
 
@@ -92,7 +92,7 @@ function delete_order(orderNum){
 			type: "post",
 			data: {'orderNum':orderNum},
 			success: function(data){
-				<?php echo $js_page_method."(".$orderTable['page_info']['current_page'].")"?>;
+				<?php echo $orderTable['js_page_method']."(".$orderTable['page_info']['current_page'].")"?>;
 			},
 		});
 	}
@@ -101,7 +101,7 @@ function delete_order(orderNum){
 
 <?php
 $data['page_info'] = $orderTable['page_info'];
-$data['js_page_method'] = $js_page_method;
+$data['js_page_method'] = $orderTable['js_page_method'];
 $this->load->view(ADMIN_PREFIX."pagination",$data);
 ?>
 </div>

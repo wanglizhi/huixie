@@ -120,8 +120,8 @@ class User extends MY_AdminController {
 				'current_page'  => $page,
 				'page_method' => ADMIN_PREFIX."user/userOrderListPage",
 			),
+			'js_page_method' => $js_page_method,
 		);
-		$data['js_page_method'] = $js_page_method;
 		$this->load->view(ADMIN_PREFIX.'order_table',$data);
 	}
 	function userTradeListPage($user_id = NULL){
@@ -146,8 +146,8 @@ class User extends MY_AdminController {
 				'current_page'  => $page,
 				'page_method' => ADMIN_PREFIX."user/userTradeListPage",
 			),
+			'js_page_method' => $js_page_method,
 		);
-		$data['js_page_method'] = $js_page_method;
 		$this->load->view(ADMIN_PREFIX.'trade_table',$data);
 	}
 
@@ -173,8 +173,8 @@ class User extends MY_AdminController {
 				'current_page'  => $page,
 				'page_method' => ADMIN_PREFIX."user/userCashListPage",
 			),
+			'js_page_method' => $js_page_method,
 		);
-		$data['js_page_method'] = $js_page_method;
 		$this->load->view(ADMIN_PREFIX.'cash_table',$data);
 	}
 
@@ -230,8 +230,8 @@ class User extends MY_AdminController {
 			'total_pages'  => ceil($result['result_num_rows']/ITEMS_PER_PAGE),
 			'current_page'  => $page,
 			'page_method' => ADMIN_PREFIX."user/userListPage",
+			'js_page_method' => $js_page_method,
 		);
-		$data['js_page_method'] = $js_page_method;
 		$this->load->view(ADMIN_PREFIX.'user_table',$data);
 	}
 

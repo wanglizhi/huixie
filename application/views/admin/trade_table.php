@@ -60,7 +60,7 @@ function showTradeDetail(detailButton,detail){
 
 <?php
 $data['page_info'] = $tradeTable['page_info'];
-$data['js_page_method'] = $js_page_method;
+$data['js_page_method'] = $tradeTable['js_page_method'];
 $this->load->view(ADMIN_PREFIX."pagination",$data);
 ?>
 </div>

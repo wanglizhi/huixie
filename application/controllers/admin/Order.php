@@ -61,8 +61,8 @@ class Order extends MY_AdminController {
 				'current_page'  => $page,
 				'page_method' => ADMIN_PREFIX."order/orderListPage",
 			),
+			'js_page_method' => $js_page_method,
 		);
-		$data['js_page_method'] = $js_page_method;
 		$this->load->view(ADMIN_PREFIX.'order_table',$data);
 	}
 
@@ -106,8 +106,8 @@ class Order extends MY_AdminController {
 				'current_page'  => $page,
 				'page_method' => ADMIN_PREFIX."order/unpaidOrderListPage",
 			),
+			'js_page_method' => $js_page_method,
 		);
-		$data['js_page_method'] = $js_page_method;
 		$this->load->view(ADMIN_PREFIX.'order_table',$data);
 	}
 
@@ -151,8 +151,8 @@ class Order extends MY_AdminController {
 				'current_page'  => $page,
 				'page_method' => ADMIN_PREFIX."order/untakenOrderListPage",
 			),
+			'js_page_method' => $js_page_method,
 		);
-		$data['js_page_method'] = $js_page_method;
 		$this->load->view(ADMIN_PREFIX.'order_table',$data);
 	}
 	function unfinishedOrderList(){
@@ -196,8 +196,8 @@ class Order extends MY_AdminController {
 				'current_page'  => $page,
 				'page_method' => ADMIN_PREFIX."order/unfinishedOrderListPage",
 			),
+			'js_page_method' => $js_page_method,
 		);
-		$data['js_page_method'] = $js_page_method;
 		$this->load->view(ADMIN_PREFIX.'order_table',$data);
 	}
 
@@ -242,8 +242,8 @@ class Order extends MY_AdminController {
 				'current_page'  => $page,
 				'page_method' => ADMIN_PREFIX."order/finishedOrderListPage",
 			),
+			'js_page_method' => $js_page_method,
 		);
-		$data['js_page_method'] = $js_page_method;
 		$this->load->view(ADMIN_PREFIX.'order_table',$data);
 	}
 
