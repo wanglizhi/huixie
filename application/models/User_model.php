@@ -78,6 +78,27 @@ class User_model extends CI_Model{
 	function update($data){
 		
 	}
+	//改变余额，money可以为负值
+	function addBalance($id, $money, $describe="", $orderNum=0){
+		$user = $this->searchById($id);
+		$balance = $user['balance'];
+		if(($balance+$money)<0){
+			return false;
+		}else{
+			$user['balance'] = $balance+$money;
+			$this->modify($id, $user);
+			// 交易记录
+			$data['openid'] = $user['openid'];
+			$data['money'] = $money;
+			$data['balance'] = $balance+$money;
+			$data['orderNum'] = $orderNum;
+			date_default_timezone_set('PRC');
+			$data['createTime'] = date('Y-m-d h:i:s');
+			$data['describe'] = $describe;
+			$this->load->model('Trade_model');
+			return $this->Trade_model->add($data);
+		}
+	}
 	
 	function modify($id,$data){
 		$this->db->where('openid',$id);

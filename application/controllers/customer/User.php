@@ -22,9 +22,26 @@ class User extends CustomerController {
 		// 		'cashType'=>1, 'cashAccount'=>'account@paypal.com','balance'=>100);
 
 		$data['user'] = $user;
-		$this->load->view('customer/header', $data);
-		$this->load->view('customer/user_info');
-		$this->load->view('customer/footer');
+		$this->loadView('user_info', $data);
+	}
+	function tradeList($page = 1,$num = ITEMS_PER_PAGE){
+		$user = $_SESSION['user'];
+
+		//数据测试
+		// $user = array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
+		// 		'nickname'=>'nickname', 'country'=>'中国', 'city'=>'南京', 'sex'=>1, 'university'=>'南京大学', 'email'=>'user@qq.com',
+		// 		'cashType'=>1, 'cashAccount'=>'account@paypal.com','balance'=>100, 'openid'=>4, 'createTime'=>'2015-08-09', 'balance'=>1000);
+
+
+		$this->load->model('Trade_model');
+		$result = $this->Trade_model->searchTradeByUser($user['openid'], $page, $num);
+		$data['tradeList'] = $result['result_rows'];
+		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
+				,"customer/user/tradeList");
+		$data['user'] = $user;
+
+		$this->loadView('user_trade_list', $data);
+
 	}
 	function modify(){
 		$user = $_SESSION['user'];
@@ -56,9 +73,7 @@ class User extends CustomerController {
 		$data['order'] = $order;
 		$data['user'] = $user;
 
-		$this->load->view('customer/header',$data);
-		$this->load->view('customer/user_order_detail');
-		$this->load->view('customer/footer');
+		$this->loadView('user_order_detail', $data);
 	}
 
 	function unpaidOrderList($page = 1,$num = ITEMS_PER_PAGE){
@@ -77,9 +92,7 @@ class User extends CustomerController {
 		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
 				,"customer/user/unpaidOrderList");
 
-		$this->load->view('customer/header', $data);
-		$this->load->view('customer/user_order_list');
-		$this->load->view('customer/footer');
+		$this->loadView('user_order_list', $data);
 	}
 	function deleteOrder($orderNum){
 		$user = $_SESSION['user'];
@@ -107,8 +120,6 @@ class User extends CustomerController {
 		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
 				,"customer/user/orderList");
 
-		$this->load->view('customer/header', $data);
-		$this->load->view('customer/user_order_list');
-		$this->load->view('customer/footer');
+		$this->loadView('user_order_list', $data);
 	}
 }

@@ -15,9 +15,7 @@ class Ta extends CustomerController {
 		//数据测试
 		// $data['ta'] = array('skills'=>'软件工程','star'=>3.5, 'unitPrice'=>100, 'hasCheck'=>1, 'email'=>'11@qq.com', 'state'=>2);	
 
-		$this->load->view('customer/header', $data);
-		$this->load->view('customer/register_ta');
-		$this->load->view('customer/footer');
+		$this->loadView('register_ta', $data);
 	}
 	function register(){
 		$user = $_SESSION['user'];
@@ -74,9 +72,7 @@ class Ta extends CustomerController {
 		$data['order'] = $order;
 		$data['user'] = $user;
 
-		$this->load->view('customer/header',$data);
-		$this->load->view('customer/ta_take_order');
-		$this->load->view('customer/footer');
+		$this->loadView('ta_take_order', $data);
 	}
 	function takeOrder(){
 		$this->load->model('Order_model');
@@ -127,9 +123,7 @@ class Ta extends CustomerController {
 		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
 				,"customer/ta/untakenOrderList");
 
-		$this->load->view('customer/header', $data);
-		$this->load->view('customer/ta_order_list');
-		$this->load->view('customer/footer');
+		$this->loadView('ta_order_list', $data);
 	}
 
 	// 订单列表
@@ -148,9 +142,7 @@ class Ta extends CustomerController {
 		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
 				,"customer/ta/orderList");
 
-		$this->load->view('customer/header', $data);
-		$this->load->view('customer/ta_order_list');
-		$this->load->view('customer/footer');
+		$this->loadView('ta_order_list', $data);
 	}
 	
 }

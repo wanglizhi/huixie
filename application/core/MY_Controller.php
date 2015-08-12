@@ -34,6 +34,11 @@ class CustomerController extends CI_Controller {
             redirect('customer/oauth/loginPage');
         }
     }
+    function loadView($view,$data=array()){
+        $this->load->view('customer/header',$data);
+        $this->load->view('customer/'.$view);
+        $this->load->view('customer/footer');
+    }
     private function checkLogin(){
         if (!session_id()) session_start();
         // 判断Session

@@ -10,18 +10,13 @@ class Order extends CustomerController {
 	//添加订单
 	function addOrderPage($notice=""){
 		$data['notice'] = $notice;
-		$this->load->view('customer/header');
-		$this->load->view('customer/add_order', $data);
-		$this->load->view('customer/footer');
+		$this->loadView('add_order',$data);
 	}
 	//保密政策
 	function privacy(){
-		$this->load->view('customer/header');
-		$this->load->view('customer/privacy');
-		$this->load->view('customer/footer');
+		$this->loadView('privacy');
 	}
 	function addOrder(){
-
 		// echo $_POST['endDate'].'--'.$_POST['endTime'].'--'.$_POST['prov'].'--'.$_POST['city'];
 
 		$this->load->model('Order_model');
@@ -32,8 +27,6 @@ class Order extends CustomerController {
 			$notice = '未付款订单数量大于'.MAX_UNPAID.'，无法继续添加，请适量删除未付款订单！';
 			redirect('customer/order/addOrderPage/'.$notice);
 		}
-		// 2015-07-14T08:55Z
-		// echo $_POST['endTime'];
 
 		$endTime = $_POST['endDate'].' '.$_POST['endTime'];
 		$timezone = $_POST['timezone'];
@@ -93,14 +86,13 @@ class Order extends CustomerController {
 		// $taList = array('1'=>$ta1, '2'=>$ta2);
 
 		$data['taList'] = $taList;
-		$this->load->view('customer/header', $data);
-		$this->load->view('customer/select_ta');
-		$this->load->view('customer/footer');
+		$this->loadView('select_ta',$data);
 	}
 
 	function payOrderPage(){
 		// 如果没有TA选择，如何处理。。。。
 
+		$user = $_SESSION['user'];
 		if(isset($_POST['taIdList'])){
 			$taIdList = $_POST['taIdList'];
 			$taList = array();
@@ -133,9 +125,12 @@ class Order extends CustomerController {
 		$data['min'] = $min * $order['pageNum'];
 		$sessionId = session_id();
 		$data['sessionId'] = $sessionId;
+		$data['user'] = $user;
 		//添加到session
 		$_SESSION['price'] = $data['max'];
 		$_SESSION['taList'] = $taList;
+
+
 		
 		//数据测试
 		// $data['max'] = 100;
@@ -150,26 +145,33 @@ class Order extends CustomerController {
 		// $taList = array('1'=>$ta1, '2'=>$ta2);
 		// $data['sessionId'] = 0;
 		// $data['taList'] = $taList;
+		// $user = array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
+		// 		'nickname'=>'nickname', 'country'=>'中国', 'city'=>'南京', 'sex'=>1, 'university'=>'南京大学', 'email'=>'user@qq.com', 'openid'=>12, 'balance'=>1000);
+		// $data['user'] = $user;
 
 
-		$this->load->view('customer/header', $data);
-		$this->load->view('customer/pay_order_detail');
-		$this->load->view('customer/footer');
+		$this->loadView('pay_order_detail',$data);
 	}
 	// 付款
-	function payOrder(){
-
+	function payOrder($useBalance=0){
 		$this->log('enter payOrder');
 		$user = $_SESSION['user'];
 		$order = $_SESSION['order'];
+		$this->load->model('Message_model');
+		$this->load->model('Order_model');
+		$this->load->model('User_model');
+		$this->load->model('Selected_ta_model');
+
+		if($useBalance>0){
+			//如果使用了余额, 用户balance改变
+			$this->User_model->addBalance($user['openid'], 0-$useBalance, "余额支付订单", $order['orderNum']);
+		}
+
 		// var_dump($order);
 		$order['price'] = $_SESSION['price'];
-		$this->load->model('Weixin_model');
-		$this->load->model('Message_model');
 		$order['hasPaid'] = 1;
 		date_default_timezone_set('PRC');
 		$order['paidTime'] = date('Y-m-d h:i:s');
-		$this->load->model('Order_model');
 		$this->Order_model->update($order);
 		//推送给用户
 		$this->Message_model->sendMessageToUser(
@@ -193,8 +195,8 @@ class Order extends CustomerController {
 			//数据库添加选择的TA列表
 			$data['taId'] = $ta['openid'];
 			$data['orderNum'] = $order['orderNum'];
+			date_default_timezone_set('PRC');
 			$data['createTime'] = date('Y-m-d h:i:s');
-			$this->load->model('Selected_ta_model');
 			$this->Selected_ta_model->add($data);
 		}
 		

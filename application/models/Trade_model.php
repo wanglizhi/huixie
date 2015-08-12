@@ -24,5 +24,9 @@ class Trade_model extends CI_Model{
 			return $result;
 		}
 	}
+	function add($data){
+		$this->db->query($this->db->insert_string('tradeRecord',$data));					
+		return $this->db->affected_rows();
+	}
 }
 ?>

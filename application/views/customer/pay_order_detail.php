@@ -73,21 +73,25 @@
 
 	<div class="alert">
 		价格区间（我们收取TA价格区间的最大值，交易成功后返回实际差额）
-		<label>【 <?php echo $min;?> 元 --- <?php echo $max;?> 元 】</label>
-		<br>
-		实际收取金额：【<?php echo $max;?> 元】
+		<label>【$ <?php echo $min;?>  ~ $<?php echo $max;?>】</label>
+		实际收取金额：$<?php echo $max;?>
 		<div>
-			余额
+			用户余额:&nbsp$<?php echo $user['balance'];?>
 		</div>
+		<div class="checkbox">
+    		<label>
+      		<input type="checkbox" id="checkBalance" onchange="useBalance()"> 选择使用余额支付
+    		</label>
+    		<label>付款金额：$<span id="payPrice"><?php echo $max;?></span></label>
+  		</div>
 	</div>
 
-	<div class="alert alert-info">
+	<div class="alert alert-info" id="payOption">
 		请选择付款方式：<br>
-		<!-- <a class="btn blue btn-block" href="<?php echo site_url("customer/order/payOrder");?>">Paypal</a><br> -->
-		<a class="btn green btn-block" link="">微信支付</a><br>
-		<a class="btn purple btn-block" link="">支付宝支付</a>
+		<a class="btn blue btn-block" href="javascript:void(0)" onclick="postPaypal()">Paypal</a><br>
+		<a class="btn green btn-block" link="">微信支付</a>
 
-		<form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+		<!-- <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
 		<input type="hidden" name="cmd" value="_xclick">
 		<input type="hidden" name="business" value="acount@huixie.me">
 		<input type="hidden" name="item_name" value="<?php echo $sessionId;?>">
@@ -100,21 +104,17 @@
 		<input type="hidden" name="no_note" value="1"> 
 		<input type="hidden" name="currency_code" value="USD">
 		<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!"> 
-		</form>
-		
+		</form> -->
 	</div>
+
 	<div class="form-actions">
+  			<a href="<?php echo site_url('customer/order/payOrder/'.$max);?>" class="btn green hide" id="submitOrder" role="button">提交订单</a>
   			<a href="<?php echo site_url('customer/order/taSelectPage/'.$order['orderNum']);?>" class="btn blue" role="button">返回修改</a>
-  			</div>
-
-
+  	</div>
 
 							</div>
-
 						</div>
-
 					</div>
-
 				</div>
 				<!-- END PAGE CONTENT-->         
 
@@ -123,3 +123,63 @@
 
 		</div>
 		<!-- END PAGE -->  
+		<script type="text/javascript">
+		var payPrice = <?php echo $max;?>;
+		var max = <?php echo $max;?>;
+		var balance = <?php echo $user['balance'];?>;
+		function postPaypal(){
+			console.log('payPrice'+payPrice);
+			var url = "https://www.sandbox.paypal.com/cgi-bin/webscr";
+			var params =
+			{
+				cmd: "_xclick",
+				business: "acount@huixie.me",
+				item_name: <?php echo $sessionId;?>,
+				item_number: <?php echo $order['orderNum'];?>,
+				cancel_return: "<?php echo site_url("customer/user/orderDetail/".$order['orderNum']);?>",
+				return: "<?php echo site_url('customer/order/payOrder');?>",
+				notify_url: "<?php echo site_url('customer/payment/paypalNotify');?>",
+				amount: payPrice,
+				no_shipping: 2,
+				no_note: 1,
+				currency_code: "USD"
+			};
+			var temp = document.createElement("form");
+		    temp.action = url;
+		    temp.method = "post";
+		    temp.style.display = "none";
+		    for (var x in params) {
+		        var opt = document.createElement("input");
+		        opt.name = x;
+		        opt.value = params[x];
+		        temp.appendChild(opt);
+		    }
+		    document.body.appendChild(temp);
+		    temp.submit();
+		    return temp;
+		}
+		function useBalance(){
+			if($('#checkBalance').attr('checked')){
+				console.log('checked');
+				console.log(balance);
+				// alert('checked');
+				if(balance < max){
+					payPrice = max - balance;
+					$('#payPrice').html(payPrice);
+				}else{
+					payPrice = 0;
+					$('#payPrice').html(payPrice);
+					$('#payOption').hide();
+					$('#submitOrder').show();
+				}
+			}else{
+				// alert('unchecked');
+				console.log('unchecked');
+				payPrice = <?php echo $max;?>;
+				$('#payPrice').html(payPrice);
+				$('#payOption').show();
+				$('#submitOrder').hide();
+			}
+		}
+
+		</script>
