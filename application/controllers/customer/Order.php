@@ -165,6 +165,8 @@ class Order extends CustomerController {
 		if($useBalance>0){
 			//如果使用了余额, 用户balance改变
 			$this->User_model->addBalance($user['openid'], 0-$useBalance, "余额支付订单", $order['orderNum']);
+			$user = $this->User_model->searchById($user['openid']);
+			$_SESSION['user'] = $user;
 		}
 
 		// var_dump($order);

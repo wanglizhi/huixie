@@ -56,7 +56,7 @@ class User extends CustomerController {
 		$this->load->model('User_model');
 		$this->User_model->modify($user['openid'], $user);
 		//更新Session
-		$_SESSION['user'] = $user;
+		$_SESSION['user'] = $this->User_model->searchById($user['openid']);
 
 		redirect('customer/user/infoPage');
 	}
