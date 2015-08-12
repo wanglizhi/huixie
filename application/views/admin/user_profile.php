@@ -378,7 +378,7 @@
 															if(isNaN(nowBalance)){
 																$('#difference').val("输入的余额有误");
 															}else{
-																$('#difference').val(preBalance-nowBalance);
+																$('#difference').val(nowBalance-preBalance);
 															}
 														}
 

@@ -241,7 +241,7 @@ class User extends MY_AdminController {
 		$describe = $_POST['describe'];
 		$this->load->model('User_model');
 		$user = $this->User_model->searchById($openid);
-		$difference = $user['balance']-$new_balance;
+		$difference = $new_balance-$user['balance'];
 		if(abs($difference)>0){
 			$user['balance'] = $new_balance;
 			$this->User_model->updateUser($user);
