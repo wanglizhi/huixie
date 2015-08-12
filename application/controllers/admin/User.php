@@ -234,6 +234,28 @@ class User extends MY_AdminController {
 		);
 		$this->load->view(ADMIN_PREFIX.'user_table',$data);
 	}
+	function changeBalance(){
+		$openid = $_POST['user_id'];
+		$new_balance = $_POST['new_balance'];
+		$difference = $_POST['difference'];
+		$describe = $_POST['describe'];
+		$this->load->model('User_model');
+		$user = $this->User_model->searchById($openid);
+		$difference = $user['balance']-$new_balance;
+		if(abs($difference)>0){
+			$user['balance'] = $new_balance;
+			$this->User_model->updateUser($user);
+			$this->load->model('Trade_model');
+			$trade['openid'] = $openid;
+			$trade['money'] = $difference;
+			$trade['balance'] = $new_balance;
+			date_default_timezone_set('PRC');
+			$trade['createTime'] = date('Y-m-d H:i:s',time());
+			$trade['describe'] = $describe;
+			$this->Trade_model->add($trade);
+		}
+		redirect(ADMIN_PREFIX.'user/userProfile/'.$openid);
+	}
 
 	function registerPage(){
 		$data['pageTitle']='添加用户';

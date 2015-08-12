@@ -2,6 +2,17 @@
 <div class="tab-pane active" id="ta_info">
 	<div class="portlet-body form">
 
+		<style type="text/css">
+
+		.good select{
+			color: green;
+			border-color: green;
+		}
+		.bad select{
+			color: red;
+			border-color:red;
+		}
+		</style>
 		<!-- BEGIN FORM-->
 		<form action="<?php echo site_url(ADMIN_PREFIX."ta/updateTa")?>
 			" class="form-horizontal" id="updateTaForm" method="post">
@@ -93,207 +104,230 @@
 
 									<label class="control-label">审核状态: </label>
 
-									<div class="controls">
+									<?php if($ta['hasCheck']):?>
+									<div id="check-row" class="controls good">
+									<?php else:?>
+									<div id="check-row" class="controls bad">
+									<?php endif;?>
 
-										<select id="hasCheck" name="hasCheck" class="small m-wrap" tabindex="1">
-											<option value="0" <?php if(!$ta['hasCheck']) echo "selected";?> >待审核</option>
+									<select id="hasCheck" name="hasCheck" class="small m-wrap" tabindex="1" onchange=check(this)>
+										<option value="0" <?php if(!$ta['hasCheck']) echo "selected";?> >待审核</option>
 
-											<option value="1" <?php if($ta['hasCheck']) echo "selected";?>>已审核</option>
+										<option value="1" <?php if($ta['hasCheck']) echo "selected";?>>已审核</option>
 
-										</select>
-
-									</div>
-
-								</div>
-								<div class="control-group">
-
-									<label class="control-label">
-										简介:
-										<span class="required">*</span>
-									</label>
-
-									<div class="controls">
-										<textarea id="introduction" name="introduction" data-required="1" class="large span6" rows="5" placeHolder="请输入简介" ><?=$ta['introduction']?></textarea>
-									</div>
+									</select>
 
 								</div>
+
+								<script type="text/javascript">
+								function check(checkState){
+									if(checkState.value==1){
+										$('#check-row').removeClass("bad").addClass("good");
+									}else{
+										$('#check-row').removeClass("good").addClass("bad");
+									}
+								}
+								</script>
+
 							</div>
-							<div class="form-actions" style="background: transparent;">
+							<div class="control-group">
 
-								<button type="submit" class="btn blue span2"> <i class="icon-ok"></i>
-									修改
-								</button>
+								<label class="control-label">
+									简介:
+									<span class="required">*</span>
+								</label>
+
+								<div class="controls">
+									<textarea id="introduction" name="introduction" data-required="1" class="large span6" rows="5" placeHolder="请输入简介" ><?=$ta['introduction']?></textarea>
+								</div>
 
 							</div>
+						</div>
+						<div class="form-actions" style="background: transparent;">
 
-						</form>
-						<!-- END FORM-->
+							<button type="submit" class="btn blue span2"> <i class="icon-ok"></i>
+								修改
+							</button>
 
-					</div>
+						</div>
+
+					</form>
+					<!-- END FORM-->
+
 				</div>
-				<div class="tab-pane" id="ta_order">
-					<div class="portlet-body">
-						<?php
-						$taOrderTable['js_page_method'] = "change_ta_order_page";
-						$dataTaOrder['orderTable'] = $taOrderTable;
-						$this->load->view(ADMIN_PREFIX."order_table",$dataTaOrder);
-						?>
-						<script type="text/javascript">
-						var ta_sort_key = "createTime",ta_sort_method = "desc",ta_current_page = 1;
-						function change_ta_order_page(page,key,method,callBack){
+			</div>
+			<div class="tab-pane" id="ta_order">
+				<div class="portlet-body">
+					<?php
+					$taOrderTable['js_page_method'] = "change_ta_order_page";
+					$dataTaOrder['orderTable'] = $taOrderTable;
+					$this->load->view(ADMIN_PREFIX."order_table",$dataTaOrder);
+					?>
+					<script type="text/javascript">
+					var ta_sort_key = "createTime",ta_sort_method = "desc",ta_current_page = 1;
+					function change_ta_order_page(page,key,method,callBack){
 
-							if(page===undefined) page = ta_current_page;
-							if(key===undefined) key = ta_sort_key;
-							if(method===undefined) method = ta_sort_method;
-							var tableId = "<?=$taOrderTable['tableId']?>";
-							$.ajax({
-								url: "<?php echo site_url($taOrderTable['page_info']['page_method'])?>",
-								type: "get",
-								data: {'page':page,'js_page_method': "change_ta_order_page",'openid': "<?=$ta['openid']?>",'sort_key': key,'sort_method':method,},
-								dataType: "html",
-								success: function(data){
-									$('#'+tableId).html(' ');
-									$('#'+tableId).html(data);
-									ta_sort_key = key,ta_sort_method = method,ta_current_page = page;
-									if(callBack!==undefined) callBack();
-								},
-							});
-						}
-						</script>
-					</div>
+						if(page===undefined) page = ta_current_page;
+						if(key===undefined) key = ta_sort_key;
+						if(method===undefined) method = ta_sort_method;
+						var tableId = "<?=$taOrderTable['tableId']?>";
+						$.ajax({
+							url: "<?php echo site_url($taOrderTable['page_info']['page_method'])?>",
+							type: "get",
+							data: {'page':page,'js_page_method': "change_ta_order_page",'openid': "<?=$ta['openid']?>",'sort_key': key,'sort_method':method,},
+							dataType: "html",
+							success: function(data){
+								$('#'+tableId).html(' ');
+								$('#'+tableId).html(data);
+								ta_sort_key = key,ta_sort_method = method,ta_current_page = page;
+								if(callBack!==undefined) callBack();
+							},
+						});
+					}
+					</script>
 				</div>
-				<script src="js/majorData.js" type="text/javascript"></script>
-				<script>
-				function test(){
-					$.ajax({
-						type: "GET",
-						url: "<?php echo site_url(ADMIN_PREFIX.'order/test')?>",
-						data: {page: 1,},
-						success: function(data){
-							alert(data);
-						},
-					});
-				}
-				$('#skill_star').raty({
-					path      : 'media/image',
-					half      : true,
-					starHalf  : 'star-half.png',
-					starOff   : 'star-off.png',
-					starOn    : 'star-on.png',
-					<?php if($ta['star']!=""):?>
-					score     : <?=$ta['star']?>
-					<?php endif;?>
+			</div>
+			<script src="js/majorData.js" type="text/javascript"></script>
+			<script>
+			function test(){
+				$.ajax({
+					type: "GET",
+					url: "<?php echo site_url(ADMIN_PREFIX.'order/test')?>",
+					data: {page: 1,},
+					success: function(data){
+						alert(data);
+					},
 				});
+			}
+			$('#skill_star').raty({
+				path      : 'media/image',
+				half      : true,
+				starHalf  : 'star-half.png',
+				starOff   : 'star-off.png',
+				starOn    : 'star-on.png',
+				<?php if($ta['star']!=""):?>
+				score     : <?=$ta['star']?>
+				<?php endif;?>
+			});
 
-				var updateSkill = function(){
-					var element = $('.search-choice > span');
-					var length = element.length;
-					var value = "";
-					for(var i = 0;i<length;i++){
-						var tmp = element[i].innerText;
-						value+=tmp+";";
-					}
-					var skill = document.getElementById("skill");
-					skill.value = value;
+			var updateSkill = function(){
+				var element = $('.search-choice > span');
+				var length = element.length;
+				var value = "";
+				for(var i = 0;i<length;i++){
+					var tmp = element[i].innerText;
+					value+=tmp+";";
 				}
+				var skill = document.getElementById("skill");
+				skill.value = value;
+			}
 
-				function initMajorData(){
+			function initMajorData(){
 
-					var has_choose = new Array();
+				var has_choose = new Array();
 
-					<?php if($ta['skills']!=""):?>
-					var init_skill = "<?=$ta['skills']?>";
-					has_choose = init_skill.split(";");
-					has_choose.pop();
-					<?php endif;?>
+				<?php if($ta['skills']!=""):?>
+				var init_skill = "<?=$ta['skills']?>";
+				has_choose = init_skill.split(";");
+				has_choose.pop();
+				<?php endif;?>
 
-					var length = major_array.length;
-					var select = document.getElementById("skill_choose");
-					for(var i = 0;i<length;i++){
-						var group = document.createElement("optgroup");
-						group.label = major_array[i];
-						group.style = "font-size:16px";
-						var sub_length = sub_array[i].length;
-						for(var j = 0;j<sub_length;j++){
-							var option = document.createElement("option");
-							option.value = major_array[i]+"-"+sub_array[i][j];
-							option.innerHTML = sub_array[i][j];
-							for(var k = 0;k<has_choose.length;k++){
-								if(option.value==has_choose[k])
-									option.selected = 1;
-							}
-							group.appendChild(option);
+				var length = major_array.length;
+				var select = document.getElementById("skill_choose");
+				for(var i = 0;i<length;i++){
+					var group = document.createElement("optgroup");
+					group.label = major_array[i];
+					group.style = "font-size:16px";
+					var sub_length = sub_array[i].length;
+					for(var j = 0;j<sub_length;j++){
+						var option = document.createElement("option");
+						option.value = major_array[i]+"-"+sub_array[i][j];
+						option.innerHTML = sub_array[i][j];
+						for(var k = 0;k<has_choose.length;k++){
+							if(option.value==has_choose[k])
+								option.selected = 1;
 						}
-						select.appendChild(group);
+						group.appendChild(option);
 					}
+					select.appendChild(group);
 				}
-				initMajorData();
+			}
+			initMajorData();
 
-				jQuery(document).ready(function(){
-					jQuery.validator.addMethod("star_required",function(value,element,params){
-						var score = $('#skill_star').raty('score');
-						var ok = (score!=null);
-						if(ok) element.value = score;
-						return ok;
-					});
-					jQuery.validator.addMethod("positive",function(value,element,params){
-						return value>0;
-					});
-					var changeMethod = function(){
-						updateSkill();
-						updateTaValidator.element($("#skill"));
-					};
-					$('#skill_choose').chosen().bind("changed",changeMethod);
+			jQuery(document).ready(function(){
+				jQuery.validator.addMethod("star_required",function(value,element,params){
+					var score = $('#skill_star').raty('score');
+					var ok = (score!=null);
+					if(ok) element.value = score;
+					return ok;
+				});
+				jQuery.validator.addMethod("positive",function(value,element,params){
+					return value>0;
+				});
+				var changeMethod = function(){
+					updateSkill();
+					updateTaValidator.element($("#skill"));
+				};
+				$('#skill_choose').chosen().bind("changed",changeMethod);
 
-					var updateTaValidator = $("#updateTaForm").validate({
-						rules:{
-							openId:{
-								required: true,
-							},
-							email:{
-								required: true,
-								email: true,
-							},
-							introduction:{
-								required: true,
-							},
-							star: {
-								star_required: true,
-							},
-							unitPrice:{
-								required: true,
-								digits: true,
-								positive: true,
-							},
-							skill: {
-								required: true,
-							},
+				var updateTaValidator = $("#updateTaForm").validate({
+					rules:{
+						openId:{
+							required: true,
 						},
-						messages:{
-							openId:{
-								required: "OpenId不能为空",
-							},
-							email:{
-								required: "Email地址不能为空",
-								email: "请输入正确的email地址"
-							},
-							introduction:{
-								required: "简介不能为空",
-							},
-							star: {
-								star_required: "技能评价不能为0",
-							},
-							unitPrice:{
-								required: "单页价钱不能为空",
-								digits: "单页价钱必须是（非负）整数",
-							},
-							skill: {
-								required: "技能不能为空",
-							},
+						email:{
+							required: true,
+							email: true,
 						},
-						errorClass: "error help-inline",
-						highlight: function(element){
-							$(element)
+						introduction:{
+							required: true,
+						},
+						star: {
+							star_required: true,
+						},
+						unitPrice:{
+							required: true,
+							digits: true,
+							positive: true,
+						},
+						actualPrice:{
+							required: true,
+							digits: true,
+							positive: true,
+						},
+						skill: {
+							required: true,
+						},
+					},
+					messages:{
+						openId:{
+							required: "OpenId不能为空",
+						},
+						email:{
+							required: "Email地址不能为空",
+							email: "请输入正确的email地址"
+						},
+						introduction:{
+							required: "简介不能为空",
+						},
+						star: {
+							star_required: "技能评价不能为0",
+						},
+						unitPrice:{
+							required: "单页价钱不能为空",
+							digits: "单页价钱必须是（非负）整数",
+						},
+						actualPrice:{
+							required: "实际工资不能为空",
+							digits: "实际工资必须是（非负）整数",
+						},
+						skill: {
+							required: "技能不能为空",
+						},
+					},
+					errorClass: "error help-inline",
+					highlight: function(element){
+						$(element)
                         .closest('.help-inline').removeClass('ok'); // display OK icon
                         $(element).closest('.control-group').removeClass('success').addClass('error');
                     },

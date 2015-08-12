@@ -19,6 +19,14 @@
 		display: inline-block;
 		margin-top: 5px;
 	}
+	.good select{
+		color: green;
+		border-color: green;
+	}
+	.bad select{
+		color: red;
+		border-color:red;
+	}
 	</style>
 	<div class="container-fluid">
 
@@ -108,16 +116,24 @@
 						<div class="span12">
 							<div class="profile-classic span6">
 								<ul class="unstyled">
-									<li>
+									<?php if(!$order['hasPaid']):?>
+									<li id="pay-row" class="bad">
+									<?php else:?>
+									<li id="pay-row" class="good">
+									<?php endif;?>
 										<span class="pay-label">付款状态:</span>
-										<select id="hasPaid" name="hasPaid" class="small m-wrap" tabindex="1">
-											<option value="<?=FALSE?>" <?php if(!$order['hasPaid']) echo "selected";?> >未付款</option>
+										<select id="hasPaid" name="hasPaid" class="small m-wrap" tabindex="1" onchange="pay(this)">
+											<option style="color:red;" value="<?=FALSE?>" <?php if(!$order['hasPaid']) echo "selected";?> >未付款</option>
 
 											<option value="<?=TRUE?>" <?php if($order['hasPaid']) echo "selected";?>>已付款</option>
 
 										</select>
 									</li>
-									<li>
+									<?php if(!$order['hasTaken']):?>
+									<li id="taken-row" class="bad">
+									<?php else:?>
+									<li id="taken-row" class="good">
+									<?php endif;?>
 										<span class="pay-label">接单状态:</span>
 										<select id="hasTaken" name="hasTaken" class="small m-wrap" tabindex="1" onchange="taken(this)">
 											<option value="<?=FALSE?>" <?php if(!$order['hasTaken']) echo "selected";?> >未接单</option>
@@ -126,7 +142,11 @@
 											
 										</select>
 									</li>
-									<li>
+									<?php if(!$order['hasFinished']):?>
+									<li id="finish-row" class="bad">
+									<?php else:?>
+									<li id="finish-row" class="good">
+									<?php endif;?>
 										<span class="pay-label">完成状态:</span>
 										<select id="hasFinished" name="hasFinished" class="small m-wrap" tabindex="1" onchange="finish(this)">
 											<option value="<?=FALSE?>" <?php if(!$order['hasFinished']) echo "selected";?> >未完成</option>
@@ -149,16 +169,31 @@
 									</li>
 								</ul>
 								<script type="text/javascript">
+								function pay(payState){
+									if(payState.value==1){
+										var paidTime = document.getElementById('paidTime');
+										paidTime.value = moment().format("YYYY-MM-DD HH:mm:ss");
+										$('#pay-row').removeClass().addClass("good");
+									}else{
+										$('#pay-row').removeClass().addClass("bad");
+									}
+								}
 								function taken(takenState){
 									if(takenState.value==1){
 										var takenTime = document.getElementById('takenTime');
-										takenTime.value = moment().format("YYYY-MM-DD HH:mm:ss")
+										takenTime.value = moment().format("YYYY-MM-DD HH:mm:ss");
+										$('#taken-row').removeClass().addClass("good");
+									}else{
+										$('#taken-row').removeClass().addClass("bad");
 									}
 								}
 								function finish(finishState){
 									if(finishState.value==1){
 										var finishTime = document.getElementById('finishedTime');
-										finishTime.value = moment().format("YYYY-MM-DD HH:mm:ss")
+										finishTime.value = moment().format("YYYY-MM-DD HH:mm:ss");
+										$('#finish-row').removeClass().addClass("good");
+									}else{
+										$('#finish-row').removeClass().addClass("bad");
 									}
 								}
 								</script>
