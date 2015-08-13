@@ -32,8 +32,9 @@ class Ta extends MY_AdminController {
 			exit(0);
 		}
 		$js_page_method = $_GET['js_page_method'];
+		$search_key = $_GET['search_key'];
 		$this->load->model('Ta_model');
-		$result = $this->Ta_model->getAll($page,ITEMS_PER_PAGE);
+		$result = $this->Ta_model->getAll($page,ITEMS_PER_PAGE,$search_key);
 		$data['taTable'] = array(
 			'taList' => $result['result_rows'],
 			'tableId'   => "taTable",
@@ -70,8 +71,9 @@ class Ta extends MY_AdminController {
 			exit(0);
 		}
 		$js_page_method = $_GET['js_page_method'];
+		$search_key = $_GET['search_key'];
 		$this->load->model('Ta_model');
-		$result = $this->Ta_model->getChecked($page,ITEMS_PER_PAGE);
+		$result = $this->Ta_model->getChecked($page,ITEMS_PER_PAGE,$search_key);
 		$data['taTable'] = array(
 			'taList' => $result['result_rows'],
 			'tableId'   => "taTable",
@@ -108,8 +110,9 @@ class Ta extends MY_AdminController {
 			exit(0);
 		}
 		$js_page_method = $_GET['js_page_method'];
+		$search_key = $_GET['search_key'];
 		$this->load->model('Ta_model');
-		$result = $this->Ta_model->getUnchecked($page,ITEMS_PER_PAGE);
+		$result = $this->Ta_model->getUnchecked($page,ITEMS_PER_PAGE,$search_key);
 		$data['taTable'] = array(
 			'taList' => $result['result_rows'],
 			'tableId'   => "taTable",

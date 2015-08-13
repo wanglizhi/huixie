@@ -189,16 +189,6 @@
 			</div>
 			<script src="js/majorData.js" type="text/javascript"></script>
 			<script>
-			function test(){
-				$.ajax({
-					type: "GET",
-					url: "<?php echo site_url(ADMIN_PREFIX.'order/test')?>",
-					data: {page: 1,},
-					success: function(data){
-						alert(data);
-					},
-				});
-			}
 			$('#skill_star').raty({
 				path      : 'media/image',
 				half      : true,

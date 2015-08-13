@@ -18,6 +18,12 @@ class Order extends MY_AdminController {
 			return;
 		}
 		$data['order'] = $order;
+		$this->load->model('Selected_ta_model');
+		$selected_ta = $this->Selected_ta_model->searchByOrderNum($orderNum);
+		$data['selectedTaTable'] = array(
+			'selectedTaList' => $selected_ta,
+			'tableId' => 'selectedTaTable',
+		);
 		$this->loadView(ADMIN_PREFIX."order_info",$data);
 	}
 

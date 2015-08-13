@@ -46,7 +46,7 @@
 	</table>
 	<?php 
 		$data['page_info'] = $taTable['page_info'];
-		$data['js_page_method'] = $js_page_method;
+		$data['js_page_method'] = $taTable['js_page_method'];
 		$this->load->view(ADMIN_PREFIX."pagination",$data);
 	?>
 </div>

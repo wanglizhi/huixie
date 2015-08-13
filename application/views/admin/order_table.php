@@ -59,7 +59,7 @@ function sort(th,js_page_method,key){
 		<td> <?php echo $order['courseName'];?> </td>
 		<td> <?php echo $order['major'];?> </td>
 		<td> <?php echo $order['createTime'];?> </td>
-		<td> <?php echo $order['finishedTime'];?> </td>
+		<td> <?php echo $order['endTime'];?> </td>
 		<td> <?php echo $order['price'];?> </td>
 		<?php if($order['hasPaid']==0): ?>
 		<td> <span class="label label-default">未付款</span></td>

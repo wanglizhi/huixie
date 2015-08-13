@@ -220,7 +220,7 @@
 																	</span>
 
 																	<div class="controls" style="margin-left: 0px;">
-																		<input type="text"  id="cashAccount" name="cashAccount" data-required="1" class="span6 m-wrap" value="<?=$user['cashAccount']?>" onKeyUp="updateCash()"></div>
+																		<input type="text"  id="cashAccount" name="cashAccount" data-required="1" class="span6 m-wrap" value="<?=$user['cashAccount']?>" onKeyUp="updateCashType()"></div>
 																	</li>
 																</ul>
 															</div>
@@ -269,7 +269,7 @@
 																				</span>
 
 																				<div class="controls" style="margin-left: 0px;">
-																					<select id="cashType" name="cashType" class="small span6 m-wrap" tabindex="1" onchange="updateCash()">
+																					<select id="cashType" name="cashType" class="small span6 m-wrap" tabindex="1" onchange="updateCashType()">
 																						<option value="1" <?php if($user['cashType']===1) echo "selected";?> >paypal</option>
 
 																						<option value="2" <?php if($user['cashType']===2) echo "selected";?>>alipay</option>
@@ -380,6 +380,10 @@
 															}else{
 																$('#difference').val(nowBalance-preBalance);
 															}
+														}
+														function updateCashType(){
+															$('#show_type').text($('#cashType option:selected').text());
+															$('#show_account').text($('#cashAccount').val());
 														}
 
 														var user_sort_key = "createTime",user_sort_method = "desc",user_current_page = 1;

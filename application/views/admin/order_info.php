@@ -28,6 +28,7 @@
 		border-color:red;
 	}
 	</style>
+	<?php $this->load->helper('time');?>
 	<div class="container-fluid">
 
 		<!-- BEGIN PAGE CONTENT-->
@@ -69,9 +70,14 @@
 									<li>
 										<span class="info-label">创建时间:</span>
 										<?=$order['createTime']?>
+										<?php
+											$differ = cal_time_differ($order['createTime'],date("Y-m-d H:i:s",time()));
+											echo "（已过去".$differ['day']."天".$differ['hour']."小时".$differ['minute']."分）";
+										?>
 									</li>
 								</ul>
 							</div>
+
 
 							<div class="profile-classic span6">
 								<ul class="unstyled">
@@ -91,6 +97,10 @@
 									<li>
 										<span class="info-label">截止时间:</span>
 										<?=$order['endTime']?>
+										<?php
+											$differ = cal_time_differ(date("Y-m-d H:i:s",time()),$order['endTime']);
+											echo "（还剩".$differ['day']."天".$differ['hour']."小时".$differ['minute']."分）";
+										?>
 									</li>
 									<li>
 										<span class="info-label">用户截止时间:</span>
@@ -111,7 +121,10 @@
 							</li>
 						</ul>
 					</div>
+					<h3 class="form-section">选择TA列表</h3>
+					<?php $this->load->view(ADMIN_PREFIX."selected_ta_table");?>
 					<h3 class="form-section">订单状态</h3>
+
 					<div class="span12">
 						<div class="span12">
 							<div class="profile-classic span6">
@@ -163,7 +176,7 @@
 											</span>
 
 											<div class="controls" style="margin-left: 0px;">
-												<input type="text"  id="taId" name="taId" data-required="1" class="span6 m-wrap" value="<?=$order['taId']?>">
+												<input type="text"  id="taId" name="taId" data-required="1" class="span7 m-wrap" value="<?=$order['taId']?>">
 											</div>
 										</div>
 									</li>
@@ -185,6 +198,7 @@
 										$('#taken-row').removeClass().addClass("good");
 									}else{
 										$('#taken-row').removeClass().addClass("bad");
+										$('#taId').val("");
 									}
 								}
 								function finish(finishState){

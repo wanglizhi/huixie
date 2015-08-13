@@ -42,16 +42,17 @@ class Ta_model extends CI_Model{
 		}
 	}
 
-	function getUncheckedCondition(){
+	function getUncheckedCondition($searchKey){
 		$this->db->where('hasCheck',FALSE);
+		$this->db->where('(openid like "%'.$searchKey.'%" or email like "%'.$searchKey.'%" or skills like "%'.$searchKey.'%")');
 	}
 
-	function getUnchecked($page,$num){
-		$this->getUncheckedCondition();
+	function getUnchecked($page,$num,$searchKey=""){
+		$this->getUncheckedCondition($searchKey);
 		$query=$this->db->get('ta',$num,($page-1)*$num);
 		if($this->db->affected_rows()){
 			$result['result_rows'] = $query->result();
-			$this->getUncheckedCondition();
+			$this->getUncheckedCondition($searchKey);
 			$query=$this->db->get('ta');
 			$result['result_num_rows'] = $query->num_rows();
 			return json_decode(json_encode($result),true);
@@ -63,16 +64,17 @@ class Ta_model extends CI_Model{
 	}
 
 
-	function getCheckedCondition(){
+	function getCheckedCondition($searchKey){
 		$this->db->where('hasCheck',TRUE);
+		$this->db->where('(openid like "%'.$searchKey.'%" or email like "%'.$searchKey.'%" or skills like "%'.$searchKey.'%")');
 		$this->db->from('ta');
 	}
 
-	function getChecked($page,$num){
-		$this->getCheckedCondition();
+	function getChecked($page,$num,$searchKey=""){
+		$this->getCheckedCondition($searchKey);
 		$result['result_num_rows'] = $this->db->count_all_results();
 		if($this->db->affected_rows()){
-			$this->getCheckedCondition();
+			$this->getCheckedCondition($searchKey);
 			$this->db->limit($num,($page-1)*$num);
 			$query = $this->db->get();
 			$result['result_rows'] = $query->result();
@@ -84,15 +86,16 @@ class Ta_model extends CI_Model{
 		}
 	}
 
-	function getAllCondition(){
+	function getAllCondition($searchKey){
 		$this->db->select('*');
+		$this->db->where('(openid like "%'.$searchKey.'%" or email like "%'.$searchKey.'%" or skills like "%'.$searchKey.'%")');
 		$this->db->from('ta');
 	}
 
-	function getAll($page,$num){
-		$this->getAllCondition();
+	function getAll($page,$num,$searchKey=""){
+		$this->getAllCondition($searchKey);
 		$result['result_num_rows'] = $this->db->count_all_results();
-		$this->getAllCondition();
+		$this->getAllCondition($searchKey);
 		$this->db->limit($num,($page-1)*$num);
 		if($this->db->affected_rows()){
 			$query=$this->db->get();
