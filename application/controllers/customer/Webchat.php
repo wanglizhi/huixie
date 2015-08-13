@@ -15,23 +15,14 @@ class Webchat extends CI_Controller {
 		// $this->Weixin_model->getAllFollower();
 		// $this->Weixin_model->getFollowerInfo('oJWDev7W6DN_6gKuLumLPoOUeky4');
 
-		$this->load->model('Admin_model');
-		$admin = $this->Admin_model->searchByName('admin2');
-
-		// $result =  json_decode(json_encode($admin),true);
-		$result = array('1'=>1, '2'=>3);
-		if($result){
-			echo 'true';
-		}else{
-			echo 'false';
-		}
-		var_dump($result);
+		
 		//$this->Weixin_model->sendTemplateMessage();
 
 		//url encode
 		// 授权接口需要转码
-		// $url = 'http://huixie.me/index.php/user/orderPage';
-		// echo urlencode($url);
+		$url = 'http://huixie.me/index.php/user/orderPage';
+		echo urlencode($url);
+		echo site_url('customer/user/orderPage');
 		
 		$this->log('index end ==================================================>');
 	}

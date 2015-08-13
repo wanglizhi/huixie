@@ -22,8 +22,7 @@ class Selected_ta_model extends CI_Model{
 		$query=$this->db->get('selectedTa',$num,($page-1)*$num);
 		if($this->db->affected_rows()){
 			$result['result_rows'] = $query->result();
-			$query=$this->db->get('selectedTa');
-			$result['result_num_rows'] = $query->num_rows();
+			$result['result_num_rows'] = $this->db->count_all_results();
 			return json_decode(json_encode($result),true);
 		}else{
 			$result['result_rows']=array();

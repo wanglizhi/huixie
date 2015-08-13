@@ -34,11 +34,12 @@ class User extends CustomerController {
 
 
 		$this->load->model('Trade_model');
+		$this->load->model('User_model');
 		$result = $this->Trade_model->searchTradeByUser($user['openid'], $page, $num);
 		$data['tradeList'] = $result['result_rows'];
 		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
 				,"customer/user/tradeList");
-		$data['user'] = $user;
+		$data['user'] = $this->User_model->searchById($user['openid']);
 
 		$this->loadView('user_trade_list', $data);
 

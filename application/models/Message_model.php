@@ -11,7 +11,7 @@ class Message_model extends CI_Model{
 		$template = array(
 			'touser' => $openid,
 			'template_id' => '6FqI2wjXUmfRunkD4zVxVAv_nWZPbb7qnVS80VN08OU',
-			'url' => $url,
+			'url' => $this->getOauthUrl($url),
 			'topcolor' => '#FF0000',
 			'data'=>array(
 				'first' =>array(
@@ -56,7 +56,7 @@ class Message_model extends CI_Model{
 		$template = array(
 			'touser' => $openid,
 			'template_id' => 'PbGUA1ZGH6hh4H1zVpyVcR0jgF3QzTfr6vLPTAoM6yc',
-			'url' => $url,
+			'url' => $this->getOauthUrl($url),
 			'topcolor' => '#FF0000',
 			'data'=>array(
 				'first' =>array(
@@ -93,7 +93,9 @@ class Message_model extends CI_Model{
 		$ret = $this->Http_model->doCurlPostRequest($url, json_encode($template, JSON_UNESCAPED_UNICODE));
 		$retData = json_decode($ret, true);
 	}
-
+	public getOauthUrl($url){
+		return 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri='.urlencode($url).'&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect';
+	}
 
 	
 }
