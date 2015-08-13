@@ -90,7 +90,7 @@ class Ta extends CustomerController {
 				$order,
 				$user['openid'],
 				'订单接单成功！',
-				site_url('customer/ta/takeOrderPage/'.$orderNum.),
+				site_url('customer/ta/takeOrderPage/'.$orderNum),
 				// 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri=http%3A%2F%2Fhuixie.me%2Findex.php%2Fcustomer%2Fta%2FtakeOrderPage%2F'.$orderNum.'&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect',
 				'恭喜你接单成功，请联系客服获得相关材料，完成后将文件发送到admin@huixie.me');
 		}

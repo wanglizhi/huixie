@@ -93,7 +93,7 @@ class Message_model extends CI_Model{
 		$ret = $this->Http_model->doCurlPostRequest($url, json_encode($template, JSON_UNESCAPED_UNICODE));
 		$retData = json_decode($ret, true);
 	}
-	public getOauthUrl($url){
+	function getOauthUrl($url){
 		return 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri='.urlencode($url).'&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect';
 	}
 
