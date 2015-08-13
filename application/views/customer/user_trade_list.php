@@ -37,7 +37,7 @@
 
 			<div class="responsive span6" data-tablet="span6" data-desktop="span3">
 
-				<div class="dashboard-stat green">
+				<div class="dashboard-stat blue">
 					<div class="visual">
 						<i class="icon-credit-card"></i>
 					</div>

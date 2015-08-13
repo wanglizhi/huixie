@@ -57,7 +57,7 @@
 		<label>补充要求：<?php echo $order['requirement'];?></label>
 	</div>
 
-		<?php if($order['taId'] and $order['taId'] == $user['openid']): ?>
+		<?php if($order['taId'] and $order['taId'] == $user['openid'] and $order['hasTaken']): ?>
 			<div class="alert alert-success">
 			<h4>您已经接受此订单</h4>
 			</div>
