@@ -311,6 +311,23 @@
 																	<div class="control-group">
 
 																		<label class="control-label">
+																			原余额:
+																			<span class="required">*</span>
+																		</label>
+																		<div class="controls">
+
+																			<div class="input-prepend span6">
+
+																				<span class="add-on">$</span>
+																				<input id="pre" name="pre" class="m-wrap span12" type="text" value="<?=$user['balance']?>" readOnly>
+																			</div>
+
+																		</div>
+
+																	</div>
+																	<div class="control-group">
+
+																		<label class="control-label">
 																			新余额:
 																			<span class="required">*</span>
 																		</label>
