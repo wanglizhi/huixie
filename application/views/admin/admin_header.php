@@ -43,8 +43,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<!--star -->
 	<link rel="stylesheet" href="media/css/jquery.raty.css" media="screen" type="text/css"/>
 	
+
 	<script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
 	<script src="media/js/jquery.js"></script>
+	<script src="media/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="media/js/jquery.raty.js"></script>
 	<script src="media/js/labs.js" type="text/javascript"></script>
 
