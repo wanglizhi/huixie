@@ -96,7 +96,7 @@
   				<select class="form-control m-wrap span6" name="timezone" id="timezone" required="required">
   					<option></option>
   					<option value="PST8PDT">UTC-8(太平洋时间,洛杉矶)</option>
-  					<option value="MST7CDT">UTC-7(山地时间,丹佛)</option>
+  					<option value="MST7MDT">UTC-7(山地时间,丹佛)</option>
   					<option value="CST6CDT">UTC-6(中央时间,芝加哥)</option>
   					<option value="EST5EDT">UTC-5(东部时间,纽约)</option>
   					<option value="Australia/Perth">UTC+8(澳大利亚时间,珀斯)</option>

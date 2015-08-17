@@ -216,7 +216,7 @@ class Order extends CustomerController {
 				'恭喜你下单成功，请联系客服获得帮助，将参考资料发送到admin@huixie.me');
 
 		//推送给TA
-		$selectList = $this->Selected_ta_model->searchByOrderNum($orderNum);
+		$selectList = $this->Selected_ta_model->searchByOrderNum($order['orderNum']);
 		foreach ($selectList as $select) {
 			$this->Message_model->sendMessageToTa(
 				$order,
