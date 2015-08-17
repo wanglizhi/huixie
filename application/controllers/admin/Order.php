@@ -256,7 +256,7 @@ class Order extends MY_AdminController {
 
 	function updateOrder(){
 		$this->load->model('Order_model');
-		$order = $this->Order_model->searchById($data['orderNum']);
+		$order = $this->Order_model->searchById($_POST['orderNum']);
 		try{
 			$data['hasPaid'] = $_POST['hasPaid'];
 			if($_POST['paidTime']!="")
@@ -307,7 +307,7 @@ class Order extends MY_AdminController {
 				$order,
 				$order['taId'],
 				'订单接单成功！',
-				site_url('customer/ta/takeOrderPage/'.$orderNum),
+				site_url('customer/ta/takeOrderPage/'.$order['orderNum']),
 				'恭喜你接单成功，请联系客服获得相关材料，完成后将文件发送到admin@huixie.me');
 			// 修改TA为有课
 			$ta = $this->Ta_model->searchById($order['taId']);
@@ -334,7 +334,7 @@ class Order extends MY_AdminController {
 				$order,
 				$order['taId'],
 				'您的接单已经完成！',
-				site_url('customer/ta/takeOrderPage/'.$orderNum),
+				site_url('customer/ta/takeOrderPage/'.$order['orderNum']),
 				'恭喜你接单成功，请联系客服获得相关材料，完成后将文件发送到admin@huixie.me');
 			// 修改用户balance，添加交易记录
 			$this->load->model('Trade_model');

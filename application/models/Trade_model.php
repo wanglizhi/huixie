@@ -7,6 +7,7 @@ class Trade_model extends CI_Model{
 
 	function searchTradeByUserCondition($openid){
 		$this->db->where('openid',$openid);
+		$this->db->order_by('createTime', 'desc');
 	}
 
 	function searchTradeByUser($openid,$page,$num){
