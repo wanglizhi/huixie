@@ -5,6 +5,7 @@ class Order extends MY_AdminController {
 		parent::__construct();
 		$this->load->helper('url');
 		$this->load->library('mypagination');
+		$this->load->helper('price');
 	}
 
 	// Admin page
@@ -255,11 +256,16 @@ class Order extends MY_AdminController {
 
 	function updateOrder(){
 		$this->load->model('Order_model');
+		$order = $this->Order_model->searchById($data['orderNum']);
 		try{
 			$data['hasPaid'] = $_POST['hasPaid'];
 			if($_POST['paidTime']!="")
 				$data['paidTime'] = $_POST['paidTime'];
 			$data['hasTaken'] = $_POST['hasTaken'];
+			if($data['hasTaken'] and !$order['hasTaken']){
+				// 将order里的takenPrice改为系统价格
+				$data['takenPrice'] = $data['pageNum'] * UNIT_PRICE;
+			}
 			if($_POST['takenTime']!="")
 				$data['takenTime'] = $_POST['takenTime'];
 			$data['hasFinished'] = $_POST['hasFinished'];
@@ -272,9 +278,95 @@ class Order extends MY_AdminController {
 			$time = 3;
 			header("refresh:$time;url=orderInfo?orderNum=".$_POST['orderNum']);
 			print('出错了...<br>'.$time.'秒后自动跳转。');
- 		}	
+ 		}
+ 		$this->notify($data, $order);
 		$this->Order_model->update($data);
 		redirect(ADMIN_PREFIX.'order/orderInfo?orderNum='.$_POST['orderNum']);
+	}
+	function notify($data, $order){
+		$this->load->model('Message_model');
+		$this->load->model('Selected_ta_model');
+		$this->load->model('Ta_model');
+		$this->load->model('User_model');
+		if($data['hasPaid'] and (!$order['hasPaid'])){
+			//修改为已付款
+			//推送给用户
+			$this->Message_model->sendMessageToUser(
+					$order,
+					$order['userId'],
+					'付款成功，订单详情如下：！',
+					site_url('customer/user/orderDetail/'.$order['orderNum']),
+					'恭喜你下单成功，请联系客服获得帮助，将参考资料发送到admin@huixie.me');
+			// 推送给TA
+		}
+
+		if($data['hasTaken'] and (!$order['hasTaken'])){
+			//修改为已接单
+			$this->Selected_ta_model->takeOrder($order['orderNum']);
+			$this->Message_model->sendMessageToTa(
+				$order,
+				$order['taId'],
+				'订单接单成功！',
+				site_url('customer/ta/takeOrderPage/'.$orderNum),
+				'恭喜你接单成功，请联系客服获得相关材料，完成后将文件发送到admin@huixie.me');
+			// 修改TA为有课
+			$ta = $this->Ta_model->searchById($order['taId']);
+			if($ta and !$ta['state']){
+				$ta['state'] = 1;
+				$this->Ta_model->modify($ta['openid'],$ta);
+			}
+			// 修改订单takenPrice
+			$order['takenPrice'] = getPrice($ta['unitPrice'], $order);
+			$this->Order_model->update($order);
+		}
+
+		if($data['hasFinished'] and (!$order['hasFinished'])){
+			//修改为已完成
+			//推送给用户
+			$this->Message_model->sendMessageToUser(
+				$order,
+				$order['userId'],
+				'您的订单已经完成：！',
+				site_url('customer/user/orderDetail/'.$order['orderNum']),
+				'恭喜你下单成功，请联系客服获得帮助，将参考资料发送到admin@huixie.me');
+			//推送给TA
+			$this->Message_model->sendMessageToTa(
+				$order,
+				$order['taId'],
+				'您的接单已经完成！',
+				site_url('customer/ta/takeOrderPage/'.$orderNum),
+				'恭喜你接单成功，请联系客服获得相关材料，完成后将文件发送到admin@huixie.me');
+			// 修改用户balance，添加交易记录
+			$this->load->model('Trade_model');
+			$user = $this->User_model->searchById($order['userId']);
+			if($order['price'] > $order['takenPrice']){
+				$user['balance'] = $user['balance'] + $order['price'] - $order['takenPrice'];
+				$this->User_model->modify($user['openid'], $user);
+				$trade['openid'] = $user['openid'];
+				$trade['money'] = $order['price'] - $order['takenPrice'];
+				$trade['balance'] = $user['balance'];
+				$trade['orderNum'] = $order['orderNum'];
+				date_default_timezone_set('PRC');
+				$trade['createTime'] = date('Y-m-d h:i:s');
+				$trade['describe'] = '订单支付余额返还';
+				$this->Trade_model->add($trade);
+			}
+			// 修改的TA的balance
+			$ta = $this->Ta_model->searchById($order['taId']);
+			$taInfo = $this->User_model->searchById($order['taId']);
+			if($taInfo){
+				$taInfo['balance'] = $taInfo['balance'] + getPrice($ta['actualPrice'], $order);
+				$this->User_model->modify($taInfo['openid'], $taInfo);
+				$trade['openid'] = $ta['openid'];
+				$trade['money'] = getPrice($ta['actualPrice'], $order);
+				$trade['balance'] = $taInfo['balance'];
+				$trade['orderNum'] = $order['orderNum'];
+				date_default_timezone_set('PRC');
+				$trade['createTime'] = date('Y-m-d h:i:s');
+				$trade['describe'] = 'TA接单收入';
+				$this->Trade_model->add($trade);
+			}
+		}
 	}
 
 	function deleteOrder(){

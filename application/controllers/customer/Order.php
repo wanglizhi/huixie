@@ -162,6 +162,12 @@ class Order extends CustomerController {
 		$this->load->model('User_model');
 		$this->load->model('Selected_ta_model');
 
+		//判断是否已经付款，避免重复~
+		$order = $this->Order_model->searchById($order['orderNum']);
+		if($order['hasPaid']){
+			redirect('customer/user/orderDetail/'.$order['orderNum']);
+		}
+
 		if($useBalance>0){
 			//如果使用了余额, 用户balance改变
 			$this->User_model->addBalance($user['openid'], 0-$useBalance, "余额支付订单", $order['orderNum']);
@@ -203,7 +209,6 @@ class Order extends CustomerController {
 			$data['createTime'] = date('Y-m-d h:i:s');
 			$this->Selected_ta_model->add($data);
 		}
-		
 		//跳转到接单界面
 		redirect('customer/user/orderDetail/'.$order['orderNum']);
 	}

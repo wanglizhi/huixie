@@ -54,7 +54,7 @@
 							</div>
 						<?php  endif?>
 
-			<form action="<?php echo site_url('customer/order/addOrder');?>" method="post">
+			<form action="<?php echo site_url('customer/order/addOrder');?>" method="post" onsubmit="return checkForm()">
   			<div class="form-group">
     			<label for="major">专业<font color='red'>*</font></label>
     			<div id="city_5">
@@ -135,7 +135,7 @@
 
 		<script>
 		jQuery(document).ready(function() {
-		   	
+		   	//初始化专业二级选框
 			var json = new Object();
 	   		var citylist = new Array();
 			for (var i = 0; i < major_array.length; i++) {
@@ -164,4 +164,16 @@
 				nodata:"none"
 			});
 		});
+		function checkForm(){
+			var today = new Date();
+			var date = $('#endDate').val();
+			var time = $('#endTime').val();
+			var endTime = date+' '+time;
+			entTime = moment(endTime, "YYYY-MM-DD h:mm");
+			if(moment(endTime).isBefore(today)){
+				alert('请选择合适的截止日期，应该大于当前日期！');
+				return false;
+			}
+			return true;
+		}
 	</script>

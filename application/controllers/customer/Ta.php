@@ -76,9 +76,14 @@ class Ta extends CustomerController {
 	}
 	function takeOrder(){
 		$this->load->model('Order_model');
+		$this->load->model('Ta_model');
 		$user = $_SESSION['user'];
 		$orderNum = $_POST['orderNum'];
 		$order = $this->Order_model->searchById($orderNum);
+		//已经接单则跳转
+		if($order['hasTaken']){
+			redirect('customer/ta/takeOrderPage/'.$orderNum);
+		}
 		// TA接单
 		if($this->Order_model->takeOrder($orderNum, $user['openid'])){
 			// 更新SelectedTa
@@ -94,13 +99,16 @@ class Ta extends CustomerController {
 				// 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri=http%3A%2F%2Fhuixie.me%2Findex.php%2Fcustomer%2Fta%2FtakeOrderPage%2F'.$orderNum.'&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect',
 				'恭喜你接单成功，请联系客服获得相关材料，完成后将文件发送到admin@huixie.me');
 		}
+
 		// 将用户状态修改为有课
-		$this->load->model('Ta_model');
-		$result = $this->Ta_model->searchById($user['openid']);
-		if(!$result['state']){
-			$result['state'] = 1;
-			$this->Ta_model->modify($result['openid'],$result);
+		$ta = $this->Ta_model->searchById($user['openid']);
+		if(!$ta['state']){
+			$ta['state'] = 1;
+			$this->Ta_model->modify($ta['openid'],$ta);
 		}
+		// 修改订单takenPrice
+		$order['takenPrice'] = $ta['unitPrice'] * $order['pageNum'];
+		$this->Order_model->update($order);
 
 		redirect('customer/ta/takeOrderPage/'.$orderNum);
 

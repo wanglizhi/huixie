@@ -42,6 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <script type="text/javascript" src="js/jquery.cityselect.js"></script>
   <script type="text/javascript" src="js/majorData.js"></script>
   <script src="media/js/jquery.raty.js"></script>
+  <script type="text/javascript" src="js/moment.js"></script>
 </head>
 <!-- END HEAD -->
 
