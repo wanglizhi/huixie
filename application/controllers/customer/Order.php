@@ -3,6 +3,7 @@
 class Order extends CustomerController {
 	function __construct(){
 		parent::__construct();
+		$this->load->helper('price');
 	}
 	function index(){
 		$this->addOrderPage();
@@ -70,7 +71,7 @@ class Order extends CustomerController {
 		$this->load->model('User_model');
 		$this->load->model('Order_model');
 		$order = $this->Order_model->searchById($orderNum);
-		$_SESSION['order'] = $order;
+		
 		$taList = $this->Ta_model->searchBySkills($order['major']);
 		$length = count($taList);
 		for ($i=0; $i < $length; $i++) {
@@ -86,22 +87,40 @@ class Order extends CustomerController {
 		// $taList = array('1'=>$ta1, '2'=>$ta2);
 
 		$data['taList'] = $taList;
+		$data['orderNum'] = $orderNum;
 		$this->loadView('select_ta',$data);
 	}
-
-	function payOrderPage(){
-		// 如果没有TA选择，如何处理。。。。
-
-		$user = $_SESSION['user'];
+	function selectTa($orderNum){
+		$this->load->model('Selected_ta_model');
+		$selectList = $this->Selected_ta_model->searchByOrderNum($orderNum);
+		if($selectList){
+			$this->Selected_ta_model->delete($orderNum);
+		}
 		if(isset($_POST['taIdList'])){
 			$taIdList = $_POST['taIdList'];
+			foreach ($taIdList as $taId) {
+				//数据库添加选择的TA列表
+				$data['taId'] = $taId;
+				$data['orderNum'] = $orderNum;
+				date_default_timezone_set('PRC');
+				$data['createTime'] = date('Y-m-d h:i:s');
+				$this->Selected_ta_model->add($data);
+			}
+		}
+		redirect('customer/order/payOrderPage/'.$orderNum.'/1');
+	}
+
+	function payOrderPage($orderNum, $force=0){
+		$user = $_SESSION['user'];
+		$this->load->model('Selected_ta_model');
+		$selectList = $this->Selected_ta_model->searchByOrderNum($orderNum);
+		if($selectList){
 			$taList = array();
 			$this->load->model('Ta_model');
 			$max = 0;
 			$min = 100000;
-			foreach ($taIdList as $taId) {
-				//ta 对象里要加userInfo项目
-				$ta = $this->Ta_model->searchById($taId);
+			foreach ($selectList as $select) {
+				$ta = $this->Ta_model->searchById($select['taId']);
 				$taList[$taId] = $ta;
 				if($ta['unitPrice'] > $max){
 					$max = $ta['unitPrice'];
@@ -110,28 +129,34 @@ class Order extends CustomerController {
 					$min = $ta['unitPrice'];
 				}
 			}
-
 		}else{
-			$max = $min = UNIT_PRICE;
-			$taList = array();
+			//如果为空
+			//force = 1表示不选择TA，强制判断
+			if($force){
+				$max = $min = UNIT_PRICE;
+				$taList = array();
+			}else{
+				//默认自动判断，如果没有选择，就跳转
+				redirect('customer/order/taSelectPage/'.$orderNum);
+			}
 		}
+		
+		// 如果没有TA选择，如何处理。。。。
 		
 		$this->load->model('Order_model');
 		$order = $this->Order_model->searchById($_SESSION['order']['orderNum']);
 
 		$data['order'] = $order;
 		$data['taList'] = $taList;
-		$data['max'] = $max * $order['pageNum'];
-		$data['min'] = $min * $order['pageNum'];
+		$data['max'] = getPrice($max, $order);
+		$data['min'] = getPrice($min, $order);
 		$sessionId = session_id();
 		$data['sessionId'] = $sessionId;
 		$data['user'] = $user;
 		//添加到session
 		$_SESSION['price'] = $data['max'];
-		$_SESSION['taList'] = $taList;
+		$_SESSION['order'] = $order;
 
-
-		
 		//数据测试
 		// $data['max'] = 100;
 		// $data['min'] = 10;
@@ -191,23 +216,15 @@ class Order extends CustomerController {
 				'恭喜你下单成功，请联系客服获得帮助，将参考资料发送到admin@huixie.me');
 
 		//推送给TA
-		$selectedTa = $_SESSION['taList'];
-
-		foreach ($selectedTa as $ta) {
+		$selectList = $this->Selected_ta_model->searchByOrderNum($orderNum);
+		foreach ($selectList as $select) {
 			$this->Message_model->sendMessageToTa(
 				$order,
-				$ta['openid'],
+				$select['taId'],
 				'有新的订单提醒',
 				site_url('customer/ta/takeOrderPage/'.$order['orderNum']),
 				// 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri=http%3A%2F%2Fhuixie.me%2Findex.php%2Fcustomer%2Fta%2FtakeOrderPage%2F'.$order['orderNum'].'&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect',
 				'请您及时接单，并且联系客服获得相关材料');
-
-			//数据库添加选择的TA列表
-			$data['taId'] = $ta['openid'];
-			$data['orderNum'] = $order['orderNum'];
-			date_default_timezone_set('PRC');
-			$data['createTime'] = date('Y-m-d h:i:s');
-			$this->Selected_ta_model->add($data);
 		}
 		//跳转到接单界面
 		redirect('customer/user/orderDetail/'.$order['orderNum']);

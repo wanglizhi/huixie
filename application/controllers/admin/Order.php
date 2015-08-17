@@ -298,26 +298,35 @@ class Order extends MY_AdminController {
 					site_url('customer/user/orderDetail/'.$order['orderNum']),
 					'恭喜你下单成功，请联系客服获得帮助，将参考资料发送到admin@huixie.me');
 			// 推送给TA
+			$selectList = $this->Selected_ta_model->searchByOrderNum($order['orderNum']);
+			foreach ($selectList as $select) {
+				$this->Message_model->sendMessageToTa(
+					$order,
+					$select['taId'],
+					'有新的订单提醒',
+					site_url('customer/ta/takeOrderPage/'.$order['orderNum']),
+					'请您及时接单，并且联系客服获得相关材料');
+			}
+
 		}
 
 		if($data['hasTaken'] and (!$order['hasTaken'])){
 			//修改为已接单
 			$this->Selected_ta_model->takeOrder($order['orderNum']);
-			$this->Message_model->sendMessageToTa(
-				$order,
-				$order['taId'],
-				'订单接单成功！',
-				site_url('customer/ta/takeOrderPage/'.$order['orderNum']),
-				'恭喜你接单成功，请联系客服获得相关材料，完成后将文件发送到admin@huixie.me');
-			// 修改TA为有课
+			// 修改TA为有课、以及推送消息
 			$ta = $this->Ta_model->searchById($order['taId']);
-			if($ta and !$ta['state']){
-				$ta['state'] = 1;
-				$this->Ta_model->modify($ta['openid'],$ta);
+			if($ta){
+				if($ta['state']==0){
+					$ta['state'] = 1;
+					$this->Ta_model->modify($ta['openid'],$ta);
+				}
+				$this->Message_model->sendMessageToTa(
+					$order,
+					$order['taId'],
+					'订单接单成功！',
+					site_url('customer/ta/takeOrderPage/'.$order['orderNum']),
+					'恭喜你接单成功，请联系客服获得相关材料，完成后将文件发送到admin@huixie.me');
 			}
-			// 修改订单takenPrice
-			$order['takenPrice'] = getPrice($ta['unitPrice'], $order);
-			$this->Order_model->update($order);
 		}
 
 		if($data['hasFinished'] and (!$order['hasFinished'])){

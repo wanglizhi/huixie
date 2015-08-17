@@ -48,7 +48,7 @@
 							<div class="portlet-body center">
 							
 			
-<form action="<?php echo site_url('customer/order/payOrderPage');?>" method="post">
+<form action="<?php echo site_url('customer/order/selectTa/'.$orderNum);?>" method="post">
 
 <?php if(!empty($taList))foreach ($taList as $ta):?>
 	<div class="checkbox span6 alert alert-info">
