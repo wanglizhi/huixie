@@ -121,7 +121,7 @@ class Order extends CustomerController {
 			$min = 100000;
 			foreach ($selectList as $select) {
 				$ta = $this->Ta_model->searchById($select['taId']);
-				$taList[$taId] = $ta;
+				$taList[$ta['openid']] = $ta;
 				if($ta['unitPrice'] > $max){
 					$max = $ta['unitPrice'];
 				}
