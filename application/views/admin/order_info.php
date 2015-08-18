@@ -72,6 +72,7 @@
 										<span class="info-label">创建时间:</span>
 										<?=$order['createTime']?>
 										<?php
+										date_default_timezone_set("PRC");
 										$differ = cal_time_differ($order['createTime'],date("Y-m-d H:i:s",time()));
 										echo "（已过去".$differ['day']."天".$differ['hour']."小时".$differ['minute']."分）";
 										?>
