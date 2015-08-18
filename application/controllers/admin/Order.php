@@ -314,7 +314,7 @@ class Order extends MY_AdminController {
 			//修改为已接单
 			$this->Selected_ta_model->takeOrder($order['orderNum']);
 			// 修改TA为有课、以及推送消息
-			$ta = $this->Ta_model->searchById($order['taId']);
+			$ta = $this->Ta_model->searchById($data['taId']);
 			if($ta){
 				if($ta['state']==0){
 					$ta['state'] = 1;
