@@ -110,7 +110,7 @@ class Ta extends CustomerController {
 		// 修改订单takenPrice
 		$newOrder = $this->Order_model->searchById($orderNum);
 		$newOrder['takenPrice'] = getPrice($ta['unitPrice'], $newOrder);
-		$this->Order_model->update($order);
+		$this->Order_model->update($newOrder);
 
 		redirect('customer/ta/takeOrderPage/'.$orderNum);
 
