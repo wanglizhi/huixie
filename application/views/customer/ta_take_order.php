@@ -55,6 +55,21 @@
 		<label>阅读材料页数：<?php echo $order['refDoc'];?></label>
 		<label>截止日期：<?php echo $order['endTime'];?></label>
 		<label>补充要求：<?php echo $order['requirement'];?></label>
+		<label>订单状态：
+		<?php if($order['hasTaken']==0): ?>
+			<span class="label label-warning">已付款&nbsp<?php
+			echo $order['paidTime'];
+		?></span>
+		<?php elseif($order['hasFinished']==0): ?>
+			<span class="label label-info">已接单&nbsp<?php 
+			echo $order['takenTime'];
+		?></span>
+		<?php else: ?>
+			<span class="label label-success">已完成&nbsp<?php 
+			echo $order['finishedTime'];
+		?></span>
+		<?php endif; ?>
+		</label>
 	</div>
 
 		<?php if($order['taId'] and $order['taId'] == $user['openid'] and $order['hasTaken']): ?>

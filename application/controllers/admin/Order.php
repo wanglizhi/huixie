@@ -335,16 +335,16 @@ class Order extends MY_AdminController {
 			$this->Message_model->sendMessageToUser(
 				$order,
 				$order['userId'],
-				'您的订单已经完成：！',
+				'订单完成！',
 				site_url('customer/user/orderDetail/'.$order['orderNum']),
-				'恭喜你下单成功，请联系客服获得帮助，将参考资料发送到admin@huixie.me');
+				'恭喜！您的订单已经完成，如有问题请咨询客服，欢迎继续使用！');
 			//推送给TA
 			$this->Message_model->sendMessageToTa(
 				$order,
 				$order['taId'],
 				'您的接单已经完成！',
 				site_url('customer/ta/takeOrderPage/'.$order['orderNum']),
-				'恭喜你接单成功，请联系客服获得相关材料，完成后将文件发送到admin@huixie.me');
+				'恭喜你完成订单，欢迎继续使用！结账请联系客服~');
 			// 修改用户balance，添加交易记录
 			$this->load->model('Trade_model');
 			$user = $this->User_model->searchById($order['userId']);
