@@ -8,8 +8,6 @@
 
 	//计算相差时间
 	function cal_time_differ($t1,$t2){
-		echo $t2;
-		date_default_timezone_set("PRC");
 		$d1 = strtotime($t1);
 		$d2 = strtotime($t2);
 		$differ = $d2-$d1;
