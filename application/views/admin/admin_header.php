@@ -147,7 +147,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			<li class="">
 				<a href="javascript:;">
-					<i class="icon-cogs"></i> 
+					<i class="icon-user"></i> 
 					<span class="title">用户管理</span>
 					<span class="arrow "></span>
 				</a>
@@ -158,7 +158,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 			<li class="">
 				<a href="javascript:;">
-					<i class="icon-cogs"></i> 
+					<i class="icon-group"></i> 
 					<span class="title">TA管理</span>
 					<span class="arrow "></span>
 				</a>
@@ -180,7 +180,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 						<li class="">
 							<a href="javascript:;">
-								<i class="icon-cogs"></i> 
+								<i class="icon-shopping-cart"></i> 
 								<span class="title">订单管理</span>
 								<span class="arrow "></span>
 							</a>
@@ -196,7 +196,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 						<li class="">
 							<a href="javascript:;">
-								<i class="icon-cogs"></i> 
+								<i class="icon-female"></i> 
 								<span class="title">Admin管理</span>
 								<span class="arrow "></span>
 							</a>

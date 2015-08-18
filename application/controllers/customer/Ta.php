@@ -5,6 +5,7 @@ class Ta extends CustomerController {
 		parent::__construct();
 		$this->load->model('Http_model');
 		$this->load->library('mypagination');
+		$this->load->helper('price');
 	}
 	function registerPage(){
 		$user = $_SESSION['user'];
@@ -107,7 +108,8 @@ class Ta extends CustomerController {
 			$this->Ta_model->modify($ta['openid'],$ta);
 		}
 		// 修改订单takenPrice
-		$order['takenPrice'] = $ta['unitPrice'] * $order['pageNum'];
+		$newOrder = $this->Order_model->searchById($orderNum);
+		$newOrder['takenPrice'] = getPrice($ta['unitPrice'], $newOrder);
 		$this->Order_model->update($order);
 
 		redirect('customer/ta/takeOrderPage/'.$orderNum);
