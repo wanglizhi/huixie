@@ -23,7 +23,7 @@
 				<td> <?php echo $trade['balance'];?> </td>
 				<td> <?php echo $trade['orderNum'];?> </td>
 				<td> <?php echo $trade['createTime'];?> </td>
-				<td> <abbr title="attribute"><?php echo $trade['describe'];?></abbr></td>
+				<td> <abbr title="<?php echo $trade['describe']?>"><?php echo mb_substr(($trade['describe']),0,10,'utf-8')."...";?></abbr></td>
 
 			</tr>
 		<?php endforeach;?>
