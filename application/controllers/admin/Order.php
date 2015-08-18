@@ -264,7 +264,7 @@ class Order extends MY_AdminController {
 			$data['hasTaken'] = $_POST['hasTaken'];
 			if($data['hasTaken'] and !$order['hasTaken']){
 				// 将order里的takenPrice改为系统价格
-				$data['takenPrice'] = $data['pageNum'] * UNIT_PRICE;
+				$data['takenPrice'] = getPrice(UNIT_PRICE, $order);
 			}
 			if($_POST['takenTime']!="")
 				$data['takenTime'] = $_POST['takenTime'];
