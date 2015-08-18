@@ -3,11 +3,11 @@
 		<thead>
 			<tr>
 				<th>交易ID</th>
-				<th>用户ID</th>
 				<th>金额</th>
 				<th>余额</th>
 				<th>订单编号</th>
 				<th>创建时间</th>
+				<th>描述</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -18,14 +18,12 @@
 			<?php if(!empty($tradeList)):?>
 			<?php foreach ($tradeList as $trade):?>
 			<tr detail="close">
-				<td>
-					<a href="javascript:void(0);" onclick="showTradeDetail(this,'<?=$trade['describe']?>')"><?=$trade['id']?></a>
-				</td>
-				<td> <?php echo $trade['openid'];?> </td>
+				<td><?=$trade['id']?></td>
 				<td> <?php echo $trade['money'];?> </td>
 				<td> <?php echo $trade['balance'];?> </td>
 				<td> <?php echo $trade['orderNum'];?> </td>
 				<td> <?php echo $trade['createTime'];?> </td>
+				<td> <abbr title="<?php echo $trade['describe']?>"><?php echo mb_substr(($trade['describe']),0,10,'utf-8')."...";?></abbr></td>
 
 			</tr>
 		<?php endforeach;?>
@@ -39,23 +37,6 @@
 </table>
 
 <script type="text/javascript">
-function showTradeDetail(detailButton,detail){
-	var tr = $(detailButton).closest('tr');
-	if($(tr).attr("detail")=="open"){
-		var tr1 = $(tr).next();
-		tr1.remove();
-		$(tr).attr("detail","close");
-	}else{
-		var tr1 = " \
-			<tr> \
-				<td>描述:</td> \
-				<td class='details' colspan='5'>"+detail+"</td> \
-			</tr> \
-		";
-		$(tr).after(tr1);
-		$(tr).attr("detail","open");
-	}
-}
 </script>
 
 <?php
