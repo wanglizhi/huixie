@@ -50,6 +50,7 @@ class Order extends CustomerController {
 		date_default_timezone_set('PRC');
 		$data['createTime'] = date('Y-m-d h:i:s');
 		$data['orderNum'] = time();
+		$data['price'] = getPrice(UNIT_PRICE, $data);
 		if(!(isset($data['major']) and isset($data['courseName']) and isset($data['userId']) and isset($data['email'])) ){
 			$notice = '信息填写错误';
 			redirect('customer/order/addOrderPage/'.$notice);
@@ -92,10 +93,14 @@ class Order extends CustomerController {
 	}
 	function selectTa($orderNum){
 		$this->load->model('Selected_ta_model');
+		$this->load->model('Ta_model');
+		$this->load->model('Order_model');
 		$selectList = $this->Selected_ta_model->searchByOrderNum($orderNum);
 		if($selectList){
 			$this->Selected_ta_model->delete($orderNum);
 		}
+		$max = 0;
+		$min = 100000;
 		if(isset($_POST['taIdList'])){
 			$taIdList = $_POST['taIdList'];
 			foreach ($taIdList as $taId) {
@@ -105,8 +110,23 @@ class Order extends CustomerController {
 				date_default_timezone_set('PRC');
 				$data['createTime'] = date('Y-m-d h:i:s');
 				$this->Selected_ta_model->add($data);
+				//求最大和最小price
+				$ta = $this->Ta_model->searchById($taId);
+				if($ta['unitPrice'] > $max){
+					$max = $ta['unitPrice'];
+				}
+				if($ta['unitPrice'] < $min){
+					$min = $ta['unitPrice'];
+				}
 			}
+		}else{
+			$max = UNIT_PRICE;
 		}
+		//选择TA后更新价格信息
+		$order = $this->Order_model->searchById($orderNum);
+		$order['price'] = getPrice($max, $order);
+		$this->Order_model->update($order);
+		
 		redirect('customer/order/payOrderPage/'.$orderNum.'/1');
 	}
 
