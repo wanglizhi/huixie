@@ -65,7 +65,7 @@
 		<label>订单状态：
 		<?php if($order['hasPaid']==0): ?>
 			<span class="label label-default">未付款</span>
-			<a class="btn green mini" href="<?php echo site_url('customer/order/taSelectPage/'.$order['orderNum']);?>"><i class="icon-shopping-cart"></i>&nbsp去结算</a>
+			<a class="btn green mini" href="<?php echo site_url('customer/order/payOrderPage/'.$order['orderNum']);?>"><i class="icon-shopping-cart"></i>&nbsp去结算</a>
 		<?php elseif($order['hasTaken']==0): ?>
 			<span class="label label-warning">已付款&nbsp<?php 
 			date_default_timezone_set("PRC");

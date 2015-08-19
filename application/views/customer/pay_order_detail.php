@@ -109,7 +109,7 @@
 
 	<div class="form-actions">
   			<a href="<?php echo site_url('customer/order/payOrder/'.$max);?>" class="btn green hide" id="submitOrder" role="button">提交订单</a>
-  			<a href="<?php echo site_url('customer/order/taSelectPage/'.$order['orderNum']);?>" class="btn blue" role="button">返回修改</a>
+  			<a href="<?php echo site_url('customer/order/taSelectPage/'.$order['orderNum']);?>" class="btn blue" style="display: inline;" id="modifyTa"role="button">返回修改</a>
   	</div>
 
 							</div>
@@ -180,6 +180,7 @@
 				$('#payPrice').html(payPrice);
 				$('#payOption').show();
 				$('#submitOrder').hide();
+				$('#modifyTa').show();
 			}
 		}
 
