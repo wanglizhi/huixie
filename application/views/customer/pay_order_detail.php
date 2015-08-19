@@ -129,15 +129,15 @@
 		var balance = <?php echo $user['balance'];?>;
 		function postPaypal(){
 			console.log('payPrice'+payPrice);
-			alert('payPrice'+payPrice);
+			// alert('payPrice'+payPrice);
 			var url = "https://www.sandbox.paypal.com/cgi-bin/webscr";
 			var params =
 			{
 				cmd: "_xclick",
 				business: "acount@huixie.me",
-				item_name: <?php echo $sessionId;?>,
-				item_number: <?php echo $order['orderNum'];?>,
-				cancel_return: "<?php echo site_url("customer/user/orderDetail/".$order['orderNum']);?>",
+				item_name: "<?php echo $sessionId;?>",
+				item_number: "<?php echo $order['orderNum'];?>",
+				cancel_return: "<?php echo site_url('customer/user/orderDetail/'.$order['orderNum']);?>",
 				return: "<?php echo site_url('customer/order/payOrder');?>"+"/"+payPrice,
 				notify_url: "<?php echo site_url('customer/payment/paypalNotify');?>",
 				amount: payPrice,
@@ -163,10 +163,10 @@
 			if($('#checkBalance').attr('checked')){
 				// console.log('checked');
 				// console.log(balance);
-				alert('checked');
+				// alert('checked');
 				if(balance < max){
 					payPrice = max - balance;
-					$('#payPrice').html(payPrice);
+					$('#payPrice').html(payfPrice);
 				}else{
 					payPrice = 0;
 					$('#payPrice').html(payPrice);
@@ -174,7 +174,7 @@
 					$('#submitOrder').show();
 				}
 			}else{
-				alert('unchecked');
+				// alert('unchecked');
 				// console.log('unchecked');
 				payPrice = <?php echo $max;?>;
 				$('#payPrice').html(payPrice);
