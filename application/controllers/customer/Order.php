@@ -36,7 +36,6 @@ class Order extends CustomerController {
 		date_default_timezone_set("PRC");
 		$data['endTime'] = date("Y-m-d H:i:s",$timestamp);
 		$data['timezone'] = $timezone;
-
 		$data['major'] = $_POST['prov'].'-'.$_POST['city'];
 		$data['courseName'] = $_POST['courseName'];
 		$data['email'] = $_POST['email'];
@@ -49,7 +48,7 @@ class Order extends CustomerController {
 		// $str4 = substr($str,-4,4);
 		date_default_timezone_set('PRC');
 		$data['createTime'] = date('Y-m-d h:i:s');
-		$data['orderNum'] = time();
+		$data['orderNum'] = substr($user['openid'],-4,4).time();
 		$data['price'] = getPrice(UNIT_PRICE, $data);
 		if(!(isset($data['major']) and isset($data['courseName']) and isset($data['userId']) and isset($data['email'])) ){
 			$notice = '信息填写错误';
@@ -164,7 +163,7 @@ class Order extends CustomerController {
 		// 如果没有TA选择，如何处理。。。。
 		
 		$this->load->model('Order_model');
-		$order = $this->Order_model->searchById($_SESSION['order']['orderNum']);
+		$order = $this->Order_model->searchById($orderNum);
 
 		$data['order'] = $order;
 		$data['taList'] = $taList;
@@ -178,21 +177,21 @@ class Order extends CustomerController {
 		$_SESSION['order'] = $order;
 
 		//数据测试
-		// $data['max'] = 100;
-		// $data['min'] = 10;
-		// $data['order'] = array('orderNum'=>1234567,'courseName'=>'设计与实现','major'=>'软件工程', 'pageNum'=>10, 'refDoc'=>6, 'endTime'=>'2015-6-10','timezone'=>'EST5EDT', 'requirement'=>'没有什么要求，好好写就行');
-		// $ta1 = array('openid'=> '123456677', 'unitPrice' => 100, 'star'=> 4.0, 'introduction'=>'我来自哈佛，学习成绩非常好！',
-		// 	'userInfo'=>array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
-		// 		'nickname'=>'nickname'));
-		// $ta2 = array('openid'=> '123456677', 'unitPrice' => 100, 'star'=> 4.0, 'introduction'=>'我来自哈佛，学习成绩非常好！',
-		// 	'userInfo'=>array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
-		// 		'nickname'=>'nickname'));
-		// $taList = array('1'=>$ta1, '2'=>$ta2);
-		// $data['sessionId'] = 0;
-		// $data['taList'] = $taList;
-		// $user = array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
-		// 		'nickname'=>'nickname', 'country'=>'中国', 'city'=>'南京', 'sex'=>1, 'university'=>'南京大学', 'email'=>'user@qq.com', 'openid'=>12, 'balance'=>1000);
-		// $data['user'] = $user;
+		$data['max'] = 100;
+		$data['min'] = 10;
+		$data['order'] = array('orderNum'=>1234567,'courseName'=>'设计与实现','major'=>'软件工程', 'pageNum'=>10, 'refDoc'=>6, 'endTime'=>'2015-6-10','timezone'=>'EST5EDT', 'requirement'=>'没有什么要求，好好写就行');
+		$ta1 = array('openid'=> '123456677', 'unitPrice' => 100, 'star'=> 4.0, 'introduction'=>'我来自哈佛，学习成绩非常好！',
+			'userInfo'=>array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
+				'nickname'=>'nickname'));
+		$ta2 = array('openid'=> '123456677', 'unitPrice' => 100, 'star'=> 4.0, 'introduction'=>'我来自哈佛，学习成绩非常好！',
+			'userInfo'=>array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
+				'nickname'=>'nickname'));
+		$taList = array('1'=>$ta1, '2'=>$ta2);
+		$data['sessionId'] = 0;
+		$data['taList'] = $taList;
+		$user = array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
+				'nickname'=>'nickname', 'country'=>'中国', 'city'=>'南京', 'sex'=>1, 'university'=>'南京大学', 'email'=>'user@qq.com', 'openid'=>12, 'balance'=>1000);
+		$data['user'] = $user;
 
 
 		$this->loadView('pay_order_detail',$data);

@@ -60,7 +60,7 @@
 							<label>订单状态：
 							<?php if($order['hasPaid']==0): ?>
 								<span class="label label-default">未付款</span>
-								<a class="btn green mini" href="<?php echo site_url('customer/order/taSelectPage/'.$order['orderNum']);?>"><i class="icon-shopping-cart"></i>&nbsp去结算</a>
+								<a class="btn green mini" href="<?php echo site_url('customer/order/payOrderPage/'.$order['orderNum']);?>"><i class="icon-shopping-cart"></i>&nbsp去结算</a>
 								<a class="btn red mini" data-toggle="modal" data-target="#delete<?=$orderRow?>"><i class="icon-trash"></i>&nbsp删除订单</a>
 								
 								<!-- Modal -->
