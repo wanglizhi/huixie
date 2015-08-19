@@ -129,6 +129,7 @@
 		var balance = <?php echo $user['balance'];?>;
 		function postPaypal(){
 			console.log('payPrice'+payPrice);
+			alert('payPrice'+payPrice);
 			var url = "https://www.sandbox.paypal.com/cgi-bin/webscr";
 			var params =
 			{
@@ -160,9 +161,9 @@
 		}
 		function useBalance(){
 			if($('#checkBalance').attr('checked')){
-				console.log('checked');
-				console.log(balance);
-				// alert('checked');
+				// console.log('checked');
+				// console.log(balance);
+				alert('checked');
 				if(balance < max){
 					payPrice = max - balance;
 					$('#payPrice').html(payPrice);
@@ -173,8 +174,8 @@
 					$('#submitOrder').show();
 				}
 			}else{
-				// alert('unchecked');
-				console.log('unchecked');
+				alert('unchecked');
+				// console.log('unchecked');
 				payPrice = <?php echo $max;?>;
 				$('#payPrice').html(payPrice);
 				$('#payOption').show();
