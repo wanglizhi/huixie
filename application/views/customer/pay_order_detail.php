@@ -91,7 +91,7 @@
 		<a class="btn blue btn-block" href="javascript:void(0)" onclick="postPaypal()">Paypal</a><br>
 		<a class="btn green btn-block" link="">微信支付</a>
 
-		<!-- <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
+		 <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
 		<input type="hidden" name="cmd" value="_xclick">
 		<input type="hidden" name="business" value="acount@huixie.me">
 		<input type="hidden" name="item_name" value="<?php echo $sessionId;?>">
@@ -104,7 +104,7 @@
 		<input type="hidden" name="no_note" value="1"> 
 		<input type="hidden" name="currency_code" value="USD">
 		<input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_paynowCC_LG.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!"> 
-		</form> -->
+		</form> 
 	</div>
 
 	<div class="form-actions">

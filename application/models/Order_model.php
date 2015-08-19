@@ -137,13 +137,15 @@ class Order_model extends CI_Model{
 	}
 	function takeOrder($orderNum, $taId){
 		$data = $this->searchById($orderNum);
+		if($data['hasTaken']){
+			return false;
+		}
 		$data['taId'] = $taId;
 		date_default_timezone_set('PRC');
 		$data['takenTime'] = date('Y-m-d h:i:s');
 		$data['hasTaken'] = 1;
 		$this->db->where('orderNum',$orderNum);
 		$this->db->update('order',$data);
-		//接单时间
 		return $this->db->affected_rows();
 	}
 	function selectTa($data){

@@ -4,6 +4,7 @@ class Oauth extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->helper('url');
+		$this->load->helper('datetime');
 	}
 	function testModel(){
 		$this->load->model('Ta_model');
@@ -14,7 +15,8 @@ class Oauth extends CI_Controller {
 		// $this->load->view('customer/test');
 		// $ch = curl_init('https://www.paypal.com/cgi-bin/webscr');
 		//sleep(5);
-		$this->load->model('Ta_model');
+		// $this->load->model('Ta_model');
+		echo getNow();
 
 		// header("refresh:3;url=oauth/check");
 		// print('信息错误，添加失败...<br>3秒后自动跳转。');

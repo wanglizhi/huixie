@@ -199,7 +199,6 @@ class Order extends CustomerController {
 	}
 	// 付款
 	function payOrder($useBalance=0){
-		$this->log('enter payOrder');
 		$user = $_SESSION['user'];
 		$order = $_SESSION['order'];
 		$this->load->model('Message_model');
@@ -249,26 +248,5 @@ class Order extends CustomerController {
 		//跳转到接单界面
 		redirect('customer/user/orderDetail/'.$order['orderNum']);
 	}
-
-		//写内容到文件，log日志功能
-	private function log($str){  
-        $mode='a';//追加方式写  
-        $file = "log.txt";  
-        $oldmask = @umask(0);  
-        $fp = @fopen($file,$mode); 
-        @flock($fp, 3);  
-        if(!$fp)  
-        {  
-            Return false;  
-        }  
-        else  
-        {  
-            @fwrite($fp,date('Y-m-d h:i:sa').' --> '.$str."\n");  
-            @fclose($fp);  
-            @umask($oldmask);  
-            Return true;  
-        }  
-    }
-
 
 }

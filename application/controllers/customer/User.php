@@ -99,11 +99,10 @@ class User extends CustomerController {
 		$user = $_SESSION['user'];
 		$this->load->model('Order_model');
 		$order = $this->Order_model->searchById($orderNum);
-		if($order['userId'] == $user['openid']){
+		if($order and $order['userId'] == $user['openid']){
 			$this->Order_model->delete($orderNum);
 		}
 		redirect('customer/user/unpaidOrderList');
-		$this->unpaidOrderList();
 	}
 
 	function orderList($page = 1,$num = ITEMS_PER_PAGE){

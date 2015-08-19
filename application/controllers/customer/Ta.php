@@ -55,14 +55,10 @@ class Ta extends CustomerController {
 	}
 
 
-
-
 	// 接单界面
 	function takeOrderPage($orderNum){
 		$user = $_SESSION['user'];
 		$this->load->model('Order_model');
-		$this->load->model('Selected_ta_model');
-		// $select = $this->Selected_ta_model->searchBy2($user['openid'], $orderNum);
 		$order = $this->Order_model->searchById($orderNum);
 
 		//测试数据
@@ -117,16 +113,18 @@ class Ta extends CustomerController {
 	}
 	//待选择订单
 	function untakenOrderList($page = 1,$num = ITEMS_PER_PAGE){
-		//此处需要修改，排序问题，联合查询问题，分页问题，选择接单
 		$user = $_SESSION['user'];
 		$this->load->model('Selected_ta_model');
 		$result = $this->Selected_ta_model->searchByTa($user['openid'],$page,$num);
 		$selectList = $result['result_rows'];
 		$orderList = array();
+		//此处可能会影响效率（不过单页问题不大）
+		$this->load->model('Order_model');
 		foreach ($selectList as $select) {
-			$this->load->model('Order_model');
 			$order = $this->Order_model->searchById($select['orderNum']);
-			array_push($orderList, $order);
+			if($order['hasPaid']){
+				array_push($orderList, $order);
+			}
 		}
 
 		$data['pageTitle'] = '未接单列表';
