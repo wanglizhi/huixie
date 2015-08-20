@@ -9,7 +9,7 @@ class Wxpay extends CI_Controller {
     }
     function index(){
         //初始化日志
-        $logHandler= new CLogFileHandler("../logs/".date('Y-m-d').'.log');
+        $logHandler= new CLogFileHandler(APPPATH."third_party/wxpay/logs/".date('Y-m-d').'.log');
         $log = Log::Init($logHandler, 15);
 
         //①、获取用户openid
