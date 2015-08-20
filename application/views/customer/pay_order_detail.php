@@ -127,6 +127,7 @@
 		var payPrice = <?php echo $max;?>;
 		var max = <?php echo $max;?>;
 		var balance = <?php echo $user['balance'];?>;
+		var usb = 0;
 		function postPaypal(){
 			console.log('payPrice'+payPrice);
 			// alert('payPrice'+payPrice);
@@ -138,8 +139,8 @@
 				item_name: "<?php echo $sessionId;?>",
 				item_number: "<?php echo $order['orderNum'];?>",
 				cancel_return: "<?php echo site_url('customer/user/orderDetail/'.$order['orderNum']);?>",
-				return: "<?php echo site_url('customer/order/payOrder');?>"+"/"+balance,
-				notify_url: "<?php echo site_url('customer/payment/paypalNotify');?>"+"/"+balance,
+				return: "<?php echo site_url('customer/order/payOrder');?>"+"/"+usb,
+				notify_url: "<?php echo site_url('customer/payment/paypalNotify');?>"+"/"+usb,
 				amount: payPrice,
 				no_shipping: 2,
 				no_note: 1,
@@ -166,9 +167,11 @@
 				// alert('checked');
 				if(balance < max){
 					payPrice = max - balance;
+					usb = balance;
 					$('#payPrice').html(payPrice);
 				}else{
 					payPrice = 0;
+					usb = max;
 					$('#payPrice').html(payPrice);
 					$('#payOption').hide();
 					$('#submitOrder').show();
@@ -177,6 +180,7 @@
 				// alert('unchecked');
 				// console.log('unchecked');
 				payPrice = <?php echo $max;?>;
+				usb = 0;
 				$('#payPrice').html(payPrice);
 				$('#payOption').show();
 				$('#submitOrder').hide();
