@@ -7,7 +7,7 @@ class Payment extends CI_Controller {
 	}
 	//网站的回调没有验证方法，必须继承CI_Controller
 
-	function paypalNotify(){
+	function paypalNotify($useBalance=0){
 		$this->log('enter notify function');
 		// STEP 1: Read POST data
 
@@ -95,7 +95,7 @@ class Payment extends CI_Controller {
 			$this->log($user['openid']);
 			$this->log($order['orderNum']);
 
-		    //$this->payOrder();
+		    $this->payOrder($item_name, $useBalance);
 
 		    // <---- HERE you can do your INSERT to the database
 
@@ -106,47 +106,59 @@ class Payment extends CI_Controller {
 
 	}
 	// 付款
-	function payOrder(){
-		$this->log('enter payOrder');
-		$user = $_SESSION['user'];
+	function payOrder($sessionId, $useBalance=0){
+		session_id($sessionId);
+	    session_start();
+	    $user = $_SESSION['user'];
 		$order = $_SESSION['order'];
-		var_dump($order);
-		$order['price'] = $_SESSION['price'];
-		$this->load->model('Weixin_model');
 		$this->load->model('Message_model');
+		$this->load->model('Order_model');
+		$this->load->model('User_model');
+		$this->load->model('Selected_ta_model');
+
+		//判断是否已经付款，避免重复~
+		$order = $this->Order_model->searchById($order['orderNum']);
+		if($order['hasPaid']){
+			redirect('customer/user/orderDetail/'.$order['orderNum']);
+		}
+
+		if($useBalance>0){
+			//如果使用了余额, 用户balance改变
+			$this->User_model->addBalance($user['openid'], 0-$useBalance, "余额支付订单", $order['orderNum']);
+			$user = $this->User_model->searchById($user['openid']);
+			$_SESSION['user'] = $user;
+		}
+
+		// var_dump($order);
+		$order['price'] = $_SESSION['price'];
 		$order['hasPaid'] = 1;
 		date_default_timezone_set('PRC');
 		$order['paidTime'] = date('Y-m-d h:i:s');
-		$this->load->model('Order_model');
 		$this->Order_model->update($order);
 		//推送给用户
 		$this->Message_model->sendMessageToUser(
 				$order,
 				$user['openid'],
 				'付款成功，订单详情如下：！',
-				'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri=http%3A%2F%2Fhuixie.me%2Findex.php%2Fcustomer%2Fuser%2ForderDetail%2F'.$order['orderNum'].'&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect',
+				site_url('customer/user/orderDetail/'.$order['orderNum']),
+				//'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri=http%3A%2F%2Fhuixie.me%2Findex.php%2Fcustomer%2Fuser%2ForderDetail%2F'.$order['orderNum'].'&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect',
 				'恭喜你下单成功，请联系客服获得帮助，将参考资料发送到admin@huixie.me');
 
 		//推送给TA
-		$selectedTa = $_SESSION['taList'];
-
-		foreach ($selectedTa as $ta) {
+		$selectList = $this->Selected_ta_model->searchByOrderNum($order['orderNum']);
+		foreach ($selectList as $select) {
 			$this->Message_model->sendMessageToTa(
 				$order,
-				$ta['openid'],
+				$select['taId'],
 				'有新的订单提醒',
-				'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri=http%3A%2F%2Fhuixie.me%2Findex.php%2Fcustomer%2Fta%2FtakeOrderPage%2F'.$order['orderNum'].'&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect',
+				site_url('customer/ta/takeOrderPage/'.$order['orderNum']),
+				// 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri=http%3A%2F%2Fhuixie.me%2Findex.php%2Fcustomer%2Fta%2FtakeOrderPage%2F'.$order['orderNum'].'&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect',
 				'请您及时接单，并且联系客服获得相关材料');
-
-			//数据库添加选择的TA列表
-			$data['taId'] = $ta['openid'];
-			$data['orderNum'] = $order['orderNum'];
-			$data['createTime'] = date('Y-m-d h:i:s');
-			$this->load->model('Selected_ta_model');
-			$this->Selected_ta_model->add($data);
 		}
-		
+		//跳转到接单界面
+		redirect('customer/user/orderDetail/'.$order['orderNum']);
 	}
+
 
 	//写内容到文件，log日志功能
 	private function log($str){  

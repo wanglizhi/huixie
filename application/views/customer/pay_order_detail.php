@@ -138,8 +138,8 @@
 				item_name: "<?php echo $sessionId;?>",
 				item_number: "<?php echo $order['orderNum'];?>",
 				cancel_return: "<?php echo site_url('customer/user/orderDetail/'.$order['orderNum']);?>",
-				return: "<?php echo site_url('customer/order/payOrder');?>"+"/"+payPrice,
-				notify_url: "<?php echo site_url('customer/payment/paypalNotify');?>",
+				return: "<?php echo site_url('customer/order/payOrder');?>"+"/"+balance,
+				notify_url: "<?php echo site_url('customer/payment/paypalNotify');?>"+"/"+balance,
 				amount: payPrice,
 				no_shipping: 2,
 				no_note: 1,
@@ -166,7 +166,7 @@
 				// alert('checked');
 				if(balance < max){
 					payPrice = max - balance;
-					$('#payPrice').html(payfPrice);
+					$('#payPrice').html(payPrice);
 				}else{
 					payPrice = 0;
 					$('#payPrice').html(payPrice);
