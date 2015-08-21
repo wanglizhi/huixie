@@ -171,6 +171,15 @@
 					usb = balance;
 					$('#payPrice').html(payPrice);
 					//ajax调用微信获得参数
+					$.ajax({
+						url: "<?php echo site_url('customer/order/wxpay');?>",
+						type: "get",
+						data: {'openId':'<?php echo $order["userId"];?>','sessionId': "<?php echo $sessionId;?>",'orderNum':'<?php echo $order["orderNum"];?>', 'total_fee':payPrice},
+						dataType: "json",
+						success: function(data){
+							alert(data);
+						},
+					});
 
 				}else{
 					payPrice = 0;
