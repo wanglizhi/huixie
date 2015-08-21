@@ -49,16 +49,16 @@
     }
     
     window.onload = function(){
-        if (typeof WeixinJSBridge == "undefined"){
-            if( document.addEventListener ){
-                document.addEventListener('WeixinJSBridgeReady', editAddress, false);
-            }else if (document.attachEvent){
-                document.attachEvent('WeixinJSBridgeReady', editAddress); 
-                document.attachEvent('onWeixinJSBridgeReady', editAddress);
-            }
-        }else{
-            // editAddress();
-        }
+        // if (typeof WeixinJSBridge == "undefined"){
+        //     if( document.addEventListener ){
+        //         document.addEventListener('WeixinJSBridgeReady', editAddress, false);
+        //     }else if (document.attachEvent){
+        //         document.attachEvent('WeixinJSBridgeReady', editAddress); 
+        //         document.attachEvent('onWeixinJSBridgeReady', editAddress);
+        //     }
+        // }else{
+        //     // editAddress();
+        // }
     };
     
     </script>

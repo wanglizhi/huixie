@@ -89,7 +89,7 @@
 	<div class="alert alert-info" id="payOption">
 		请选择付款方式：<br>
 		<a class="btn blue btn-block" href="javascript:void(0)" onclick="postPaypal()">Paypal</a><br>
-		<a class="btn green btn-block" link="">微信支付</a>
+		<a class="btn green btn-block" href="javascript:void(0)" onclick="callpay()">微信支付</a>
 
 		<!-- <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
 		<input type="hidden" name="cmd" value="_xclick">
@@ -128,6 +128,7 @@
 		var max = <?php echo $max;?>;
 		var balance = <?php echo $user['balance'];?>;
 		var usb = 0;
+		var jsApiParameters = <?php echo $jsApiParameters; ?>;
 		function postPaypal(){
 			console.log('payPrice'+payPrice);
 			// alert('payPrice'+payPrice);
@@ -169,6 +170,8 @@
 					payPrice = max - balance;
 					usb = balance;
 					$('#payPrice').html(payPrice);
+					//ajax调用微信获得参数
+					
 				}else{
 					payPrice = 0;
 					usb = max;
@@ -180,6 +183,7 @@
 				// alert('unchecked');
 				// console.log('unchecked');
 				payPrice = <?php echo $max;?>;
+				jsApiParameters = <?php echo $jsApiParameters; ?>;
 				usb = 0;
 				$('#payPrice').html(payPrice);
 				$('#payOption').show();
@@ -187,5 +191,30 @@
 				$('#modifyTa').show();
 			}
 		}
+		function jsApiCall()
+	    {
+	        WeixinJSBridge.invoke(
+	            'getBrandWCPayRequest',
+	            jsApiParameters,
+	            function(res){
+	                WeixinJSBridge.log(res.err_msg);
+	                alert(res.err_code+res.err_desc+res.err_msg);
+	            }
+	        );
+	    }
+
+	    function callpay()
+	    {
+	        if (typeof WeixinJSBridge == "undefined"){
+	            if( document.addEventListener ){
+	                document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+	            }else if (document.attachEvent){
+	                document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+	                document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+	            }
+	        }else{
+	            jsApiCall();
+	        }
+	    }
 
 		</script>

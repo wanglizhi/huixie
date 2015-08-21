@@ -8,10 +8,11 @@ class Wxpay extends CI_Controller {
         require_once(APPPATH."third_party/wxpay/lib/log.php");
         require_once(APPPATH."third_party/wxpay/lib/notify.php");
     }
-    //初始化日志
-    $logHandler= new CLogFileHandler(APPPATH."third_party/wxpay/logs/".date('Y-m-d').'.log');
-    $log = Log::Init($logHandler, 15);
     function index(){
+        date_default_timezone_set("Asia/Shanghai");
+        //初始化日志
+        $logHandler= new CLogFileHandler(APPPATH."third_party/wxpay/logs/".date('Y-m-d').'.log');
+        $log = Log::Init($logHandler, 15);
 
         //①、获取用户openid
         $tools = new JsApiPay();
@@ -50,8 +51,10 @@ class Wxpay extends CI_Controller {
         $this->load->view('customer/jsapi_page',$data);
     }
     function notify(){
+        Log::DEBUG("call back before");
         $notify = new PayNotifyCallBack();
         $notify->Handle(false);
+        Log::DEBUG("call back after");
     }
     //打印输出数组信息
     function printf_info($data)
