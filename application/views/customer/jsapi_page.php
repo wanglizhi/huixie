@@ -57,13 +57,14 @@
                 document.attachEvent('onWeixinJSBridgeReady', editAddress);
             }
         }else{
-            editAddress();
+            // editAddress();
         }
     };
     
     </script>
 </head>
 <body>
+
     <br/>
     <font color="#9ACD32"><b>该笔订单支付金额为<span style="color:#f00;font-size:50px">1分</span>钱</b></font><br/><br/>
     <div align="center">

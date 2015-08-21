@@ -1,14 +1,14 @@
 <?php
-ini_set('date.timezone','Asia/Shanghai');
-error_reporting(E_ERROR);
+// ini_set('date.timezone','Asia/Shanghai');
+// error_reporting(E_ERROR);
 
-require_once "../lib/WxPay.Api.php";
-require_once '../lib/WxPay.Notify.php';
+require_once "WxPay.Api.php";
+require_once 'WxPay.Notify.php';
 require_once 'log.php';
 
 //初始化日志
-$logHandler= new CLogFileHandler("../logs/".date('Y-m-d').'.log');
-$log = Log::Init($logHandler, 15);
+// $logHandler= new CLogFileHandler("../logs/".date('Y-m-d').'.log');
+// $log = Log::Init($logHandler, 15);
 
 class PayNotifyCallBack extends WxPayNotify
 {
@@ -44,10 +44,11 @@ class PayNotifyCallBack extends WxPayNotify
 			$msg = "订单查询失败";
 			return false;
 		}
+		echo '回调成功！';
 		return true;
 	}
 }
 
-Log::DEBUG("begin notify");
-$notify = new PayNotifyCallBack();
-$notify->Handle(false);
+// Log::DEBUG("begin notify");
+// $notify = new PayNotifyCallBack();
+// $notify->Handle(false);
