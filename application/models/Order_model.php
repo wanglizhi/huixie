@@ -17,6 +17,12 @@ class Order_model extends CI_Model{
 		}
 	}
 
+	function getTotalOrderNum(){
+		$this->db->select('*');
+		$this->db->from('order');
+		return $this->db->count_all_results();
+	}
+
 	function searchBy1Condition($key,$value,$sort_key,$sort_method,$searchKey){
 		$this->db->where($key, $value);
 		$this->db->select('*');

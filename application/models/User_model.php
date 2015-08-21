@@ -11,6 +11,12 @@ class User_model extends CI_Model{
 		$this->db->or_like('nickname',$key);
 	}
 
+	function getTotalUserNum(){
+		$this->db->select('*');
+		$this->db->from('user');
+		return $this->db->count_all_results();
+	}
+
 	function searchUser($key,$page,$num){
 		$this->searchUserCondition($key);
 		$query=$this->db->get('user',$num,($page-1)*$num);
