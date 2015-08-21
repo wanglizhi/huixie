@@ -20,6 +20,19 @@ class Ta_model extends CI_Model{
 		}
 	}
 
+	function getCheckedTaNum(){
+		$this->db->select('*');
+		$this->db->where('hasCheck',TRUE);
+		$this->db->from('ta');
+		return $this->db->count_all_results();
+	}
+
+	function getUnCheckedTaNum(){
+		$this->db->select('*');
+		$this->db->where('hasCheck',FALSE);
+		$this->db->from('ta');
+		return $this->db->count_all_results();
+	}
 
 	function searchTaCondition($key){
 		$this->db->like('openid',$key);

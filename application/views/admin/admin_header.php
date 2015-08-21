@@ -139,7 +139,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</li>
 
 			<li class="start ">
-				<a href="#">
+				<a href="<?php echo site_url(ADMIN_PREFIX."statistic/stat"); ?>">
 					<i class="icon-home"></i> 
 					<span class="title">统计面板</span>
 				</a>
