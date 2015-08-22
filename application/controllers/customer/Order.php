@@ -197,7 +197,7 @@ class Order extends CustomerController {
 
 
 		//初始化微信数据
-		$jsApiParameters = $this->wxpay($user['openid'], $sessionId, $orderNum, $max);
+		$jsApiParameters = $this->wxpay($user['openid'], $sessionId, $orderNum, $data['max'], 0);
 		$data['jsApiParameters'] = $jsApiParameters;
 
 
@@ -255,7 +255,7 @@ class Order extends CustomerController {
 		redirect('customer/user/orderDetail/'.$order['orderNum']);
 	}
 	//微信支付初始化
-	function wxpay($openId, $sessionId, $orderNum, $total_fee){
+	function wxpay($openId, $sessionId, $orderNum, $total_fee, $usb){
 		require_once(APPPATH."third_party/wxpay/lib/WxPay.JsApiPay.php");
         require_once(APPPATH."third_party/wxpay/lib/log.php");
         require_once(APPPATH."third_party/wxpay/lib/notify.php");
@@ -274,7 +274,7 @@ class Order extends CustomerController {
         $input->SetBody("商品订单编号:".$orderNum);
         $input->SetAttach($sessionId);
         $input->SetOut_trade_no(WxPayConfig::MCHID.date("YmdHis"));
-        $input->SetTotal_fee($total_fee);
+        $input->SetTotal_fee($total_fee*100);
         // $input->SetTotal_fee("1");
         $input->SetTime_start(date("YmdHis"));
         $input->SetTime_expire(date("YmdHis", time() + 600));
@@ -286,6 +286,7 @@ class Order extends CustomerController {
         // echo '<font color="#f00"><b>统一下单支付单信息</b></font><br/>';
         // $this->printf_info($order);
         $jsApiParameters = $tools->GetJsApiParameters($order);
+        // echo $jsApiParameters;
 
         //获取共享收货地址js函数参数
         // $editAddress = $tools->GetEditAddressParameters();
@@ -299,6 +300,12 @@ class Order extends CustomerController {
          */
         // $this->load->view('customer/jsapi_page',$data);
         return $jsApiParameters;
+	}
+	function ajaxCall($total_fee, $usb){
+		$user = $_SESSION['user'];
+		$order = $_SESSION['order'];
+		$sessionId = session_id();
+		echo $this->wxpay($user['openid'], $sessionId, $order['orderNum'], $total_fee, $usb);
 	}
 
 }

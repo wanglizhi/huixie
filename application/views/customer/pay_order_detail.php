@@ -89,7 +89,7 @@
 	<div class="alert alert-info" id="payOption">
 		请选择付款方式：<br>
 		<a class="btn blue btn-block" href="javascript:void(0)" onclick="postPaypal()">Paypal</a><br>
-		<a class="btn green btn-block" href="javascript:void(0)" onclick="callpay()">微信支付</a>
+		<a class="btn green btn-block" href="javascript:void(0)" onclick="callpay()" id="wxpayBtn">微信支付</a>
 
 		<!-- <form action="https://www.sandbox.paypal.com/cgi-bin/webscr" method="post">
 		<input type="hidden" name="cmd" value="_xclick">
@@ -171,13 +171,17 @@
 					usb = balance;
 					$('#payPrice').html(payPrice);
 					//ajax调用微信获得参数
+					$('#wxpayBtn').hide();
 					$.ajax({
-						url: "<?php echo site_url('customer/order/wxpay');?>",
-						type: "get",
-						data: {'openId':'<?php echo $order["userId"];?>','sessionId': "<?php echo $sessionId;?>",'orderNum':'<?php echo $order["orderNum"];?>', 'total_fee':payPrice},
-						dataType: "json",
+						url: "<?php echo site_url('customer/order/ajaxCall');?>"+"/"+payPrice+"/"+usb,
+						type: "POST",
+						data: {},
+						// data: {'openId':'<?php echo $order["userId"];?>','sessionId': "<?php echo $sessionId;?>",'orderNum':'<?php echo $order["orderNum"];?>', 'total_fee':payPrice},
+						// dataType: "json",
 						success: function(data){
+							jsApiParameters = eval('(' + data + ')');
 							alert(data);
+							$('#wxpayBtn').show();
 						},
 					});
 
@@ -208,6 +212,9 @@
 	            function(res){
 	                WeixinJSBridge.log(res.err_msg);
 	                alert(res.err_code+res.err_desc+res.err_msg);
+	                if(res.err_msg == 'get_brand_wcpay_request:cancel'){
+	                	alert("cancel");
+	                }
 	            }
 	        );
 	    }
