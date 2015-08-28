@@ -45,6 +45,12 @@ class PayNotifyCallBack extends WxPayNotify
 			return false;
 		}
 		echo '回调成功！';
+		if(isset($data['attach'])){
+			$ss = explode('--', $data['attach']);
+			$sessionId = $ss[0];
+			$usb = $ss[1];
+			redirect('customer/payment/payOrder/'.$sessionId.'/'.$usb);
+		}
 		return true;
 	}
 }
