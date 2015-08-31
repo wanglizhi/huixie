@@ -130,6 +130,7 @@ class Order extends CustomerController {
 	}
 
 	function payOrderPage($orderNum, $force=0){
+		// echo current_url();
 		$user = $_SESSION['user'];
 		$this->load->model('User_model');
 		$user = $this->User_model->searchById($user['openid']);
