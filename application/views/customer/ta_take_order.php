@@ -64,6 +64,9 @@
 			<span class="label label-info">已接单&nbsp<?php 
 			echo $order['takenTime'];
 		?></span>
+		<?php elseif($order['hasPaid']==0): ?>
+			<span class="label label-important">未付款</span>
+
 		<?php else: ?>
 			<span class="label label-success">已完成&nbsp<?php 
 			echo $order['finishedTime'];
@@ -81,6 +84,10 @@
 				<div class="alert alert-error">
 				<h4>订单已经被接单，您不能再接。</h4>
 				</div>
+		<?php elseif($order['hasPaid'] == 0): ?>
+			<div class="alert alert-error">
+				<h4>订单未付款，您不能接单。</h4>
+			</div>
 		<?php else: ?>
 		<div class="">
 		<form action="<?php echo site_url('customer/ta/takeOrder');?>" method="post">

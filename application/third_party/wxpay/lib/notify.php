@@ -12,6 +12,8 @@ $log = Log::Init($logHandler, 15);
 
 class PayNotifyCallBack extends WxPayNotify
 {
+	public $sessionId='';
+	public $usb='';
 	//查询订单
 	public function Queryorder($transaction_id)
 	{
@@ -49,9 +51,22 @@ class PayNotifyCallBack extends WxPayNotify
 			$ss = explode('--', $data['attach']);
 			$sessionId = $ss[0];
 			$usb = $ss[1];
-			redirect('customer/payment/payOrder/'.$sessionId.'/'.$usb);
+			$this->setSessionId($sessionId);
+			$this->setUsb($usb);
 		}
 		return true;
+	}
+	public function setUsb($usb){
+		$this->usb = $usb;
+	}
+	public function getUsb(){
+		return $this->usb;
+	}
+	public function setSessionId($sessionId){
+		$this->sessionId = $sessionId;
+	}
+	public function getSessionId(){
+		return $this->sessionId;
 	}
 }
 

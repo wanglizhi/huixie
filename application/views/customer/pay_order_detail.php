@@ -180,7 +180,7 @@
 						// dataType: "json",
 						success: function(data){
 							jsApiParameters = eval('(' + data + ')');
-							alert(data);
+							// alert(data);
 							$('#wxpayBtn').show();
 						},
 					});

@@ -55,6 +55,11 @@ class Wxpay extends CI_Controller {
         $notify = new PayNotifyCallBack();
         $notify->Handle(false);
         Log::DEBUG("call back after");
+        $sessionId = $notify->getSessionId();
+        $usb = $notify->getUsb();
+        if($sessionId and $usb){
+            redirect('customer/payment/payOrder/'.$sessionId.'/'.$usb);   
+        }
     }
     //打印输出数组信息
     function printf_info($data)

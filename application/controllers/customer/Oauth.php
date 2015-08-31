@@ -20,6 +20,9 @@ class Oauth extends CI_Controller {
 		$str = "oJWDev3kr51nqxTSFNQDaf4y7xHA";
 		$str4 = substr($str,-4,4);
 		echo $str4.time();
+		if($this->check()){
+			echo 'haha';
+		}
 
 		// header("refresh:3;url=oauth/check");
 		// print('信息错误，添加失败...<br>3秒后自动跳转。');
@@ -27,7 +30,9 @@ class Oauth extends CI_Controller {
 	}
 	function check(){
 
-		echo 'check';
+		// echo 'check';
+		// redirect('customer/oauth/loginPage');
+		// return true;
 	}
 	function loginPage(){
 		$this->load->view('customer/header');

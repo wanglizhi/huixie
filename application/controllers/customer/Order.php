@@ -125,8 +125,8 @@ class Order extends CustomerController {
 		$order = $this->Order_model->searchById($orderNum);
 		$order['price'] = getPrice($max, $order);
 		$this->Order_model->update($order);
-		
-		redirect('customer/order/payOrderPage/'.$orderNum.'/1');
+		$this->payOrderPage($orderNum, 1);
+		// redirect('customer/order/payOrderPage/'.$orderNum.'/1');
 	}
 
 	function payOrderPage($orderNum, $force=0){
