@@ -23,7 +23,15 @@ class Webchat extends CI_Controller {
 		// $url = 'http://huixie.me/index.php/user/orderPage';
 		// echo urlencode($url);
 		// echo site_url('customer/user/orderPage');
-		$this->checkSignature();
+
+
+		if($this->checkSignature() == false){
+			exit(0);
+		}
+		if(isset($_GET['echostr'])){
+			echo $_GET['echostr'];
+			exit(0);
+		}
 		
 		// $this->log('index end ==================================================>');
 	}
