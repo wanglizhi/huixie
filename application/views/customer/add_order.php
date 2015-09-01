@@ -58,21 +58,21 @@
   			<div class="form-group">
     			<label for="major">专业<font color='red'>*</font></label>
     			<div id="city_5">
-					<select class="prov small m-wrap" name="prov" required="required"></select>
-					<select class="city small m-wrap" name="city" disabled="disabled" required="required"></select>
+					<select class="prov small m-wrap" name="prov" required="required" data-placeholder="请选择专业"></select>
+					<select class="city small m-wrap" name="city" disabled="disabled" required="required" data-placeholder="请选择专业"></select>
 				</div>
   			</div>
   			<div class="form-group">
     			<label for="courseName">课程名<font color='red'>*</font></label>
-    			<input type="text" class="form-control m-wrap span6" id="courseName" name="courseName" placeholder="" required="required">
+    			<input type="text" class="form-control m-wrap span6" id="courseName" name="courseName" placeholder="请输入课程名称" required="required">
   			</div>
   			<div class="form-group">
     			<label for="email">Email<font color='red'>*</font></label>
-    			<input type="email" class="form-control m-wrap span6" id="email" name="email" placeholder="" required="required">
+    			<input type="email" class="form-control m-wrap span6" id="email" name="email" placeholder="请输入邮箱" required="required">
   			</div>
   			<div class="form-group">
     			<label for="pageNum">页数<font color='red'>*</font></label>
-    			<select class="form-control m-wrap span6" name="pageNum" id="pageNum">
+    			<select class="form-control m-wrap span6" name="pageNum" id="pageNum" data-placeholder="请选择文章页数">
     			<?php for($i=1;$i<=100;$i++){ ?>
   					<option><?php echo $i; ?></option>
 				<?php } ?>
@@ -80,7 +80,7 @@
     		</div>
   			<div class="form-group">
     			<label for="refDoc">阅读材料页数<font color='red'>*</font></label>
-    			<select class="form-control m-wrap span6" name="refDoc" id="refDoc">
+    			<select class="form-control m-wrap span6" name="refDoc" id="refDoc" data-placeholder="请选择阅读材料数量">
     			<?php for($i=0;$i<=100;$i++){ ?>
   					<option><?php echo $i; ?></option>
 				<?php } ?>
@@ -88,12 +88,12 @@
   			</div>
   			<div class="form-group">
     			<label for="endTime">截止日期<font color='red'>*</font></label>
-          		<input type="date" class="form-control m-wrap small" id="endDate" name="endDate" required="required">
-    			<input type="time" class="form-control m-wrap small" id="endTime" name="endTime" required="required">
+          		<input type="date" class="form-control m-wrap small" id="endDate" name="endDate" required="required" placeholder="请选择日期">
+    			<input type="time" class="form-control m-wrap small" id="endTime" name="endTime" required="required" placeholder="请选择时间">
   				
 
     			<label for="endTime">请选择时区<font color='red'>*</font></label>
-  				<select class="form-control m-wrap span6" name="timezone" id="timezone" required="required">
+  				<select class="form-control m-wrap span6" name="timezone" id="timezone" required="required" data-placeholder="请选择您的时区">
   					<option></option>
   					<option value="PST8PDT">UTC-8(太平洋时间,洛杉矶)</option>
   					<option value="MST7MDT">UTC-7(山地时间,丹佛)</option>
@@ -106,7 +106,7 @@
   			</div>
   			<div class="form-group">
     			<label for="requirement">补充要求</label>
-    			<textarea rows="5" class="form-control m-wrap span6" id="requirement" name="requirement" placeholder=""></textarea>
+    			<textarea rows="5" class="form-control m-wrap span6" id="requirement" name="requirement" placeholder="如有额外要求，请在这里填写~"></textarea>
   			</div>
 			<div class="form-group">
     			<a link="" href="<?php echo site_url("customer/order/privacy");?>">保密政策</a>

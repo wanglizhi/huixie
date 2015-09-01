@@ -117,7 +117,11 @@
 		<form action="<?php echo site_url('customer/ta/register');?>" method="post">
   			<div class="form-group">
     			<label for="email">邮箱</label>
-    			<input type="email" class="form-control m-wrap span6" id="email" name="email" placeholder="" required="required">
+    			<input type="email" class="form-control m-wrap span6" id="email" name="email" placeholder="请输入您的邮箱" required="required">
+  			</div>
+  			<div class="form-group">
+    			<label for="introduction">自我介绍</label>
+    			<textarea class="form-control m-wrap span6" rows="5" id="introduction" name="introduction" placeholder="请输入您的简介" required="required"></textarea>
   			</div>
 
   			<div class="form-actions">

@@ -99,6 +99,10 @@
 		</div>
 		<?php endif ?>
 
+		<div class="form-actions">
+			<input type="button" class="btn green btn-block" value="关闭本窗口" onclick="WeixinJSBridge.call('closeWindow');" />
+  			</div>
+
 
 							</div>
 

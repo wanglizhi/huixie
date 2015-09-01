@@ -82,15 +82,15 @@
 		<form action="<?php echo site_url('customer/user/modify');?>" method="post">
 			<div class="form-group">
     			<label for="university">大学</label>
-    			<input type="text" class="form-control m-wrap span6" id="university" name="university" placeholder="" value="<?php echo $user['university'];?>" required="required">
+    			<input type="text" class="form-control m-wrap span6" id="university" name="university" placeholder="请输入您的学校" value="<?php echo $user['university'];?>" required="required">
   			</div>
   			<div class="form-group">
     			<label for="email">邮箱</label>
-    			<input type="email" class="form-control m-wrap span6" id="email" name="email" placeholder="" value="<?php echo $user['email'];?>"required="required">
+    			<input type="email" class="form-control m-wrap span6" id="email" name="email" placeholder="请输入您的邮箱" value="<?php echo $user['email'];?>"required="required">
   			</div>
   			<div class="form-group">
     			<label for="email">现金账户</label>
-    			<select class="form-control m-wrap span6" name="cashType" id="cashType" required="required">
+    			<select class="form-control m-wrap span6" name="cashType" id="cashType" required="required" data-placeholder="请选择账户类型">
   					
   				<?php if($user['cashType']==1): ?>
 					<option value="1" selected="selected">Paypal</option>
@@ -111,7 +111,7 @@
   					<option value="3">微信支付</option>
 				<?php endif ?>
 				</select>
-    			<input type="text" class="form-control m-wrap span6" id="cashAccount" name="cashAccount" placeholder="" value="<?php echo $user['cashAccount'];?>" required="required">
+    			<input type="text" class="form-control m-wrap span6" id="cashAccount" name="cashAccount" placeholder="请输入您的账户" value="<?php echo $user['cashAccount'];?>" required="required">
   			</div>
   			<div class="form-actions">
   			<button type="submit" class="btn green"><i class="icon-ok"></i> 提交申请</button>

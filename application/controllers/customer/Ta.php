@@ -21,14 +21,17 @@ class Ta extends CustomerController {
 	function register(){
 		$user = $_SESSION['user'];
 		$email = $_POST['email'];
+		$introduction = $_POST['introduction'];
 		$this->load->model('Ta_model');
 		$result = $this->Ta_model->searchById($user['openid']);
 		if($result){
 			$result['email'] = $email;
+			$result['introduction'] = $introduction;
 			$this->Ta_model->modify($result['openid'],$result);
 		}else{
 			$data['openid']= $user['openid'];
 			$data['email'] = $_POST['email'];
+			$data['introduction'] = $introduction;
 			date_default_timezone_set('PRC');
 			$data['createTime'] = date('Y-m-d h:i:s');
 			$this->Ta_model->add($data);
