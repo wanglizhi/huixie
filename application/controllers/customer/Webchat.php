@@ -7,11 +7,11 @@ class Webchat extends CI_Controller {
 	}
 	//默认入口
 	function index(){
-		$this->log('index start <-----------------------------------------------');
+		// $this->log('index start <-----------------------------------------------');
 		// $this->load->model('Ctoken_model');
 		// echo $this->Ctoken_model->getAccessToken();;
 
-		$this->load->model('Weixin_model');
+		// $this->load->model('Weixin_model');
 		// $this->Weixin_model->getAllFollower();
 		// $this->Weixin_model->getFollowerInfo('oJWDev7W6DN_6gKuLumLPoOUeky4');
 
@@ -20,11 +20,12 @@ class Webchat extends CI_Controller {
 
 		//url encode
 		// 授权接口需要转码
-		$url = 'http://huixie.me/index.php/user/orderPage';
-		echo urlencode($url);
-		echo site_url('customer/user/orderPage');
+		// $url = 'http://huixie.me/index.php/user/orderPage';
+		// echo urlencode($url);
+		// echo site_url('customer/user/orderPage');
+		$this->checkSignature();
 		
-		$this->log('index end ==================================================>');
+		// $this->log('index end ==================================================>');
 	}
 
 	// 要连接数据库，检测更新
