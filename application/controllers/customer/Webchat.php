@@ -7,6 +7,18 @@ class Webchat extends CI_Controller {
 	}
 	//默认入口
 	function index(){
+		// 验证签名
+		// if($this->checkSignature() == false){
+		// 	exit(0);
+		// }
+		// if(isset($_GET['echostr'])){
+		// 	echo $_GET['echostr'];
+		// 	exit(0);
+		// }
+
+		$this->multiCustomerService();
+
+
 		// $this->log('index start <-----------------------------------------------');
 		// $this->load->model('Ctoken_model');
 		// echo $this->Ctoken_model->getAccessToken();;
@@ -25,13 +37,6 @@ class Webchat extends CI_Controller {
 		// echo site_url('customer/user/orderPage');
 
 
-		if($this->checkSignature() == false){
-			exit(0);
-		}
-		if(isset($_GET['echostr'])){
-			echo $_GET['echostr'];
-			exit(0);
-		}
 		
 		// $this->log('index end ==================================================>');
 	}
@@ -143,6 +148,33 @@ class Webchat extends CI_Controller {
 			<FuncFlag>0</FuncFlag>
 			</xml>";
 		$resultStr = sprintf($retTmp, $fromUserName, $toUserName, time(), $retMsg);
+		$this->log('$resultStr=>'.$resultStr);
+		echo $resultStr;
+	}
+	// 多客服转发
+	private function multiCustomerService(){
+		if(isset($GLOBALS['HTTP_RAW_POST_DATA'])){
+			$postData = $GLOBALS['HTTP_RAW_POST_DATA'];
+			$this->log('$postData=>'.$postData);
+		}else{
+			$this->log('$postData=> NULL');
+			exit(0);
+		}
+		$xmlObj = simplexml_load_string($postData, 'SimpleXMLElement',LIBXML_NOCDATA);
+		if(!$xmlObj){
+			echo 'wrong input';
+			$this->log('$xmlObj=> NULL');
+			exit(0);
+		}
+		$fromUserName = $xmlObj->FromUserName;
+		$toUserName = $xmlObj->ToUserName;
+		$retTmp = "<xml>
+			<ToUserName><![CDATA[%s]]></ToUserName>
+			<FromUserName><![CDATA[%s]]></FromUserName>
+			<CreateTime>%s</CreateTime>
+			<MsgType><![CDATA[transfer_customer_service]]></MsgType>
+			</xml>";
+		$resultStr = sprintf($retTmp, $fromUserName, $toUserName, time());
 		$this->log('$resultStr=>'.$resultStr);
 		echo $resultStr;
 	}
