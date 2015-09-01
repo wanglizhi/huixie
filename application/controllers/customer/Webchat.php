@@ -16,10 +16,9 @@ class Webchat extends CI_Controller {
 		// 	exit(0);
 		// }
 
+		// 多客服转发回复
 		$this->multiCustomerService();
 
-
-		// $this->log('index start <-----------------------------------------------');
 		// $this->load->model('Ctoken_model');
 		// echo $this->Ctoken_model->getAccessToken();;
 
@@ -36,9 +35,6 @@ class Webchat extends CI_Controller {
 		// echo urlencode($url);
 		// echo site_url('customer/user/orderPage');
 
-
-		
-		// $this->log('index end ==================================================>');
 	}
 
 	// 要连接数据库，检测更新
