@@ -110,6 +110,9 @@
 			<?php if($ta): ?>
 				<div class="alert alert-info">
 				您已经提交过助教申请，您的邮箱是<span><?php echo $ta['email'];?></span>
+				<br>
+				您的简介是：<span><?php echo $ta['introduction'];?></span>
+				<br>
 				请联系客服发送材料等待审核，重新点击提交申请可以更改邮箱。
 				</div>
 			<?php endif ?>

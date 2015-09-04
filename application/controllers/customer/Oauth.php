@@ -17,12 +17,13 @@ class Oauth extends CI_Controller {
 		//sleep(5);
 		// $this->load->model('Ta_model');
 		// echo getNow();
-		$str = "oJWDev3kr51nqxTSFNQDaf4y7xHA";
-		$str4 = substr($str,-4,4);
-		echo $str4.time();
-		if($this->check()){
-			echo 'haha';
-		}
+		// $str = "oJWDev3kr51nqxTSFNQDaf4y7xHA";
+		// $str4 = substr($str,-4,4);
+		// echo $str4.time();
+		// if($this->check()){
+		// 	echo 'haha';
+		// }
+		$this->load->view('customer/sui_index');
 
 		// header("refresh:3;url=oauth/check");
 		// print('信息错误，添加失败...<br>3秒后自动跳转。');
@@ -33,6 +34,17 @@ class Oauth extends CI_Controller {
 		// echo 'check';
 		// redirect('customer/oauth/loginPage');
 		// return true;
+	}
+	function infoPage(){
+		// $user = $_SESSION['user'];
+
+		//数据测试
+		$user = array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
+				'nickname'=>'nickname', 'country'=>'中国', 'city'=>'南京', 'sex'=>1, 'university'=>'南京大学', 'email'=>'user@qq.com',
+				'cashType'=>1, 'cashAccount'=>'account@paypal.com','balance'=>100);
+
+		$data['user'] = $user;
+		$this->load->view('customer/sui_user_info', $data);
 	}
 	function loginPage(){
 		$this->load->view('customer/header');

@@ -21,11 +21,11 @@
 
 				<div class="row-fluid">
 
-					<div class="span12">
+					<!-- <div class="span12">
 						<h3 class="page-title">
 							个人信息
 						</h3>
-					</div>
+					</div> -->
 
 				</div>
 				<!-- END PAGE HEADER-->
@@ -36,7 +36,7 @@
 						<div class="portlet box blue" id="form_wizard_1">
 							<div class="portlet-title">
 								<div class="caption">
-									<i class="icon-reorder"></i>
+									<i class="icon-reorder"></i>个人信息
 								</div>
 								<div class="tools hidden-phone">
 									<a href="javascript:;" class="collapse"></a>

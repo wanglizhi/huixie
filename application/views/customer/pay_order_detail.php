@@ -211,9 +211,9 @@
 	            jsApiParameters,
 	            function(res){
 	                WeixinJSBridge.log(res.err_msg);
-	                alert(res.err_msg);
+	                // alert(res.err_msg);
 	                if(res.err_msg == 'get_brand_wcpay_request:cancel' || res.err_msg == 'get_brand_wcpay_request:fail'){
-	                	alert("cancel");
+	                	// alert("cancel");
 	                }else if(res.err_msg == 'get_brand_wcpay_request:ok'){
 	                	window.location.href = "<?php echo site_url('customer/order/payOrder');?>"+"/"+usb;
 	                }
