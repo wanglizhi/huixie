@@ -70,7 +70,7 @@ class User extends CustomerController {
 		$user = $_SESSION['user'];
 		$orderNum = $_POST['orderNum'];
 		$taId = $_POST['taId'];
-		$star = $_POST['star'];
+		$star = $_POST['score'];
 		$this->load->model('Star_model');
 		$starRecord = $this->Star_model->searchByOrderNum($orderNum);
 		if($starRecord){
