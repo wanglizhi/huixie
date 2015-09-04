@@ -25,12 +25,12 @@ class User extends CustomerController {
 		$this->loadView('user_info', $data);
 	}
 	function tradeList($page = 1,$num = ITEMS_PER_PAGE){
-		// $user = $_SESSION['user'];
+		$user = $_SESSION['user'];
 
 		//数据测试
-		$user = array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
-				'nickname'=>'nickname', 'country'=>'中国', 'city'=>'南京', 'sex'=>1, 'university'=>'南京大学', 'email'=>'user@qq.com',
-				'cashType'=>1, 'cashAccount'=>'account@paypal.com','balance'=>100, 'openid'=>4, 'createTime'=>'2015-08-09', 'balance'=>1000);
+		// $user = array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
+		// 		'nickname'=>'nickname', 'country'=>'中国', 'city'=>'南京', 'sex'=>1, 'university'=>'南京大学', 'email'=>'user@qq.com',
+		// 		'cashType'=>1, 'cashAccount'=>'account@paypal.com','balance'=>100, 'openid'=>4, 'createTime'=>'2015-08-09', 'balance'=>1000);
 
 
 		$this->load->model('Trade_model');
@@ -39,9 +39,9 @@ class User extends CustomerController {
 		$data['tradeList'] = $result['result_rows'];
 		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
 				,"customer/user/tradeList");
-		// $data['user'] = $this->User_model->searchById($user['openid']);
-		$data['user'] = $user;
-		$_SESSION['user'] = $user;
+		$data['user'] = $this->User_model->searchById($user['openid']);
+		// $data['user'] = $user;
+		// $_SESSION['user'] = $user;
 
 		$this->loadView('user_trade_list', $data);
 
