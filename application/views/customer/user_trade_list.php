@@ -47,8 +47,17 @@
 					</div>
 					<a class="more">
 					充值<i class="m-icon-swapright m-icon-white"></i>
-					</a>                 
+					</a>
 				</div>
+
+				<form action="<?php echo site_url('customer/user/rechargePage');?>" method="post">
+		  			<div class="form-group">
+		    			<label for="recharge">充值金额（$）</label>
+		    			<input type="number" class="form-control m-wrap" id="recharge" name="recharge" placeholder="请输入充值金额" required="required">
+		  				<button type="submit" class="btn green">充值</button>
+		  			</div>
+				</form>
+
 			</div>
 
 			<div class="span12">

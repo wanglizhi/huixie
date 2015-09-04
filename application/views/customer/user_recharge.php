@@ -1,93 +1,131 @@
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>充值</title>
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-    <link rel="shortcut icon" href="/favicon.ico">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-    <link rel="stylesheet" href="//g.alicdn.com/sui-mobile/sm/0.0.3/css/sm.min.css">
-    <link rel="stylesheet" href="//g.alicdn.com/sui-mobile/sm/0.0.3/css/sm-extend.min.css">
-
-    <link rel="stylesheet" href="/your-css-file.css">
-  </head>
-  <body>
-    <!-- 你的html代码 -->
-    <header class="bar bar-nav">
-      <a class="button button-link button-nav pull-left" href="/demos/card" data-transition='slide-out'>
-        <span class="icon icon-left"></span>
-        返回
-      </a>
-      <h1 class="title">我的生活</h1>
-    </header>
-    <nav class="bar bar-tab">
-      <a class="tab-item active" href="#">
-        <span class="icon icon-home"></span>
-        <span class="tab-label">首页</span>
-      </a>
-      <a class="tab-item" href="#">
-        <span class="icon icon-me"></span>
-        <span class="tab-label">我</span>
-      </a>
-      <a class="tab-item" href="#">
-        <span class="icon icon-star"></span>
-        <span class="tab-label">收藏</span>
-      </a>
-      <a class="tab-item" href="#">
-        <span class="icon icon-settings"></span>
-        <span class="tab-label">设置</span>
-      </a>
-    </nav>
-    <div class="content">
-      <!-- 这里是页面内容区 -->
-      <div class="page-index">
-        <div class="card">
-          <div style="background-image:url(//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg)" valign="bottom" class="card-header color-white no-border">旅途的山</div>
-          <div class="card-content">
-            <div class="card-content-inner">
-              <p class="color-gray">发表于 2015/01/15</p>
-              <p>此处是内容...</p>
-            </div>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="link">赞</a>
-            <a href="#" class="link">更多</a>
-          </div>
+<!-- BEGIN PAGE -->
+<div class="page-content">
+    <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+    <div id="portlet-config" class="modal hide">
+        <div class="modal-header">
+            <button data-dismiss="modal" class="close" type="button"></button>
+            <h3>portlet Settings</h3>
         </div>
-        <div class="card">
-          <div style="background-image:url(//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg)" valign="bottom" class="card-header color-white no-border">旅途的山</div>
-          <div class="card-content">
-            <div class="card-content-inner">
-              <p class="color-gray">发表于 2015/01/15</p>
-              <p>此处是内容...</p>
-            </div>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="link">赞</a>
-            <a href="#" class="link">更多</a>
-          </div>
+        <div class="modal-body">
+            <p>Here will be a configuration form</p>
         </div>
-        <div class="card">
-          <div style="background-image:url(//gqianniu.alicdn.com/bao/uploaded/i4//tfscom/i3/TB10LfcHFXXXXXKXpXXXXXXXXXX_!!0-item_pic.jpg_250x250q60.jpg)" valign="bottom" class="card-header color-white no-border">旅途的山</div>
-          <div class="card-content">
-            <div class="card-content-inner">
-              <p class="color-gray">发表于 2015/01/15</p>
-              <p>此处是内容...</p>
-            </div>
-          </div>
-          <div class="card-footer">
-            <a href="#" class="link">赞</a>
-            <a href="#" class="link">更多</a>
-          </div>
-        </div>
-      </div>
     </div>
-    <script type='text/javascript' src='//g.alicdn.com/sj/lib/zepto/zepto.min.js' charset='utf-8'></script>
-    <script type='text/javascript' src='//g.alicdn.com/sui-mobile/sm/0.0.3/js/sm.min.js' charset='utf-8'></script>
-    <script type='text/javascript' src='//g.alicdn.com/sui-mobile/sm/0.0.3/js/sm-extend.min.js' charset='utf-8'></script>
+    <!-- END SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+    <!-- BEGIN PAGE CONTAINER-->
+    <div class="container-fluid">
+        <!-- BEGIN PAGE HEADER-->
+        <div class="row-fluid">
+            <div class="span12">
+                <h3 class="page-title">
+          余额信息
+        </h3>
+                <ul class="breadcrumb">
+                    <li>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- END PAGE HEADER-->
+        <!-- BEGIN PAGE CONTENT-->
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="portlet box blue" id="form_wizard_1">
+                    <div class="portlet-title">
+                        <div class="caption">
+                            <i class="icon-reorder"></i> 充值详情
+                        </div>
+                        <div class="tools hidden-phone">
+                            <a href="javascript:;" class="collapse"></a>
+                        </div>
+                    </div>
 
-    <script src="/your-js-file.js"></script>
-  </body>
-</html>
+                    <div class="portlet-body">
+                        <div class="well">
+                            <label>充值金额（$）：
+                                <?php echo $recharge;?>
+                            </label>
+                        </div>
+
+                        <div class="alert alert-info" id="payOption">
+                            请选择付款方式：<br>
+                            <a class="btn blue btn-block" href="javascript:void(0)" onclick="postPaypal()">Paypal</a><br>
+                            <a class="btn green btn-block" href="javascript:void(0)" onclick="callpay()" id="wxpayBtn">微信支付</a>
+                          </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END PAGE CONTENT-->
+    </div>
+    <!-- END PAGE CONTAINER-->
+</div>
+<!-- END PAGE -->
+
+<script type="text/javascript">
+    var payPrice = <?php echo $recharge;?>;
+    var jsApiParameters = <?php echo $jsApiParameters; ?>;
+    function postPaypal(){
+      console.log('payPrice'+payPrice);
+      // alert('payPrice'+payPrice);
+      var url = "https://www.sandbox.paypal.com/cgi-bin/webscr";
+      var params =
+      {
+        cmd: "_xclick",
+        business: "acount@huixie.me",
+        item_name: "<?php echo $sessionId;?>",
+        item_number: "<?php echo $user['openid'];?>",
+        cancel_return: "<?php echo site_url('customer/user/tradeList');?>",
+        return: "<?php echo site_url('customer/user/recharge');?>"+"/"+payPrice,
+        notify_url: "<?php echo site_url('customer/payment/paypalNotify');?>"+"/"+payPrice,
+        amount: payPrice,
+        no_shipping: 2,
+        no_note: 1,
+        currency_code: "USD"
+      };
+      var temp = document.createElement("form");
+        temp.action = url;
+        temp.method = "post";
+        temp.style.display = "none";
+        for (var x in params) {
+            var opt = document.createElement("input");
+            opt.name = x;
+            opt.value = params[x];
+            temp.appendChild(opt);
+        }
+        document.body.appendChild(temp);
+        temp.submit();
+        return temp;
+    }
+    function jsApiCall()
+      {
+          WeixinJSBridge.invoke(
+              'getBrandWCPayRequest',
+              jsApiParameters,
+              function(res){
+                  WeixinJSBridge.log(res.err_msg);
+                  // alert(res.err_msg);
+                  if(res.err_msg == 'get_brand_wcpay_request:cancel' || res.err_msg == 'get_brand_wcpay_request:fail'){
+                    // alert("cancel");
+                  }else if(res.err_msg == 'get_brand_wcpay_request:ok'){
+                    window.location.href = "<?php echo site_url('customer/user/tradeList');?>";
+                  }
+              }
+          );
+      }
+
+      function callpay()
+      {
+          if (typeof WeixinJSBridge == "undefined"){
+              if( document.addEventListener ){
+                  document.addEventListener('WeixinJSBridgeReady', jsApiCall, false);
+              }else if (document.attachEvent){
+                  document.attachEvent('WeixinJSBridgeReady', jsApiCall); 
+                  document.attachEvent('onWeixinJSBridgeReady', jsApiCall);
+              }
+          }else{
+              jsApiCall();
+          }
+      }
+
+    </script>
