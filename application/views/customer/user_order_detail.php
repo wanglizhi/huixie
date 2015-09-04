@@ -90,7 +90,26 @@
 		<?php endif; ?>
 		</label>
 		<label></label>
-</div>
+	</div>
+
+<?php if($order['hasFinished']): ?>
+	<form action="<?php echo site_url('customer/user/starTa');?>" method="post">
+	<div class="control-group">
+		<label class="control-label">技能评价:<span class="required">*</span></label>
+		<div class="controls ">
+			<div style="display: inline-block;" id="skill_star" name="skill_star" ></div>
+			<input id="star" name="star" type="text" data-required="1" style="width:1px;visibility: hidden;"/>
+		</div>
+		<div class="form-group">
+    		<input type="hidden" value="<?php echo $order['orderNum'];?>" id="orderNum" name="orderNum" placeholder="">
+  		</div>
+  		<div class="form-group">
+    		<input type="hidden" value="<?php echo $order['taId'];?>" id="taId" name="taId" placeholder="">
+  		</div>
+	</div>
+	</form>
+<?php endif; ?>
+
 			<div class="form-actions">
 			<input type="button" class="btn green btn-block" value="关闭本窗口" onclick="WeixinJSBridge.call('closeWindow');" />
   			</div>
@@ -112,3 +131,15 @@
 
 		</div>
 		<!-- END PAGE -->  
+		<script>
+			$('#skill_star').raty({
+				path      : 'media/image',
+				half      : true,
+				starHalf  : 'star-half.png',
+				starOff   : 'star-off.png',
+				starOn    : 'star-on.png',
+				<?php if(isset($star)):?>
+				score     : <?=$star?>
+				<?php endif;?>
+			});
+		</script>

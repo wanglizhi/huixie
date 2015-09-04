@@ -120,3 +120,12 @@ create table `tradeRecord`(
 `createTime` datetime NOT NULL,
 `describe` varchar(255)
 )
+
+create table `starRecord`(
+`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+`orderNum` varchar(64) NOT NULL,
+`star` float,
+`userId` varchar(255) NOT NULL,
+`taId` varchar(255) NOT NULL,
+`createTime` datetime NOT NULL
+)

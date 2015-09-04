@@ -66,6 +66,30 @@ class User extends CustomerController {
 	function recharge($money){
 
 	}
+	function starTa(){
+		$user = $_SESSION['user'];
+		$orderNum = $_POST['orderNum'];
+		$taId = $_POST['taId'];
+		$star = $_POST['star'];
+		$this->load->model('Star_model');
+		$starRecord = $this->Star_model->searchByOrderNum($orderNum);
+		if($starRecord){
+			$starRecord['star']=$star;
+			$this->Star_model->modify($starRecord);
+		}else{
+			$data['star'] = $star;
+			$data['userId'] = $user['openid'];
+			$data['taId'] = $taId;
+			$data['orderNum'] = $orderNum;
+			date_default_timezone_set('PRC');
+			$data['createTime'] = date('Y-m-d h:i:s');
+			$this->Star_model->add($data);
+		}
+		//更新TA的star项
+		//。。。
+
+		redirect('customer/user/orderDetail/'.$orderNum);
+	}
 	function modify(){
 		$user = $_SESSION['user'];
 		$university = $_POST['university'];
@@ -87,6 +111,15 @@ class User extends CustomerController {
 		$user = $_SESSION['user'];
 		$this->load->model('Order_model');
 		$order = $this->Order_model->searchById($orderNum);
+
+		//加上TA信息和对TA的评价
+		if($order['hasFinished']){
+			$this->load->model('Star_model');
+			$starRecord = $this->Star_model->searchByOrderNum($orderNum);
+			if($starRecord){
+				$data['star'] = $starRecord['star'];
+			}
+		}
 
 		//测试数据
 		// $user = array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
