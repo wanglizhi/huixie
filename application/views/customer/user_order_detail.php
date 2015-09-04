@@ -95,7 +95,7 @@
 <?php if($order['hasFinished']): ?>
 	<form action="<?php echo site_url('customer/user/starTa');?>" method="post">
 	<div class="control-group">
-		<label class="control-label">技能评价:<span class="required">*</span></label>
+		<label class="control-label">给TA打分:<span class="required">*</span></label>
 		<div class="controls ">
 			<div style="display: inline-block;" id="skill_star" name="skill_star" ></div>
 			<input id="star" name="star" type="text" data-required="1" style="width:1px;visibility: hidden;"/>
@@ -105,6 +105,9 @@
   		</div>
   		<div class="form-group">
     		<input type="hidden" value="<?php echo $order['taId'];?>" id="taId" name="taId" placeholder="">
+  		</div>
+  		<div class="">
+  			<button type="submit" class="btn green"><i class="icon-ok"></i> 评分</button>
   		</div>
 	</div>
 	</form>
