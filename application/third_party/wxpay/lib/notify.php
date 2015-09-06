@@ -62,6 +62,7 @@ class PayNotifyCallBack extends WxPayNotify
 		if(isset($data['total_fee'])){
 			$this->setTotalFee($data['total_fee']);
 		}
+		Log::DEBUG("call back end: true");
 		return true;
 	}
 	public function setUsb($usb){
