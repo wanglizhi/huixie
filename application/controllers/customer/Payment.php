@@ -284,6 +284,11 @@ class Payment extends CI_Controller {
 		$this->Trade_model->add($data);
 
 		$_SESSION['hasPaid'] = 1;
+		$this->load->model('Message_model');
+		$this->Message_model->sendRechargeMessage($data,
+			'恭喜您充值成功！',
+			site_url('customer/user/tradeList'),
+			'感谢您使用会写么！');
 		$this->log('end recharge');
 	}
 

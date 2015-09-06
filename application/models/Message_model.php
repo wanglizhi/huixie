@@ -96,6 +96,38 @@ class Message_model extends CI_Model{
 	function getOauthUrl($url){
 		return 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxcd901e4412fc040b&redirect_uri='.urlencode($url).'&response_type=code&scope=snsapi_base&state=fuxue#wechat_redirect';
 	}
+	// 充值后通知
+	function sendRechargeMessage($data, $first, $url, $remark){
+		$this->load->model('Ctoken_model');
+		$token = $this->Ctoken_model->getAccessToken();
+		$template = array(
+			'touser' => $data['openid'],
+			'template_id' => '_47fXG2P03U-XdMcpOWv6BK41yhBri-Skw-wQvWkWYU',
+			'url' => $this->getOauthUrl($url),
+			'topcolor' => '#FF0000',
+			'data'=>array(
+				'first' =>array(
+					'value' => $first,
+					'color' => '#173177'
+				),
+				'keyword1' =>array(
+					'value' => $data['money'],
+					'color' => '#173177'
+				),
+				'keyword2' =>array(
+					'value' => $data['createTime'],
+					'color' => '#173177'
+				),
+				'remark' =>array(
+					'value' => $remark,
+					'color' => '#173177'
+				)
+			)
+		);
+		$url = 'https://api.weixin.qq.com/cgi-bin/message/template/send?access_token='.$token;
+		$ret = $this->Http_model->doCurlPostRequest($url, json_encode($template, JSON_UNESCAPED_UNICODE));
+		$retData = json_decode($ret, true);
+	}
 
 	
 }
