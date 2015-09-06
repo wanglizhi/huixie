@@ -108,7 +108,7 @@
                   if(res.err_msg == 'get_brand_wcpay_request:cancel' || res.err_msg == 'get_brand_wcpay_request:fail'){
                     alert("cancel");
                   }else if(res.err_msg == 'get_brand_wcpay_request:ok'){
-                    window.location.href = "<?php echo site_url('customer/user/tradeList');?>";
+                    window.location.href = "<?php echo site_url('customer/user/recharge');?>"+ "/" + payPrice;
                   }
               }
           );

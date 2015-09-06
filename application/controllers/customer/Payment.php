@@ -258,9 +258,11 @@ class Payment extends CI_Controller {
 	}
 
 	function recharge($sessionId, $money){
+		$this->log('enter recharge');
 		session_id($sessionId);
 		session_start();
 		$hasPaid = $_SESSION['hasPaid'];
+		$this->log($hasPaid);
 		$user = $_SESSION['user'];
 		if($hasPaid){
 			return;
@@ -281,6 +283,7 @@ class Payment extends CI_Controller {
 		$this->Trade_model->add($data);
 
 		$_SESSION['hasPaid'] = 1;
+		$this->log('end recharge');
 	}
 
 
