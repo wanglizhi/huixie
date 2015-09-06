@@ -211,7 +211,7 @@ class Webchat extends CI_Controller {
         }  
         else  
         {  
-            @fwrite($fp,date('Y-m-d h:i:sa').' --> '.$str."\n");  
+            @fwrite($fp,date('Y-m-d H:i:sa').' --> '.$str."\n");  
             @fclose($fp);  
             @umask($oldmask);  
             Return true;  

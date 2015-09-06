@@ -148,7 +148,7 @@ class Order_model extends CI_Model{
 		}
 		$data['taId'] = $taId;
 		date_default_timezone_set('PRC');
-		$data['takenTime'] = date('Y-m-d h:i:s');
+		$data['takenTime'] = date('Y-m-d H:i:s');
 		$data['hasTaken'] = 1;
 		$this->db->where('orderNum',$orderNum);
 		$this->db->update('order',$data);

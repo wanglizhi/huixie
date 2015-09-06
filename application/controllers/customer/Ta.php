@@ -33,7 +33,7 @@ class Ta extends CustomerController {
 			$data['email'] = $_POST['email'];
 			$data['introduction'] = $introduction;
 			date_default_timezone_set('PRC');
-			$data['createTime'] = date('Y-m-d h:i:s');
+			$data['createTime'] = date('Y-m-d H:i:s');
 			$this->Ta_model->add($data);
 		}
 		redirect('customer/ta/registerPage');

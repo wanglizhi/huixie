@@ -133,7 +133,7 @@ class Payment extends CI_Controller {
 		$order['price'] = $_SESSION['price'];
 		$order['hasPaid'] = 1;
 		date_default_timezone_set('PRC');
-		$order['paidTime'] = date('Y-m-d h:i:s');
+		$order['paidTime'] = date('Y-m-d H:i:s');
 		$this->Order_model->update($order);
 		//推送给用户
 		$this->Message_model->sendMessageToUser(
@@ -278,7 +278,7 @@ class Payment extends CI_Controller {
 		$data['money'] = $money;
 		$data['balance'] = $user['balance'];
 		date_default_timezone_set('PRC');
-		$data['createTime'] = date('Y-m-d h:i:s');
+		$data['createTime'] = date('Y-m-d H:i:s');
 		$data['describe'] = '用户充值';
 		$this->User_model->modify($user['openid'], $user);
 		$this->Trade_model->add($data);
@@ -306,7 +306,7 @@ class Payment extends CI_Controller {
         }  
         else  
         {  
-            @fwrite($fp,date('Y-m-d h:i:sa').' --> '.$str."\n");  
+            @fwrite($fp,date('Y-m-d H:i:sa').' --> '.$str."\n");  
             @fclose($fp);  
             @umask($oldmask);  
             Return true;  

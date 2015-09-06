@@ -99,7 +99,7 @@ class User_model extends CI_Model{
 			$data['balance'] = $balance+$money;
 			$data['orderNum'] = $orderNum;
 			date_default_timezone_set('PRC');
-			$data['createTime'] = date('Y-m-d h:i:s');
+			$data['createTime'] = date('Y-m-d H:i:s');
 			$data['describe'] = $describe;
 			$this->load->model('Trade_model');
 			return $this->Trade_model->add($data);

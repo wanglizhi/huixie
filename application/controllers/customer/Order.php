@@ -47,7 +47,7 @@ class Order extends CustomerController {
 		// $str = "oJWDev3kr51nqxTSFNQDaf4y7xHA";
 		// $str4 = substr($str,-4,4);
 		date_default_timezone_set('PRC');
-		$data['createTime'] = date('Y-m-d h:i:s');
+		$data['createTime'] = date('Y-m-d H:i:s');
 		$data['orderNum'] = substr($user['openid'],-4,4).time();
 		$data['price'] = getPrice(UNIT_PRICE, $data);
 		if(!(isset($data['major']) and isset($data['courseName']) and isset($data['userId']) and isset($data['email'])) ){
@@ -107,7 +107,7 @@ class Order extends CustomerController {
 				$data['taId'] = $taId;
 				$data['orderNum'] = $orderNum;
 				date_default_timezone_set('PRC');
-				$data['createTime'] = date('Y-m-d h:i:s');
+				$data['createTime'] = date('Y-m-d H:i:s');
 				$this->Selected_ta_model->add($data);
 				//求最大和最小price
 				$ta = $this->Ta_model->searchById($taId);
@@ -230,7 +230,7 @@ class Order extends CustomerController {
 		$order['price'] = $_SESSION['price'];
 		$order['hasPaid'] = 1;
 		date_default_timezone_set('PRC');
-		$order['paidTime'] = date('Y-m-d h:i:s');
+		$order['paidTime'] = date('Y-m-d H:i:s');
 		$this->Order_model->update($order);
 		//推送给用户
 		$this->Message_model->sendMessageToUser(

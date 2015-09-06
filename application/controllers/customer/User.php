@@ -82,7 +82,7 @@ class User extends CustomerController {
 		$data['money'] = $money;
 		$data['balance'] = $user['balance'];
 		date_default_timezone_set('PRC');
-		$data['createTime'] = date('Y-m-d h:i:s');
+		$data['createTime'] = date('Y-m-d H:i:s');
 		$data['describe'] = '用户充值';
 		$this->User_model->modify($user['openid'], $user);
 		$this->Trade_model->add($data);
@@ -112,7 +112,7 @@ class User extends CustomerController {
 			$data['taId'] = $taId;
 			$data['orderNum'] = $orderNum;
 			date_default_timezone_set('PRC');
-			$data['createTime'] = date('Y-m-d h:i:s');
+			$data['createTime'] = date('Y-m-d H:i:s');
 			$this->Star_model->add($data);
 		}
 		//更新TA的star项
@@ -120,7 +120,7 @@ class User extends CustomerController {
 		$this->load->model('Ta_model');
 		$result = $this->Ta_model->searchById($taId);
 		$result['star'] = $taStar;
-		$this->Ta_model->update($taId, $result);
+		$this->Ta_model->modify($taId, $result);
 
 		redirect('customer/user/orderDetail/'.$orderNum);
 	}
