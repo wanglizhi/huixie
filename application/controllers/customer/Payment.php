@@ -263,6 +263,7 @@ class Payment extends CI_Controller {
 		session_start();
 		$hasPaid = $_SESSION['hasPaid'];
 		$this->log($hasPaid);
+		$this->log($money);
 		$user = $_SESSION['user'];
 		if($hasPaid){
 			return;
