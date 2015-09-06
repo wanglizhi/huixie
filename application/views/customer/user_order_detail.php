@@ -107,7 +107,7 @@
     		<input type="hidden" value="<?php echo $order['taId'];?>" id="taId" name="taId" placeholder="">
   		</div>
   		<div class="">
-  			<button type="submit" class="btn green"><i class="icon-ok"></i> 评分</button>
+  			<button type="submit" class="btn blue"><i class="icon-ok"></i> 评分</button>
   		</div>
 	</div>
 	</form>

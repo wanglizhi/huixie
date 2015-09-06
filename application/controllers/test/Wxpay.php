@@ -61,6 +61,17 @@ class Wxpay extends CI_Controller {
             redirect('customer/payment/payOrder/'.$sessionId.'/'.$usb);   
         }
     }
+    function recharge(){
+        Log::DEBUG("call back before");
+        $notify = new PayNotifyCallBack();
+        $notify->Handle(false);
+        Log::DEBUG("call back after");
+        $sessionId = $notify->getSessionId();
+        $money = $notify->getTotalFee();
+        if($sessionId and $usb){
+            redirect('customer/payment/recharge/'.$sessionId.'/'.$money);   
+        }
+    }
     //打印输出数组信息
     function printf_info($data)
     {

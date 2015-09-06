@@ -57,6 +57,9 @@ class User extends CustomerController {
 		$data['sessionId'] = $sessionId;
 		$data['user'] = $user;
 
+		//Session 中存储是否付款
+		$_SESSION['hasPaid'] = 0;
+
 		//初始化微信数据
 		$jsApiParameters = $this->wxpay($user['openid'], $sessionId, $recharge);
 		$data['jsApiParameters'] = $jsApiParameters;
@@ -64,7 +67,29 @@ class User extends CustomerController {
 		$this->loadView('user_recharge', $data);
 	}
 	function recharge($money){
+		$user = $_SESSION['user'];
+		$hasPaid = $_SESSION['hasPaid'];
+		if($hasPaid){
+			return;
+		}
 
+		$this->load->model('User_model');
+		$this->load->model('Trade_model');
+		$user = $this->User_model->searchById($user['openid']);
+		$balance = $user['balance'];
+		$user['balance'] = $balance + $money;
+		$data['openid'] = $user['openid'];
+		$data['money'] = $money;
+		$data['balance'] = $user['balance'];
+		date_default_timezone_set('PRC');
+		$data['createTime'] = date('Y-m-d h:i:s');
+		$data['describe'] = '用户充值';
+		$this->User_model->modify($user['openid'], $user);
+		$this->Trade_model->add($data);
+
+		$_SESSION['hasPaid'] = 1;
+
+		redirect('customer/user/tradeList');
 	}
 	function starTa(){
 		$user = $_SESSION['user'];
@@ -86,7 +111,11 @@ class User extends CustomerController {
 			$this->Star_model->add($data);
 		}
 		//更新TA的star项
-		//。。。
+		$taStar = $this->Star_model->getTaStar($taId);
+		$this->load->model('Ta_model');
+		$result = $this->Ta_model->searchById($taId);
+		$result['star'] = $taStar;
+		$this->Ta_model->update($taId, $result);
 
 		redirect('customer/user/orderDetail/'.$orderNum);
 	}
@@ -203,26 +232,13 @@ class User extends CustomerController {
         $input->SetTime_start(date("YmdHis"));
         $input->SetTime_expire(date("YmdHis", time() + 600));
         $input->SetGoods_tag("商品标签");
-        $input->SetNotify_url("http://huixie.me/index.php/test/wxpay/notify");
+        $input->SetNotify_url("http://huixie.me/index.php/test/wxpay/recharge");
         $input->SetTrade_type("JSAPI");
         $input->SetOpenid($openId);
         $order = WxPayApi::unifiedOrder($input);
-        // echo '<font color="#f00"><b>统一下单支付单信息</b></font><br/>';
-        // $this->printf_info($order);
+
         $jsApiParameters = $tools->GetJsApiParameters($order);
-        // echo $jsApiParameters;
 
-        //获取共享收货地址js函数参数
-        // $editAddress = $tools->GetEditAddressParameters();
-
-        //③、在支持成功回调通知中处理成功之后的事宜，见 notify.php
-        /**
-         * 注意：
-         * 1、当你的回调地址不可访问的时候，回调通知会失败，可以通过查询订单来确认支付是否成功
-         * 2、jsapi支付时需要填入用户openid，WxPay.JsApiPay.php中有获取openid流程 （文档可以参考微信公众平台“网页授权接口”，
-         * 参考http://mp.weixin.qq.com/wiki/17/c0f37d5704f0b64713d5d2c37b468d75.html）
-         */
-        // $this->load->view('customer/jsapi_page',$data);
         return $jsApiParameters;
 	}
 }

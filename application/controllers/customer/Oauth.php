@@ -30,12 +30,13 @@ class Oauth extends CI_Controller {
 		//$this->check();
 	}
 	function check(){
-
-		// echo 'check';
-		// redirect('customer/oauth/loginPage');
-		// return true;
+		$this->load->model('Star_model');
+		echo $this->Star_model->getTaStar('oJWDev7W6DN_6gKuLumLPoOUeky4');
+		$ss = explode('--', 'fadfafa');
+		var_dump($ss);
 	}
 	function infoPage(){
+		// 用来测试Sui mobile的函数
 		// $user = $_SESSION['user'];
 
 		//数据测试

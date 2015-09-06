@@ -14,6 +14,7 @@ class PayNotifyCallBack extends WxPayNotify
 {
 	public $sessionId='';
 	public $usb='';
+	public $total_fee = '';
 	//查询订单
 	public function Queryorder($transaction_id)
 	{
@@ -50,9 +51,16 @@ class PayNotifyCallBack extends WxPayNotify
 		if(isset($data['attach'])){
 			$ss = explode('--', $data['attach']);
 			$sessionId = $ss[0];
-			$usb = $ss[1];
+			if(isset($ss[1])){
+				$usb = $ss[1];
+			}else{
+				$usb = '';
+			}
 			$this->setSessionId($sessionId);
 			$this->setUsb($usb);
+		}
+		if(isset($data['total_fee'])){
+			$this->setTotalFee($data['total_fee']);
 		}
 		return true;
 	}
@@ -67,6 +75,12 @@ class PayNotifyCallBack extends WxPayNotify
 	}
 	public function getSessionId(){
 		return $this->sessionId;
+	}
+	public function setTotalFee($total_fee){
+		$this->total_fee = $total_fee;
+	}
+	public function getTotalFee(){
+		return $this->total_fee;
 	}
 }
 
