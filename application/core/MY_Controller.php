@@ -31,13 +31,18 @@ class CustomerController extends CI_Controller {
         $this->load->helper('url');
         if(!$this->checkLogin()){
             //Login 失败
-            redirect('customer/oauth/loginPage');
+            // redirect('customer/oauth/loginPage');
         }
     }
     function loadView($view,$data=array()){
         $this->load->view('customer/header',$data);
         $this->load->view('customer/'.$view);
         $this->load->view('customer/footer');
+    }
+    function load_view($view, $data=array()){
+        $this->load->view('customer/m_header', $data);
+        $this->load->view('customer/'.$view);
+        $this->load->view('customer/m_footer');
     }
     private function checkLogin(){
         if (!session_id()) session_start();

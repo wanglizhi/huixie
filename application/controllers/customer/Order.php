@@ -11,11 +11,13 @@ class Order extends CustomerController {
 	//添加订单
 	function addOrderPage($notice=""){
 		$data['notice'] = $notice;
-		$this->loadView('add_order',$data);
+		$data['pageTitle'] = '下订单';
+		$this->load_view('m_add_order',$data);
 	}
 	//保密政策
 	function privacy(){
-		$this->loadView('privacy');
+		$data['pageTitle'] = '保密政策';
+		$this->load_view('m_privacy');
 	}
 	function addOrder(){
 		// echo $_POST['endDate'].'--'.$_POST['endTime'].'--'.$_POST['prov'].'--'.$_POST['city'];

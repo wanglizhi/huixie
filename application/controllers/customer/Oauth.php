@@ -30,7 +30,9 @@ class Oauth extends CI_Controller {
 		//$this->check();
 	}
 	function ratchet(){
+		$this->load->view('customer/m_header');
 		$this->load->view('customer/ratchet');
+		$this->load->view('customer/m_footer');
 	}
 	function check(){
 		$this->load->model('Star_model');

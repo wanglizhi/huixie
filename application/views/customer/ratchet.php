@@ -1,41 +1,3 @@
-<?php
-defined('BASEPATH') OR exit('No direct script access allowed');
-?>
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Ratchet template page</title>
-    <base href="<?php echo base_url();?>"/>
-
-    <!-- Sets initial viewport load and disables zooming  -->
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
-
-    <!-- Makes your prototype chrome-less once bookmarked to your phone's home screen -->
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-
-    <!-- Include the compiled Ratchet CSS -->
-    <link href="ratchet/css/ratchet.css" rel="stylesheet" type="text/css"> 
-    <link href="ratchet/css/my.css" rel="stylesheet" type="text/css"> 
-    <link href="ratchet/css/sm.css" rel="stylesheet" type="text/css"> 
-    <link href="ratchet/css/ratchet-theme-ios.css" rel="stylesheet" type="text/css">
-    <!--star -->
-    <link rel="stylesheet" href="media/css/jquery.raty.css" media="screen" type="text/css"/>
-
-    <link rel="shortcut icon" href="images/icon.ico" /> 
-
-    <!-- Include the compiled Ratchet JS -->
-    <script type="text/javascript" src="ratchet/js/ratchet.js"></script>
-    <script type="text/javascript" src="ratchet/js/my.js"></script>
-    <script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
-    <script type="text/javascript" src="js/jquery.cityselect.js"></script>
-    <script type="text/javascript" src="js/majorData.js"></script>
-    <script src="media/js/jquery.raty.js"></script>
-    <script type="text/javascript" src="js/moment.js"></script>
-
-  </head>
-  <body>
 
     <!-- Make sure all your bars are the first things in your <body> -->
     <header class="bar bar-nav">
@@ -69,6 +31,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           </li>
         </ul>
       </div>
+
+
+<a href="#myModalexample" class="btn">Open modal</a>
+<div id="myModalexample" class="modal">
+  <header class="bar bar-nav">
+    <a class="icon icon-close pull-right" href="#myModalexample"></a>
+    <h1 class="title">Modal</h1>
+  </header>
+
+  <div class="content">
+    <p class="content-padded">The contents of my modal go here. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut.</p>
+  </div>
+</div>
+
+      
       <form action="<?php echo site_url('customer/user/starTa');?>" method="post" class="input-group">
   <div class="control-group">
     <label class="control-label">给TA打分:<span class="required">*</span></label>
@@ -80,9 +57,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <button type="submit" class="btn btn-primary btn-block"><i class="icon-ok"></i> 评分</button>
       </div>
   </div>
-  <div class="list-block">
+  <div class="">
           <label for="major">专业<font color='red'>*</font></label>
-          <div id="city_5" class="">
+          <div id="" class="">
           <select class="prov" name="prov" required="required" data-placeholder="请选择专业"></select>
           <select class="city" name="city" disabled="disabled" required="required" data-placeholder="请选择专业"></select>
         </div>
@@ -119,7 +96,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <div class="item-inner">
             <div class="item-title label">姓名</div>
             <div class="item-input">
-              <input type="text" placeholder="Your name">
+              <input type="text" placeholder="Your name" required="required">
             </div>
           </div>
         </div>
@@ -128,7 +105,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         <div class="item-content">
           <div class="item-media"><i class="icon icon-form-email"></i></div>
           <div class="item-inner">
-            <div class="item-title label">邮箱</div>
+            <div class="item-title label">邮箱<font color='red'>*</font></div>
             <div class="item-input">
               <input type="email" placeholder="E-mail">
             </div>
@@ -151,11 +128,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
           <div class="item-media"><i class="icon icon-form-gender"></i></div>
           <div class="item-inner">
             <div class="item-title label">性别</div>
-            <div class="item-input">
-              <select>
-                <option>Male</option>
-                <option>Female</option>
-              </select>
+            <div class="item-input" id ="city_5">
+
+          <select class="prov" name="prov" required="required" data-placeholder="请选择专业"></select>
+          <select class="city" name="city" disabled="disabled" required="required" data-placeholder="请选择专业"></select>
+
             </div>
           </div>
         </div>
@@ -202,8 +179,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   </div>
   <div class="content-block">
     <div class="row">
-      <button class="col-50 button button-big button-fill button-danger">取消</button>
-      <button class="col-50 button button-big button-fill button-success" type="submit">提交</button>
+      <button class="col-100 button button-big button-fill button-success" type="submit">提交</button>
     </div>
   </div>
   </form>
@@ -348,6 +324,3 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       });
 
     </script>
-
-  </body>
-</html>
