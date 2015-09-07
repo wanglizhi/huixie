@@ -142,7 +142,7 @@ font-weight: 300;
 
         <li class="">
           <a href="javascript:;">
-          <i class="icon-inbox"></i> 
+          <i class="icon-inbox"></i>
           <span class="title">我的接单</span>
           <span class="arrow "></span>
           </a>

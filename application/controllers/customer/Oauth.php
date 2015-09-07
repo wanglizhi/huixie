@@ -29,6 +29,9 @@ class Oauth extends CI_Controller {
 		// print('信息错误，添加失败...<br>3秒后自动跳转。');
 		//$this->check();
 	}
+	function ratchet(){
+		$this->load->view('customer/ratchet');
+	}
 	function check(){
 		$this->load->model('Star_model');
 		echo $this->Star_model->getTaStar('oJWDev7W6DN_6gKuLumLPoOUeky4');
