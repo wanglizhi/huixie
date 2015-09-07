@@ -1,9 +1,4 @@
 
-    <!-- Make sure all your bars are the first things in your <body> -->
-    <header class="bar bar-nav">
-      <h1 class="title">测试界面</h1>
-    </header>
-
     <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
     <div class="content">
       <p class="content-padded">Thanks for downloading Ratchet. This is an example HTML page that's linked up to compiled Ratchet CSS and JS, has the proper meta tags and the HTML structure. Need some more help before you start filling this with your own content? Check out some Ratchet resources:</p>
@@ -45,7 +40,7 @@
   </div>
 </div>
 
-      
+
       <form action="<?php echo site_url('customer/user/starTa');?>" method="post" class="input-group">
   <div class="control-group">
     <label class="control-label">给TA打分:<span class="required">*</span></label>
@@ -144,7 +139,7 @@
           <div class="item-inner">
             <div class="item-title label">生日</div>
             <div class="item-input">
-              <input type="date" placeholder="Birth day" value="2014-04-30">
+              <input type="date" placeholder="Birth day">
             </div>
           </div>
         </div>

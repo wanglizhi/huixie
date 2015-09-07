@@ -42,3 +42,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
   </head>
   <body>
+  <!-- Make sure all your bars are the first things in your <body> -->
+<header class="bar bar-nav" style="background-color:#18b4ed;">
+    <h1 class="title" style="color:#fff;"><?php echo $pageTitle;?></h1>
+</header>

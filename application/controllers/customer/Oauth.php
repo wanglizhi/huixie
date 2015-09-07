@@ -30,7 +30,8 @@ class Oauth extends CI_Controller {
 		//$this->check();
 	}
 	function ratchet(){
-		$this->load->view('customer/m_header');
+		$data['pageTitle'] = "测试界面";
+		$this->load->view('customer/m_header', $data);
 		$this->load->view('customer/ratchet');
 		$this->load->view('customer/m_footer');
 	}

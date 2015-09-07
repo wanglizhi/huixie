@@ -1,7 +1,4 @@
-<!-- Make sure all your bars are the first things in your <body> -->
-<header class="bar bar-nav">
-    <h1 class="title">下订单</h1>
-</header>
+
 <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
 <div class="content native-scroll">
     <?php if(isset($notice) and $notice!= ""):?>
@@ -24,7 +21,8 @@
                                         <font color='red'>*</font>
                                     </div>
                                     <div class="item-input" id="city_5">
-                                        <select class="prov" name="prov" required="required" data-placeholder="请选择专业"></select>
+                                        <select class="prov" name="prov" required="required" data-placeholder="请选择专业">
+                                        </select>
                                         <select class="city" name="city" disabled="disabled" required="required" data-placeholder="请选择专业"></select>
                                     </div>
                                 </div>
@@ -98,6 +96,17 @@
                                     </div>
                                     <div class="item-input">
                                         <input type="date" id="endDate" name="endDate" required="required" placeholder="请选择日期">
+                                        </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="item-content">
+                                <div class="item-inner">
+                                    <div class="item-title label">截止时间
+                                        <font color='red'>*</font>
+                                    </div>
+                                    <div class="item-input">
                                         <input type="time" id="endTime" name="endTime" required="required" placeholder="请选择时间">
                                     </div>
                                 </div>
@@ -183,6 +192,7 @@ jQuery(document).ready(function() {
         dist: "",
         nodata: "none"
     });
+    var today = new Date();
 });
 
 function checkForm() {

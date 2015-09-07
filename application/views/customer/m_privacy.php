@@ -1,7 +1,3 @@
-<header class="bar bar-nav">
-      <h1 class="title">保密政策</h1>
-    </header>
-
     <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
     <div class="content">
       <div class="card">
