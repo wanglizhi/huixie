@@ -78,7 +78,7 @@
                                     </div>
                                     <div class="item-input">
                                         <select name="refDoc" id="refDoc" data-placeholder="请选择阅读材料数量">
-                                            <?php for($i=1;$i<=100;$i++){ ?>
+                                            <?php for($i=0;$i<=100;$i++){ ?>
                                                 <option>
                                                     <?php echo $i; ?>
                                                 </option>
@@ -120,7 +120,7 @@
                                     </div>
                                     <div class="item-input">
                                         <select name="timezone" id="timezone" required="required" data-placeholder="请选择您的时区">
-                                            <option></option>
+                                            <option>请选择时区</option>
                                             <option value="PST8PDT">UTC-8(太平洋时间,洛杉矶)</option>
                                             <option value="MST7MDT">UTC-7(山地时间,丹佛)</option>
                                             <option value="CST6CDT">UTC-6(中央时间,芝加哥)</option>
@@ -145,10 +145,10 @@
                         </li>
                     </ul>
                 </div>
-                 <div class="card">
+                 <div class="list-block">
                     <ul class="table-view">
                       <li class="table-view-cell">
-                        <a class="push-right" href="<?php echo site_url("customer/order/privacy");?>">
+                        <a class="push-right" href="<?php echo site_url("customer/order/privacy");?>" data-ignore="push">
                           <strong>保密政策</strong>
                         </a>
                       </li>

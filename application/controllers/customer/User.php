@@ -21,8 +21,10 @@ class User extends CustomerController {
 		// 		'nickname'=>'nickname', 'country'=>'中国', 'city'=>'南京', 'sex'=>1, 'university'=>'南京大学', 'email'=>'user@qq.com',
 		// 		'cashType'=>1, 'cashAccount'=>'account@paypal.com','balance'=>100);
 
-		$data['user'] = $user;
-		$this->loadView('user_info', $data);
+		$this->load->model('User_model');
+		$data['user'] = $this->User_model->searchById($user['openid']);
+		$data['pageTitle'] = '个人信息';
+		$this->load_view('m_user_info', $data);
 	}
 	function tradeList($page = 1,$num = ITEMS_PER_PAGE){
 		$user = $_SESSION['user'];
@@ -123,6 +125,19 @@ class User extends CustomerController {
 		$this->Ta_model->modify($taId, $result);
 
 		redirect('customer/user/orderDetail/'.$orderNum);
+	}
+	function modifyPage(){
+		$user = $_SESSION['user'];
+
+		//数据测试
+		// $user = array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
+		// 		'nickname'=>'nickname', 'country'=>'中国', 'city'=>'南京', 'sex'=>1, 'university'=>'南京大学', 'email'=>'user@qq.com',
+		// 		'cashType'=>1, 'cashAccount'=>'account@paypal.com','balance'=>100);
+
+		$this->load->model('User_model');
+		$data['user'] = $this->User_model->searchById($user['openid']);
+		$data['pageTitle'] = '修改信息';
+		$this->load_view('m_user_modify', $data);
 	}
 	function modify(){
 		$user = $_SESSION['user'];

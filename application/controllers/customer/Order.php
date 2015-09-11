@@ -17,7 +17,7 @@ class Order extends CustomerController {
 	//保密政策
 	function privacy(){
 		$data['pageTitle'] = '保密政策';
-		$this->load_view('m_privacy');
+		$this->load_view('m_privacy', $data);
 	}
 	function addOrder(){
 		// echo $_POST['endDate'].'--'.$_POST['endTime'].'--'.$_POST['prov'].'--'.$_POST['city'];

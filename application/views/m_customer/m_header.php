@@ -25,7 +25,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <link rel="shortcut icon" href="images/icon.ico" /> 
 
-    <!-- Include the compiled Ratchet JS -->
+    <!-- Include the compiled Ratchet JS 
     <script type="text/javascript" src="ratchet/js/ratchet.js"></script>
     <script type="text/javascript" src="ratchet/js/my.js"></script>
     <script type="text/javascript" src="ratchet/js/push.js"></script>
@@ -33,7 +33,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script type="text/javascript" src="ratchet/js/popovers.js"></script>
     <script type="text/javascript" src="ratchet/js/segmented-controllers.js"></script>
     <script type="text/javascript" src="ratchet/js/sliders.js"></script>
-    <script type="text/javascript" src="ratchet/js/toggles.js"></script>
+    <script type="text/javascript" src="ratchet/js/toggles.js"></script> -->
     <script src="media/js/jquery-1.10.1.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="js/jquery.cityselect.js"></script>
     <script type="text/javascript" src="js/majorData.js"></script>

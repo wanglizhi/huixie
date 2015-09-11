@@ -40,9 +40,9 @@ class CustomerController extends CI_Controller {
         $this->load->view('customer/footer');
     }
     function load_view($view, $data=array()){
-        $this->load->view('customer/m_header', $data);
-        $this->load->view('customer/'.$view);
-        $this->load->view('customer/m_footer');
+        $this->load->view('m_customer/m_header', $data);
+        $this->load->view('m_customer/'.$view);
+        $this->load->view('m_customer/m_footer');
     }
     private function checkLogin(){
         if (!session_id()) session_start();
