@@ -199,7 +199,7 @@ class User extends CustomerController {
 		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
 				,"customer/user/unpaidOrderList");
 
-		$this->loadView('user_order_list', $data);
+		$this->load_view('m_user_order_list', $data);
 	}
 	function deleteOrder($orderNum){
 		$user = $_SESSION['user'];
@@ -226,7 +226,7 @@ class User extends CustomerController {
 		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
 				,"customer/user/orderList");
 
-		$this->loadView('user_order_list', $data);
+		$this->load_view('m_user_order_list', $data);
 	}
 
 		//微信支付初始化

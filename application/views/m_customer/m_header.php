@@ -17,9 +17,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
     <!-- Include the compiled Ratchet CSS -->
     <link href="ratchet/css/ratchet.css" rel="stylesheet" type="text/css"> 
-    <link href="ratchet/css/my.css" rel="stylesheet" type="text/css"> 
     <link href="ratchet/css/sm.css" rel="stylesheet" type="text/css"> 
     <link href="ratchet/css/ratchet-theme-ios.css" rel="stylesheet" type="text/css">
+    <link href="ratchet/css/my.css" rel="stylesheet" type="text/css">
     <!--star -->
     <link rel="stylesheet" href="media/css/jquery.raty.css" media="screen" type="text/css"/>
 
