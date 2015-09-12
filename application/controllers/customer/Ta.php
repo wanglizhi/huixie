@@ -150,7 +150,7 @@ class Ta extends CustomerController {
 		$user = $_SESSION['user'];
 
 		//数据测试
-		$user = array('openid'=>'4');
+		// $user = array('openid'=>'4');
 
 
 		$data['pageTitle'] = '接单列表';
