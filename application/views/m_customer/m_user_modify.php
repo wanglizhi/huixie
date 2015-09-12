@@ -72,6 +72,7 @@
                                 </div>
                             </div>
                         </li>
+                    </ul>
                 <div class="content-block">
                     <div class="row">
                         <button class="col-100 button button-big button-fill button-success" type="submit">提交</button>

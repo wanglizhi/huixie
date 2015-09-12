@@ -44,5 +44,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <body>
   <!-- Make sure all your bars are the first things in your <body> -->
 <header class="bar bar-nav" style="background-color:#18b4ed;">
+    <?php if(isset($back) and $back!= ""):?>
+        <a class="icon icon-left pull-left" href="<?php echo $back; ?>" style="color:#fff;"></a>
+    <?php  endif?>
+    <?php if(isset($forward) and $forward!= ""):?>
+        <a class="icon icon-right pull-right" href="<?php echo $forward; ?>" style="color:#fff;"></a>
+    <?php  endif?>
     <h1 class="title" style="color:#fff;"><?php echo $pageTitle;?></h1>
 </header>

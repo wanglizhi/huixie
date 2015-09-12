@@ -137,6 +137,7 @@ class User extends CustomerController {
 		$this->load->model('User_model');
 		$data['user'] = $this->User_model->searchById($user['openid']);
 		$data['pageTitle'] = '修改信息';
+		$data['back'] = site_url('customer/user/infoPage');
 		$this->load_view('m_user_modify', $data);
 	}
 	function modify(){
@@ -173,12 +174,13 @@ class User extends CustomerController {
 		//测试数据
 		// $user = array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
 		// 		'nickname'=>'nickname', 'country'=>'中国', 'city'=>'南京', 'sex'=>1, 'university'=>'南京大学', 'email'=>'user@qq.com', 'openid'=>12);
-		// $order = array('taId'=>2, 'price'=>100, 'hasPaid'=>0, 'hasTaken'=>0, 'orderNum'=>1437727418,'courseName'=>'设计与实现','major'=>'软件工程', 'pageNum'=>10, 'refDoc'=>6, 'createTime'=>'2015-4-30 18：00','endTime'=>'2015-6-10', 'requirement'=>'没有什么要求，好好写就行');
+		// $order = array('taId'=>2, 'price'=>100, 'timezone'=>'PST8PDT', 'hasFinished'=>0, 'hasPaid'=>1,'paidTime'=>'2015-9-10', 'hasTaken'=>0, 'orderNum'=>1437727418,'courseName'=>'计算机系统的设计与实现','major'=>'软件工程', 'pageNum'=>10, 'refDoc'=>6, 'createTime'=>'2015-4-30 18:00','endTime'=>'2015-6-10', 'requirement'=>'没有什么要求，好好写就行');
 
 		$data['order'] = $order;
 		$data['user'] = $user;
+		$data['pageTitle'] = '订单详情';
 
-		$this->loadView('user_order_detail', $data);
+		$this->load_view('m_user_order_detail', $data);
 	}
 
 	function unpaidOrderList($page = 1,$num = ITEMS_PER_PAGE){

@@ -14,9 +14,10 @@ class Ta extends CustomerController {
 		$data['ta'] = $result;
 
 		//数据测试
-		// $data['ta'] = array('skills'=>'软件工程','star'=>3.5, 'unitPrice'=>100, 'hasCheck'=>1, 'email'=>'11@qq.com', 'state'=>2);	
+		// $data['ta'] = array('skills'=>'软件工程','star'=>3.5, 'unitPrice'=>100, 'hasCheck'=>1, 'email'=>'11@qq.com', 'state'=>2, 'introduction'=>'wo hen bang');	
 
-		$this->loadView('register_ta', $data);
+		$data['pageTitle'] = '助教信息';
+		$this->load_view('m_register_ta', $data);
 	}
 	function register(){
 		$user = $_SESSION['user'];
@@ -67,12 +68,13 @@ class Ta extends CustomerController {
 		//测试数据
 		// $user = array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
 		// 		'nickname'=>'nickname', 'country'=>'中国', 'city'=>'南京', 'sex'=>1, 'university'=>'南京大学', 'email'=>'user@qq.com', 'openid'=>12);
-		// $order = array('taId'=>2, 'hasTaken'=>0, 'orderNum'=>1234567,'courseName'=>'设计与实现','major'=>'软件工程', 'pageNum'=>10, 'refDoc'=>6, 'endTime'=>'2015-6-10', 'requirement'=>'没有什么要求，好好写就行');
+		// $order = array('taId'=>2, 'price'=>100, 'timezone'=>'PST8PDT', 'hasFinished'=>0, 'hasPaid'=>1,'paidTime'=>'2015-9-10', 'hasTaken'=>0, 'orderNum'=>1437727418,'courseName'=>'计算机系统的设计与实现','major'=>'软件工程', 'pageNum'=>10, 'refDoc'=>6, 'createTime'=>'2015-4-30 18:00','endTime'=>'2015-6-10', 'requirement'=>'没有什么要求，好好写就行');
 
 		$data['order'] = $order;
 		$data['user'] = $user;
+		$data['pageTitle'] = '接单信息';
 
-		$this->loadView('ta_take_order', $data);
+		$this->load_view('m_ta_take_order', $data);
 	}
 	function takeOrder(){
 		$this->load->model('Order_model');

@@ -17,6 +17,7 @@ class Order extends CustomerController {
 	//保密政策
 	function privacy(){
 		$data['pageTitle'] = '保密政策';
+		$data['back'] = site_url('customer/order/addOrderPage');
 		$this->load_view('m_privacy', $data);
 	}
 	function addOrder(){
