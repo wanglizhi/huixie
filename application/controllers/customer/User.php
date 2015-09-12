@@ -179,6 +179,11 @@ class User extends CustomerController {
 		$data['order'] = $order;
 		$data['user'] = $user;
 		$data['pageTitle'] = '订单详情';
+		if($order['hasPaid']){
+			$data['back'] = site_url('customer/user/orderList');
+		}else{
+			$data['back'] = site_url('customer/user/unpaidOrderList');
+		}
 
 		$this->load_view('m_user_order_detail', $data);
 	}

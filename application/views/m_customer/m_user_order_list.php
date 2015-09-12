@@ -67,18 +67,17 @@
                                     echo date("Y-m-d H:i:s",$timestamp);
                                     ?>
       </span>
-                    <a href="<?php echo site_url(" customer/user/orderDetail/ ".$order['orderNum']);?>" class="link">更多</a>
+                    <a href="<?php echo site_url('customer/user/orderDetail').'/'.$order['orderNum'];?>" class="link">更多</a>
                 </div>
             </div>
             <?php
                             $orderRow++; 
                             ?>
                 <?php endforeach;?>
-                
+
                     <?=$page_info?>
 </div>
 <!-- end content-->
-<script type="text/javascript" src="ratchet/js/ratchet.js"></script>
 <script type="text/javascript">
 function deleteOrder(orderNum) {
     if (confirm("确定要删除订单编号为：" + orderNum + "? 未付款订单最多只能有十单，请及时清理~")) {
