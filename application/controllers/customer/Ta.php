@@ -73,6 +73,11 @@ class Ta extends CustomerController {
 		$data['order'] = $order;
 		$data['user'] = $user;
 		$data['pageTitle'] = '接单信息';
+		if($order['hasTaken']){
+			$data['back'] = site_url('customer/ta/orderList');
+		}else{
+			$data['back'] = site_url('customer/ta/untakenOrderList');
+		}
 
 		$this->load_view('m_ta_take_order', $data);
 	}
@@ -137,7 +142,7 @@ class Ta extends CustomerController {
 		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
 				,"customer/ta/untakenOrderList");
 
-		$this->loadView('ta_order_list', $data);
+		$this->load_view('m_ta_order_list', $data);
 	}
 
 	// 订单列表
@@ -145,7 +150,7 @@ class Ta extends CustomerController {
 		$user = $_SESSION['user'];
 
 		//数据测试
-		// $user = array('openid'=>'4');
+		$user = array('openid'=>'4');
 
 
 		$data['pageTitle'] = '接单列表';
@@ -156,7 +161,7 @@ class Ta extends CustomerController {
 		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
 				,"customer/ta/orderList");
 
-		$this->loadView('ta_order_list', $data);
+		$this->load_view('m_ta_order_list', $data);
 	}
 	
 }
