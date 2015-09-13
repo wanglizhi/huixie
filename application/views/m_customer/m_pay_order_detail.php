@@ -186,7 +186,6 @@
         return temp;
     }
     function useBalance(){
-      alert($('#checkBalance').is(':checked'));
       if($('#checkBalance').is(':checked')){
         // console.log('checked');
         // console.log(balance);
@@ -213,7 +212,6 @@
         }else{
           payPrice = 0;
           usb = max;
-          alert(payPrice+"is 0");
           $('#payPrice').html(payPrice);
           $('#payOption').hide();
           $('#submitOrder').show();
