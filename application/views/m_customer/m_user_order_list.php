@@ -42,9 +42,9 @@
                                         <?php if($order['hasPaid']==0): ?>
                                             <span class="label label-default">未付款</span>
                                             &nbsp&nbsp
-                                            <a class="btn btn-primary" href="<?php echo site_url('customer/order/payOrderPage/'.$order['orderNum']);?>"><i class="icon-shopping-cart"></i>&nbsp去结算</a>
+                                            <a class="btn btn-primary" href="<?php echo site_url('customer/order/payOrderPage/'.$order['orderNum']);?>">&nbsp去结算</a>
                                             &nbsp&nbsp
-                                            <a class="btn btn-negative" onclick="deleteOrder(<?php echo $order['orderNum'];?>);" data-target="#delete<?=$orderRow?>"><i class="icon-trash"></i>&nbsp删除订单</a>
+                                            <a class="btn btn-negative" onclick="deleteOrder(<?php echo $order['orderNum'];?>)">&nbsp删除订单</a>
                                             <?php elseif($order['hasTaken']==0): ?>
                                                 <span class="label label-warning">已付款</span>
                                                 <?php elseif($order['hasFinished']==0): ?>
