@@ -206,7 +206,7 @@ class Order extends CustomerController {
 		$data['jsApiParameters'] = $jsApiParameters;
 
 
-		$this->loadView('pay_order_detail',$data);
+		$this->load_view('m_pay_order_detail',$data);
 	}
 	// 付款
 	function payOrder($useBalance=0){

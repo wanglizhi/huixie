@@ -47,7 +47,7 @@
 </div>
     <div class="content-block">
         <div class="row">
-            <button class="col-100 button button-big button-fill button-success" type="submit">提交</button>
+            <button class="col-100 button button-big button-fill button-success" type="submit">下一步</button>
         </div>
     </div>
 </form>
