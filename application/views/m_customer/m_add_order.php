@@ -120,7 +120,7 @@
                                     </div>
                                     <div class="item-input">
                                         <select name="timezone" id="timezone" required="required" data-placeholder="请选择您的时区">
-                                            <option>请选择时区</option>
+                                            <option value="">请选择时区</option>
                                             <option value="PST8PDT">UTC-8(太平洋时间,洛杉矶)</option>
                                             <option value="MST7MDT">UTC-7(山地时间,丹佛)</option>
                                             <option value="CST6CDT">UTC-6(中央时间,芝加哥)</option>

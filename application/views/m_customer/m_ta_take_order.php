@@ -92,14 +92,14 @@
           <?php if($order['taId'] and $order['taId'] == $user['openid'] and $order['hasTaken']): ?>
             <div class="list-block">
             <ul>
-                <li>
+                <li class="item-content">
                     <div class="item-inner">
                         <div class="item-title">您已经接受此订单</div>
                     </div>
                 </li>
-                <li>
+                <li class="item-content">
                     <div class="item-inner">
-                        <div class="item-title">如果需要阅读材料，请联系客服，论文完成后发送到邮箱admin@huixie.me</div>
+                        <p>如果需要阅读材料，请联系客服，论文完成后发送到邮箱admin@huixie.me</p>
                     </div>
                 </li>
             </ul>
@@ -107,7 +107,7 @@
         <?php elseif($order['hasTaken']): ?>
              <div class="list-block">
             <ul>
-                <li>
+                <li class="item-content">
                     <div class="item-inner">
                         <div class="item-title">订单已经被接单，您不能再接单！</div>
                     </div>
@@ -117,7 +117,7 @@
         <?php elseif($order['hasPaid'] == 0): ?>
             <div class="list-block">
             <ul>
-                <li>
+                <li class="item-content">
                     <div class="item-inner">
                         <div class="item-title">订单未付款，您不能接单~</div>
                     </div>

@@ -127,7 +127,7 @@
             </ul>
           </div>
         <?php endif; ?>
-        <?php if($order['hasFinished'] || 1): ?>
+        <?php if($order['hasFinished']): ?>
             <div class="content-block-title">给TA打分</div>
             <div class="list-block">
             <form action="<?php echo site_url('customer/user/starTa');?>" method="post">

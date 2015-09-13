@@ -41,11 +41,12 @@ class User extends CustomerController {
 		$data['tradeList'] = $result['result_rows'];
 		$data['page_info'] = $this->mypagination->create_links(ceil($result['result_num_rows']/$num),$page
 				,"customer/user/tradeList");
+		$data['pageTitle'] = '余额信息';
 		$data['user'] = $this->User_model->searchById($user['openid']);
 		// $data['user'] = $user;
-		// $_SESSION['user'] = $user;
+		$_SESSION['user'] = $user;
 
-		$this->loadView('user_trade_list', $data);
+		$this->load_view('m_user_trade_list', $data);
 
 	}
 	function rechargePage(){
@@ -58,6 +59,7 @@ class User extends CustomerController {
 		$sessionId = session_id();
 		$data['sessionId'] = $sessionId;
 		$data['user'] = $user;
+		$data['pageTitle'] = '充值信息';
 
 		//Session 中存储是否付款
 		$_SESSION['hasPaid'] = 0;
@@ -66,7 +68,7 @@ class User extends CustomerController {
 		$jsApiParameters = $this->wxpay($user['openid'], $sessionId, $recharge);
 		$data['jsApiParameters'] = $jsApiParameters;
 
-		$this->loadView('user_recharge', $data);
+		$this->load_view('m_user_recharge', $data);
 	}
 	function recharge($money){
 		$user = $_SESSION['user'];
