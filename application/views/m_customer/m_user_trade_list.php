@@ -5,14 +5,12 @@
 <div class="list-block">
     <ul>
       <li class="item-content">
-        <div class="item-media"><i class="icon icon-emoji"></i></div>
         <div class="item-inner">
           <div class="item-title">余额($)</div>
           <div class="item-after"><?php echo $user['balance'];?></div>
         </div>
       </li>
       <li class="item-content">
-        <div class="item-media"><i class="icon icon-edit"></i></div>
         <form action="<?php echo site_url('customer/user/rechargePage');?>" method="post">
         <div class="item-inner">
             <input type="number" id="recharge" name="recharge" placeholder="请输入充值金额" required="required">

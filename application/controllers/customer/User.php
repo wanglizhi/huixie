@@ -60,6 +60,7 @@ class User extends CustomerController {
 		$data['sessionId'] = $sessionId;
 		$data['user'] = $user;
 		$data['pageTitle'] = '充值信息';
+		$data['back'] = site_url('customer/user/tradeList');
 
 		//Session 中存储是否付款
 		$_SESSION['hasPaid'] = 0;
