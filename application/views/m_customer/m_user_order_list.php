@@ -44,7 +44,7 @@
                                             &nbsp&nbsp
                                             <a class="btn btn-primary" href="<?php echo site_url('customer/order/payOrderPage/'.$order['orderNum']);?>">&nbsp去结算</a>
                                             &nbsp&nbsp
-                                            <a class="btn btn-negative" onclick="deleteOrder(<?php echo $order['orderNum'];?>)">&nbsp删除订单</a>
+                                            <a class="btn btn-negative" onclick="deleteOrder(<?php echo '\''.$order['orderNum'].'\'';?>);">&nbsp删除订单</a>
                                             <?php elseif($order['hasTaken']==0): ?>
                                                 <span class="label label-warning">已付款</span>
                                                 <?php elseif($order['hasFinished']==0): ?>
