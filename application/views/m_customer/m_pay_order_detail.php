@@ -81,8 +81,12 @@
     </label>
   </li>
       <?php endforeach;?>
+      <li class="item-content">
+                            <div class="item-inner">
+                                <p>如果没有选择TA或者TA没有接单，系统将会自动分配TA，请您放心！</p>
+                            </div>
+                        </li>
 </ul>
-<label>如果没有选择TA或者TA没有接单，系统将会自动分配TA，请您放心！</label>
 </div>
 
 <div class="content-block-title">付款详情（我们收取TA价格区间的最大值，交易成功后返回实际差额）</div>
@@ -112,8 +116,8 @@
           <div class="item-after"><?php echo $user['balance'];?></div>
         </div>
       </li>
-      <li>
-        <div class="checkbox">
+      <li class="item-content">
+        <div class="item-inner">
         <label>
           <input type="checkbox" id="checkBalance" onchange="useBalance()"> 选择使用余额支付
         </label>
@@ -124,14 +128,21 @@
 </div>
 
 <div class="content-block-title">请选择付款方式</div>
+<div class="alert alert-info" id="payOption">
 <a class="btn btn-primary btn-block" href="javascript:void(0)" onclick="postPaypal()">Paypal</a><br>
 <a class="btn btn-positive btn-block" href="javascript:void(0)" onclick="callpay()" id="wxpayBtn">微信支付</a>
+</div>
 
-  <div class="form-actions">
-        <a href="<?php echo site_url('customer/order/payOrder/'.$max);?>" class="btn green hide" id="submitOrder" role="button">提交订单</a>
-        <a href="<?php echo site_url('customer/order/taSelectPage/'.$order['orderNum']);?>" class="btn blue" style="display: inline;" id="modifyTa"role="button">返回修改</a>
+<div class="form-actions">
+      <a href="<?php echo site_url('customer/order/payOrder/'.$max);?>" class="btn green hide" id="submitOrder" role="button">提交订单</a>
+      <a href="<?php echo site_url('customer/order/taSelectPage/'.$order['orderNum']);?>" class="btn blue" style="display: inline;" id="modifyTa"role="button">返回修改</a>
+</div>
+<div class="content-block">
+    <div class="row">
+      <div class="col-50"><a href="<?php echo site_url('customer/order/payOrder/'.$max);?>" class="button button-big button-fill button-danger" id="submitOrder">取消</a></div>
+      <div class="col-50"><a href="<?php echo site_url('customer/order/taSelectPage/'.$order['orderNum']);?>" class="button button-big button-fill button-success" id="modifyTa">提交</a></div>
     </div>
-
+</div>
 
 
 </div>
