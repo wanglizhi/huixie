@@ -136,7 +136,7 @@
 
 <div class="content-block">
     <div class="row">
-      <div class="col-50"><a href="<?php echo site_url('customer/order/payOrder/'.$max);?>" class="button button-big button-fill button-success hide" id="submitOrder">提交</a></div>
+      <div class="col-50"><a href="<?php echo site_url('customer/order/payOrder/'.$max);?>" class="button button-big button-fill button-success" id="submitOrder" hidden="hidden">提交</a></div>
       <div class="col-50"><a href="<?php echo site_url('customer/order/taSelectPage/'.$order['orderNum']);?>" class="button button-big button-fill button-danger" id="modifyTa">返回修改</a></div>
     </div>
 </div>
@@ -210,6 +210,7 @@
         }else{
           payPrice = 0;
           usb = max;
+          alert(payPrice+"is 0");
           $('#payPrice').html(payPrice);
           $('#payOption').hide();
           $('#submitOrder').show();
