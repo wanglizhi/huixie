@@ -12,7 +12,7 @@
         </div>
       </li>
       <li class="item-content">
-        <div class="item-media"><i class="icon icon-cart"></i></div>
+        <div class="item-media"><i class="icon icon-edit"></i></div>
         <form action="<?php echo site_url('customer/user/rechargePage');?>" method="post">
         <div class="item-inner">
             <input type="number" id="recharge" name="recharge" placeholder="请输入充值金额" required="required">
