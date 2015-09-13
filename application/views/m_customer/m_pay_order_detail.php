@@ -116,27 +116,28 @@
           <div class="item-after"><?php echo $user['balance'];?></div>
         </div>
       </li>
-      <li class="item-content">
+    </ul>
+</div>
+
+<div class="content-block">
         <div class="item-inner">
         <label>
           <input type="checkbox" id="checkBalance" onchange="useBalance()"> 选择使用余额支付
         </label>
         <label>付款金额：$<span id="payPrice"><?php echo $max;?></span></label>
       </div>
-      </li>
-    </ul>
-</div>
+      </div>
 
 <div class="content-block-title">请选择付款方式</div>
-<div class="alert alert-info" id="payOption">
+<div class="content-block" id="payOption">
 <a class="btn btn-primary btn-block" href="javascript:void(0)" onclick="postPaypal()">Paypal</a><br>
 <a class="btn btn-positive btn-block" href="javascript:void(0)" onclick="callpay()" id="wxpayBtn">微信支付</a>
 </div>
 
 <div class="content-block">
     <div class="row">
-      <div class="col-50"><a href="<?php echo site_url('customer/order/payOrder/'.$max);?>" class="button button-big button-fill button-danger" id="submitOrder">取消</a></div>
-      <div class="col-50"><a href="<?php echo site_url('customer/order/taSelectPage/'.$order['orderNum']);?>" class="button button-big button-fill button-success" id="modifyTa">提交</a></div>
+      <div class="col-50"><a href="<?php echo site_url('customer/order/payOrder/'.$max);?>" class="button button-big button-fill button-success hide" id="submitOrder">提交</a></div>
+      <div class="col-50"><a href="<?php echo site_url('customer/order/taSelectPage/'.$order['orderNum']);?>" class="button button-big button-fill button-danger" id="modifyTa">返回修改</a></div>
     </div>
 </div>
 
@@ -182,6 +183,7 @@
         return temp;
     }
     function useBalance(){
+      alert('use balance');
       if($('#checkBalance').attr('checked')){
         // console.log('checked');
         // console.log(balance);
