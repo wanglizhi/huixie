@@ -10,11 +10,12 @@
           <div class="item-after"><?php echo $user['balance'];?></div>
         </div>
       </li>
-      <li class="item-content">
+      <li>
         <form action="<?php echo site_url('customer/user/rechargePage');?>" method="post">
         <div class="item-inner">
+            &nbsp&nbsp&nbsp&nbsp
             <input type="number" id="recharge" name="recharge" placeholder="请输入充值金额" required="required">
-            <button type="submit" class="btn btn-primary">充值</button>   
+            <button type="submit" class="btn btn-primary">充值</button>
         </div>
         </form>
       </li>
