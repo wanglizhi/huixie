@@ -54,9 +54,10 @@ class Oauth extends CI_Controller {
 		$this->load->view('customer/sui_user_info', $data);
 	}
 	function loginPage(){
-		$this->load->view('customer/header');
-		$this->load->view('customer/login_page');
-		$this->load->view('customer/footer');
+		$data['pageTitle'] = '登入界面';
+		$this->load->view('m_customer/m_header', $data);
+		$this->load->view('m_customer/m_login_page');
+		$this->load->view('m_customer/m_footer');
 	}
 
 }
