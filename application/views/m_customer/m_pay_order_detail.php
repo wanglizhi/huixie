@@ -129,15 +129,17 @@
       </div>
 
 <div class="content-block-title">请选择付款方式</div>
-<div class="content-block" id="payOption">
+<div class="content-block">
+<div id="payOption">
 <a class="btn btn-primary btn-block" href="javascript:void(0)" onclick="postPaypal()">Paypal</a><br>
 <a class="btn btn-positive btn-block" href="javascript:void(0)" onclick="callpay()" id="wxpayBtn">微信支付</a>
+</div>
 </div>
 
 <div class="content-block">
     <div class="row">
-      <div class="col-50"><a href="<?php echo site_url('customer/order/payOrder/'.$max);?>" class="button button-big button-fill button-success" id="submitOrder" hidden="hidden">提交</a></div>
       <div class="col-50"><a href="<?php echo site_url('customer/order/taSelectPage/'.$order['orderNum']);?>" class="button button-big button-fill button-danger" id="modifyTa">返回修改</a></div>
+      <div class="col-50"><a href="<?php echo site_url('customer/order/payOrder/'.$max);?>" class="button button-big button-fill button-success" id="submitOrder">提交</a></div>
     </div>
 </div>
 
@@ -145,6 +147,7 @@
 </div>
 <!-- end content-->
 <script type="text/javascript">
+    $('#submitOrder').hide();
     var payPrice = <?php echo $max;?>;
     var max = <?php echo $max;?>;
     var balance = <?php echo $user['balance'];?>;
@@ -183,8 +186,8 @@
         return temp;
     }
     function useBalance(){
-      alert('use balance');
-      if($('#checkBalance').attr('checked')){
+      alert($('#checkBalance').is(':checked'));
+      if($('#checkBalance').is(':checked')){
         // console.log('checked');
         // console.log(balance);
         // alert('checked');
@@ -224,7 +227,7 @@
         $('#payPrice').html(payPrice);
         $('#payOption').show();
         $('#submitOrder').hide();
-        $('#modifyTa').show();
+        //$('#modifyTa').show();
       }
     }
     function jsApiCall()
