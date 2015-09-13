@@ -81,7 +81,7 @@
 <script type="text/javascript">
 function deleteOrder(orderNum) {
     if (confirm("确定要删除订单编号为：" + orderNum + "? 未付款订单最多只能有十单，请及时清理~")) {
-        location.href = "<?php echo site_url('customer/user/deleteOrder/');?>" + orderNum;
+        location.href = "<?php echo site_url('customer/user/deleteOrder');?>" + "/" + orderNum;
     }
 }
 </script>
