@@ -179,6 +179,7 @@ class Order extends CustomerController {
 		$sessionId = session_id();
 		$data['sessionId'] = $sessionId;
 		$data['user'] = $user;
+		$data['pageTitle'] = '付款信息';
 		//添加到session
 		$_SESSION['price'] = $data['max'];
 		$_SESSION['order'] = $order;
