@@ -133,10 +133,6 @@
 <a class="btn btn-positive btn-block" href="javascript:void(0)" onclick="callpay()" id="wxpayBtn">微信支付</a>
 </div>
 
-<div class="form-actions">
-      <a href="<?php echo site_url('customer/order/payOrder/'.$max);?>" class="btn green hide" id="submitOrder" role="button">提交订单</a>
-      <a href="<?php echo site_url('customer/order/taSelectPage/'.$order['orderNum']);?>" class="btn blue" style="display: inline;" id="modifyTa"role="button">返回修改</a>
-</div>
 <div class="content-block">
     <div class="row">
       <div class="col-50"><a href="<?php echo site_url('customer/order/payOrder/'.$max);?>" class="button button-big button-fill button-danger" id="submitOrder">取消</a></div>
