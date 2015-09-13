@@ -6,7 +6,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
   <head>
     <meta charset="utf-8">
     <base href="<?php echo base_url();?>"/>
-    <title><?php echo $pageTitle;?></title>
+   <!-- <title><?php echo $pageTitle;?></title> -->
+    <title>会写么</title>
 
     <!-- Sets initial viewport load and disables zooming  -->
     <meta name="viewport" content="initial-scale=1, maximum-scale=1">

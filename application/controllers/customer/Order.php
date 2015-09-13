@@ -81,17 +81,18 @@ class Order extends CustomerController {
 			$taList[$i]['userInfo'] = $this->User_model->searchById($taList[$i]['openid']);
 		}
 
-		// $ta1 = array('openid'=> '123456677', 'unitPrice' => 100, 'star'=> 4.0, 'introduction'=>'我来自哈佛，学习成绩非常好！',
+		// $ta1 = array('openid'=> '123456677', 'state'=>1,'unitPrice' => 100, 'star'=> 4.0, 'introduction'=>'我来自哈佛，学习成绩非常好！',
 		// 	'userInfo'=>array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
 		// 		'nickname'=>'nickname'));
-		// $ta2 = array('openid'=> '123456677', 'unitPrice' => 100, 'star'=> 4.0, 'introduction'=>'我来自哈佛，学习成绩非常好！',
+		// $ta2 = array('openid'=> '123456677', 'state'=>2,'unitPrice' => 100, 'star'=> 4.0, 'introduction'=>'我来自哈佛，学习成绩非常好！',
 		// 	'userInfo'=>array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
 		// 		'nickname'=>'nickname'));
 		// $taList = array('1'=>$ta1, '2'=>$ta2);
 
 		$data['taList'] = $taList;
 		$data['orderNum'] = $orderNum;
-		$this->loadView('select_ta',$data);
+		$data['pageTitle'] = '选择TA';
+		$this->load_view('m_select_ta',$data);
 	}
 	function selectTa($orderNum){
 		$this->load->model('Selected_ta_model');
