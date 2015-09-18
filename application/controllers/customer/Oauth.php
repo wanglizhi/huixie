@@ -59,5 +59,10 @@ class Oauth extends CI_Controller {
 		$this->load->view('m_customer/m_login_page');
 		$this->load->view('m_customer/m_footer');
 	}
+	function rateTest(){
+		$this->load->helper('simple_html_dom_helper');
+		$this->load->helper('rate_helper');
+		var_dump(getRate());
+	}
 
 }

@@ -31,7 +31,7 @@ class CustomerController extends CI_Controller {
         $this->load->helper('url');
         if(!$this->checkLogin()){
             //Login 失败
-            // redirect('customer/oauth/loginPage');
+            redirect('customer/oauth/loginPage');
         }
     }
     function loadView($view,$data=array()){
