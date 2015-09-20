@@ -21,9 +21,9 @@
                                         <font color='red'>*</font>
                                     </div>
                                     <div class="item-input" id="city_5">
-                                        <select class="prov" name="prov" required="required" data-placeholder="请选择专业">
+                                        <select class="prov" id="prov" name="prov" required="required" data-placeholder="请选择专业">
                                         </select>
-                                        <select class="city" name="city" disabled="disabled" required="required" data-placeholder="请选择专业"></select>
+                                        <select class="city" id="city" name="city" disabled="disabled" required="required" data-placeholder="请选择专业"></select>
                                     </div>
                                 </div>
                             </div>
@@ -202,14 +202,28 @@ jQuery(document).ready(function() {
 });
 
 function checkForm() {
-    var major = $('#major').val();
-    var courseName = $('courseName').val();
+    var major = $('#prov').val();
+    var courseName = $('#courseName').val();
     var email = $('#email').val();
     var date = $('#endDate').val();
     var time = $('#endTime').val();
     var timezone = $('#timezone').val();
     alert(major+' '+courseName+' '+email+' '+date+' '+time+' '+timezone);
-    return false;
+    var pattern = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;    
+    flag = pattern.test(email);  
+    if(major==''){
+        alert("请选择专业");
+    }else if(courseName==''){
+        alert('请输入课程名称');
+    }else if(flag){
+        alert('请输入正确的邮箱');
+    }else if(date==''){
+        alert('请选择日期');
+    }else if(time==''){
+        alert('请选择时间');
+    }else if(timezone==''){
+        alert('请选择时区');
+    }
 
     var today = new Date();
     var endTime = date + ' ' + time;
