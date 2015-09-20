@@ -148,9 +148,14 @@
                  <div class="list-block">
                     <ul class="table-view">
                       <li class="table-view-cell">
-                        <a class="push-right" href="<?php echo site_url("customer/order/privacy");?>" data-ignore="push">
+                        <a class="push-right" href="javascript:void(0);" onclick="showPrivacy();" data-ignore="push">
                           <strong>保密政策</strong>
                         </a>
+                      </li>
+                    </ul>
+                    <ul class="table-view" id="privacy">
+                      <li class="table-view-cell">
+                        会写么非常重视用户信息的保护，在使用会写么的所有产品和服务前，请您务必仔细阅读并透彻理解本声明。一旦您选择使用，即表示您认可并接受本条款现有内容及其可能随时更新的内容。
                       </li>
                     </ul>
                   </div>
@@ -164,6 +169,7 @@
 <!-- end content-->
 <script>
 jQuery(document).ready(function() {
+    $('#privacy').hide();
     //初始化专业二级选框
     var json = new Object();
     var citylist = new Array();
@@ -196,9 +202,16 @@ jQuery(document).ready(function() {
 });
 
 function checkForm() {
-    var today = new Date();
+    var major = $('#major').val();
+    var courseName = $('courseName').val();
+    var email = $('#email').val();
     var date = $('#endDate').val();
     var time = $('#endTime').val();
+    var timezone = $('#timezone').val();
+    alert(major+' '+courseName+' '+email+' '+date+' '+time+' '+timezone);
+    return false;
+
+    var today = new Date();
     var endTime = date + ' ' + time;
     entTime = moment(endTime, "YYYY-MM-DD h:mm");
     if (moment(endTime).isBefore(today)) {
@@ -206,5 +219,12 @@ function checkForm() {
         return false;
     }
     return true;
+}
+function showPrivacy(){
+    if($("#privacy").is(":hidden")){
+        $("#privacy").show();    //如果元素为隐藏,则将它显现
+    }else{
+        $("#privacy").hide();     //如果元素为显现,则将其隐藏
+    }
 }
 </script>
