@@ -1,6 +1,6 @@
 
 <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
-<div class="content">
+<div class="content native-scroll">
     <?php if(isset($notice) and $notice!= ""):?>
         <div class="content-block-title" style="color:#f00;">Notice！</div>
         <div class="card">

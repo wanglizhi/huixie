@@ -1,7 +1,6 @@
 
 <!-- Wrap all non-bar HTML in the .content div (this is actually what scrolls) -->
 <div class="content native-scroll">
-    
         <div class="content-block-title">订单详情</div>
           <div class="list-block">
             <ul>
@@ -157,6 +156,11 @@
 </div>
 <!-- end content-->
 <script>
+            jQuery(document).ready(function() {
+                var hasPaid = <?php echo $order['hasPaid'];?>;
+                var paidTime = <?php echo $order['paidTime'];?>;
+                alert(hasPaid+" "+paidTime);
+            });
             $('#skill_star').raty({
                 path      : 'media/image',
                 half      : true,
