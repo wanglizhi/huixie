@@ -208,10 +208,10 @@ function checkForm() {
     var date = $('#endDate').val();
     var time = $('#endTime').val();
     var timezone = $('#timezone').val();
-    alert(major+' '+courseName+' '+email+' '+date+' '+time+' '+timezone);
+    alert(major+' 1 '+courseName+' 2 '+email+' 3 '+date+' 4 '+time+' 5 '+timezone);
     var pattern = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;    
     flag = pattern.test(email);  
-    if(major==''){
+    if(major=='' || major==null){
         alert("请选择专业");
         return false;
     }else if(courseName==''){
