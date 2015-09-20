@@ -86,7 +86,7 @@ class Order extends CustomerController {
 			$taList[$i]['userInfo'] = $this->User_model->searchById($taList[$i]['openid']);
 		}
 
-		// $ta1 = array('openid'=> '123456677', 'state'=>1,'unitPrice' => 100, 'star'=> 4.0, 'introduction'=>'我来自哈佛，学习成绩非常好！',
+		// $ta1 = array('openid'=> '123456677', 'state'=>1,'unitPrice' => 100, 'star'=> 4.0, 'introduction'=>'我来自哈佛，学习成绩非常好！英语、商学、数学，样样精通，上知天文，下知地理',
 		// 	'userInfo'=>array('headimgurl'=>'http://wx.qlogo.cn/mmopen/ib3RVnJ436WdEFP1zdH4hibpeJcnUmo6nGPHmM4FicOKd7MtROuQqws0WdntwQozgZuuJQlFG42yl6fWic0NYmwtvnWotBRyxt9O/0',
 		// 		'nickname'=>'nickname'));
 		// $ta2 = array('openid'=> '123456677', 'state'=>2,'unitPrice' => 100, 'star'=> 4.0, 'introduction'=>'我来自哈佛，学习成绩非常好！',

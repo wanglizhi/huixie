@@ -30,7 +30,9 @@
         </div>
         <div class="item-subtitle">单价：<?php echo $ta['unitPrice'];?></div>
         <div class="item-text">
-          简介：
+          <a style="color:#000;" href="javascript:void(0);" onclick="showIntro(<?php echo '\''.$ta['introduction'].'\'';?>);">
+          简介(点击查看)：
+          </a>
           <?php echo $ta['introduction'];?>
           <br>
             当前状态：
@@ -60,3 +62,8 @@
 
 </div>
 <!-- end content-->
+<script type="text/javascript">
+function showIntro(introduction) {
+    alert(introduction);
+}
+</script>
