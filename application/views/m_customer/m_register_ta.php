@@ -5,10 +5,10 @@
         <div class="list-block">
             <ul>
                 <a style="color:#000;" href="javascript:void(0);" onclick="showIntro(<?php echo '\''.$ta['skills'].'\'';?>);">
-                <li class="item-content">
+                <li class="item-content item-link">
                     <div class="item-inner">
                         <div class="item-title">技能</div>
-                        <div class="item-after">
+                        <div class="item-after item-text">
                             <?php echo $ta['skills'];?>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                 <li class="item-content item-link">
                     <div class="item-inner">
                         <div class="item-title">简介</div>
-                        <div class="item-after">
+                        <div class="item-after item-text">
                             <?php echo $ta['introduction'];?>
                         </div>
                     </div>
