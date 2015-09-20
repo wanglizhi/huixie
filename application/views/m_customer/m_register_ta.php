@@ -4,7 +4,6 @@
         <div class="content-block-title">您已经通过审核成为助教</div>
         <div class="list-block">
             <ul>
-                <a style="color:#000;" href="javascript:void(0);" onclick="showIntro(<?php echo '\''.$ta['skills'].'\'';?>);">
                 <li class="item-content item-link">
                     <div class="item-inner">
                         <div class="item-title">技能</div>
@@ -13,7 +12,6 @@
                         </div>
                     </div>
                 </li>
-                </a>
                 <li class="item-content">
                     <div class="item-inner">
                         <div class="item-title">单价</div>
@@ -45,16 +43,9 @@
                         </div>
                     </div>
                 </li>
-                <a style="color:#000;" href="javascript:void(0);" onclick="showIntro(<?php echo '\''.$ta['introduction'].'\'';?>);">
-                <li class="item-content item-link">
-                    <div class="item-inner">
-                        <div class="item-title">简介</div>
-                        <div class="item-after item-text">
-                            <?php echo $ta['introduction'];?>
-                        </div>
-                    </div>
+                <li class="table-view-cell">
+                    简介：<?php echo $ta['introduction'];?>
                 </li>
-                </a>
             </ul>
         </div>
         <div class="content-block-title">修改信息</div>
@@ -194,7 +185,4 @@
                                 <?php endif;?>
                             });
                         });
-                        function showIntro(introduction) {
-                            alert(introduction);
-                        }
                         </script>
