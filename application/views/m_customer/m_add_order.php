@@ -213,16 +213,22 @@ function checkForm() {
     flag = pattern.test(email);  
     if(major==''){
         alert("请选择专业");
+        return false;
     }else if(courseName==''){
         alert('请输入课程名称');
+        return false;
     }else if(flag){
         alert('请输入正确的邮箱');
+        return false;
     }else if(date==''){
         alert('请选择日期');
+        return false;
     }else if(time==''){
         alert('请选择时间');
+        return false;
     }else if(timezone==''){
         alert('请选择时区');
+        return false;
     }
 
     var today = new Date();
