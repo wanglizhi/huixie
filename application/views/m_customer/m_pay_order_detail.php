@@ -138,9 +138,7 @@
 </div>
 
 <div class="content-block">
-    <div class="row">
-     <div class="col-100" id="submitOrder"><a href="<?php echo site_url('customer/order/payOrder/'.$max);?>" class="button button-big button-fill button-success">提交</a></div>
-    </div>
+    <div id="submitOrder"><a href="<?php echo site_url('customer/order/payOrder/'.$max);?>" class="btn btn-positive btn-block">提交</a></div>
 </div>
 
 
