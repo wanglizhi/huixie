@@ -122,10 +122,12 @@
 <div class="content-block">
         <div class="item-inner">
         <label>
-          <input type="checkbox" id="checkBalance" onchange="useBalance()">使用余额
+          <input type="checkbox" id="checkBalance" onchange="useBalance()">使用余额支付
         </label>
+      </div>
+      <div>
         <label>余额支付：$<span id="useBalance">0</span></label>
-        <label>现金支付：$<span id="payPrice"><?php echo $max;?></span></label>
+        <label>还需现金支付：$<span id="payPrice"><?php echo $max;?></span></label>
       </div>
       </div>
 

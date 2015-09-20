@@ -30,6 +30,9 @@
         </div>
         <div class="item-subtitle">单价：<?php echo $ta['unitPrice'];?></div>
         <div class="item-text">
+          简介：
+          <?php echo $ta['introduction'];?>
+          <br>
             当前状态：
             <?php if($ta['state']==0): ?>
                 <span class="label label-success">空闲</span>
@@ -38,6 +41,7 @@
             <?php else: ?>
                 <span class="label label-important">忙碌</span>
             <?php endif ?>
+
         </div>
       </div>
     </label>
