@@ -22,7 +22,8 @@ class User extends CustomerController {
 		// 		'cashType'=>1, 'cashAccount'=>'account@paypal.com','balance'=>100);
 
 		$this->load->model('User_model');
-		$data['user'] = $this->User_model->searchById($user['openid']);
+		$user = $this->User_model->searchById($user['openid']);
+		$data['user'] = $user;
 		$data['pageTitle'] = '个人信息';
 		$this->load_view('m_user_info', $data);
 	}

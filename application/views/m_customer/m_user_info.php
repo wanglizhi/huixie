@@ -31,25 +31,26 @@
         <div class="content-block-title">详细信息</div>
           <div class="list-block">
             <ul>
+            <a href="<?php echo site_url("customer/user/modifyPage");?>">
               <li class="item-content item-link">
                 <div class="item-inner">
-                  <div class="item-title">大学</div>
-                  <a href="<?php echo site_url("customer/user/modifyPage");?>">
+                  <div class="item-title" style="color:#000;">大学</div>
                   <div class="item-after"><?php echo $user['university'];?></div>
-                  </a>
                 </div>
               </li>
+              </a>
+              <a href="<?php echo site_url("customer/user/modifyPage");?>">
               <li class="item-content item-link">
                 <div class="item-inner">
-                  <div class="item-title">邮箱</div>
-                  <a href="<?php echo site_url("customer/user/modifyPage");?>">
+                  <div class="item-title" style="color:#000;">邮箱</div>
                   <div class="item-after"><?php echo $user['email'];?></div>
-                  </a>
                 </div>
               </li>
+              </a>
+              <a href="<?php echo site_url("customer/user/modifyPage");?>">
               <li class="item-content item-link">
                 <div class="item-inner">
-                  <div class="item-title">
+                  <div class="item-title" style="color:#000;">
                       <?php 
                     $type = $user['cashType'];
                     if($type == 1){
@@ -58,14 +59,15 @@
                         echo "支付宝：";
                     }else if($type == 3){
                         echo "微信支付账户";
+                    }else{
+                        echo "支付账户";
                     }
                     ?>
                   </div>
-                  <a href="<?php echo site_url("customer/user/modifyPage");?>">
                   <div class="item-after"><?php echo $user['cashAccount'];?></div>
-                  </a>
                 </div>
               </li>
+              </a>
             </ul>
           </div>
 
@@ -80,7 +82,8 @@
               </li>
             </ul>
           </div>
+          <!--
           <a class="btn btn-negative btn-block" role="button" href="<?php echo site_url("customer/user/logout");?>">注销登陆</a>
-
+          -->
 </div>
 <!-- end content-->

@@ -9,8 +9,8 @@ class Order extends CustomerController {
 		$this->addOrderPage();
 	}
 	//添加订单
-	function addOrderPage($notice="测试notice显示乱码"){
-		$data['notice'] = $notice;
+	function addOrderPage($notice=""){
+		$data['notice'] = urldecode($notice);
 		$data['pageTitle'] = '下订单';
 		$this->load_view('m_add_order',$data);
 	}
@@ -185,6 +185,7 @@ class Order extends CustomerController {
 		$data['sessionId'] = $sessionId;
 		$data['user'] = $user;
 		$data['pageTitle'] = '付款信息';
+		$data['back'] = site_url('customer/order/taSelectPage/'.$order['orderNum']);
 		//添加到session
 		$_SESSION['price'] = $data['max'];
 		$_SESSION['order'] = $order;

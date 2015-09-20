@@ -122,9 +122,10 @@
 <div class="content-block">
         <div class="item-inner">
         <label>
-          <input type="checkbox" id="checkBalance" onchange="useBalance()"> 选择使用余额支付
+          <input type="checkbox" id="checkBalance" onchange="useBalance()">使用余额
         </label>
-        <label>付款金额：$<span id="payPrice"><?php echo $max;?></span></label>
+        <label>余额支付：$<span id="useBalance">0</span></label>
+        <label>现金支付：$<span id="payPrice"><?php echo $max;?></span></label>
       </div>
       </div>
 
@@ -138,8 +139,7 @@
 
 <div class="content-block">
     <div class="row">
-      <div class="col-50"><a href="<?php echo site_url('customer/order/taSelectPage/'.$order['orderNum']);?>" class="button button-big button-fill button-danger" id="modifyTa">返回修改</a></div>
-      <div class="col-50"><a href="<?php echo site_url('customer/order/payOrder/'.$max);?>" class="button button-big button-fill button-success" id="submitOrder">提交</a></div>
+      <div class="col-100"><a href="<?php echo site_url('customer/order/payOrder/'.$max);?>" class="button button-big button-fill button-success" id="submitOrder">提交</a></div>
     </div>
 </div>
 
@@ -194,6 +194,7 @@
           payPrice = max - balance;
           usb = balance;
           $('#payPrice').html(payPrice);
+          $('#useBalance').html(usb);
           //ajax调用微信获得参数
           $('#wxpayBtn').hide();
           $.ajax({
@@ -213,6 +214,7 @@
           payPrice = 0;
           usb = max;
           $('#payPrice').html(payPrice);
+          $('#useBalance').html(usb);
           $('#payOption').hide();
           $('#submitOrder').show();
         }
@@ -223,6 +225,7 @@
         jsApiParameters = <?php echo $jsApiParameters; ?>;
         usb = 0;
         $('#payPrice').html(payPrice);
+        $('#useBalance').html(usb);
         $('#payOption').show();
         $('#submitOrder').hide();
         //$('#modifyTa').show();

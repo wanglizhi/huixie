@@ -10,15 +10,19 @@
           <div class="item-after"><?php echo $user['balance'];?></div>
         </div>
       </li>
+      <form action="<?php echo site_url('customer/user/rechargePage');?>" method="post">
       <li class="item-content">
-        <form action="<?php echo site_url('customer/user/rechargePage');?>" method="post">
         <div class="item-inner">
-            <input type="number" id="recharge" name="recharge" placeholder="请输入充值金额" required="required">
-            <button type="submit" class="btn btn-primary">充值</button>
+        <input type="number" id="recharge" name="recharge" placeholder="请输入充值金额" required="required">
         </div>
-        </form>
       </li>
     </ul>
+    <div class="content-block">
+        <div class="row">
+            <button class="col-100 button button-big button-fill button-success" type="submit">充值</button>
+        </div>
+    </div>
+        </form>
 </div>
 <div class="content-block-title">交易记录</div>
 
