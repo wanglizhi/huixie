@@ -22,6 +22,11 @@ class Order extends CustomerController {
 	}
 	function addOrder(){
 		// echo $_POST['endDate'].'--'.$_POST['endTime'].'--'.$_POST['prov'].'--'.$_POST['city'];
+		$notice = '测试notice显示乱码';
+		if($_POST['endDate']=='' || $_POST['endTime']=='' || $_POST['timezone']==''|| $_POST['courseName']=='' || $_POST['major']=='' || $_POST['email']==''){
+			$notice = '信息填写不完整，请补充~';
+			redirect('customer/order/addOrderPage/'.$notice);
+		}
 
 		$this->load->model('Order_model');
 		$user = $_SESSION['user'];
