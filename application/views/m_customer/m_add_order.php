@@ -217,7 +217,7 @@ function checkForm() {
     }else if(courseName==''){
         alert('请输入课程名称');
         return false;
-    }else if(flag){
+    }else if(!flag){
         alert('请输入正确的邮箱');
         return false;
     }else if(date==''){
