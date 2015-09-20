@@ -12,7 +12,10 @@
           <div class="item-title">系统匹配TA</div>
           <div class="item-after">*</div>
         </div>
-        <div class="item-subtitle">如果不选择或者未接单，系统默认分配助教</div>
+        <div class="item-subtitle">如果不选择或者未接单</div>
+        <div class="item-text">
+        系统会默认分配合适的助教
+        </div>
       </div>
     </label>
   </li>

@@ -8,7 +8,7 @@
                     <div class="item-inner">
                         <div class="item-title">技能</div>
                         <div class="item-after">
-                            <?php echo $ta['skills'];?>
+                            <p><?php echo $ta['skills'];?></p>
                         </div>
                     </div>
                 </li>
@@ -40,6 +40,14 @@
                                     <?php else: ?>
                                         忙碌
                                         <?php endif ?>
+                        </div>
+                    </div>
+                </li>
+                <li class="item-content">
+                    <div class="item-inner">
+                        <div class="item-title">简介</div>
+                        <div class="item-after">
+                            <p><?php echo $ta['introduction'];?></p>
                         </div>
                     </div>
                 </li>
