@@ -2052,6 +2052,7 @@ html:not(.watch-active-state) .list-block .item-link:active .item-inner:after,
           appearance: none;
 }
 .list-block input[type="date"],
+.list-block input[type="time"],
 .list-block input[type="datetime-local"] {
   line-height: 2.2rem;
 }

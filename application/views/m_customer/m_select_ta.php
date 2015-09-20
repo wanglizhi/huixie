@@ -28,7 +28,7 @@
           <div class="item-title"><?php echo $ta['userInfo']['nickname'];?></div>
           <div class="item-after">评级：<?php echo $ta['star'];?></div>
         </div>
-        <div class="item-subtitle">单价：<?php echo $ta['unitPrice'];?></div>
+        <div class="item-subtitle">单价($)：<?php echo $ta['unitPrice'];?></div>
         <div class="item-text">
           <a style="color:#000;" href="javascript:void(0);" onclick="showIntro(<?php echo '\''.$ta['introduction'].'\'';?>);">
           简介(点击查看):
