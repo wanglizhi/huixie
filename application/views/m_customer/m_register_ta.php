@@ -4,14 +4,6 @@
         <div class="content-block-title">您已经通过审核成为助教</div>
         <div class="list-block">
             <ul>
-                <li class="item-content item-link">
-                    <div class="item-inner">
-                        <div class="item-title">技能</div>
-                        <div class="item-after item-text">
-                            <?php echo $ta['skills'];?>
-                        </div>
-                    </div>
-                </li>
                 <li class="item-content">
                     <div class="item-inner">
                         <div class="item-title">单价</div>
@@ -42,6 +34,9 @@
                                         <?php endif ?>
                         </div>
                     </div>
+                </li>
+                <li class="table-view-cell">
+                    技能：<?php echo $ta['skills'];?>
                 </li>
                 <li class="table-view-cell">
                     简介：<?php echo $ta['introduction'];?>
