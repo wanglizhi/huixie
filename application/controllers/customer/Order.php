@@ -9,7 +9,7 @@ class Order extends CustomerController {
 		$this->addOrderPage();
 	}
 	//添加订单
-	function addOrderPage($notice=""){
+	function addOrderPage($notice="测试notice显示乱码"){
 		$data['notice'] = $notice;
 		$data['pageTitle'] = '下订单';
 		$this->load_view('m_add_order',$data);
