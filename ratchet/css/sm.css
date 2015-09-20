@@ -1812,7 +1812,7 @@ html:not(.watch-active-state) .list-block .item-link:active .item-inner:after,
 .list-block .item-text {
   position: relative;
   display: -webkit-box;
-  height: 2.1rem;
+  height: 3.1rem;
   overflow: hidden;
   font-size: .75rem;
   line-height: 1.05rem;
