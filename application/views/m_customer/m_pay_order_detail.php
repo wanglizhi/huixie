@@ -139,8 +139,7 @@
 
 <div class="content-block">
     <div class="row">
-      <div class="col-100"><a href="<?php echo site_url('customer/order/taSelectPage/'.$order['orderNum']);?>" class="button button-big button-fill button-danger" id="modifyTa">返回修改</a></div>
-      <div class="col-50"><a href="<?php echo site_url('customer/order/payOrder/'.$max);?>" class="button button-big button-fill button-success" id="submitOrder">提交</a></div>
+     <div class="col-100" id="submitOrder"><a href="<?php echo site_url('customer/order/payOrder/'.$max);?>" class="button button-big button-fill button-success">提交</a></div>
     </div>
 </div>
 
@@ -218,8 +217,6 @@
           $('#useBalance').html(usb);
           $('#payOption').hide();
           $('#submitOrder').show();
-          $('#modifyTa').removeClass('col-100');
-          $('#modifyTa').addClass('col-50');
         }
       }else{
         // alert('unchecked');
@@ -232,8 +229,6 @@
         $('#payOption').show();
         $('#submitOrder').hide();
         //$('#modifyTa').show();
-        $('#modifyTa').removeClass('col-50');
-        $('#modifyTa').addClass('col-100');
       }
     }
     function jsApiCall()
