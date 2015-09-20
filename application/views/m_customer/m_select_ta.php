@@ -31,19 +31,9 @@
         <div class="item-subtitle">单价：<?php echo $ta['unitPrice'];?></div>
         <div class="item-text">
           <a style="color:#000;" href="javascript:void(0);" onclick="showIntro(<?php echo '\''.$ta['introduction'].'\'';?>);">
-          简介(点击查看)：
+          简介(点击查看):
           </a>
           <?php echo $ta['introduction'];?>
-          <br>
-            当前状态：
-            <?php if($ta['state']==0): ?>
-                <span class="label label-success">空闲</span>
-            <?php elseif($ta['state']==1): ?>
-                <span class="label label-warning">有课</span>
-            <?php else: ?>
-                <span class="label label-important">忙碌</span>
-            <?php endif ?>
-
         </div>
       </div>
     </label>
