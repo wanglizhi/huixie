@@ -71,7 +71,7 @@ function sort(th,js_page_method,key){
 	<td> <span class="label label-success">已完成</span></td>
 <?php endif; ?>
 <td>
-	<a href="javascript:void(0)" class="btn mini red" onclick="delete_order(<?=$order['orderNum']?>)"><i class="icon-trash"></i> 删除</a>
+	<a href="javascript:void(0)" class="btn mini red" onclick="delete_order(<?='\''.$order['orderNum'].'\''?>)"><i class="icon-trash"></i> 删除</a>
 </td>
 </tr>
 <?php endforeach;?>
