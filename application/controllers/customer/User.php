@@ -70,7 +70,7 @@ class User extends CustomerController {
 		$this->load->helper('rate_helper');
 		$selling_rate = floatval(getRate()['selling_rate']);
 		$data['selling_rate'] = $selling_rate/100;
-		$data['rmb'] = intval( ($selling_rate/100) * $data['max'] );
+		$data['rmb'] = intval( ($selling_rate/100) * $recharge );
 
 
 		//初始化微信数据
