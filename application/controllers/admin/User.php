@@ -232,6 +232,7 @@ class User extends MY_AdminController {
 			'page_method' => ADMIN_PREFIX."user/userListPage",
 			'js_page_method' => $js_page_method,
 		);
+		$data['js_page_method'] => $js_page_method;
 		$this->load->view(ADMIN_PREFIX.'user_table',$data);
 	}
 	function changeBalance(){

@@ -33,7 +33,7 @@
 
 <?php 
 $data['page_info'] = $page_info;
-$data['js_page_method'] = $page_info['js_page_method'];
+$data['js_page_method'] = $js_page_method;
 $this->load->view(ADMIN_PREFIX."pagination",$data);
 ?>
 </div>
