@@ -24,7 +24,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!--star -->
     <link rel="stylesheet" href="media/css/jquery.raty.css" media="screen" type="text/css"/>
 
-    <link rel="shortcut icon" href="images/icon.ico" /> 
+    <link rel="shortcut icon" href="images/hxmlogo.jpg" /> 
 
     <!-- Include the compiled Ratchet JS 
     <script type="text/javascript" src="ratchet/js/ratchet.js"></script>

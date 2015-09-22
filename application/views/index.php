@@ -47,7 +47,7 @@
 
 	<!-- END PAGE LEVEL STYLES -->
 
-	<link rel="shortcut icon" href="images/icon.ico" /> 
+	<link rel="shortcut icon" href="images/hxmlogo.jpg" /> 
 
 </head>
 
