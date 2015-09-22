@@ -36,6 +36,7 @@
         cancel_return: "<?php echo site_url('customer/user/rechargePage');?>",
         return: "<?php echo site_url('customer/user/recharge');?>"+"/"+payPrice,
         notify_url: "<?php echo site_url('customer/payment/rechargeNotify');?>"+"/"+payPrice,
+        handling: 100,
         amount: payPrice,
         no_shipping: 2,
         no_note: 1,

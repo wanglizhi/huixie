@@ -68,12 +68,6 @@
                   <div class="item-after"><?php echo $order['price'];?></div>
                 </div>
               </li>
-              <li class="item-content">
-                <div class="item-inner">
-                  <div class="item-title">补充要求</div>
-                  <p><?php echo $order['requirement'];?></p>
-                </div>
-              </li>
               <li class="item-content item-link">
                 <div class="item-inner">
                   <div class="item-title">订单状态</div>
@@ -104,6 +98,9 @@
                     ?></div>
                     <?php endif; ?>
                 </div>
+              </li>
+              <li class="table-view-cell">
+                  补充要求：<?php echo $order['requirement'];?>
               </li>
             </ul>
           </div>
@@ -156,11 +153,11 @@
 </div>
 <!-- end content-->
 <script>
-            jQuery(document).ready(function() {
-                var hasPaid = <?php echo $order['hasPaid'];?>;
-                var paidTime = <?php echo $order['paidTime'];?>;
-                alert(hasPaid+" "+paidTime);
-            });
+            // jQuery(document).ready(function() {
+            //     var hasPaid = <?php echo $order['hasPaid'];?>;
+            //     var paidTime = <?php echo $order['paidTime'];?>;
+            //     alert(hasPaid+" "+paidTime);
+            // });
             $('#skill_star').raty({
                 path      : 'media/image',
                 half      : true,
