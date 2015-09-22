@@ -168,11 +168,11 @@
     function postPaypal(){
       console.log('payPrice'+payPrice);
       // alert('payPrice'+payPrice);
-      var url = "https://www.sandbox.paypal.com/cgi-bin/webscr";
+      var url = "https://www.paypal.com/cgi-bin/webscr";
       var params =
       {
         cmd: "_xclick",
-        business: "acount@huixie.me",
+        business: "799661128@qq.com",
         item_name: "<?php echo $sessionId;?>",
         item_number: "<?php echo $order['orderNum'];?>",
         cancel_return: "<?php echo site_url('customer/user/orderDetail/'.$order['orderNum']);?>",
