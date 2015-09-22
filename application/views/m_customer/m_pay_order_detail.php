@@ -179,7 +179,7 @@
         return: "<?php echo site_url('customer/order/payOrder');?>"+"/"+usb,
         notify_url: "<?php echo site_url('customer/payment/paypalNotify');?>"+"/"+usb,
         amount: payPrice,
-        handling: payPrice*0.044,
+        handling: Math.round(payPrice*0.044),
         no_shipping: 2,
         no_note: 1,
         currency_code: "USD"

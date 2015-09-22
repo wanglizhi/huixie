@@ -50,7 +50,7 @@
         cancel_return: "<?php echo site_url('customer/user/rechargePage');?>",
         return: "<?php echo site_url('customer/user/recharge');?>"+"/"+payPrice,
         notify_url: "<?php echo site_url('customer/payment/rechargeNotify');?>"+"/"+payPrice,
-        handling: payPrice*0.044,
+        handling: Math.round(payPrice*0.044),
         amount: payPrice,
         no_shipping: 2,
         no_note: 1,
