@@ -106,7 +106,7 @@ class Order extends CustomerController {
 		if($selectList){
 			$this->Selected_ta_model->delete($orderNum);
 		}
-		$max = 0;
+		$max = UNIT_PRICE;
 		$min = 100000;
 		if(isset($_POST['taIdList'])){
 			$taIdList = $_POST['taIdList'];
@@ -147,7 +147,7 @@ class Order extends CustomerController {
 		if($selectList){
 			$taList = array();
 			$this->load->model('Ta_model');
-			$max = 0;
+			$max = UNIT_PRICE;
 			$min = 100000;
 			foreach ($selectList as $select) {
 				$ta = $this->Ta_model->searchById($select['taId']);

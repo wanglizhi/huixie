@@ -27,7 +27,7 @@ define ('MAX_PAGES', 10);
 define ('ADMIN_PREFIX', 'admin/');
 define ('CASH_TYPE',"return array(null,'paypal','alipay','weixinpay');");
 
-define('UNIT_PRICE', 34);
+define('UNIT_PRICE', 30);
 define('MAX_UNPAID', 10);
 
 
