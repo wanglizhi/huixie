@@ -65,9 +65,16 @@ class User extends CustomerController {
 
 		//Session 中存储是否付款
 		$_SESSION['hasPaid'] = 0;
+		//汇率问题
+        $this->load->helper('simple_html_dom_helper');
+		$this->load->helper('rate_helper');
+		$selling_rate = floatval(getRate()['selling_rate']);
+		$data['selling_rate'] = $selling_rate/100;
+		$data['rmb'] = intval( ($selling_rate/100) * $data['max'] );
+
 
 		//初始化微信数据
-		$jsApiParameters = $this->wxpay($user['openid'], $sessionId, $recharge);
+		$jsApiParameters = $this->wxpay($user['openid'], $sessionId, $data['rmb']);
 		$data['jsApiParameters'] = $jsApiParameters;
 
 		$this->load_view('m_user_recharge', $data);
@@ -258,8 +265,8 @@ class User extends CustomerController {
         $input->SetBody("充值");
         $input->SetAttach($sessionId);
         $input->SetOut_trade_no(WxPayConfig::MCHID.date("YmdHis"));
-        // $input->SetTotal_fee($total_fee*100);
-        $input->SetTotal_fee("1");
+        $input->SetTotal_fee($total_fee*100);
+        // $input->SetTotal_fee("1");
         $input->SetTime_start(date("YmdHis"));
         $input->SetTime_expire(date("YmdHis", time() + 600));
         $input->SetGoods_tag("商品标签");

@@ -188,6 +188,14 @@ class Order extends CustomerController {
 		//添加到session
 		$_SESSION['price'] = $data['max'];
 		$_SESSION['order'] = $order;
+		//汇率问题
+        $this->load->helper('simple_html_dom_helper');
+		$this->load->helper('rate_helper');
+		$selling_rate = floatval(getRate()['selling_rate']);
+		$data['selling_rate'] = $selling_rate/100;
+		$data['rmb'] = intval( ($selling_rate/100) * $data['max']);
+
+
 
 		//数据测试
 		// $data['max'] = 100;
@@ -208,7 +216,7 @@ class Order extends CustomerController {
 
 
 		//初始化微信数据
-		$jsApiParameters = $this->wxpay($user['openid'], $sessionId, $orderNum, $data['max'], 0);
+		$jsApiParameters = $this->wxpay($user['openid'], $sessionId, $orderNum, $data['rmb'], 0);
 		$data['jsApiParameters'] = $jsApiParameters;
 
 
@@ -285,8 +293,10 @@ class Order extends CustomerController {
         $input->SetBody("商品订单编号:".$orderNum);
         $input->SetAttach($sessionId."--".$usb);
         $input->SetOut_trade_no(WxPayConfig::MCHID.date("YmdHis"));
-        // $input->SetTotal_fee($total_fee*100);
-        $input->SetTotal_fee("1");
+        $input->SetTotal_fee($total_fee*100);
+
+
+        // $input->SetTotal_fee("1");
         $input->SetTime_start(date("YmdHis"));
         $input->SetTime_expire(date("YmdHis", time() + 600));
         $input->SetGoods_tag("商品标签");

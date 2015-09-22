@@ -62,7 +62,8 @@ class Oauth extends CI_Controller {
 	function rateTest(){
 		$this->load->helper('simple_html_dom_helper');
 		$this->load->helper('rate_helper');
-		var_dump(getRate());
+		$selling_rate = floatval(getRate()['selling_rate']);
+		echo intval(($selling_rate/100)*34);
 	}
 
 }

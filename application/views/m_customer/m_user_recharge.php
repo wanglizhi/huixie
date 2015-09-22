@@ -7,8 +7,22 @@
       <li class="item-content">
         <div class="item-media"><i class="icon icon-emoji"></i></div>
         <div class="item-inner">
-          <div class="item-title">充值金额</div>
+          <div class="item-title">充值金额($)</div>
           <div class="item-after"><?php echo $recharge;?></div>
+        </div>
+      </li>
+      <li class="item-content">
+        <div class="item-media"><i class="icon icon-emoji"></i></div>
+        <div class="item-inner">
+          <div class="item-title">美元对人民币汇率</div>
+          <div class="item-after"><?php echo $selling_rate;?></div>
+        </div>
+      </li>
+      <li class="item-content">
+        <div class="item-media"><i class="icon icon-emoji"></i></div>
+        <div class="item-inner">
+          <div class="item-title">人民币金额(￥)</div>
+          <div class="item-after"><?php echo $rmb;?></div>
         </div>
       </li>
     </ul>
@@ -36,7 +50,7 @@
         cancel_return: "<?php echo site_url('customer/user/rechargePage');?>",
         return: "<?php echo site_url('customer/user/recharge');?>"+"/"+payPrice,
         notify_url: "<?php echo site_url('customer/payment/rechargeNotify');?>"+"/"+payPrice,
-        handling: 100,
+        handling: payPrice*0.044,
         amount: payPrice,
         no_shipping: 2,
         no_note: 1,
@@ -63,9 +77,9 @@
               jsApiParameters,
               function(res){
                   WeixinJSBridge.log(res.err_msg);
-                  alert(res.err_msg);
+                  // alert(res.err_msg);
                   if(res.err_msg == 'get_brand_wcpay_request:cancel' || res.err_msg == 'get_brand_wcpay_request:fail'){
-                    alert("cancel");
+                    // alert("cancel");
                   }else if(res.err_msg == 'get_brand_wcpay_request:ok'){
                     window.location.href = "<?php echo site_url('customer/user/recharge');?>"+ "/" + payPrice;
                   }
