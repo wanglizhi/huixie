@@ -63,9 +63,9 @@
 
 			<div class="span12 coming-soon-header">
 
-				<a class="brand" href="index.html">
+				<a class="brand" href="#">
 
-				<img src="media/image/logo-big.png" alt="logo" />
+				<img src="images/hxmlogo.jpg" alt="logo" height="100" width="100"/>
 
 				</a>
 
@@ -77,10 +77,10 @@
 
 			<div class="span6 coming-soon-content">
 
-				<h1>Coming Soon!</h1>
+				<h1>Welcome!</h1>
 
 				<p>
-					At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi vehicula sem ut volutpat. Ut non libero magna fusce condimentum eleifend enim a feugiat.
+					欢迎使用会写么，扫描下面的二维码关注~
 				</p>
 
 				<br>
@@ -120,6 +120,13 @@
 			<div class="span6 coming-soon-countdown">
 
 				<div id="defaultCountdown"></div>
+				<br>
+				<br>
+				<br>
+				<br>
+				<div class="span6">
+				<img src="images/qrcode.jpg" alt="logo" />
+				</div>
 
 			</div>
 
@@ -130,7 +137,6 @@
 		<div class="row-fluid">
 
 			<div class="span12 coming-soon-footer">
-
 
 			</div>
 
