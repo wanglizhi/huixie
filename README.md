@@ -37,38 +37,38 @@ Paypal支付：js接口
 
 **下订单**
 
-![](http://github.com/wanglizhi/huixie/raw/master/images/addOrder.png)
+![](https://raw.githubusercontent.com/wanglizhi/huixie/master/images/addOrder.png)
 
 ##### **订单列表**
 
 
 
-![](http://github.com/wanglizhi/huixie/raw/master/images/orderList.png)
+![](https://raw.githubusercontent.com/wanglizhi/huixie/master/images/orderList.png)
 
 **订单详情**
 
 
 
-![](http://github.com/wanglizhi/huixie/raw/master/images/orderDetail.png)
+![](https://raw.githubusercontent.com/wanglizhi/huixie/master/images/orderDetail.png)
 
 **付款信息**
 
-![](http://github.com/wanglizhi/huixie/raw/master/images/payOrder1.png)
+![](https://raw.githubusercontent.com/wanglizhi/huixie/master/images/payOrder1.png)
 
-![](http://github.com/wanglizhi/huixie/raw/master/images/payOrder2.png)
+![](https://raw.githubusercontent.com/wanglizhi/huixie/master/images/payOrder2.png)
 
 **助教注册**
 
-![](http://github.com/wanglizhi/huixie/raw/master/images/taRegister.png)
+![](https://raw.githubusercontent.com/wanglizhi/huixie/master/images/taRegister.png)
 
-![](http://github.com/wanglizhi/huixie/raw/master/images/takeOrder.png)
+![](https://raw.githubusercontent.com/wanglizhi/huixie/master/images/takeOrder.png)
 
 **用户信息**
 
-![](http://github.com/wanglizhi/huixie/raw/master/images/userInfo.png)
+![](https://raw.githubusercontent.com/wanglizhi/huixie/master/images/userInfo.png)
 
 **后台管理**
 
-![](http://github.com/wanglizhi/huixie/raw/master/images/admin_addTa.png)
+![](https://raw.githubusercontent.com/wanglizhi/huixie/master/images/admin_addTa.png)
 
-![](http://github.com/wanglizhi/huixie/raw/master/images/admin_orderList.png)
+![](https://raw.githubusercontent.com/wanglizhi/huixie/master/images/admin_orderList.png)
