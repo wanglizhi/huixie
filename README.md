@@ -1,6 +1,8 @@
 # huixie.me
 #### 会写么公众号
 
+![](http://github.com/wanglizhi/huixie/raw/master/images/hxmlogo.jpg)
+
 2015年8月份到10月份大四暑假，学校附近一家公司兼职，为留学生写paper提供快捷下单和管理的功能，主要是为了赚点零花钱=。= 顺便学习一下微信公众号开发的技术。
 
 项目最终功能完工，由于用户量小，时间紧，没有太多技术上的处理。boss对于最终的功能还是比较满意的，但是最后在推广的过程中，并没有实际使用，具体原有我也没有追问，开学后就继续上课了。
@@ -40,4 +42,34 @@ Paypal支付：js接口
 ##### **订单列表**
 
 
+
+![](http://github.com/wanglizhi/huixie/raw/master/images/orderList.png)
+
+**订单详情**
+
+
+
+![](http://github.com/wanglizhi/huixie/raw/master/images/orderDetail.png)
+
+**付款信息**
+
+![](http://github.com/wanglizhi/huixie/raw/master/images/payOrder1.png)
+
+![](http://github.com/wanglizhi/huixie/raw/master/images/payOrder2.png)
+
+**助教注册**
+
+![](http://github.com/wanglizhi/huixie/raw/master/images/taRegister.png)
+
+![](http://github.com/wanglizhi/huixie/raw/master/images/takeOrder.png)
+
+**用户信息**
+
+![](http://github.com/wanglizhi/huixie/raw/master/images/userInfo.png)
+
+**后台管理**
+
+![](http://github.com/wanglizhi/huixie/raw/master/images/admin_addTa.png)
+
+![](http://github.com/wanglizhi/huixie/raw/master/images/admin_orderList.png)
 
