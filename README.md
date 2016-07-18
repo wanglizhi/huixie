@@ -37,29 +37,33 @@ Paypal支付：js接口
 
 **下订单**
 
-![](https://raw.githubusercontent.com/wanglizhi/huixie/master/images/addOrder.png)
+![](https://raw.githubusercontent.com/wanglizhi/huixie/master/images/addOrder.jpg)
 
 ##### **订单列表**
 
 
 
-![](https://raw.githubusercontent.com/wanglizhi/huixie/master/images/orderList.png)
+![](https://raw.githubusercontent.com/wanglizhi/huixie/master/images/orderList.jpg)
 
 **订单详情**
 
 
 
+![](https://raw.githubusercontent.com/wanglizhi/huixie/master/images/orderDetail.jpg)
+
 ![](https://raw.githubusercontent.com/wanglizhi/huixie/master/images/orderDetail.png)
 
 **付款信息**
 
-![](https://raw.githubusercontent.com/wanglizhi/huixie/master/images/payOrder1.png)
+![](https://raw.githubusercontent.com/wanglizhi/huixie/master/images/payOrder1.jpg)
 
-![](https://raw.githubusercontent.com/wanglizhi/huixie/master/images/payOrder2.png)
+![](https://raw.githubusercontent.com/wanglizhi/huixie/master/images/payOrder2.jpg)
+
+![](https://raw.githubusercontent.com/wanglizhi/huixie/master/images/paypal.jpg)
 
 **助教注册**
 
-![](https://raw.githubusercontent.com/wanglizhi/huixie/master/images/taRegister.png)
+![](https://raw.githubusercontent.com/wanglizhi/huixie/master/images/taRegister.jpg)
 
 ![](https://raw.githubusercontent.com/wanglizhi/huixie/master/images/takeOrder.png)
 
